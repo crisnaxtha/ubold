@@ -1,0 +1,178 @@
+<?php
+
+namespace App\Model\Dcms\Eloquent;
+use DB;
+use Illuminate\Database\Eloquent\Model;
+use App\Model\Dcms\Setting;
+use App\Model\Dcms\Language;
+use App\Model\Dcms\Post;
+use App\Model\Dcms\File;
+use App\Model\Dcms\Menu;
+use App\Model\Dcms\Category;
+use Session;
+use App;
+use Auth;
+
+
+class DM_Post extends Model{
+    /**
+     * get all the multiple language names
+     */
+    public static function getLanguage() {
+        return Language::where('status', '=', 1)->where('deleted_at', '=', null)->get();
+    }
+
+    /**
+     * to get all the post file using joint post with file
+     */
+    public static function joinPostFile($post_unique_id) {
+        return DB::table('posts')
+                ->join('files', 'posts.post_unique_id', '=', 'files.post_unique_id')
+                ->where('posts.deleted_at', '=', null)
+                ->where('posts.post_unique_id', '=', $post_unique_id)
+                ->select('posts.*', 'files.title as file_tile', 'files.file')
+                ->get();
+    }
+
+    /**
+    *to get all the post file using joint post with file
+     * 
+     */
+    public static function joinSliderName($lang_id) {
+        return DB::table('sliders')
+                ->join('sliders_name', 'sliders.id', '=', 'sliders_name.slider_id')
+                ->where('sliders_name.lang_id', '=', $lang_id)
+                ->select('sliders.*', 'sliders_name.lang_id', 'sliders_name.name as slider_name')
+                ->get();
+    }
+
+    /**
+     * 
+     * get the post's id  using post_unique_id
+     *  */
+    public static function getPostId($post_unique_id) {
+        return Post::where('post_unique_id', $post_unique_id)
+                ->select('id')->get();
+    }
+
+    //get categories
+    public static function getCategories() {
+        return Category::get();
+    }
+
+    //get all the post of same language
+    public static function getAllPosts($lang_id) {
+        return Post::where('deleted_at', '=', null)->where('status', '=', 1)->where('type', '=', 'post')->where('lang_id','=', $lang_id)->get();
+    }
+
+    //get all the pages of the same langnuage
+    public static function getAllPages($lang_id) {
+        return Post::where('deleted_at', '=', null)->where('status', '=', 1)->where('type', '=','page')->where('lang_id', '=', $lang_id)->get();
+    }
+
+    // get single page of particular language
+    public static function getSinglePage($post_unique_id, $lang_id) {
+        $post =  Post::where('deleted_at', '=', null)->where('status', '=', 1)->where('type', '=', 'page')->where('post_unique_id', '=', $post_unique_id)->where('lang_id', '=', $lang_id)->first();
+        if(isset($post)){
+        $post->increment('visit_no');
+        }
+        return $post;
+    }
+
+    // get the single post of particular language
+    public static function getSinglePost($post_unique_id, $lang_id) {
+        $post = Post::where('deleted_at', '=', null)->where('type', '=', 'post')->where('post_unique_id', '=', $post_unique_id)->where('lang_id', '=', $lang_id)->first();
+        if(isset($post)){
+            $post->increment('visit_no');
+        }    
+        return $post;
+
+    }
+    // get the file
+    public static function getFile($post_unique_id) {
+        return File::where('post_unique_id', '=', $post_unique_id)->get();
+    }
+
+    /**
+     * download file
+     */
+    public static function downloadFile($id) {
+        $file = File::where('id', '=', $id)->first();
+        if(isset($file)){
+        $file->increment('download_count');
+        }
+        $file_path = getcwd().'/'.$file->file;
+        return response()->download($file_path);
+    }
+    //get the single category
+    public static function getCategory($category_id) {
+        return Category::where('id', '=', $category_id)->first();
+        
+    }
+
+    //get category base post
+    public static function categoryPost($category_id, $lang_id) {
+        return Post::where('deleted_at', '=', null)->where('category_id', '=', $category_id)->where('lang_id', '=', $lang_id)->get();
+    }
+
+    public static function joinMenu($lang_id) {
+        return DB::table('menus')
+                ->join('menus_name', 'menus.id', '=', 'menus_name.menu_id')
+                ->where('menus_name.lang_id', '=', $lang_id)
+                ->select('menus.*', 'menus_name.lang_id', 'menus_name.name as menu_name')->orderBy('order')
+                ->get();
+    }
+
+    public static function getMenuDisplay($lang_id) {
+        return self::joinMenu($lang_id);
+    }
+
+    //get all the menu with public status
+    public static function getMenu() {
+        return Menu::where('status', '=', 1)->get();
+    }
+
+
+    /**
+     * Join Album
+     */
+    public static function joinAlbum($lang_id) {
+        $album = DB::table('albums')
+                    ->join('albums_name', 'albums.id', '=', 'albums_name.album_id')
+                    ->select('albums.*', 'albums_name.title', 'albums_name.lang_id', 'albums_name.description')
+                    ->where('albums_name.lang_id', '=', $lang_id)
+                    ->where('albums.status', '=', 1)
+                    ->get();
+        return $album;
+    }
+
+    /** used for the session language id | used all over */
+    public static function setLanguage() {
+        if(!Session::has('lang_id')) {
+            $default_lang_id = Setting::pluck('language')->first();
+            if(!isset($default_lang_id)){
+                $default_lang_id = $this->app->config->get('app.fallback_locale');    
+            }
+            Session::put('lang_id', $default_lang_id);
+            $lang_id = Session::get('lang_id');
+        }else {
+            $lang_id = Session::get('lang_id');               
+        }
+        //to set the locale for language file 
+        App::setLocale(DM_Post::getLangCode($lang_id));
+        return $lang_id;
+    }
+
+    /** return the language code */
+    public static function getLangCode() {
+        $row = Language::findOrFail(Session::get('lang_id'));
+        return $row->code;
+    }
+    /** return user id if authenticated  */
+    public static function userId() {
+        if (Auth::check()) {
+           return Auth::user()->id;
+        }
+        return null;
+    }
+}
