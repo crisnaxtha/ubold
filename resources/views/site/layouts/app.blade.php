@@ -5,6 +5,8 @@
     <meta charset="utf-8">
     <meta http-equiv="X-UA-Compatible" content="IE=edge">
     <meta name="viewport" content="width=device-width, initial-scale=1">
+    <meta name="viewport" content="width=device-width, initial-scale=1, maximum-scale=1">
+
     @if(isset($all_view['setting']->site_name))
     <meta name="author" content="{{ $all_view['setting']->site_name }}">
     @endif
@@ -22,14 +24,14 @@
     @if(isset($all_view['setting']->site_description))
     <meta name="description" content="{{ $all_view['setting']->site_description }}">
     @endif
- 
+
     <!-- Goole Fonts -->
 
     <!-- Bootstrap -->
     <link href="{{ asset('assets/site/assets/css/bootstrap.min.css') }}" rel="stylesheet">
 
     <!-- Font Awesome -->
-    <link href="{{ asset('assets/site/assets/fonts/font-awesome/css/font-awesome.min.css') }}" rel="stylesheet">
+    <link href="{{ asset('assets/site/assets/css/font-awesome.min.css') }}" rel="stylesheet">
 
     <link href="{{ asset('assets/site/assets/css/owl.carousel.min.css') }}" rel="stylesheet" type="text/css">
 
@@ -37,8 +39,6 @@
 
     <!--Custom CSS -->
     <link href="{{ asset('assets/site/assets/css/style.css') }}" rel="stylesheet">
-    <link href="{{ asset('assets/site/assets/css/color.css') }}" rel="stylesheet" type="text/css">
-    <link href="{{ asset('assets/site/assets/css/responsive.css') }}" rel="stylesheet" type="text/css">
 
     @yield('css')
     <!-- HTML5 shim and Respond.js for IE8 support of HTML5 elements and media queries -->
@@ -51,23 +51,29 @@
 
 <body>
 
-    <div id="wrapper">
-        @include('site.includes.header')
-
-        @yield('content')
-
-        
-        @include('site.includes.footer')
+    <!-- preloader start -->
+    <div class="preloader">
+        <div class="spinner"></div>
     </div>
+    <!-- preloader end -->
 
 
-    <script src="{{ asset('assets/site/assets/js/jquery-1.11.3.js') }}"></script>
+    @include('site.includes.header')
+    @yield('content')
+    @include('site.includes.footer')
+
+
+
+    <script src="{{ asset('assets/site/assets/js/jquery.min.js') }}"></script>
 
     <script src="{{ asset('assets/site/assets/js/bootstrap.min.js') }}"></script>
+    <script src="{{ asset('assets/site/assets/js/wow.min.js') }}"></script>
+    <script src="{{ asset('assets/site/assets/js/Chart.min.js') }}"></script>
+    <script src="{{ asset('assets/site/assets/js/charts-custom.js') }}"></script>
 
     <script src="{{ asset('assets/site/assets/js/owl.carousel.min.js') }}"></script>
 
-    <script src="{{ asset('assets/site/assets/js/custom.js') }}"></script>
+    <script src="{{ asset('assets/site/assets/js/script.js') }}"></script>
 
     @yield('js')
 </body>

@@ -22,7 +22,7 @@ class CreateSettingsTable extends Migration
             $table->string('site_url')->nullable();
             $table->text('meta_keyword')->nullable();
             $table->string('logo')->nullable();
-            $table->string('language')->default('en');
+            $table->string('language')->default('1');
             $table->string('social_profile_fb')->nullable();
             $table->string('social_profile_twitter')->nullable();
             $table->string('social_profile_insta')->nullable();

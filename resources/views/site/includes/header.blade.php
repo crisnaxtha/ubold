@@ -1,108 +1,122 @@
-<header id="header">
-    <section class="top-row">
-        <div class="container">
-            <div class="left-box">
-                <ul>
-                    <li><a href="javascript:void(0)"><i class="fa fa-calendar" aria-hidden="true"></i>Events</a></li>
-                    <li><a href="javascript:void(0)"><i class="fa fa-bank" aria-hidden="true"></i>Departments</a></li>
-                    <li><a href="javascript:void(0)"><i class="fa fa-map-marker" aria-hidden="true"></i>Maps</a></li>
-                    <li><a href="javascript:void(0)"><i class="fa fa-video-camera" aria-hidden="true"></i>News Room</a></li>
-                    <li><a href="javascript:void(0)"><i class="fa fa-newspaper-o" aria-hidden="true"></i>Information</a></li>
-                </ul>
-            </div> 
-            <div class="right-box text-right">
-                <ul>
-                    @if(isset($all_view['lang']))
-                        @foreach($all_view['lang'] as $lang)
-                        <li>
-                            @if(Route::has('site.swap_language'))
-                            <a href="{{ route('site.swap_language', ['lang_id'=>$lang->id])}}">@if(isset($lang->image))<img src="{{ $lang->image}}" alt="" />@endif &nbsp; {{ $lang->name }}</a>
-                            @endif
-                        </li>
-                        @endforeach
-                    @endif
-                </ul>
-                <a href="#" class="btn-style-1">Ask Question to Govt. </a> 
+<!-- Front End Designed And Developed By: Bikash Bhandari(bikash.433@gmail.com) -->
+<!DOCTYPE html>
+<html lang="zxx">
+<head>
+<meta charset="utf-8">
+<title>NGO Site By Tejobindu Solutions</title>
+
+<!-- mobile responsive meta -->
+<meta name="viewport" content="width=device-width, initial-scale=1">
+<meta name="viewport" content="width=device-width, initial-scale=1, maximum-scale=1">
+
+<!-- ** Plugins Needed for the Project ** -->
+<!-- Bootstrap -->
+<link rel="stylesheet" href="css/bootstrap.min.css">
+<!-- fontawesome -->
+<link rel="stylesheet" href="css/font-awesome.min.css">
+<!-- animation css -->
+<link rel="stylesheet" href="css/animate.css">
+<link href="css/owl.carousel.min.css" rel="stylesheet">
+<!-- Main Stylesheet -->
+<link href="css/style.css" rel="stylesheet">
+<!--Favicon-->
+<link rel="shortcut icon" href="images/favicon.png" type="image/x-icon">
+<link rel="icon" href="images/favicon.png" type="image/x-icon">
+
+<!-- HTML5 shim and Respond.js IE8 support of HTML5 elements and media queries -->
+
+    <!--[if lt IE 9]>
+      <script src="https://oss.maxcdn.com/libs/html5shiv/3.7.0/html5shiv.js"></script>
+      <script src="https://oss.maxcdn.com/libs/respond.js/1.3.0/respond.min.js"></script>
+    <![endif]-->
+
+</head>
+
+<body>
+<!-- preloader start -->
+<div class="preloader">
+  <div class="spinner"></div>
+</div>
+<!-- preloader end -->
+
+<!-- header -->
+<header>
+  <div class="container">
+    <div class="row">
+      <div class="col-lg-4 col-md-6 col-sm-6"> <a href="index.html" class="logo_sec">
+        <div class="row">
+          <div class="col-lg-4 col-md-5 pad-right-0"> <img src="images/logo.png" alt="Main Logo" /> </div>
+          <div class="col-lg-8 col-md-7 text-left logo_text"> <span>नेपाल सरकार</span> <b>कोष लेखा  कार्यालय</b> <span>काठमाडौँ , नेपाल </span> </div>
+          <div class="clearfix"></div>
+        </div>
+        </a> </div>
+      <div class="col-lg-8 col-md-6 col-sm-6 text-right">
+        <div class="right-box text-right">
+          <form class="navbar-form" role="search">
+            <div class="input-group">
+              <input class="form-control" placeholder="Search" name="srch-term" id="srch-term" type="text">
+              <div class="input-group-append">
+                <button class="btn btn-info" type="submit"><i class="fa fa-search"></i></button>
+              </div>
             </div>
+          </form>
+          <ul>
+            <li><a href="javascript:void(0)"><img src="images/npflag.png" alt="Nepali flag"> Nepali</a></li>
+            <li><a href="javascript:void(0)"><img src="images/engflag.png" alt="English flag"> English</a></li>
+          </ul>
+          <div class="clearfix"></div>
         </div>
-    </section>
-    <section class="logo-row">
-        <div class="container">
-            @if(isset($all_view['setting']->logo))
-            <strong class="logo"><a href="{{ route('site.index') }}"><img src="{{ asset($all_view['setting']->logo) }}" alt="img"></a></strong>
-            @endif
-            <div class="menu-col-top"> <a href="javascript:void(0)" class="btn-style-1">Facebook</a></div>&nbsp
-            <div class="menu-col-top"> <a href="javascript:void(0)" class="btn-style-1">Twitter</a></div>
-        </div>
-        <div class="menu-col">
-            <div class="container">
-                <div class="btm-row">
-                    {{-- <div class="cp-burger-nav">
-                        <div id="cp_side-menu-btn" class="cp_side-menu"><a href="javascript:void(0)"><i class="fa fa-bars" aria-hidden="true"></i></a></div>
-                        <div id="cp_side-menu"> <a href="javascript:void(0)" id="cp-close-btn" class="crose"><i class="fa fa-close"></i></a>
-                            <div class="content mCustomScrollbar">
-                                <div id="content-1" class="content">
-                                    <div class="cp_side-navigation">
-                                        @if(isset($data['menu']))
-                                        <nav>
-                                            <ul class="navbar-nav">
-                                                @foreach($data['menu'] as $row)
-                                                <li><a href="index.html">{{ $row->menu_name }}</a></li>
-                                                @endforeach
-
-                                                <li class="active"><a href="javascript:void(0)" class="dropdown-toggle" data-toggle="dropdown" role="button" aria-expanded="false">About <i class="fa fa-angle-down"></i></a>
-                                                    <ul class="dropdown-menu" role="menu">
-                                                        <li><a href="javascript:void(0)">Introduction</a></li>
-                                                        <li><a href="javascript:void(0)">Organizational Structure</a></li>
-                                                        <li><a href="javascript:void(0)">Section/Division</a></li>
-                                                        <li><a href="javascript:void(0)">Staff Detail</a></li>
-                                                    </ul>
-                                                </li>
-                                            </ul>
-                                        </nav>
-                                        @endif
-                                    </div>
-                                </div>
-                            </div>
-                            <strong class="copy">Contact: <b>+</b>123 4567 8910</strong> <strong class="copy">Email: <a href="mailto:"><span class="__cf_email__" data-cfemail="721b1c141d32151d0417001c1f171c065c111d1f">[info@foreignmentemploymentnepal.com]</span></a></strong>
-                            <div class="sidebar-social">
-                                <ul>
-                                    <li><a href="javascript:void(0)"><i class="fa fa-facebook-square" aria-hidden="true"></i></a></li>
-                                    <li><a href="javascript:void(0)"><i class="fa fa-google-plus" aria-hidden="true"></i></a></li>
-                                    <li><a href="javascript:void(0)"><i class="fa fa-whatsapp" aria-hidden="true"></i></a></li>
-                                    <li><a href="javascript:void(0)"><i class="fa fa-skype" aria-hidden="true"></i></a></li>
-                                    <li><a href="javascript:void(0)"><i class="fa fa-envelope" aria-hidden="true"></i></a></li>
-                                    <li><a href="javascript:void(0)"><i class="fa fa-rss" aria-hidden="true"></i></a></li>
-                                </ul>
-                            </div>
-                        </div>
-
-                    </div> --}}
-
-                    <div class="header-search">
-                        <div class="dropdown">
-                            <button class="btn btn-default dropdown-toggle" type="button" id="dropdownMenu1" data-toggle="dropdown" aria-haspopup="true" aria-expanded="true"> <i class="fa fa-search" aria-hidden="true"></i> </button>
-                            <ul class="dropdown-menu" aria-labelledby="dropdownMenu1">
-                                <li>
-                                    <form action="{{ Route('site.search')}}" method="POST" role="search">
-                                        {{ csrf_field() }}
-                                        <input type="text" name="keyword" placeholder="Search..." required>
-                                        <button type="submit"><i class="fa fa-search" aria-hidden="true"></i></button>
-                                    </form>
-                                </li>
-                            </ul>
-                        </div>
-                    </div>
-                    <nav class="navbar navbar-inverse">
-                        <div class="navbar-header">
-                            <button type="button" class="navbar-toggle collapsed" data-toggle="collapse" data-target="#navbar" aria-expanded="false" aria-controls="navbar"> <span class="sr-only">Toggle navigation</span> <span class="icon-bar"></span> <span class="icon-bar"></span> <span class="icon-bar"></span> </button>
-                        </div>
-                        <div id="navbar" class="collapse navbar-collapse">
-                                @include('site.includes.nav')
-                        </div>
-                    </nav>
-                </div>
-            </div>
-        </div>
-    </section>
+      </div>
+      <div class="clearfix"></div>
+    </div>
+  </div>
 </header>
+<!-- /header -->
+<!-- Navigation -->
+<nav class="navbar navbar-expand-lg navbar-dark bg-primary nav_sec">
+  <div class="container">
+    <button class="navbar-toggler navbar-toggler-right" type="button" data-toggle="collapse" data-target="#navbarResponsive" aria-controls="navbarResponsive" aria-expanded="false" aria-label="Toggle navigation"> <span class="navbar-toggler-icon"></span> </button>
+    <div class="collapse navbar-collapse" id="navbarResponsive">
+      <ul class="navbar-nav mr-auto">
+        <li class="nav-item"> <a class="nav-link" href="index.html">गृह पृष्ठ</a> </li>
+        <li class="nav-item"> <a class="nav-link" href="#">हाम्रो बारेमा</a> </li>
+        <li class="nav-item"> <a class="nav-link" href="#">संगठनिक संरचना</a> </li>
+        <li class="nav-item"> <a class="nav-link" href="#">खेलकुद</a> </li>
+        <li class="nav-item"> <a class="nav-link" href="#">शिक्षा</a> </li>
+        <li class="nav-item"> <a class="nav-link" href="#">नागरिक</a> </li>
+        <li class="nav-item"> <a class="nav-link" href="#">व्यवसाय </a> </li>
+        <li class="nav-item"> <a class="nav-link" href="#">पर्यटन </a> </li>
+        <li class="nav-item dropdown menu-large"> <a class="nav-link dropdown-toggle" href="#" id="navLarge" data-toggle="dropdown" aria-haspopup="true" aria-expanded="false"> More </a>
+          <div class="dropdown-menu megamenu" aria-labelledby="navLarge">
+            <div class="row">
+              <div class="col-lg-2 col-md-3 col-sm-4">
+                <h4>More</h4>
+              </div>
+              <div class="col-lg-10 col-md-9 col-sm-8">
+                <ul>
+                  <li><a href="#">Culture</a></li>
+                  <li><a href="#">Future</a></li>
+                  <li><a href="#">Sounds</a></li>
+                  <li><a href="#">CBBC</a></li>
+                  <li><a href="#">CBeebies</a></li>
+                  <li><a href="#">Food</a></li>
+                  <li><a href="#">Bitesize</a></li>
+                  <li><a href="#">Arts</a></li>
+                  <li><a href="#">Taster</a></li>
+                  <li><a href="#">Nature</a></li>
+                  <li><a href="#">Local</a></li>
+                  <li><a href="#">TV</a></li>
+                  <li><a href="#">Radio</a></li>
+                  <li><a href="#">Three</a></li>
+                  <li><a href="#">Four</a></li>
+                </ul>
+              </div>
+              <div class="clearfix"></div>
+            </div>
+          </div>
+        </li>
+      </ul>
+    </div>
+  </div>
+</nav>
+<!-- /Navigation -->
