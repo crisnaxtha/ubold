@@ -59,6 +59,7 @@
 
 
     @include('site.includes.header')
+    @include('site.includes.nav')
     @yield('content')
     @include('site.includes.footer')
 
@@ -71,7 +72,7 @@
     <script src="{{ asset('assets/site/assets/js/Chart.min.js') }}"></script>
     <script src="{{ asset('assets/site/assets/js/charts-custom.js') }}"></script>
 
-    <script src="{{ asset('assets/site/assets/js/owl.carousel.min.js') }}"></script>
+    <script src="{{ asset('assets/site/assets/js/owl.carousel.js') }}"></script>
 
     <script src="{{ asset('assets/site/assets/js/script.js') }}"></script>
 
