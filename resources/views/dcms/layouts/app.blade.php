@@ -1,6 +1,6 @@
 <!DOCTYPE html>
 <html lang="{{ App::getLocale() }}">
-  
+
 <head>
         <!--ajax-request csrf-token-->
     <meta name="csrf-token" content="{{ csrf_token() }}"/>
@@ -13,7 +13,7 @@
 
     @if(isset($_panel))
     <title>{{ $_panel }} | DCMS</title>
-    @else 
+    @else
     <title>DCMS</title>
     @endif
 
@@ -24,7 +24,7 @@
     <link href="{{ asset('assets/dcms/assets/css/bootstrap.min.css') }}" rel="stylesheet">
     <link href="{{ asset('assets/dcms/assets/css/icons.min.css') }}" rel="stylesheet">
     <link href="{{ asset('assets/dcms/assets/css/app.min.css') }}" rel="stylesheet" />
-  
+
 
 
     @yield('css')
@@ -51,11 +51,21 @@
       <!--sidebar end-->
 
       <!--main content start-->
-      <section id="main-content">
-          <section class="wrapper"> 
-            @yield('content')
-          </section>
-      </section>
+    <!-- ============================================================== -->
+    <!-- Start Page Content here -->
+    <!-- ============================================================== -->
+
+    <div class="content-page">
+        <div class="content">
+
+            <!-- Start Content-->
+            <div class="container-fluid">
+        @yield('content')
+            </div>
+            {{-- end of content --}}
+        </div>
+    </div>
+
       <!--main content end-->
 
       <!-- Right Slidebar start -->
@@ -83,5 +93,7 @@
 
     <!-- App js-->
     <script src="{{ asset('assets/dcms/assets/js/app.min.js') }}"></script>
+
+    @yield('js')
   </body>
 </html>

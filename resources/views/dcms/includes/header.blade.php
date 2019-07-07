@@ -18,10 +18,10 @@
             <li style="padding-top:25px;"><strong>{{__('Role')}}:</strong>&nbsp;<?php dm_userRole(Auth::user()->role) ?></li>
             {{-- language change  --}}
             <li class="dropdown notification-list">
-                    
+
                   <a class="nav-link dropdown-toggle  waves-effect waves-light" data-toggle="dropdown" class="dropdown-toggle" href="#">
                       <span class="pro-user-name ml-1"><?php use App\Http\Controllers\Dcms\HomeController; echo HomeController::langName(); ?><i class="mdi mdi-chevron-down"></i></span>
-                      
+
                   </a>
                   <div class="dropdown-menu dropdown-menu-right">
                       @if(isset($all_view['lang']))
@@ -36,7 +36,7 @@
                 <a class="nav-link dropdown-toggle nav-user mr-0 waves-effect waves-light" data-toggle="dropdown" class="dropdown-toggle" href="#" role="button" aria-haspopup="false" aria-expanded="false">
                     @if(Auth::user()->avatar)
                     <img alt="" src="{{ asset(Auth::user()->avatar) }}" height="29" width="29" class="rounded-circle">
-                    @else 
+                    @else
                     <img alt="" src="{{ asset('assets/dcms/img/lochan.png') }}" height="29" width="29" class="rounded-circle">
                     @endif
                     <span class="pro-user-name ml-1">{{ Auth::user()->name }}<i class="mdi mdi-chevron-down"></i></span>
@@ -47,7 +47,7 @@
                     <div class="dropdown-header noti-title">
                         <h6 class="text-overflow m-0">Welcome !</h6>
                     </div>
-                    
+
                     @if(route::has('dcms.user_profile.show'))
                     <a class="dropdown-item notify-item" href="{{ route('dcms.user_profile.show') }}"><i class=" fa fa-user"></i>Profile</a></li>
                     @endif
@@ -62,7 +62,7 @@
         <a href="index.html" class="logo text-center">
             <span class="logo-lg">
                 {{-- <img src="assets/images/logo-light.png" alt="" height="18"> --}}
-                <span class="logo-lg-text-light">UBold</span> 
+                <span class="logo-lg-text-light">UBold</span>
             </span>
             <span class="logo-sm">
                 <span class="logo-lg-text-light">U</span>
@@ -86,7 +86,7 @@
         </li>
 
         <li class="nav-link">
-                @include('dcms.includes.breadcrumb')
+                {{-- @include('dcms.includes.breadcrumb') --}}
         </li>
     </ul>
 </div>
