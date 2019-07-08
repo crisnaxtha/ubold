@@ -1,33 +1,28 @@
 @extends('dcms.layouts.app')
 
 @section('content')
-
+@include('dcms.includes.breadcrumb')
 <div class="row">
-    <div class="col-lg-12 col-md-12 col-xs-12">
-        <section class="panel">
-            <header class="panel-heading">
-                <h3>{{ $_panel }}</h3>
-                @include('dcms.includes.buttons.button-back') 
-                @include('dcms.includes.flash_message_error')  
-            </header>
-        </section>
-    </div>
-    <div class="form">
+    <div>
         <?php
         dm_postform(URL::route($_base_route.'.store'), 'POST');
         ?>
-        <div class="col-lg-8 col-md-8 col-xs-8">
+        <div class="col-12">
                 
-            <section class="panel">
+            <div class="card">
+                <div class="card-body">
+                @include('dcms.includes.buttons.button-back') 
+                @include('dcms.includes.flash_message_error')  
                 <div class="panel-heading">
                     <p>Select Category</p>
                 </div>
-                <div class="panel-body">        
-                    <?php 
-                        dm_dropdown('category','Category(*)', $data['categories']);                            
-                    ?>
+                           
+                        <?php 
+                            dm_dropdown('category','Category(*)', $data['categories']);                            
+                        ?>
+                  
                 </div>
-            </section>
+            </div>
               
             <!--tab nav start-->
             <section class="panel">
