@@ -105,9 +105,9 @@ if(!function_exists('dm_hsubmit')){
     ?>
     <div class="form-group">
         <div class="col-lg-offset-2 col-lg-10">
-            <div class="pull-right">  
+            <div class="float-right">
                 <input class="btn btn-danger" type="submit" value="<?=$submitCaption!=null?$submitCaption:''?>" >
-                <a href="<?=$backURL!=null?$backURL:''?>" class="btn btn-default" type="button"><?=$backCaption!=null?$backCaption:''?></a>
+                <a href="<?=$backURL!=null?$backURL:''?>" class="btn btn-success btn-small" type="button"><?=$backCaption!=null?$backCaption:''?></a>
             </div>
         </div>
     </div>
@@ -170,7 +170,7 @@ if(!function_exists('dm_hdropdown')){
                         <option value=<?=$old_data_name?>><?=$old_data_name?></option>
                         <?php foreach($data as $row){ ?>
                         <option value="<?=$row->id?>"><?=$row->name?></option>
-                        <?php } ?>   
+                        <?php } ?>
                     </select>
                 </div>
         </div>
@@ -245,7 +245,7 @@ if(!function_exists('dm_checkbox')){
     function dm_checkbox($type="checkbox",$name,$caption="",$checked=null,$value="1",$options=''){
     ?>
     <div class="form-group ">
-        <label for="<?=$name?>" class="control-label col-lg-2"><?=$caption?></label>
+        <label for="<?=$name?>" class=""><?=$caption?></label>
             <input value="<?=$value?>" type="checkbox" onclick="if($(this).attr('checked')=='checked'){ $(this).next().removeAttr('checked'); }else{ $(this).next().attr('checked','checked'); }" style="width: 20px" class="checkbox form-control" id="<?=$name?>" name="<?=$name?>" <?=$checked!=null?"checked":""?> <?=$options?>>
             <input value="0" type="checkbox" style="display: none;" name="<?=$name?>" <?=$checked==null?"checked":""?>>
     </div>
@@ -321,13 +321,13 @@ if(!function_exists('dm_dropdown')){
                     <option value=<?=$old_data?>><?=$old_data_name?></option>
                     <?php foreach($data as $row){ ?>
                     <option value="<?=$row->id?>"><?=$row->name?></option>
-                    <?php } ?>   
+                    <?php } ?>
                 </select>
         </div>
         <?php
     }
 }
-/** 
+/**
  * Branch Drop Down
  */
 if(!function_exists('dm_branchDropdown')){
@@ -340,7 +340,7 @@ if(!function_exists('dm_branchDropdown')){
                     <option value=<?=$old_data?>><?=$old_data_name?></option>
                     <?php foreach($data as $row){ ?>
                     <option value="<?=$row->id?>"><?=$row->name?></option>
-                    <?php } ?>   
+                    <?php } ?>
                 </select>
             </div>
         </div>
@@ -348,7 +348,7 @@ if(!function_exists('dm_branchDropdown')){
     }
 }
 
-/** 
+/**
  * Branch Drop Down for staff
  */
 if(!function_exists('dm_dbranchDropdown')){
@@ -360,7 +360,7 @@ if(!function_exists('dm_dbranchDropdown')){
                     <option value=<?=$old_data?>><?=$old_data_name?></option>
                     <?php foreach($data as $row){ ?>
                     <option value="<?=$row->id?>"><?=$row->name?></option>
-                    <?php } ?>   
+                    <?php } ?>
                 </select>
         </div>
         <?php
@@ -377,7 +377,7 @@ if(!function_exists('dm_menu_dropdown')){
                 <option value=<?=$old_data_name?>><?=$old_data_name?></option>
                 <?php foreach($data as $row){ ?>
                 <option value="<?=$row?>"><?=$row?></option>
-                <?php } ?>   
+                <?php } ?>
             </select>
         </div>
     </div>
@@ -394,7 +394,7 @@ if(!function_exists('dm_menu_type_dropdown')){
                 <option id="old_value" value=<?=$old_data?>><?=$old_data_name?></option>
                 <?php foreach($data as $row){ ?>
                 <option value="<?=$row?>"><?=$row?></option>
-                <?php } ?>   
+                <?php } ?>
             </select>
         </div>
     </div>
@@ -411,7 +411,7 @@ if(!function_exists('dm_post_dropdown')){
                 <option value=<?=$old_data?>><?=$old_data_name?></option>
                 <?php foreach($data as $key => $row){ ?>
                     <option value="<?=$row->post_unique_id ?>"><?= $row->title; ?></option>
-                <?php } ?>   
+                <?php } ?>
             </select>
         </div>
     </div>
@@ -428,7 +428,7 @@ if(!function_exists('dm_category_dropdown')){
                 <option value=<?=$old_data?>><?=$old_data_name?></option>
                 <?php foreach($data as $key => $row){?>
                     <option value="<?=$row->id ?>"><?= $row->name; ?></option>
-                <?php } ?>   
+                <?php } ?>
             </select>
         </div>
     </div>

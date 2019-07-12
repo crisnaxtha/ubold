@@ -60,7 +60,7 @@
 
             <!-- Start Content-->
             <div class="container-fluid">
-        @yield('content')
+                @yield('content')
             </div>
             {{-- end of content --}}
         </div>
