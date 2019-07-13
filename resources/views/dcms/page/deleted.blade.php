@@ -1,7 +1,7 @@
 @extends('dcms.layouts.app')
 @section('css')
        <!--dynamic table-->
-       @include('dcms.includes.datatable-assets.css')
+       @include('dcms.includes.footable-assets.css')
 @endsection
 
 @section('content')
@@ -14,7 +14,7 @@
           </header>
           <div class="panel-body">
                @include('dcms.includes.buttons.button-back')
-               <div class="btn-group pull-right">            
+               <div class="btn-group pull-right">
                </div>
             <div class="adv-table">
                 <table  class="display table table-bordered table-striped" id="dynamic-table">
@@ -38,7 +38,7 @@
                            </td>
                            <td>{{ $row->title }}</td>
                            <td width="150px" class="hidden-phone">
-                                 @include('dcms.includes.buttons.button-recycle-restore-post')                              
+                                 @include('dcms.includes.buttons.button-recycle-restore-post')
                                  @include('dcms.includes.buttons.button-recycle-delete-post')
                            </td>
                         </tr>
@@ -54,8 +54,8 @@
 @endsection
 
 @section('js')
-@include('dcms.includes.flash-message') 
+@include('dcms.includes.flash-message')
 
-   @include('dcms.includes.datatable-assets.js')
+@include('dcms.includes.footable-assets.js')
 
 @endsection

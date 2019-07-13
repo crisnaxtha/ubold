@@ -1,17 +1,13 @@
 @extends('dcms.layouts.app')
 
 @section('content')
-
+@include('dcms.includes.breadcrumb')
 <div class="row">
         <div class="col-lg-12 col-md-12 col-xs-12">
-            <section class="panel">
-                <header class="panel-heading">
-                   <h3>{{ $_panel }}</h3>
-                </header>
-                <div class="panel-body">
+            <section class="card">
+                <div class="card-body">
                         @include('dcms.includes.buttons.button-back')
-                        @include('dcms.includes.flash_message_error')                    
-
+                        @include('dcms.includes.flash_message_error')
                     <div class=" form">
                         <?php
                         dm_hpostform(URL::route($_base_route.'.store'), 'POST');
@@ -22,8 +18,8 @@
                           <?php   dm_hidden('rows['.$loop->index.'][lang_id]', $lang->id);
                                   dm_menu_hinput('text','rows['.$loop->index.'][lang_name]', "Menu Name (<strong>$lang->name</strong>)(*)", 'rows.'.$loop->index.'.lang_name');
                          ?>
-                        @endforeach 
-                        <?php 
+                        @endforeach
+                        <?php
                         dm_hsubmit('Submit', URL::route($_base_route.'.index'), 'Cancel');
                         dm_closeform();
                         ?>
@@ -40,7 +36,7 @@
 @endsection
 
 @section('js')
-@include('dcms.includes.flash-message')                    
+@include('dcms.includes.flash-message')
 
 
 @endsection
