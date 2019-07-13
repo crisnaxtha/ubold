@@ -1,30 +1,25 @@
 @extends('dcms.layouts.app')
 @section('css')
        <!--dynamic table-->
-       @include('dcms.includes.datatable-assets.css')
+       {{-- @include('dcms.includes.datatable-assets.css') --}}
        @include('dcms.includes.nestable-assets.css')
 @endsection
 
 @section('content')
 <!-- page start-->
+@include('dcms.includes.breadcrumb')
+
 <div class="row">
-   <div class="col-lg-12 col-md-12 col-xs-12">
-         <section class="panel">
-               <header class="panel-heading">
-                  <h3>{{ $_panel }}</h3> 
-               </header>
-         </section>
-      </div>
     <div class="col-sm-12">
-       <section class="panel">
-          <div class="panel-body">
+       <section class="card">
+          <div class="card-body">
                <?php dm_button('button', 'btn-success', "Create", '', '', '', "modal", "#myModal"); ?>
                <br>
                <br>
                <div class="alert alert-block alert-warning fade in">
                     <strong>Be Cearful While Deleating Category!!</strong> It May bring Error on site.
                 </div>
-                @include('dcms.includes.flash_message_error') 
+                @include('dcms.includes.flash_message_error')
 
                <div class="dd" id="nestable">
                      {{-- ==============Category- DISPLAY==================== --}}
@@ -53,8 +48,8 @@
                     </div>
                     <div class="modal-footer">
                         <button data-dismiss="modal" class="btn btn-default" type="button">Close</button>
-                        <?php 
-                              dm_button('submit','btn-success pull-right', 'Submit'); 
+                        <?php
+                              dm_button('submit','btn-success pull-right', 'Submit');
                               dm_closeform();
                         ?>
                     </div>
@@ -66,8 +61,8 @@
 @endsection
 
 @section('js')
-@include('dcms.includes.flash-message')  
-@include('dcms.includes.datatable-assets.js')
+@include('dcms.includes.flash-message')
+{{-- @include('dcms.includes.datatable-assets.js') --}}
 @include('dcms.includes.nestable-assets.js')
 <script>
       $(document).ready(function()
@@ -78,9 +73,9 @@
                   output = list.data('output');
               if (window.JSON) {
                   output.val(window.JSON.stringify(list.nestable('serialize')));//, null, 2));
-                  
-                  // Ajax request data 
-                  var dataString = { 
+
+                  // Ajax request data
+                  var dataString = {
                     data : $("#nestable-output").val(),
                   };
               console.log(dataString);
@@ -96,7 +91,7 @@
                       },
                   cache : false,
                   success: function(data){
-                     //  alert(data); 
+                     //  alert(data);
                     // $("#load").hide();
                   } ,error: function(xhr, status, error) {
                     alert(error);
@@ -117,8 +112,8 @@
           // output initial serialised data
           updateOutput($('#nestable').data('output', $('#nestable-output')));
       });
-      
-      
+
+
       $(document).on("click",".del-button",function() {
               var x = confirm('Delete this Category?');
               var id = $(this).attr('id');
@@ -149,10 +144,10 @@
                   error: function(xhr, status, error) {
                         alert(error);
                       },
-                  }); 
+                  });
               }
       });
-             
+
       </script>
 
 @endsection
