@@ -1,85 +1,74 @@
 @extends('dcms.layouts.app')
 
 @section('content')
+@include('dcms.includes.breadcrumb')
 
 <div class="row">
-    <div class="col-lg-12 col-md-12 col-xs-12">
-        <section class="panel">
-            <header class="panel-heading">
-                <h3>{{ $_panel }}</h3> 
+    <div class="col-lg-8 col-md-8 col-xs-8">
+        <div class="card">
+            <div class="card-body">
                 @include('dcms.includes.buttons.button-back')
                 @include('dcms.includes.flash_message_error')  
-            </header>
-        </section>
-    </div>
-    <div class="form">
+
         <?php
         dm_postform(URL::route($_base_route.'.update', ['staff_unique_id'=> $data['single']->staff_unique_id]), 'PUT');
         ?>
-        <div class="col-lg-8 col-md-8 col-xs-8">
-           
-            <!--tab nav start-->
-            <section class="panel">
-                <header class="panel-heading tab-bg-dark-navy-blue ">
-                    <ul class="nav nav-tabs">
-                        @if(isset($data['lang']))
-                            @foreach($data['lang'] as $row )
-                            <li class="@if($loop->iteration == 1){{ 'active' }} @endif">
-                                <a data-toggle="tab" href="#{{ $row->name }}">{{ $row->name }}</a>
-                            </li>
-                            @endforeach
-                        @endif
-                    </ul>
-                </header>
-                <div class="panel-body">
-                    <div class="tab-content">
-                        @if(isset($data['lang']))
-                            @foreach($data['lang'] as $row )
-                                <div id="{{  $row->name }}" class="tab-pane @if($loop->iteration == 1){{ 'active' }} @endif">
-                                    <?php 
+            <ul class="nav nav-tabs">
+                @if(isset($data['lang']))
+                    @foreach($data['lang'] as $row )
+                    <li class="@if($loop->iteration == 1){{ 'active' }} @endif">
+                        <a data-toggle="tab" href="#{{ $row->name }}">{{ $row->name }}</a>
+                    </li>
+                    @endforeach
+                @endif
+            </ul>
+               
+            <div class="tab-content">
+                @if(isset($data['lang']))
+                    @foreach($data['lang'] as $row )
+                        <div id="{{  $row->name }}" class="tab-pane @if($loop->iteration == 1){{ 'active' }} @endif">
+                            <?php 
 
-                                            if(isset($staff[$loop->index]['id'])){
-                                                $id = $staff[$loop->index]['id'];
-                                            }else {
-                                                $id = '';
-                                            }
-                                            if(isset($staff[$loop->index]['name'])){
-                                                $name = $staff[$loop->index]['name'];
-                                            }else {
-                                                $name = '';
-                                            }
-                                            if(isset($staff[$loop->index]['designation'])){
-                                                $designation = $staff[$loop->index]['designation'];
-                                            }else {
-                                                $designation = '';
-                                            }
-                                            if(isset($staff[$loop->index]['description'])){
-                                                $description = $staff[$loop->index]['description'];
-                                            }else {
-                                                $description = '';
-                                            }
+                                    if(isset($staff[$loop->index]['id'])){
+                                        $id = $staff[$loop->index]['id'];
+                                    }else {
+                                        $id = '';
+                                    }
+                                    if(isset($staff[$loop->index]['name'])){
+                                        $name = $staff[$loop->index]['name'];
+                                    }else {
+                                        $name = '';
+                                    }
+                                    if(isset($staff[$loop->index]['designation'])){
+                                        $designation = $staff[$loop->index]['designation'];
+                                    }else {
+                                        $designation = '';
+                                    }
+                                    if(isset($staff[$loop->index]['description'])){
+                                        $description = $staff[$loop->index]['description'];
+                                    }else {
+                                        $description = '';
+                                    }
 
-                                        dm_hidden('rows['.$loop->index.'][lang_id]', $row->id);
-                                        dm_hidden('rows['.$loop->index.'][id]', $id);
-                                        dm_hidden('staff_unique_id', $data['single']->staff_unique_id);
-                                        dm_inputUpdate('text', 'rows['.$loop->index.'][name]', 'Name(*)', $name, '');
-                                        dm_inputUpdate('text', 'rows['.$loop->index.'][designation]', 'Designation', $designation, '');
-                                        dm_ckeditorUpdate($row->code.$loop->iteration, 'rows['.$loop->index.'][description]', 'Description', $description);
-                                    ?>
-                                </div>
-                            @endforeach
-                        @endif
-                    </div>
-                </div>
-            </section>
-            <!--tab nav start-->
+                                dm_hidden('rows['.$loop->index.'][lang_id]', $row->id);
+                                dm_hidden('rows['.$loop->index.'][id]', $id);
+                                dm_hidden('staff_unique_id', $data['single']->staff_unique_id);
+                                dm_inputUpdate('text', 'rows['.$loop->index.'][name]', 'Name(*)', $name, '');
+                                dm_inputUpdate('text', 'rows['.$loop->index.'][designation]', 'Designation', $designation, '');
+                                dm_ckeditorUpdate($row->code.$loop->iteration, 'rows['.$loop->index.'][description]', 'Description', $description);
+                            ?>
+                        </div>
+                    @endforeach
+                @endif
+            </div>
         </div>
+    </div>
+            <!--tab nav start-->
+</div>
         <div class="col-lg-4 col-md-4 col-xs-4">
-            <section class="panel">
-                <div class="panel-heading">
-                    <p>Staff Image</p>
-                </div>
-                <div class="panel-body">
+            <div class="card">
+                <div class="card-body">
+                        <p class="header-title">Staff Image</p>
                     <?php 
                         dm_input('file', 'image', 'Staff Image', '', '');
                         if(isset($data['single']->image)){
@@ -87,40 +76,35 @@
                         }
                     ?>
                 </div>
-            </section>
-        </div>
-        <div class="col-lg-4 col-md-4 col-xs-4">
-                <section class="panel">
-                        <div class="panel-heading">
-                            <p>Select Branch</p>
-                        </div>
-                        <div class="panel-body">        
-                            <?php 
-                               if(!empty($data['single']->branch_id )) {
-                                                    $branch_id = $data['single']->branch_id;
-                                                    $branch_name = $data['single']->branch->name;
-                                    }else {
-                                                    $branch_id = '';
-                                                    $branch_name = "No Branch";
-                            }
-    
-                                    dm_dbranchDropdown('branch_id', "Branch(*)", $data['branch'], $branch_id, $branch_name);                           
-                            ?>
-                        </div>
-                </section>
-        </div>
-        <div class="col-lg-4 col-md-4 col-xs-4">
-            <section class="panel">
-                <div class="panel-heading">
-                    <p>Staff Status</p>
+            </div>
+        
+       
+                <div class="card">    
+                    <div class="panel-body"> 
+                        <p class="header-title">Select Branch</p>
+                        <?php 
+                            if(!empty($data['single']->branch_id )) {
+                                                $branch_id = $data['single']->branch_id;
+                                                $branch_name = $data['single']->branch->name;
+                                }else {
+                                                $branch_id = '';
+                                                $branch_name = "No Branch";
+                        }
+
+                                dm_dbranchDropdown('branch_id', "Branch(*)", $data['branch'], $branch_id, $branch_name);                           
+                        ?>
+                    </div>
                 </div>
-                <div class="panel-body">        
+       
+            <div class="card">
+                <div class="card-body"> 
+                    <p class="header-title">Staff Status</p>
                     <?php 
                         dm_inputUpdate('number', 'level', 'Level(*)', $data['single']->level, '');
                         dm_checkbox('checkbox', 'status', 'Status', $data['single']->status);
                     ?>
                 </div>
-            </section>
+            </div>
         </div>
         <div class="col-lg-12 col-md-12 col-xs-12">
             <?php

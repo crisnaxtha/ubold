@@ -1,7 +1,7 @@
 @extends('dcms.layouts.app')
 @section('css')
        <!--dynamic table-->
-       @include('dcms.includes.datatable-assets.css')
+      
 
 @endsection
 
@@ -64,6 +64,5 @@
 
 @section('js')
 
-@include('dcms.includes.datatable-assets.js')
 
 @endsection

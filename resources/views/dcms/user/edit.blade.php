@@ -1,14 +1,12 @@
 @extends('dcms.layouts.app')
 
 @section('content')
+@include('dcms.includes.breadcrumb')
 
 <div class="row">
         <div class="col-lg-8 col-md-8 col-xs-12">
-            <section class="panel">
-                <header class="panel-heading">
-                    <h3>{{ $_panel }}</h3>
-                </header>
-                <div class="panel-body">
+            <section class="card">
+                <div class="card-body">
                         @include('dcms.includes.buttons.button-back')
                         @include('dcms.includes.flash-message') 
 
