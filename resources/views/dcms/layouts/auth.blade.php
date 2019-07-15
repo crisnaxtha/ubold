@@ -5,22 +5,18 @@
     <meta charset="utf-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
     <meta name="description" content="">
-    <meta name="author" content="Mosaddek">
-    <meta name="keyword" content="FlatLab, Dashboard, Bootstrap, Admin, Template, Theme, Responsive, Fluid, Retina">
-    <link rel="shortcut icon" href="img/favicon.html">
+    <meta name="author" content="LOCHAN">
+    <meta name="keyword" content="">
+    <link rel="shortcut icon" href="">
 
     <title>DCMS|</title>
 
-    <!-- Bootstrap core CSS -->
-    <link href="{{ asset('assets/dcms/css/bootstrap.min.css') }}" rel="stylesheet">
-    <link href="{{ asset('assets/dcms/css/bootstrap-reset.css') }}" rel="stylesheet">
-    <!--external css-->
-    <link href="{{ asset('assets/dcms/assets/font-awesome/css/font-awesome.css') }}" rel="stylesheet" />
-    <!--toastr-->
-    <link href="{{ asset('assets/dcms/assets/toastr-master/toastr.css') }}" rel="stylesheet" type="text/css" />
-    <!-- Custom styles for this template -->
-    <link href="{{ asset('assets/dcms/css/style.css') }}" rel="stylesheet">
-    <link href="{{ asset('assets/dcms/css/style-responsive.css') }}" rel="stylesheet" />
+    <!-- App css -->
+    <link href="{{ asset('assets/dcms/assets/css/bootstrap.min.css') }}" rel="stylesheet" type="text/css" />
+    <link href="{{ asset('assets/dcms/assets/css/icons.min.css') }}" rel="stylesheet" type="text/css" />
+    <link href="{{ asset('assets/dcms/assets/css/app.min.css') }}" rel="stylesheet" type="text/css" />
+
+
 
     @yield('css')
 
@@ -31,23 +27,40 @@
     <![endif]-->
 </head>
 
-  <body class="login-body">
+  <body class="authentication-bg authentication-bg-pattern">
+    <div class="account-pages mt-5 mb-5">
+        <div class="container">
+            <div class="row justify-content-center">
+                    <div class="col-md-8 col-lg-6 col-xl-5">
+                        <div class="card bg-pattern">
 
-    <div class="container">
+                            <div class="card-body p-4">
 
-        @yield('content')
+                                <div class="text-center w-75 m-auto">
+                                    {{-- <a href="index.html">
+                                        <span><img src="assets/images/logo-dark.png" alt="" height="22"></span>
+                                    </a> --}}
+                                    <h3 class="text-muted mb-4 mt-3"><strong>{{ __('DCMS:') }}</strong>{{ __('Sign In') }}</h3>
+                                </div>
 
+                                    @yield('content')
+
+                            </div> <!-- end col -->
+                        </div>
+                        <!-- end row -->
+                    </div>
+                    <!-- end container -->
+            </div>
+            <!-- end page -->
+        </div>
     </div>
 
+     <!-- Vendor js -->
+     <script src="{{ asset('assets/dcms/assets/js/vendor.min.js') }}"></script>
 
+     <!-- App js -->
+     <script src="{{ asset('assets/dcms/assets/js/app.min.js') }}"></script>
 
-    <!-- js placed at the end of the document so the pages load faster -->
-    <script src="{{ asset('assets/dcms/js/jquery.js') }}"></script>
-    <script src="{{ asset('assets/dcms/js/bootstrap.min.js') }}"></script>
-    <!--toastr-->
-   <script src="{{ asset('assets/dcms/assets/toastr-master/toastr.js') }}"></script>
-    <!--common script for all pages-->
-    <script src="{{ asset('assets/dcms/js/common-scripts.js') }}"></script>
    @yield('js')
 
 {{-- script-lochna-custom-js  --}}

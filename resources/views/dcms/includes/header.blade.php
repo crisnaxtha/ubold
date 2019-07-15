@@ -85,8 +85,24 @@
             </a>
         </li>
 
-        <li class="nav-link">
-                {{-- @include('dcms.includes.breadcrumb') --}}
+        <li>
+                <a class="nav-link dropdown-toggle  waves-effect waves-light" data-toggle="dropdown" href="#" role="button" aria-haspopup="false" aria-expanded="false">
+                        <i class=" fas fa-file-image"></i>
+                        <span class="badge badge-danger rounded-circle noti-icon-badge">9</span>
+                </a>
+        </li>
+        <li>
+                <a class="nav-link dropdown-toggle  waves-effect waves-light" data-toggle="dropdown" href="#" role="button" aria-haspopup="false" aria-expanded="false">
+                        <i class="fas fa-file"></i>
+                        <span class="badge badge-danger rounded-circle noti-icon-badge">9</span>
+                </a>
+        </li>
+        <li>
+                <a class="nav-link dropdown-toggle  waves-effect waves-light" data-toggle="dropdown" href="#" role="button" aria-haspopup="false" aria-expanded="false">
+                        <i class=" fas fa-envelope"></i>
+                        <span class="badge badge-danger rounded-circle noti-icon-badge">9</span>
+                </a>
+
         </li>
     </ul>
 </div>

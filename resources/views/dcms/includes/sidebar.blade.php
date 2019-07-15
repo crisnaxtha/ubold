@@ -21,17 +21,17 @@
                 <li><a href="{{ URL::route('dcms.category.index') }}" class="{{ ($_panel == 'Category') ? 'active' : '' }}"><i class="fa fa-list-alt"></i><span>{{__('Categories')}}</span></a></li>
                 @endif
                 @if( Route::has('dcms.page.index'))
-                <li><a class="{{ ($_panel == 'Pages') ? 'active' : '' }}" href="{{ URL::route('dcms.page.index') }}" ><i class="fa fa-file-o"></i><span>{{__('Pages')}}</span></a></li>
+                <li><a class="{{ ($_panel == 'Pages') ? 'active' : '' }}" href="{{ URL::route('dcms.page.index') }}" ><i class="fe-package"></i><span>{{__('Pages')}}</span></a></li>
                 @endif
 
                 @if( Route::has('dcms.slider.index'))
-                <li><a class="{{ ($_panel == 'Sliders') ? 'active' : '' }}" href="{{ URL::route('dcms.slider.index') }}" ><i class="fa fa-arrows-h"></i><span>{{__('Sliders')}}</span></a></li>
+                <li><a class="{{ ($_panel == 'Sliders') ? 'active' : '' }}" href="{{ URL::route('dcms.slider.index') }}" ><i class=" fas fa-arrows-alt-h"></i><span>{{__('Sliders')}}</span></a></li>
                 @endif
                 @if( Route::has('dcms.link.index'))
                 <li><a class="{{ ($_panel == 'Links') ? 'active' : '' }}" href="{{ URL::route('dcms.link.index') }}" ><i class="fa fa-link"></i><span>{{__('Links')}}</span></a></li>
                 @endif
                 @if( Route::has('dcms.album.index'))
-                <li><a class="{{ ($_panel == 'Album' || $_panel == 'Gallery') ? 'active' : '' }}" href="{{ URL::route('dcms.album.index') }}" ><i class="fa  fa-picture-o"></i><span>{{__('Photo Album')}}</span></a></li>
+                <li><a class="{{ ($_panel == 'Album' || $_panel == 'Gallery') ? 'active' : '' }}" href="{{ URL::route('dcms.album.index') }}" ><i class="fas fa-camera-retro"></i><span>{{__('Photo Album')}}</span></a></li>
                 @endif
                 {{-- Check if the user is admin or super-admin  --}}
                 @if(Auth::user()->role == 'super-admin' || Auth::user()->role == 'admin')
@@ -45,7 +45,7 @@
                     <li><a class="{{ ($_panel == 'Staff') ? 'active' : '' }}" href="{{ URL::route('dcms.staff.index') }}" ><i class="fa fa-users"></i><span>{{__('Staff')}}</span></a></li>
                     @endif
                     <li class="sub-menu">
-                        <a href="javascript:;" class="{{ ($_base_route == 'dcms.setting') ? 'active' : '' }}">
+                        <a href="javascript:;" class="{{ ($_base_route == 'dcms.setting') ? 'active' : '' }}"><i class="fe-settings"></i>
                             <span class="menu-arrow"></span>
                             <span>{{ __('Settings') }}</span>
                         </a>
@@ -75,7 +75,7 @@
                     <li><a class="{{ ($_panel == 'Tracker') ? 'active' : '' }}" href="{{ URL::route('dcms.tracker.index') }}" ><i class="fa fa-map-marker"></i><span>{{__('User Tracker')}}</span></a></li>
                     @endif
                     @if( Route::has('dcms.database.index'))
-                    <li><a class="{{ ($_panel == 'DB Backup') ? 'active' : '' }}" href="{{ URL::route('dcms.database.index') }}" ><i class="fa fa-cloud-download"></i><span>{{__('DB Backup')}}</span></a></li>
+                    <li><a class="{{ ($_panel == 'DB Backup') ? 'active' : '' }}" href="{{ URL::route('dcms.database.index') }}" ><i class=" fas fa-file-download"></i><span>{{__('DB Backup')}}</span></a></li>
                     @endif
                     @if(Route::has('dcms.language.index'))
                     <li><a class="{{ ($_panel == 'Language') ? 'active' : '' }}" href="{{ URL::route('dcms.language.index') }}" ><i class="fa fa-globe"></i><span>{{__('Language')}}</span></a></li>

@@ -1,16 +1,13 @@
 @extends('dcms.layouts.app')
 
 @section('content')
-
+@include('dcms.includes.breadcrumb')
 <div class="row">
         <div class="col-lg-12 col-md-12 col-xs-12">
-            <section class="panel">
-                <header class="panel-heading">
-                   <h3>{{ $_panel }}</h3>
-                </header>
-                <div class="panel-body">
+            <section class="card">
+                <div class="card-body">
                         @include('dcms.includes.buttons.button-back')
-                        @include('dcms.includes.flash_message_error')                    
+                        @include('dcms.includes.flash_message_error')
                     <div class=" form">
                         <?php
                         dm_hpostform(URL::route($_base_route.'.update', ['id' => $data['albums']]), 'PUT');
@@ -18,7 +15,7 @@
 
                         ?>
                         @foreach($data['lang'] as $lang)
-                        <?php 
+                        <?php
                         if(isset($albums_name[$loop->index]->title)){
                             $albums_title = $albums_name[$loop->index]->title;
                         }
@@ -31,7 +28,7 @@
                         @endforeach
                         <?php
                         dm_hinputUpdate('file', 'image', 'Album Feature Image', '', '');
-                       
+
                         dm_hinputUpdate('number','order', "Order", $data['albums']->order);
                         dm_hcheckbox('checkbox', 'status', 'Status', $data['albums']->status);
                         if(isset($data['albums']->cover_image)){
