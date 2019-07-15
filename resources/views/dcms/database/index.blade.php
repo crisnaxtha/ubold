@@ -1,55 +1,78 @@
 @extends('dcms.layouts.app')
 @section('css')
        <!--dynamic table-->
-       @include('dcms.includes.datatable-assets.css')
 
 @endsection
 
 @section('content')
 <!-- page start-->
-<div class="row">
-    <div class="col-sm-12">
-       <section class="panel">
-          <header class="panel-heading">
-             {{ $_panel }}
-          </header>
-          <div class="panel-body">
-                @include('dcms.includes.buttons.button-create')
-               <div class="alert alert-block alert-warning fade in">
-                  <strong>Backup: Database will be saved in server.</strong> 
-              </div>
-                <a href="{{ route('dcms.database.backup') }}" type="button" class="btn btn-primary"><i class="fa fa-cloud-upload"></i>&nbsp;Backup In Server</a>
-                <a href="{{ route('dcms.database.download') }}" type="button" class="btn btn-success"><i class="fa  fa-cloud-download"></i>&nbsp;Download to Your Computer</a>
+@include('dcms.includes.breadcrumb')
 
-                <div class="adv-table">
-                  <table  class="display table table-bordered table-striped" id="dynamic-table">
-                     <thead>
+<div class="row">
+    <div class="col-12">
+        <div class="card-box">
+            <h4 class="header-title">Filtering</h4>
+            <p class="sub-header">
+                include filtering in your FooTable.
+            </p>
+
+            <a href="{{ route('dcms.database.backup') }}" type="button" class="btn btn-primary"><i class="fa fa-cloud-upload"></i>&nbsp;Backup In Server</a>
+                <a href="{{ route('dcms.database.download') }}" type="button" class="btn btn-success"><i class="fa  fa-cloud-download"></i>&nbsp;Download to Your Computer</a>
+            <hr>
+            <div class="mb-2">
+                <div class="row">
+                    <div class="col-12 text-sm-center form-inline">
+                        <div class="form-group mr-2">
+                            <select id="demo-show-entries" class="form-control form-control-sm ml-1 mr-1">
+                                <option value="5">5</option>
+                                <option value="10">10</option>
+                                <option value="15">15</option>
+                                <option value="20">20</option>
+                            </select>
+                        </div>
+                        <div class="form-group">
+                            <input id="demo-foo-search" type="text" placeholder="Search" class="form-control form-control-sm" autocomplete="on">
+                        </div>
+                    </div>
+                </div>
+            </div>
+
+            <div class="table-responsive">
+                <table id="demo-foo-pagination" class="table table-bordered toggle-circle mb-0" data-page-size="7">
+                    <thead>
                         <tr>
-                           <th>#</th>
+                            <th>#</th>
                            <th>Database Table Name</th>
                         </tr>
-                     </thead>
-                     <tbody>
-                       @if(isset($data['rows'])) 
-                          @foreach($data['rows'] as $row)
-                          <tr class="gradeX">
-                             <td>{{ $loop->iteration }}</td>
-                             <td>{{ $row }}</td>
-                          </tr>
-                          @endforeach
-                       @endif
-                     </tbody>
-                  </table>
-               </div>
-               
-          </div>
-       </section>
-    </div>
-</div>
+                    </thead>
+                    <tbody>
+                        @if(isset($data['rows']))
+                        @foreach($data['rows'] as $row)
+                        <tr class="gradeX">
+                           <td>{{ $loop->iteration }}</td>
+                           <td>{{ $row }}</td>
+                        </tr>
+                        @endforeach
+                     @endif
+                    </tbody>
+                    <tfoot>
+                    <tr class="active">
+                        <td colspan="8">
+                            <div class="text-right">
+                                <ul class="pagination pagination-rounded justify-content-end footable-pagination m-t-10 mb-0"></ul>
+                            </div>
+                        </td>
+                    </tr>
+                    </tfoot>
+                </table>
+            </div> <!-- end .table-responsive-->
+        </div> <!-- end card-box -->
+    </div> <!-- end col -->
+ </div>
 @endsection
 
 @section('js')
-@include('dcms.includes.flash-message') 
-@include('dcms.includes.datatable-assets.js')
+@include('dcms.includes.flash-message')
+
 
 @endsection
