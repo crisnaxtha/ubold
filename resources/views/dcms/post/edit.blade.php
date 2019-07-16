@@ -12,11 +12,11 @@
                 <?php
                     dm_dropdown('category','Category(*)', $data['categories'], $data['single']->category_id, $data['single']->postCategory->name);
                 ?>
-                <ul class="nav nav-tabs">
+                <ul class="nav nav-tabs nav-bordered">
                     @if(isset($data['lang']))
                         @foreach($data['lang'] as $row )
-                        <li class="@if($loop->iteration == 1){{ 'active' }} @endif">
-                            <a data-toggle="tab" href="#{{ $row->name }}">{{ $row->name }}</a>
+                        <li class="nav-item">
+                            <a class="nav-link @if($loop->iteration == 1){{ 'active' }} @endif" data-toggle="tab" href="#{{ $row->name }}" aria-expanded="false">{{ $row->name }}</a>
                         </li>
                         @endforeach
                     @endif

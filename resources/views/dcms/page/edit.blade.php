@@ -11,11 +11,11 @@
                 <?php
                     dm_postform(URL::route($_base_route.'.update', ['id' => $data['single']->post_unique_id]), 'PUT');
                 ?>
-                <ul class="nav nav-tabs">
+                <ul class="nav nav-tabs nav-bordered">
                     @if(isset($data['lang']))
                         @foreach($data['lang'] as $row )
-                        <li class="@if($loop->iteration == 1){{ 'active' }} @endif">
-                            <a data-toggle="tab" href="#{{ $row->name }}">{{ $row->name }}</a>
+                        <li class="nav-item">
+                            <a data-toggle="tab" class="nav-link @if($loop->iteration == 1){{ 'active' }} @endif" href="#{{ $row->name }}">{{ $row->name }}</a>
                         </li>
                         @endforeach
                     @endif

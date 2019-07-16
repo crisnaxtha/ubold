@@ -2,32 +2,31 @@
 
 @section('content')
 <!-- page start-->
+@include('dcms.includes.breadcrumb')
+
 <div class="row">
-    @include('dcms.user_profile.includes.user-pic')
-    <aside class="profile-info col-lg-9">
-        <section class="panel">
-            <div class="bio-graph-heading">
-                {{ Auth::user()->name }}'s Profile
-            </div>
-            <div class="panel-body bio-graph-info">
-                <h1>Bio Graph</h1>
-                <div class="row">
-                    <div class="bio-row">
-                        <p><span>Name </span>: {{ Auth::user()->name }}</p>
+        @include('dcms.user_profile.includes.user-pic')
+        <div class="col-lg-8 col-xl-8">
+            <section class="card">
+                    <div class="card-body">
+                        <div class="header-title">
+                                {{ Auth::user()->name }}'s Edit Profile
+                        </div>
+                        <div class=" form">
+                                <?php
+                                dm_hpostform(URL::route($_base_route.'.update'), 'PUT');
+                                dm_hinputUpdate('file', 'avatar', 'Avatar', '', '');
+                                dm_hinputUpdate('text','name', "Name", $row->name);
+                                dm_hinputUpdate('text','email', "Email", $row->email);
+                                dm_hinputUpdate('text','phone', "Phone", $row->phone);
+                                dm_hsubmit('Submit', URL::route($_base_route.'.show'), 'Cancel');
+                                dm_closeform();
+                                ?>
+                        </div>
                     </div>
-                    <div class="bio-row">
-                        <p><span>Email </span>: {{ Auth::user()->email }}</p>
-                    </div>
-                    <div class="bio-row">
-                        <p><span>Phone </span>: {{ Auth::user()->phone }}</p>
-                    </div>
-                    <div class="bio-row">
-                        <p><span>Role </span>: <?php dm_userRole(Auth::user()->role) ?></p>
-                    </div>
-                </div>
-            </div>
-        </section>
-    </aside>
+                </section>
+                @include('dcms.user_profile.includes.change-password')
+        </div> <!-- end col -->
 </div>
 <!-- page end-->
 

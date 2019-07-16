@@ -59,7 +59,7 @@
 
     <!-- LOGO -->
     <div class="logo-box">
-        <a href="index.html" class="logo text-center">
+        <a href="{{ URL::route('dcms.dashboard')}}" class="logo text-center">
             <span class="logo-lg">
                 {{-- <img src="assets/images/logo-light.png" alt="" height="18"> --}}
                 <span class="logo-lg-text-light">UBold</span>
@@ -84,26 +84,31 @@
                 <span class="">{{__('View Site')}}</span>
             </a>
         </li>
-
+        @if(Route::has('dcms.gallery.index'))
         <li>
-                <a class="nav-link dropdown-toggle  waves-effect waves-light" data-toggle="dropdown" href="#" role="button" aria-haspopup="false" aria-expanded="false">
+                <a class="nav-link dropdown-toggle  waves-effect waves-light" data-toggle="dropdown" href="{{ URL::route('dcms.gallery.index') }}" role="button" aria-haspopup="false" aria-expanded="false">
                         <i class=" fas fa-file-image"></i>
-                        <span class="badge badge-danger rounded-circle noti-icon-badge">9</span>
+                        <span class="badge badge-danger rounded-circle noti-icon-badge">@if(isset($all_view['photo_count'])){{ $all_view['photo_count'] }} @endif</span>
                 </a>
         </li>
+        @endif
+        @if(Route::has('dcms.file.index'))
         <li>
-                <a class="nav-link dropdown-toggle  waves-effect waves-light" data-toggle="dropdown" href="#" role="button" aria-haspopup="false" aria-expanded="false">
+                <a class="nav-link dropdown-toggle  waves-effect waves-light" data-toggle="dropdown" href="{{ URL::route('dcms.file.index') }}" role="button" aria-haspopup="false" aria-expanded="false">
                         <i class="fas fa-file"></i>
-                        <span class="badge badge-danger rounded-circle noti-icon-badge">9</span>
+                        <span class="badge badge-danger rounded-circle noti-icon-badge">@if(isset($all_view['file_count'])){{ $all_view['file_count'] }} @endif</span>
                 </a>
         </li>
+        @endif
+        @if(Route::has('dcms.message.index'))
         <li>
-                <a class="nav-link dropdown-toggle  waves-effect waves-light" data-toggle="dropdown" href="#" role="button" aria-haspopup="false" aria-expanded="false">
+                <a class="nav-link dropdown-toggle  waves-effect waves-light" data-toggle="dropdown" href="{{ URL::route('dcms.message.index') }}" role="button" aria-haspopup="false" aria-expanded="false">
                         <i class=" fas fa-envelope"></i>
-                        <span class="badge badge-danger rounded-circle noti-icon-badge">9</span>
+                        <span class="badge badge-danger rounded-circle noti-icon-badge">@if(isset($all_view['contact_count'])){{ $all_view['contact_count'] }} @endif</span>
                 </a>
 
         </li>
+        @endif
     </ul>
 </div>
 <!-- end Topbar -->

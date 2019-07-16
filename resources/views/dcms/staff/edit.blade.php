@@ -8,26 +8,26 @@
         <div class="card">
             <div class="card-body">
                 @include('dcms.includes.buttons.button-back')
-                @include('dcms.includes.flash_message_error')  
+                @include('dcms.includes.flash_message_error')
 
         <?php
         dm_postform(URL::route($_base_route.'.update', ['staff_unique_id'=> $data['single']->staff_unique_id]), 'PUT');
         ?>
-            <ul class="nav nav-tabs">
+            <ul class="nav nav-tabs nav-bordered">
                 @if(isset($data['lang']))
                     @foreach($data['lang'] as $row )
-                    <li class="@if($loop->iteration == 1){{ 'active' }} @endif">
-                        <a data-toggle="tab" href="#{{ $row->name }}">{{ $row->name }}</a>
+                    <li class="nav-item">
+                        <a data-toggle="tab" class="nav-link @if($loop->iteration == 1){{ 'active' }} @endif" href="#{{ $row->name }}">{{ $row->name }}</a>
                     </li>
                     @endforeach
                 @endif
             </ul>
-               
+
             <div class="tab-content">
                 @if(isset($data['lang']))
                     @foreach($data['lang'] as $row )
                         <div id="{{  $row->name }}" class="tab-pane @if($loop->iteration == 1){{ 'active' }} @endif">
-                            <?php 
+                            <?php
 
                                     if(isset($staff[$loop->index]['id'])){
                                         $id = $staff[$loop->index]['id'];
@@ -69,7 +69,7 @@
             <div class="card">
                 <div class="card-body">
                         <p class="header-title">Staff Image</p>
-                    <?php 
+                    <?php
                         dm_input('file', 'image', 'Staff Image', '', '');
                         if(isset($data['single']->image)){
                               dm_thumbImage($data['single']->image);
@@ -77,12 +77,12 @@
                     ?>
                 </div>
             </div>
-        
-       
-                <div class="card">    
-                    <div class="panel-body"> 
+
+
+                <div class="card">
+                    <div class="panel-body">
                         <p class="header-title">Select Branch</p>
-                        <?php 
+                        <?php
                             if(!empty($data['single']->branch_id )) {
                                                 $branch_id = $data['single']->branch_id;
                                                 $branch_name = $data['single']->branch->name;
@@ -91,15 +91,15 @@
                                                 $branch_name = "No Branch";
                         }
 
-                                dm_dbranchDropdown('branch_id', "Branch(*)", $data['branch'], $branch_id, $branch_name);                           
+                                dm_dbranchDropdown('branch_id', "Branch(*)", $data['branch'], $branch_id, $branch_name);
                         ?>
                     </div>
                 </div>
-       
+
             <div class="card">
-                <div class="card-body"> 
+                <div class="card-body">
                     <p class="header-title">Staff Status</p>
-                    <?php 
+                    <?php
                         dm_inputUpdate('number', 'level', 'Level(*)', $data['single']->level, '');
                         dm_checkbox('checkbox', 'status', 'Status', $data['single']->status);
                     ?>
@@ -126,7 +126,7 @@
             CKEDITOR.replace(<?=$row->code.$loop->iteration?>, options);
         </script>
     @endforeach
-@endif 
+@endif
 <script>
 $(document).ready(function() {
     $(".btn-file").click(function(){

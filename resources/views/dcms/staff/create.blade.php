@@ -7,25 +7,25 @@
         <div class="card">
             <div class="card-body">
                 @include('dcms.includes.buttons.button-back')
-                @include('dcms.includes.flash_message_error')                
-        
+                @include('dcms.includes.flash_message_error')
+
                 <?php
                 dm_postform(URL::route($_base_route.'.store'), 'POST');
                 ?>
-                <ul class="nav nav-tabs">
+                <ul class="nav nav-tabs nav-bordered">
                     @if(isset($data['lang']))
                         @foreach($data['lang'] as $row )
-                        <li class="@if($loop->iteration == 1){{ 'active' }} @endif">
-                            <a data-toggle="tab" href="#{{ $row->name }}">{{ $row->name }}</a>
+                        <li class="nav-item">
+                            <a data-toggle="tab" href="#{{ $row->name }}" class="nav-link @if($loop->iteration == 1){{ 'active' }} @endif">{{ $row->name }}</a>
                         </li>
                         @endforeach
                     @endif
-                </ul>      
+                </ul>
                 <div class="tab-content">
                     @if(isset($data['lang']))
                         @foreach($data['lang'] as $row )
                             <div id="{{  $row->name }}" class="tab-pane @if($loop->iteration == 1){{ 'active' }} @endif">
-                                <?php 
+                                <?php
                                     dm_hidden('rows['.$loop->index.'][lang_id]', $row->id);
                                     dm_input('text', 'rows['.$loop->index.'][name]', 'Name(*)', 'rows.'.$loop->index.'.name', '');
                                     dm_input('text', 'rows['.$loop->index.'][designation]', 'Designation', 'rows.'.$loop->index.'.designation', '');
@@ -43,16 +43,16 @@
         <div class="card">
             <div class="card-body">
                 <p class="header-title">Staff Image</p>
-                <?php 
+                <?php
                     dm_input('file', 'image', 'Staff Image', '', '');
                 ?>
             </div>
         </div>
-        
+
         <div class="card">
-            <div class="card-body">   
+            <div class="card-body">
                 <p class="header-title">Select Branch</p>
-                <?php 
+                <?php
                     if(!empty($data['single']->branch_id )) {
                                         $branch_id = $data['single']->branch_id;
                                         $branch_name = $data['single']->branch->name;
@@ -61,21 +61,21 @@
                                         $branch_name = "No Branch";
                 }
 
-                        dm_dbranchDropdown('branch_id', "Branch(*)", $data['branch'], $branch_id, $branch_name);                           
+                        dm_dbranchDropdown('branch_id', "Branch(*)", $data['branch'], $branch_id, $branch_name);
                 ?>
             </div>
         </div>
         <div class="card">
-            <div class="card-body">      
+            <div class="card-body">
                 <p class="header-title">Staff Status</p>
-                <?php 
+                <?php
                     dm_input('number', 'level', 'Level(*)', 'level', '');
                     dm_checkbox('checkbox', 'status', 'Status');
                 ?>
             </div>
         </div>
     </div>
-        
+
     <div class="col-lg-12 col-md-12 col-xs-12">
         <?php
             dm_hsubmit('Submit', URL::route($_base_route.'.index'), 'Cancel');
@@ -95,7 +95,7 @@
             CKEDITOR.replace(<?=$row->code.$loop->iteration?>, options);
         </script>
     @endforeach
-@endif 
+@endif
 <script>
 $(document).ready(function() {
     $(".btn-file").click(function(){

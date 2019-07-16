@@ -13,11 +13,11 @@
                 <?php
                     dm_dropdown('category','Category(*)', $data['categories']);
                 ?>
-                <ul class="nav nav-tabs">
+                <ul class="nav nav-tabs nav-bordered">
                     @if(isset($data['lang']))
                         @foreach($data['lang'] as $row )
-                        <li class="@if($loop->iteration == 1){{ 'active' }} @endif">
-                            <a data-toggle="tab" href="#{{ $row->name }}">{{ $row->name }}</a>
+                        <li class="nav-item">
+                            <a data-toggle="tab" href="#{{ $row->name }}" class="nav-link @if($loop->iteration == 1){{ 'active' }} @endif" aria-expanded="false">{{ $row->name }}</a>
                         </li>
                         @endforeach
                     @endif
@@ -25,7 +25,7 @@
                 <div class="tab-content">
                     @if(isset($data['lang']))
                         @foreach($data['lang'] as $row )
-                            <div id="{{  $row->name }}" class="tab-pane @if($loop->iteration == 1){{ 'active' }} @endif">
+                            <div id="{{  $row->name }}" class="tab-pane @if($loop->iteration == 1){{ ' show active' }} @endif">
                                 <?php
                                     dm_hidden('rows['.$loop->index.'][lang_id]', $row->id);
                                     dm_hidden('type', 'post');
