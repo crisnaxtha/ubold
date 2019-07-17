@@ -25,7 +25,7 @@ class Category extends DM_BaseModel
                 $items[$row->id] = &$thisRef;
             } else {
                 $ref[$row->parent_id]['child'][$row->id] = &$thisRef;
-            } 
+            }
         }
         return $items;
     }
@@ -38,13 +38,13 @@ class Category extends DM_BaseModel
         foreach($items as $key=>$value) {
             $html.= '<li class="dd-item dd3-item" data-id="'.$value['id'].'">
                         <div class="dd-handle dd3-handle"></div>
-                        <div class="dd3-content"><span id="label_show'.$value['id'].'">'.$value['name'].'</span> 
+                        <div class="dd3-content"><span id="label_show'.$value['id'].'">'.$value['name'].'</span>
                             <span class="span-right">
-                                
-                                &nbsp;&nbsp; 
-                                <a class="btn btn-warning" id="'.$value['id'].'" label="'.$value['name'].'" href="\dashboard/category/'. $value['id'].'/edit" ><i class="fa fa-pencil"></i></a>
-                                <a class="btn btn-danger del-button" id="'.$value['id'].'" ><i class="fa fa-trash-o"></i></a>
-                            </span> 
+
+                                &nbsp;&nbsp;
+                                <a class="btn btn-warning" id="'.$value['id'].'" label="'.$value['name'].'" href="\dashboard/category/'. $value['id'].'/edit" ><i class="fas fa-pencil-alt"></i></a>
+                                <a class="btn btn-danger del-button" id="'.$value['id'].'" ><i class="far fa-trash-alt"></i></a>
+                            </span>
                         </div>';
             if(array_key_exists('child',$value)) {
                 $html .= self::buildCategory($value['child'],'child');

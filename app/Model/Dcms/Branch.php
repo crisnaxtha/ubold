@@ -19,19 +19,19 @@ class Branch extends DM_BaseModel
     public function branchParent() {
         return $this->belongsTo(Branch::class, 'parent_id', 'id' );
     }
-    /** 
+    /**
      * relationship between branches table
      */
     public function branchChildren() {
         return $this->hasMany(Branch::class, 'parent_id', 'id');
-    }  
+    }
     /**
      * Relationship between branch and staff
      */
     public function staff() {
         $lang_id = DM_Post::setLanguage();
         return $this->hasMany(Staff::class, 'branch_id', 'id')->where('status', '=', 1)->where('lang_id', '=', $lang_id)->orderBy('level');
-    } 
+    }
     /**
      * store the data in office
      */
@@ -70,7 +70,7 @@ class Branch extends DM_BaseModel
                     'lang_id' => $row['lang_id'],
                     'name' => $row['name'],
                 ]);
-            }  
+            }
         }
         if($branch->save()) {
             return true;
@@ -94,7 +94,7 @@ class Branch extends DM_BaseModel
                 $items[$row->id] = &$thisRef;
             } else {
                 $ref[$row->parent_id]['child'][$row->id] = &$thisRef;
-            } 
+            }
         }
         return $items;
     }
@@ -107,13 +107,13 @@ class Branch extends DM_BaseModel
         foreach($items as $key=>$value) {
             $html.= '<li class="dd-item dd3-item" data-id="'.$value['id'].'">
                         <div class="dd-handle dd3-handle"></div>
-                        <div class="dd3-content"><span id="label_show'.$value['id'].'">'.$value['name'].'</span> 
+                        <div class="dd3-content"><span id="label_show'.$value['id'].'">'.$value['name'].'</span>
                             <span class="span-right">
-                                <span id="link_show'.$value['id'].'">Status:'.$value['status'].'</span>                                
-                                &nbsp;&nbsp; 
-                                <a class="btn btn-warning" id="'.$value['id'].'" label="'.$value['name'].'" href="\dashboard/branch/'. $value['id'].'/edit" ><i class="fa fa-pencil"></i></a>
-                                <a class="btn btn-danger del-button" id="'.$value['id'].'" ><i class="fa fa-trash-o"></i></a>
-                            </span> 
+                                <span id="link_show'.$value['id'].'">Status:'.$value['status'].'</span>
+                                &nbsp;&nbsp;
+                                <a class="btn btn-warning" id="'.$value['id'].'" label="'.$value['name'].'" href="\dashboard/branch/'. $value['id'].'/edit" ><i class="fas fa-pencil-alt"></i></a>
+                                <a class="btn btn-danger del-button" id="'.$value['id'].'" ><i class="far fa-trash-alt"></i></a>
+                            </span>
                         </div>';
             if(array_key_exists('child',$value)) {
                 $html .= self::buildBranch($value['child'],'child');
