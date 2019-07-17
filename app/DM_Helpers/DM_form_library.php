@@ -92,9 +92,9 @@ if(!function_exists('dm_hcheckbox')){
     ?>
     <div class="form-group ">
         <label for="<?=$name?>" class="control-label col-lg-2"><?=$caption?></label>
-        <div class="col-lg-10 col-sm-10">
-            <input value=<?=$value?> type="checkbox" onclick="if($(this).attr('checked')=='checked'){ $(this).next().removeAttr('checked'); }else{ $(this).next().attr('checked','checked'); }" style="width: 20px" class="checkbox form-control" id="<?=$name?>" name="<?=$name?>" <?=$checked!=null?"checked":""?> <?=$options?>>
-            <input value=0 type="checkbox" style="display: none;" name="<?=$name?>" <?=$checked==null?"checked":""?>>
+        <div class="custom-control custom-checkbox">
+            <input type="hidden" name="<?=$name?>" value=0>
+            <input type="checkbox" name="<?=$name?>" value=1 <?php if($checked == 1){ echo "checked"; }?>>
         </div>
     </div>
     <?php
@@ -246,8 +246,8 @@ if(!function_exists('dm_checkbox')){
     ?>
     <div class="form-group ">
         <label for="<?=$name?>" class=""><?=$caption?></label>
-            <input value="<?=$value?>" type="checkbox" onclick="if($(this).attr('checked')=='checked'){ $(this).next().removeAttr('checked'); }else{ $(this).next().attr('checked','checked'); }" style="width: 20px" class="checkbox form-control" id="<?=$name?>" name="<?=$name?>" <?=$checked!=null?"checked":""?> <?=$options?>>
-            <input value="0" type="checkbox" style="display: none;" name="<?=$name?>" <?=$checked==null?"checked":""?>>
+            <input type="hidden" name="<?=$name?>" value=0>
+            <input type="checkbox" name="<?=$name?>" value=1 <?php if($checked == 1){ echo "checked"; }?>>
     </div>
     <?php
     }
@@ -484,6 +484,17 @@ if(!function_exists('dm_menu_hinput_update')){
             <input class=" form-control" type="<?=$type?>" id="<?=$name?>" name="<?=$name?>" value="<?=$value?>" <?=$options?>/>
         </div>
     </div>
+    <?php
+    }
+}
+if(!function_exists('dm_switch')) {
+    function dm_switch($name,$caption="",$checked=null,$value=1,$options='') {
+    ?>
+    <div class="custom-control custom-switch">
+        <input value="<?=$value?>" type="checkbox" class="custom-control-input" id="customSwitch1" name="<?= $name ?>"onclick="if($(this).attr('checked')=='checked'){ $(this).next().removeAttr('checked'); }else{ $(this).next().attr('checked','checked'); }" style="width: 20px" class="checkbox form-control" id="<?=$name?>" name="<?=$name?>" <?=$checked!=null?"checked":""?> <?=$options?>>
+        <label class="custom-control-label" for="customSwitch1"><?= $caption ?></label>
+    </div>
+
     <?php
     }
 }
