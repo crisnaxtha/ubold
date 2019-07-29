@@ -52,9 +52,9 @@
 <body>
 
     <!-- preloader start -->
-    <div class="preloader">
+    {{-- <div class="preloader">
         <div class="spinner"></div>
-    </div>
+    </div> --}}
     <!-- preloader end -->
 
 

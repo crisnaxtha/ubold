@@ -16,14 +16,14 @@ class StaffController extends DM_BaseController
     protected $view_path = 'dcms.staff';
     protected $model;
     protected $table;
-    
+
     public function __construct(Request $request, Staff $staff, Branch $branch, Tracker $tracker,DM_Post $dm_post) {
         $this->middleware('auth');
         $this->model = $staff;
         $this->tracker = $tracker::hit();
         $this->dm_post = $dm_post;
         $this->branch = $branch;
-        $this->lang_id = $dm_post::setLanguage();        
+        $this->lang_id = $dm_post::setLanguage();
     }
     /**
      * Display a listing of the resource.
@@ -46,7 +46,7 @@ class StaffController extends DM_BaseController
     {
         $data['lang'] = $this->dm_post::getLanguage();
         $data['branch'] = $this->branch::where('status', '=', 1)->get();
-        return view(parent::loadView($this->view_path.'.create'), compact('data')); 
+        return view(parent::loadView($this->view_path.'.create'), compact('data'));
     }
 
     /**
@@ -67,7 +67,7 @@ class StaffController extends DM_BaseController
             'rows.*.name.required' => 'The Staff Name is required (Language)',
             'branch_id.required' => 'Select Branch',
         ]);
-        if($this->model->storeData($request, $request->rows, $request->image, $request->branch_id, $request->status, $request->level ) ){
+        if($this->model->storeData($request, $request->rows, $request->image, $request->branch_id, $request->status, $request->level, $request->featured ) ){
             session()->flash('alert-success', $this->panel.' Successfully Store');
         }else {
             session()->flash('alert-danger', $this->panel.' can not be Store');
@@ -98,7 +98,7 @@ class StaffController extends DM_BaseController
         $data['lang'] = $this->dm_post::getLanguage();
         $data['branch'] = $this->branch::where('status', '=', 1)->get();
         $data['single'] = $this->model::where('staff_unique_id', '=', $staff_unique_id)->first();
-        return view(parent::loadView($this->view_path.'.edit'), compact('data', 'staff')); 
+        return view(parent::loadView($this->view_path.'.edit'), compact('data', 'staff'));
     }
 
     /**
@@ -120,7 +120,7 @@ class StaffController extends DM_BaseController
             'rows.*.name.required' => 'The Staff Name is required (Language)',
             'branch_id.required' => 'Select Branch',
         ]);
-        if($this->model->updateData($request, $request->rows, $request->image, $request->branch_id, $request->status, $request->level ) ){
+        if($this->model->updateData($request, $request->rows, $request->image, $request->branch_id, $request->status, $request->level, $request->featured ) ){
             session()->flash('alert-success', $this->panel.' Successfully Store');
         }else {
             session()->flash('alert-danger', $this->panel.' can not be Store');

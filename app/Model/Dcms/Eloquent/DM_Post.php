@@ -36,7 +36,7 @@ class DM_Post extends Model{
 
     /**
     *to get all the post file using joint post with file
-     * 
+     *
      */
     public static function joinSliderName($lang_id) {
         return DB::table('sliders')
@@ -47,7 +47,7 @@ class DM_Post extends Model{
     }
 
     /**
-     * 
+     *
      * get the post's id  using post_unique_id
      *  */
     public static function getPostId($post_unique_id) {
@@ -84,7 +84,7 @@ class DM_Post extends Model{
         $post = Post::where('deleted_at', '=', null)->where('type', '=', 'post')->where('post_unique_id', '=', $post_unique_id)->where('lang_id', '=', $lang_id)->first();
         if(isset($post)){
             $post->increment('visit_no');
-        }    
+        }
         return $post;
 
     }
@@ -107,12 +107,12 @@ class DM_Post extends Model{
     //get the single category
     public static function getCategory($category_id) {
         return Category::where('id', '=', $category_id)->first();
-        
+
     }
 
     //get category base post
-    public static function categoryPost($category_id, $lang_id) {
-        return Post::where('deleted_at', '=', null)->where('category_id', '=', $category_id)->where('lang_id', '=', $lang_id)->get();
+    public static function categoryPost($category_id, $lang_id, $number = '5') {
+        return Post::where('deleted_at', '=', null)->where('category_id', '=', $category_id)->where('lang_id', '=', $lang_id)->take($number)->get();
     }
 
     public static function joinMenu($lang_id) {
@@ -151,14 +151,14 @@ class DM_Post extends Model{
         if(!Session::has('lang_id')) {
             $default_lang_id = Setting::pluck('language')->first();
             if(!isset($default_lang_id)){
-                $default_lang_id = $this->app->config->get('app.fallback_locale');    
+                $default_lang_id = $this->app->config->get('app.fallback_locale');
             }
             Session::put('lang_id', $default_lang_id);
             $lang_id = Session::get('lang_id');
         }else {
-            $lang_id = Session::get('lang_id');               
+            $lang_id = Session::get('lang_id');
         }
-        //to set the locale for language file 
+        //to set the locale for language file
         App::setLocale(DM_Post::getLangCode($lang_id));
         return $lang_id;
     }

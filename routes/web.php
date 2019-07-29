@@ -377,6 +377,9 @@ Route::group(['prefix' => 'dashboard', 'as'=> 'dcms.', 'namespace'=>'Dcms', 'mid
 
         
     });
+
+    Route::resource('blog',                     'BlogsController')->middleware('role:super-admin');
+
 });
 
 /**

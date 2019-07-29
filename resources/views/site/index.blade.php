@@ -105,27 +105,20 @@
             <div class="clearfix"></div>
           </div>
           <div class="clearfix"></div>
-
+          @if(isset($data['imp_link']))
                 <div class="main-link card">
-                  <div class="card-header"><h4>महत्त्वपूर्ण लिङ्कहरू</h4></div>
+                  <div class="card-header"><h4>{{ __('Important Links') }}</h4></div>
                       <div class="card-body">
                       <ul class="useful-link">
-                        <li><a href="#" class="btn btn-info hover-ripple"><i class="fa fa-bell"></i>
-                         Information Rights</a></li>
-                         <li><a href="#" class="btn btn-danger hover-ripple"><i class="fa fa-fa fa-leanpub"></i>
-                         Publications</a></li>
-                         <li><a href="#" class="btn btn-warning hover-ripple"><i class="fa fa-comments-o"></i>
-                         Feedbacks</a></li>
-                         <li><a href="#" class="btn btn-success hover-ripple"><i class="fa fa-file-archive-o"></i>
-                         Archive</a></li>
-                         <li><a href="#" class="btn btn-primary hover-ripple"><i class="fa fa-envelope"></i>
-                         मेल हेर्नुहोस</a></li>
-                         <li><a href="#" class="btn btn-dark hover-ripple"><i class="fa fa-copy"></i>
-                         बिलहरुको सार्बजनिकरण</a></li>
+                          @foreach($data['imp_link'] as $row)
+                        <li><a href="{{ $row->url }}" class="btn btn-info hover-ripple">
+                         {{ $row->name }}</a></li>
+                         @endforeach
                       </ul>
                       <div class="clearfix"></div>
                     </div>
                   </div>
+        @endif
 
 
 
@@ -149,307 +142,84 @@
   <div class="tab-content card white-box" id="myTabContent">
     <div class="tab-pane fade show active" id="info" role="tabpanel" aria-labelledby="home-tab">
           <div class="owl-carousel info-carousel">
+            @if(isset($data['cat_post_1']))
+            @foreach($data['cat_post_1'] as $row)
               <div class="item">
                 <div class="item-inner card">
-                  <figure><a href="#"><img src="images/service/service-1.jpg" class="img-fluid" alt="image"></a></figure>
+                  {{-- <figure><a href="#"><img src="images/service/service-1.jpg" class="img-fluid" alt="image"></a></figure> --}}
                 <div class="card-body">
-                  <div class="card-meta"><i class="fa fa-clock-o">&nbsp;</i> 2076 जेष्ठ 24  </div>
+                  <div class="card-meta"><i class="fa fa-clock-o">&nbsp;</i>{{ $row->created_at }}</div>
                   <a href="#">
-                    <h6 class="card-title">काठमाण्डौ उपत्यकामा सार्वजनिक विदा सम्बन्धी सूचना</h6>
+                    <h6 class="card-title">{{ $row->title }}</h6>
                   </a>
-                  <p>नेपाल  सरकारबाट २०५६ जेठ ९ गते राजपत्रमा सूचना प्रकाशित गरी आधारभूत तथा प्राथमिक शिक्षा परियोजना र माध्यमिक शिक्षा विकास परियोजनाद्वारा सञ्चालित  कार्यक्रमहरूलाई निरन्तरता ...</p>
+                  {!! mb_strimwidth($row->content, 0, 100, "...") !!}
                 </div>
                 </div>
               </div>
-              <div class="item">
-                <div class="item-inner card">
-                  <figure><a href="#"><img src="images/service/service-2.jpg" class="img-fluid" alt="image"></a></figure>
-                <div class="card-body">
-                  <div class="card-meta"><i class="fa fa-clock-o">&nbsp;</i> 2076 जेष्ठ 24  </div>
-                  <a href="#">
-                    <h6 class="card-title">काठमाण्डौ उपत्यकामा सार्वजनिक विदा सम्बन्धी सूचना</h6>
-                  </a>
-                  <p>नेपाल  सरकारबाट २०५६ जेठ ९ गते राजपत्रमा सूचना प्रकाशित गरी आधारभूत तथा प्राथमिक शिक्षा परियोजना र माध्यमिक शिक्षा विकास परियोजनाद्वारा सञ्चालित  कार्यक्रमहरूलाई निरन्तरता ...</p>
-                </div>
-                </div>
-              </div>
-              <div class="item">
-                <div class="item-inner card">
-                  <figure><a href="#"><img src="images/service/service-3.jpg" class="img-fluid" alt="image"></a></figure>
-                <div class="card-body">
-                  <div class="card-meta"><i class="fa fa-clock-o">&nbsp;</i> 2076 जेष्ठ 24  </div>
-                  <a href="#">
-                    <h6 class="card-title">काठमाण्डौ उपत्यकामा सार्वजनिक विदा सम्बन्धी सूचना</h6>
-                  </a>
-                  <p>नेपाल  सरकारबाट २०५६ जेठ ९ गते राजपत्रमा सूचना प्रकाशित गरी आधारभूत तथा प्राथमिक शिक्षा परियोजना र माध्यमिक शिक्षा विकास परियोजनाद्वारा सञ्चालित  कार्यक्रमहरूलाई निरन्तरता ...</p>
-                </div>
-                </div>
-              </div>
-              <div class="item">
-                <div class="item-inner card">
-                  <figure><a href="#"><img src="images/service/service-4.jpg" class="img-fluid" alt="image"></a></figure>
-                <div class="card-body">
-                  <div class="card-meta"><i class="fa fa-clock-o">&nbsp;</i> 2076 जेष्ठ 24  </div>
-                  <a href="#">
-                    <h6 class="card-title">काठमाण्डौ उपत्यकामा सार्वजनिक विदा सम्बन्धी सूचना</h6>
-                  </a>
-                  <p>नेपाल  सरकारबाट २०५६ जेठ ९ गते राजपत्रमा सूचना प्रकाशित गरी आधारभूत तथा प्राथमिक शिक्षा परियोजना र माध्यमिक शिक्षा विकास परियोजनाद्वारा सञ्चालित  कार्यक्रमहरूलाई निरन्तरता ...</p>
-                </div>
-                </div>
-              </div>
-              <div class="item">
-                <div class="item-inner card">
-                  <figure><a href="#"><img src="images/service/service-5.jpg" class="img-fluid" alt="image"></a></figure>
-                <div class="card-body">
-                  <div class="card-meta"><i class="fa fa-clock-o">&nbsp;</i> 2076 जेष्ठ 24  </div>
-                  <a href="#">
-                    <h6 class="card-title">काठमाण्डौ उपत्यकामा सार्वजनिक विदा सम्बन्धी सूचना</h6>
-                  </a>
-                  <p>नेपाल  सरकारबाट २०५६ जेठ ९ गते राजपत्रमा सूचना प्रकाशित गरी आधारभूत तथा प्राथमिक शिक्षा परियोजना र माध्यमिक शिक्षा विकास परियोजनाद्वारा सञ्चालित  कार्यक्रमहरूलाई निरन्तरता ...</p>
-                </div>
-                </div>
-              </div>
-              <div class="item">
-                <div class="item-inner card">
-                  <figure><a href="#"><img src="images/service/service-6.jpg" class="img-fluid" alt="image"></a></figure>
-                <div class="card-body">
-                  <div class="card-meta"><i class="fa fa-clock-o">&nbsp;</i> 2076 जेष्ठ 24  </div>
-                  <a href="#">
-                    <h6 class="card-title">काठमाण्डौ उपत्यकामा सार्वजनिक विदा सम्बन्धी सूचना</h6>
-                  </a>
-                  <p>नेपाल  सरकारबाट २०५६ जेठ ९ गते राजपत्रमा सूचना प्रकाशित गरी आधारभूत तथा प्राथमिक शिक्षा परियोजना र माध्यमिक शिक्षा विकास परियोजनाद्वारा सञ्चालित  कार्यक्रमहरूलाई निरन्तरता ...</p>
-                </div>
-                </div>
-              </div>
+              @endforeach
+              @endif
           </div>
 
     </div>
     <div class="tab-pane fade" id="press" role="tabpanel" aria-labelledby="press-tab">
-      <div class="owl-carousel info-carousel">
-              <div class="item">
-                <div class="item-inner card">
-                  <figure><a href="#"><img src="images/service/service-5.jpg" class="img-fluid" alt="image"></a></figure>
-                <div class="card-body">
-                  <div class="card-meta"><i class="fa fa-clock-o">&nbsp;</i> 2076 जेष्ठ 24  </div>
-                  <a href="#">
-                    <h6 class="card-title">काठमाण्डौ उपत्यकामा सार्वजनिक विदा सम्बन्धी सूचना</h6>
-                  </a>
-                  <p>नेपाल  सरकारबाट २०५६ जेठ ९ गते राजपत्रमा सूचना प्रकाशित गरी आधारभूत तथा प्राथमिक शिक्षा परियोजना र माध्यमिक शिक्षा विकास परियोजनाद्वारा सञ्चालित  कार्यक्रमहरूलाई निरन्तरता ...</p>
-                </div>
-                </div>
+        <div class="owl-carousel info-carousel">
+            @if(isset($data['cat_post_2']))
+            @foreach($data['cat_post_2'] as $row)
+            <div class="item">
+              <div class="item-inner card">
+                {{-- <figure><a href="#"><img src="images/service/service-1.jpg" class="img-fluid" alt="image"></a></figure> --}}
+              <div class="card-body">
+                <div class="card-meta"><i class="fa fa-clock-o">&nbsp;</i>{{ $row->created_at }}</div>
+                <a href="#">
+                  <h6 class="card-title">{{ $row->title }}</h6>
+                </a>
+                {!! mb_strimwidth($row->content, 0, 100, "...") !!}
               </div>
-              <div class="item">
-                <div class="item-inner card">
-                  <figure><a href="#"><img src="images/service/service-4.jpg" class="img-fluid" alt="image"></a></figure>
-                <div class="card-body">
-                  <div class="card-meta"><i class="fa fa-clock-o">&nbsp;</i> 2076 जेष्ठ 24  </div>
-                  <a href="#">
-                    <h6 class="card-title">काठमाण्डौ उपत्यकामा सार्वजनिक विदा सम्बन्धी सूचना</h6>
-                  </a>
-                  <p>नेपाल  सरकारबाट २०५६ जेठ ९ गते राजपत्रमा सूचना प्रकाशित गरी आधारभूत तथा प्राथमिक शिक्षा परियोजना र माध्यमिक शिक्षा विकास परियोजनाद्वारा सञ्चालित  कार्यक्रमहरूलाई निरन्तरता ...</p>
-                </div>
-                </div>
               </div>
-              <div class="item">
-                <div class="item-inner card">
-                  <figure><a href="#"><img src="images/service/service-3.jpg" class="img-fluid" alt="image"></a></figure>
-                <div class="card-body">
-                  <div class="card-meta"><i class="fa fa-clock-o">&nbsp;</i> 2076 जेष्ठ 24  </div>
-                  <a href="#">
-                    <h6 class="card-title">काठमाण्डौ उपत्यकामा सार्वजनिक विदा सम्बन्धी सूचना</h6>
-                  </a>
-                  <p>नेपाल  सरकारबाट २०५६ जेठ ९ गते राजपत्रमा सूचना प्रकाशित गरी आधारभूत तथा प्राथमिक शिक्षा परियोजना र माध्यमिक शिक्षा विकास परियोजनाद्वारा सञ्चालित  कार्यक्रमहरूलाई निरन्तरता ...</p>
-                </div>
-                </div>
-              </div>
-              <div class="item">
-                <div class="item-inner card">
-                  <figure><a href="#"><img src="images/service/service-2.jpg" class="img-fluid" alt="image"></a></figure>
-                <div class="card-body">
-                  <div class="card-meta"><i class="fa fa-clock-o">&nbsp;</i> 2076 जेष्ठ 24  </div>
-                  <a href="#">
-                    <h6 class="card-title">काठमाण्डौ उपत्यकामा सार्वजनिक विदा सम्बन्धी सूचना</h6>
-                  </a>
-                  <p>नेपाल  सरकारबाट २०५६ जेठ ९ गते राजपत्रमा सूचना प्रकाशित गरी आधारभूत तथा प्राथमिक शिक्षा परियोजना र माध्यमिक शिक्षा विकास परियोजनाद्वारा सञ्चालित  कार्यक्रमहरूलाई निरन्तरता ...</p>
-                </div>
-                </div>
-              </div>
-              <div class="item">
-                <div class="item-inner card">
-                  <figure><a href="#"><img src="images/service/service-1.jpg" class="img-fluid" alt="image"></a></figure>
-                <div class="card-body">
-                  <div class="card-meta"><i class="fa fa-clock-o">&nbsp;</i> 2076 जेष्ठ 24  </div>
-                  <a href="#">
-                    <h6 class="card-title">काठमाण्डौ उपत्यकामा सार्वजनिक विदा सम्बन्धी सूचना</h6>
-                  </a>
-                  <p>नेपाल  सरकारबाट २०५६ जेठ ९ गते राजपत्रमा सूचना प्रकाशित गरी आधारभूत तथा प्राथमिक शिक्षा परियोजना र माध्यमिक शिक्षा विकास परियोजनाद्वारा सञ्चालित  कार्यक्रमहरूलाई निरन्तरता ...</p>
-                </div>
-                </div>
-              </div>
-              <div class="item">
-                <div class="item-inner card">
-                  <figure><a href="#"><img src="images/service/service-6.jpg" class="img-fluid" alt="image"></a></figure>
-                <div class="card-body">
-                  <div class="card-meta"><i class="fa fa-clock-o">&nbsp;</i> 2076 जेष्ठ 24  </div>
-                  <a href="#">
-                    <h6 class="card-title">काठमाण्डौ उपत्यकामा सार्वजनिक विदा सम्बन्धी सूचना</h6>
-                  </a>
-                  <p>नेपाल  सरकारबाट २०५६ जेठ ९ गते राजपत्रमा सूचना प्रकाशित गरी आधारभूत तथा प्राथमिक शिक्षा परियोजना र माध्यमिक शिक्षा विकास परियोजनाद्वारा सञ्चालित  कार्यक्रमहरूलाई निरन्तरता ...</p>
-                </div>
-                </div>
-              </div>
-          </div>
+            </div>
+            @endforeach
+            @endif
+        </div>
     </div>
     <div class="tab-pane fade" id="news" role="tabpanel" aria-labelledby="news-tab">
       <div class="owl-carousel info-carousel">
-              <div class="item">
-                <div class="item-inner card">
-                  <figure><a href="#"><img src="images/service/service-1.jpg" class="img-fluid" alt="image"></a></figure>
-                <div class="card-body">
-                  <div class="card-meta"><i class="fa fa-clock-o">&nbsp;</i> 2076 जेष्ठ 24  </div>
-                  <a href="#">
-                    <h6 class="card-title">काठमाण्डौ उपत्यकामा सार्वजनिक विदा सम्बन्धी सूचना</h6>
-                  </a>
-                  <p>नेपाल  सरकारबाट २०५६ जेठ ९ गते राजपत्रमा सूचना प्रकाशित गरी आधारभूत तथा प्राथमिक शिक्षा परियोजना र माध्यमिक शिक्षा विकास परियोजनाद्वारा सञ्चालित  कार्यक्रमहरूलाई निरन्तरता ...</p>
-                </div>
-                </div>
+
+            @if(isset($data['cat_post_3']))
+            @foreach($data['cat_post_3'] as $row)
+            <div class="item">
+              <div class="item-inner card">
+                {{-- <figure><a href="#"><img src="images/service/service-1.jpg" class="img-fluid" alt="image"></a></figure> --}}
+              <div class="card-body">
+                <div class="card-meta"><i class="fa fa-clock-o">&nbsp;</i>{{ $row->created_at }}</div>
+                <a href="#">
+                  <h6 class="card-title">{{ $row->title }}</h6>
+                </a>
+                {!! mb_strimwidth($row->content, 0, 100, "...") !!}
               </div>
-              <div class="item">
-                <div class="item-inner card">
-                  <figure><a href="#"><img src="images/service/service-2.jpg" class="img-fluid" alt="image"></a></figure>
-                <div class="card-body">
-                  <div class="card-meta"><i class="fa fa-clock-o">&nbsp;</i> 2076 जेष्ठ 24  </div>
-                  <a href="#">
-                    <h6 class="card-title">काठमाण्डौ उपत्यकामा सार्वजनिक विदा सम्बन्धी सूचना</h6>
-                  </a>
-                  <p>नेपाल  सरकारबाट २०५६ जेठ ९ गते राजपत्रमा सूचना प्रकाशित गरी आधारभूत तथा प्राथमिक शिक्षा परियोजना र माध्यमिक शिक्षा विकास परियोजनाद्वारा सञ्चालित  कार्यक्रमहरूलाई निरन्तरता ...</p>
-                </div>
-                </div>
               </div>
-              <div class="item">
-                <div class="item-inner card">
-                  <figure><a href="#"><img src="images/service/service-3.jpg" class="img-fluid" alt="image"></a></figure>
-                <div class="card-body">
-                  <div class="card-meta"><i class="fa fa-clock-o">&nbsp;</i> 2076 जेष्ठ 24  </div>
-                  <a href="#">
-                    <h6 class="card-title">काठमाण्डौ उपत्यकामा सार्वजनिक विदा सम्बन्धी सूचना</h6>
-                  </a>
-                  <p>नेपाल  सरकारबाट २०५६ जेठ ९ गते राजपत्रमा सूचना प्रकाशित गरी आधारभूत तथा प्राथमिक शिक्षा परियोजना र माध्यमिक शिक्षा विकास परियोजनाद्वारा सञ्चालित  कार्यक्रमहरूलाई निरन्तरता ...</p>
-                </div>
-                </div>
-              </div>
-              <div class="item">
-                <div class="item-inner card">
-                  <figure><a href="#"><img src="images/service/service-4.jpg" class="img-fluid" alt="image"></a></figure>
-                <div class="card-body">
-                  <div class="card-meta"><i class="fa fa-clock-o">&nbsp;</i> 2076 जेष्ठ 24  </div>
-                  <a href="#">
-                    <h6 class="card-title">काठमाण्डौ उपत्यकामा सार्वजनिक विदा सम्बन्धी सूचना</h6>
-                  </a>
-                  <p>नेपाल  सरकारबाट २०५६ जेठ ९ गते राजपत्रमा सूचना प्रकाशित गरी आधारभूत तथा प्राथमिक शिक्षा परियोजना र माध्यमिक शिक्षा विकास परियोजनाद्वारा सञ्चालित  कार्यक्रमहरूलाई निरन्तरता ...</p>
-                </div>
-                </div>
-              </div>
-              <div class="item">
-                <div class="item-inner card">
-                  <figure><a href="#"><img src="images/service/service-5.jpg" class="img-fluid" alt="image"></a></figure>
-                <div class="card-body">
-                  <div class="card-meta"><i class="fa fa-clock-o">&nbsp;</i> 2076 जेष्ठ 24  </div>
-                  <a href="#">
-                    <h6 class="card-title">काठमाण्डौ उपत्यकामा सार्वजनिक विदा सम्बन्धी सूचना</h6>
-                  </a>
-                  <p>नेपाल  सरकारबाट २०५६ जेठ ९ गते राजपत्रमा सूचना प्रकाशित गरी आधारभूत तथा प्राथमिक शिक्षा परियोजना र माध्यमिक शिक्षा विकास परियोजनाद्वारा सञ्चालित  कार्यक्रमहरूलाई निरन्तरता ...</p>
-                </div>
-                </div>
-              </div>
-              <div class="item">
-                <div class="item-inner card">
-                  <figure><a href="#"><img src="images/service/service-6.jpg" class="img-fluid" alt="image"></a></figure>
-                <div class="card-body">
-                  <div class="card-meta"><i class="fa fa-clock-o">&nbsp;</i> 2076 जेष्ठ 24  </div>
-                  <a href="#">
-                    <h6 class="card-title">काठमाण्डौ उपत्यकामा सार्वजनिक विदा सम्बन्धी सूचना</h6>
-                  </a>
-                  <p>नेपाल  सरकारबाट २०५६ जेठ ९ गते राजपत्रमा सूचना प्रकाशित गरी आधारभूत तथा प्राथमिक शिक्षा परियोजना र माध्यमिक शिक्षा विकास परियोजनाद्वारा सञ्चालित  कार्यक्रमहरूलाई निरन्तरता...</p>
-                </div>
-                </div>
-              </div>
+            </div>
+            @endforeach
+            @endif
           </div>
     </div>
     <div class="tab-pane fade" id="patra" role="tabpanel" aria-labelledby="patra-tab">
       <div class="owl-carousel info-carousel">
-              <div class="item">
-                <div class="item-inner card">
-                  <figure><a href="#"><img src="images/service/service-5.jpg" class="img-fluid" alt="image"></a></figure>
-                <div class="card-body">
-                  <div class="card-meta"><i class="fa fa-clock-o">&nbsp;</i> 2076 जेष्ठ 24  </div>
-                  <a href="#">
-                    <h6 class="card-title">काठमाण्डौ उपत्यकामा सार्वजनिक विदा सम्बन्धी सूचना</h6>
-                  </a>
-                  <p>नेपाल  सरकारबाट २०५६ जेठ ९ गते राजपत्रमा सूचना प्रकाशित गरी आधारभूत तथा प्राथमिक शिक्षा परियोजना र माध्यमिक शिक्षा विकास परियोजनाद्वारा सञ्चालित  कार्यक्रमहरूलाई निरन्तरता ...</p>
-                </div>
-                </div>
+            @if(isset($data['cat_post_4']))
+            @foreach($data['cat_post_4'] as $row)
+            <div class="item">
+              <div class="item-inner card">
+                {{-- <figure><a href="#"><img src="images/service/service-1.jpg" class="img-fluid" alt="image"></a></figure> --}}
+              <div class="card-body">
+                <div class="card-meta"><i class="fa fa-clock-o">&nbsp;</i>{{ $row->created_at }}</div>
+                <a href="#">
+                  <h6 class="card-title">{{ $row->title }}</h6>
+                </a>
+                {!! mb_strimwidth($row->content, 0, 100, "...") !!}
               </div>
-              <div class="item">
-                <div class="item-inner card">
-                  <figure><a href="#"><img src="images/service/service-4.jpg" class="img-fluid" alt="image"></a></figure>
-                <div class="card-body">
-                  <div class="card-meta"><i class="fa fa-clock-o">&nbsp;</i> 2076 जेष्ठ 24  </div>
-                  <a href="#">
-                    <h6 class="card-title">काठमाण्डौ उपत्यकामा सार्वजनिक विदा सम्बन्धी सूचना</h6>
-                  </a>
-                  <p>नेपाल  सरकारबाट २०५६ जेठ ९ गते राजपत्रमा सूचना प्रकाशित गरी आधारभूत तथा प्राथमिक शिक्षा परियोजना र माध्यमिक शिक्षा विकास परियोजनाद्वारा सञ्चालित  कार्यक्रमहरूलाई निरन्तरता ...</p>
-                </div>
-                </div>
               </div>
-              <div class="item">
-                <div class="item-inner card">
-                  <figure><a href="#"><img src="images/service/service-3.jpg" class="img-fluid" alt="image"></a></figure>
-                <div class="card-body">
-                  <div class="card-meta"><i class="fa fa-clock-o">&nbsp;</i> 2076 जेष्ठ 24  </div>
-                  <a href="#">
-                    <h6 class="card-title">काठमाण्डौ उपत्यकामा सार्वजनिक विदा सम्बन्धी सूचना</h6>
-                  </a>
-                  <p>नेपाल  सरकारबाट २०५६ जेठ ९ गते राजपत्रमा सूचना प्रकाशित गरी आधारभूत तथा प्राथमिक शिक्षा परियोजना र माध्यमिक शिक्षा विकास परियोजनाद्वारा सञ्चालित  कार्यक्रमहरूलाई निरन्तरता ...</p>
-                </div>
-                </div>
-              </div>
-              <div class="item">
-                <div class="item-inner card">
-                  <figure><a href="#"><img src="images/service/service-2.jpg" class="img-fluid" alt="image"></a></figure>
-                <div class="card-body">
-                  <div class="card-meta"><i class="fa fa-clock-o">&nbsp;</i> 2076 जेष्ठ 24  </div>
-                  <a href="#">
-                    <h6 class="card-title">काठमाण्डौ उपत्यकामा सार्वजनिक विदा सम्बन्धी सूचना</h6>
-                  </a>
-                  <p>नेपाल  सरकारबाट २०५६ जेठ ९ गते राजपत्रमा सूचना प्रकाशित गरी आधारभूत तथा प्राथमिक शिक्षा परियोजना र माध्यमिक शिक्षा विकास परियोजनाद्वारा सञ्चालित  कार्यक्रमहरूलाई निरन्तरता ...</p>
-                </div>
-                </div>
-              </div>
-              <div class="item">
-                <div class="item-inner card">
-                  <figure><a href="#"><img src="images/service/service-1.jpg" class="img-fluid" alt="image"></a></figure>
-                <div class="card-body">
-                  <div class="card-meta"><i class="fa fa-clock-o">&nbsp;</i> 2076 जेष्ठ 24  </div>
-                  <a href="#">
-                    <h6 class="card-title">काठमाण्डौ उपत्यकामा सार्वजनिक विदा सम्बन्धी सूचना</h6>
-                  </a>
-                  <p>नेपाल  सरकारबाट २०५६ जेठ ९ गते राजपत्रमा सूचना प्रकाशित गरी आधारभूत तथा प्राथमिक शिक्षा परियोजना र माध्यमिक शिक्षा विकास परियोजनाद्वारा सञ्चालित  कार्यक्रमहरूलाई निरन्तरता ...</p>
-                </div>
-                </div>
-              </div>
-              <div class="item">
-                <div class="item-inner card">
-                  <figure><a href="#"><img src="images/service/service-6.jpg" class="img-fluid" alt="image"></a></figure>
-                <div class="card-body">
-                  <div class="card-meta"><i class="fa fa-clock-o">&nbsp;</i> 2076 जेष्ठ 24  </div>
-                  <a href="#">
-                    <h6 class="card-title">काठमाण्डौ उपत्यकामा सार्वजनिक विदा सम्बन्धी सूचना</h6>
-                  </a>
-                  <p>नेपाल  सरकारबाट २०५६ जेठ ९ गते राजपत्रमा सूचना प्रकाशित गरी आधारभूत तथा प्राथमिक शिक्षा परियोजना र माध्यमिक शिक्षा विकास परियोजनाद्वारा सञ्चालित  कार्यक्रमहरूलाई निरन्तरता ...</p>
-                </div>
-                </div>
-              </div>
+            </div>
+            @endforeach
+            @endif
           </div>
     </div>
   </div>
@@ -457,84 +227,68 @@
 
 
   </div>
+  @if(isset($data['video']))
   <div class="vdo_sec">
     <div class="my-ttl">सबै भिडियोहरू</div>
     <div class="owl-carousel vdo-carousel">
+        @foreach($data['video'] as $row)
               <div class="item">
-                <iframe width="100%" height="250" src="https://www.youtube.com/embed/2DG3pMcNNlw" frameborder="0" allowfullscreen></iframe>
+               {!! $row->link !!}
               </div>
-              <div class="item">
-                <iframe width="100%" height="250" src="https://www.youtube.com/embed/VDUy5NKDBgE" frameborder="0" allowfullscreen></iframe>
-              </div>
-              <div class="item">
-                <iframe width="100%" height="250" src="https://www.youtube.com/embed/xI0uGBEPMts" frameborder="0" allowfullscreen></iframe>
-              </div>
-              <div class="item">
-                <iframe width="100%" height="250" src="https://www.youtube.com/embed/TuDTgLSJtcg" frameborder="0" allowfullscreen></iframe>
-              </div>
-              <div class="item">
-                <iframe width="100%" height="250" src="https://www.youtube.com/embed/WK0NOUQ9iXE" frameborder="0" allowfullscreen></iframe>
-              </div>
-          </div>
+        @endforeach
+    </div>
     <div class="clearfix"></div>
   </div>
   </div>
-
+  @endif
+  @if(isset($data['member']))
         <div class="col-lg-3 col-md-4">
           <div class="home_members">
             <div class="members text-center">
+                @foreach($data['member'] as $row)
+                @if($loop->iteration == 1 || $loop->iteration == 4 || $loop->iteration == 5 || $loop->iteration == 6)
               <div class="member_single">
-                <img src="images/KP_Sharma_Oli.png" alt="खड्ग प्रसाद शर्मा ओली'" class="img-fluid mx-auto">
+                <img src="{{ $row->image }}" alt="{{ $row->name }}" class="img-fluid mx-auto">
               <h6 class="text-center mt-3">
                 <a href="#" class="showToolTip" title="" data-original-title="Click to view detail">
-  खड्ग प्रसाद शर्मा ओली </a>
+                        {{ $row->name }}</a>
               </h6>
-              <p class="text-center">माननीय प्रधान मन्त्री </p>
+              <p class="text-center">{{ $row->designation }}</p>
               </div>
-
+              @endif
+              @if($loop->iteration == 2 || $loop->iteration == 3)
+              @if($loop->iteration == 2 )
               <div class="member_multiple">
               <div class="row">
                 <div class="col-md-6">
-                  <img src="images/sachibmoha.jpg" alt="प्रेम कुमार राई'" class="img-fluid mx-auto">
+                  <img src="{{ $row->image }}" alt="{{ $row->name }}'" class="img-fluid mx-auto">
               <h6 class="text-center mt-3">
                 <a href="#" class="showToolTip" title="" data-original-title="Click to view detail">
-  प्रेम कुमार राई </a>
+                        {{ $row->name }}</a>
               </h6>
-              <p class="text-center">सह सचिव (प्रवक्ता) </p>
+              <p class="text-center">{{ $row->designation }}</p>
                 </div>
+                @endif
+
+                @if($loop->iteration == 3)
                 <div class="col-md-6">
-                  <img src="images/ramkrishnasubedi.jpg" alt="रामकृष्ण सुवेदी" class="img-fluid mx-auto">
-              <h6 class="text-center mt-3">
-                <a href="#" class="showToolTip" title="" data-original-title="Click to view detail">
-  रामकृष्ण सुवेदी </a>
-              </h6>
-              <p class="text-center">सह सचिव (प्रवक्ता)  </p>
-                </div>
+                        <img src="{{ $row->image }}" alt="{{ $row->name }}'" class="img-fluid mx-auto">
+                    <h6 class="text-center mt-3">
+                      <a href="#" class="showToolTip" title="" data-original-title="Click to view detail">
+                              {{ $row->name }}</a>
+                    </h6>
+                    <p class="text-center">{{ $row->designation }}</p>
+                      </div>
                 <div class="clearfix"></div>
               </div>
-
               </div>
-
-              <div class="member_single">
-                <img src="images/upasachib.jpg" alt="उमाकान्त अधिकारी'" class="img-fluid mx-auto">
-                <h6 class="text-center mt-3">
-                <a href="#" class="showToolTip" title="" data-original-title="Click to view detail">
-  उमाकान्त अधिकारी </a>
-                </h6>
-                <p class="text-center">उप सचिव </p>
-              </div>
-
-              <div class="member_single">
-                <img src="images/ramkrishnasubedi.jpg" alt="प्रेम कुमार राई'" class="img-fluid mx-auto">
-                <h6 class="text-center mt-3">
-                <a href="#" class="showToolTip" title="" data-original-title="Click to view detail">
-  प्रेम कुमार राई </a>
-                </h6>
-                <p class="text-center">सचिव </p>
-              </div>
-
+              @endif
+              @endif
+              @endforeach
             </div>
           </div>
+
+          @endif
   <div class="twitter-feeds">
       <a class="twitter-timeline" data-height="700" data-width="100%"
          href="https://twitter.com/TechBikash">गृह मन्त्रालय</a>
@@ -546,25 +300,27 @@
       </div>
     </div>
     <div class="clearfix"></div>
+@if(isset($data['about_us']))
   <div class="white-box banner_sec">
         <div class="container">
         <div class="row">
           <div class="col-md-6 col-sm-6 wow fadeInLeft" data-wow-duration="1s" data-wow-delay=".2s">
-            <h2>12 Years Old</h2>
-            <h3>Reputed</h3>
-            <p>नेपाल  सरकारबाट २०५६ जेठ ९ गते राजपत्रमा सूचना प्रकाशित गरी आधारभूत तथा प्राथमिक शिक्षा परियोजना र माध्यमिक शिक्षा विकास परियोजनाद्वारा सञ्चालित  कार्यक्रमहरूलाई निरन्तरता क्षेत्रीय शिक्षा निर्देशनालय  एवम् जिल्ला शिक्षा कार्यालयहरूलाई सक्रिय बनाई विद्यालयको विद्यमान  शैक्षिक प्रणालीलाई अझ बढी प्रभावकारी बनाउन शिक्षा मन्त्रालयअन्तर्गत  शिक्षा विभागको गठन गरिएको हो ।</p>
-
-            <a href="#" class="btn btn-info">Get Started</a>
+            <h2>{{ $data['about_us']->title  }}</h2>
+            {{-- <h3>Reputed</h3> --}}
+            {!! mb_strimwidth($data['about_us']->content, 0, 700, "...") !!}
+            @if(route::has('site.page.show'))
+            <a href="{{ route('site.page.show', ['id' => $data['about_us']->post_unique_id]) }}" class="btn btn-info">{{__('View more')}}</a>
+            @endif
           </div>
           <div class="col-md-6 col-sm-6 wow fadeInRight" data-wow-duration="1s" data-wow-delay=".3s">
-            <figure><img src="images/a1.png" alt="banner image" class="img-fluid"/></figure>
+            <figure><img src="{{ $data['about_us']->thumbnail }}" alt="banner image" class="img-fluid"/></figure>
           </div>
           <div class="clearfix"></div>
         </div>
         </div>
   </div>
   <div class="clearfix"></div>
-
+  @endif
   <div class="white-box sewa">
     <div class="container">
   <div class="card">

@@ -27,6 +27,7 @@ class CreateStaffTable extends Migration
             $table->integer('level');
             $table->integer('order')->nullable();
             $table->boolean('status');
+            $table->boolean('featured');
             $table->timestamps();
             $table->foreign('lang_id')
                     ->references('id')->on('languages')

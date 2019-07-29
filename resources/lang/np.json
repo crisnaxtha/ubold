@@ -30,15 +30,17 @@
 
     "Last twelve months website visitor graph( Line Graph )": "पछिल्लो बाह्र महिनाको वेबसाइट भ्रमण कर्ताकोs ग्राफ (रेखा ग्राफ)",
     "Last twelve months website visitor graph( Pie Graph )": "पछिल्लो बाह्र महिनाको वेबसाइट भ्रमण कर्ताको ग्राफ (पाई ग्राफ)",
-    
+
     "Role":"भूमिका",
     "View Site":"साइट हेर्नुहोस्",
-   
+
     "Sign in to start your session":"तपाइँको सत्र सुरु गर्न साइन इन गर्नुहोस्।",
     "Remember Me":"मलाई सम्झनुहोस्",
     "I forget my password":"मैले मेरो पासवर्ड बिर्सें",
     "Register a new membership":"नयाँ सदस्यता दर्ता गर्नुहोस्",
-    "Sign In":"साइन इन"
+    "Sign In":"साइन इन",
+
+    "ngo": "national gov site"
 
 
 }

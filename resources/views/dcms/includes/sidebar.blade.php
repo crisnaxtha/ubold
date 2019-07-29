@@ -33,6 +33,9 @@
                 @if( Route::has('dcms.album.index'))
                 <li><a class="{{ ($_panel == 'Album' || $_panel == 'Gallery') ? 'active' : '' }}" href="{{ URL::route('dcms.album.index') }}" ><i class="fas fa-camera-retro"></i><span>{{__('Photo Album')}}</span></a></li>
                 @endif
+                @if(Route::has('dcms.blog.index'))
+                <li><a class="{{ ($_panel == 'Blogs') ? 'active' : '' }}" href="{{ URL::route('dcms.blog.index') }}"><i class="fa fa-book"></i><span>Videos</span></a></li>
+                @endif
                 {{-- Check if the user is admin or super-admin  --}}
                 @if(Auth::user()->role == 'super-admin' || Auth::user()->role == 'admin')
                     @if( Route::has('dcms.menu.index'))

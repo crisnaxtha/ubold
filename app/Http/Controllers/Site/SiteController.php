@@ -11,6 +11,10 @@ use App\Model\Dcms\Setting;
 use App\Model\Dcms\Branch;
 use App\Model\Dcms\Album;
 use App\Model\Dcms\Post;
+use App\Model\Dcms\Staff;
+use App\Model\Dcms\Link;
+use App\Model\Dcms\Category;
+use App\Model\Dcms\Blog;
 use DB;
 use Session;
 
@@ -32,18 +36,22 @@ class SiteController extends DM_BaseController
     public function index() {
         $this->panel = "Home";
         $this->view_path = 'site.';
-        $this->tracker; //to track the user 
+        $this->tracker; //to track the user
         $data['menu'] = Menu::tree($this->lang_id);
-        $data['slider'] = $this->dm_post::joinSliderName($this->lang_id);
-        $data['cat_recent_news'] = DB::table('posts')->where('type', '=', 'post')->where('category_id', '=', 4)->where('lang_id', '=', $this->lang_id)->take(5)->get();
-        $data['about_us'] = $this->dm_post::getSinglePage('1_5ca0600e901f2', $this->lang_id);
-        $data['cat_news_post'] = $this->dm_post::categoryPost(7, $this->lang_id);
-        $data['cat_news'] = 7;
-        $data['cat_notice_post'] = $this->dm_post::categoryPost(8, $this->lang_id);
-        $data['cat_notice'] = 8;
-        $data['cat_publication_post'] = $this->dm_post::categoryPost(9, $this->lang_id);
-        $data['cat_publication'] = 9;
-        $data['popular_post'] = DB::table('posts')->where('type', '=', 'post')->where('status', '=', 1)->where('lang_id', '=', $this->lang_id)->take(3)->orderBy('visit_no', 'desc')->get();
+        $data['imp_link'] = Link::where('status', '=', 1)->where('lang_id', '=', $this->lang_id)->get();
+        $data['member'] = Staff::where('featured', '=', 1)->where('lang_id', '=', $this->lang_id)->orderBy('level')->get();
+
+        $data['category'] = Category::take(4)->get();
+
+        $i = 1;
+        foreach($data['category'] as $row) {
+            $data['cat_post_'.$i] = $this->dm_post::categoryPost($row->id, $this->lang_id, 6);
+            $data['cat_'.$i] = $row->id;
+            $i++;
+        }
+        $data['about_us'] = $this->dm_post::getSinglePage('1_5d3e5689aef01', $this->lang_id);
+        $data['video'] = Blog::where('status', '=', 1)->get();
+
         return view(parent::loadView($this->view_path.'.index'), compact('data'));
     }
 
@@ -139,7 +147,7 @@ class SiteController extends DM_BaseController
      * shows album
      */
     public function showAlbum() {
-        $this->tracker; 
+        $this->tracker;
         $data['menu'] = Menu::tree($this->lang_id);
         $data['recent_post'] = DB::table('posts')->where('type', '=', 'post')->where('status', '=', 1)->where('lang_id', '=', $this->lang_id)->take(5)->get();
         $data['album'] = $this->dm_post::joinAlbum($this->lang_id);
@@ -149,7 +157,7 @@ class SiteController extends DM_BaseController
      * show photos
      */
     public function showPhotos($album_id) {
-        $this->tracker; 
+        $this->tracker;
         $data['menu'] = Menu::tree($this->lang_id);
         $data['recent_post'] = DB::table('posts')->where('type', '=', 'post')->where('status', '=', 1)->where('lang_id', '=', $this->lang_id)->take(5)->get();
         $data['album'] = Album::findOrFail($album_id);
@@ -166,7 +174,7 @@ class SiteController extends DM_BaseController
 
     public function swapLanguage($lang_id) {
         Session::put('lang_id', $lang_id);
-        return back();   
+        return back();
     }
 
     public function search(Request $request) {

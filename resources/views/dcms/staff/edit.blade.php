@@ -102,6 +102,7 @@
                     <?php
                         dm_inputUpdate('number', 'level', 'Level(*)', $data['single']->level, '');
                         dm_checkbox('checkbox', 'status', 'Status', $data['single']->status);
+                        dm_checkbox('checkbox', 'featured', 'Featured', $data['single']->featured);
                     ?>
                 </div>
             </div>

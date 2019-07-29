@@ -71,6 +71,7 @@
                 <?php
                     dm_input('number', 'level', 'Level(*)', 'level', '');
                     dm_checkbox('checkbox', 'status', 'Status');
+                    dm_checkbox('checkbox', 'featured', 'Featured');
                 ?>
             </div>
         </div>
