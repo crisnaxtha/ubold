@@ -11,7 +11,7 @@
             <div class="row">
               <div class="col-lg-4 col-md-12 pad-right-0 wow fadeInUp" data-wow-duration="2s" data-wow-delay=".2s">
                 <figure>
-                  <img src="images/upasachib.jpg" alt="image" class="img-fluid">
+                  <img src="{{asset('assets/site/assets/images/upasachib.jpg')}}" alt="image" class="img-fluid">
                 </figure>
               </div>
               <div class="col-lg-8 col-md-12 wow fadeInUp" data-wow-duration="2s" data-wow-delay=".2s">
@@ -28,7 +28,7 @@
             <div class="row">
               <div class="col-lg-4 col-md-12 pad-right-0 wow fadeInUp" data-wow-duration="2s" data-wow-delay=".2s">
                 <figure>
-                  <img src="images/sachibmoha.jpg" alt="image" class="img-fluid">
+                  <img src="{{asset('assets/site/assets/images/sachibmoha.jpg') }}" alt="image" class="img-fluid">
                 </figure>
               </div>
               <div class="col-lg-8 col-md-12 wow fadeInUp" data-wow-duration="2s" data-wow-delay=".2s">

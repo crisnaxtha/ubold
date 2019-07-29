@@ -165,7 +165,7 @@
         <a href="#" class="btn btn-primary btn-block">सबै Category हेर्नुहोस</a>
             </div>
 
-          <div class="widget-box">
+          {{-- <div class="widget-box">
               <h3> <i class="fa fa-newspaper-o">&nbsp;</i> Publications</h3>
               <div class="side-widget">
                 <ul>
@@ -188,4 +188,4 @@
                   </li>
                 </ul>
               </div>
-          </div>
+          </div> --}}
