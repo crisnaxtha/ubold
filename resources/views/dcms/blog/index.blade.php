@@ -11,10 +11,10 @@
 <div class="row">
     <div class="col-12">
         <div class="card-box">
-            <h4 class="header-title">Filtering</h4>
+            {{-- <h4 class="header-title">Filtering</h4>
             <p class="sub-header">
                 include filtering in your FooTable.
-            </p>
+            </p> --}}
 
             @include('dcms.includes.buttons.button-create')
             <hr>
@@ -43,7 +43,6 @@
                                     <th>#</th>
                                     <th>Video</th>
                                     <th>Public</th>
-
                                     <th>Action</th>
                                  </tr>
                     </thead>
