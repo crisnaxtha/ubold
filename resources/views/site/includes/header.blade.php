@@ -9,7 +9,7 @@
                 <img src="{{ asset($all_view['setting']->logo) }}" alt="Main Logo" />
             @endif
              </div>
-            <div class="col-lg-9 col-md-8 text-left logo_text"> <span>{{ __('ngo') }}</span> <b>{{ __('hello') }}</b> <span>{{ __('Kathmandu, Nepal') }}</span> </div>
+            <div class="col-lg-9 col-md-8 text-left logo_text"> <span>{{ __('Lorem ipsum dolor sit amet') }}</span> <b>{{ __('Lorem ipsum dolor sit amet') }}</b> <span>{{ __('Kathmandu, Nepal') }}</span> </div>
             <div class="clearfix"></div>
           </div>
           </a> </div>

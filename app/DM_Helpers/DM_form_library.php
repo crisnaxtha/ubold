@@ -19,7 +19,7 @@ if(!function_exists('dm_hinput')){
     function dm_hinput($type,$name,$caption="",$value="",$options=''){
     ?>
     <div class="form-group ">
-        <label for="<?=$name?>" class="control-label col-lg-2"><?=$caption?></label>
+        <label for="<?=$name?>" class="control-label"><?=$caption?></label>
         <div class="col-lg-10">
             <input class=" form-control" type="<?=$type?>" id="<?=$name?>" name="<?=$name?>" value="<?=old($value);?>" <?=$options?>/>
         </div>
@@ -32,7 +32,7 @@ if(!function_exists('dm_hinputUpdate')){
     function dm_hinputUpdate($type,$name,$caption="",$value="",$options=''){
     ?>
     <div class="form-group ">
-        <label for="<?=$name?>" class="control-label col-lg-2"><?=$caption?></label>
+        <label for="<?=$name?>" class="control-label"><?=$caption?></label>
         <div class="col-lg-10">
             <input class=" form-control" type="<?=$type?>" id="<?=$name?>" name="<?=$name?>" value="<?=$value?>" <?=$options?>/>
         </div>
@@ -52,7 +52,7 @@ if(!function_exists('dm_htextarea')){
     function dm_htextarea($name,$caption="",$value="",$options=''){
     ?>
     <div class="form-group ">
-        <label for="<?=$name?>" class="control-label col-lg-2"><?=$caption?></label>
+        <label for="<?=$name?>" class="control-label"><?=$caption?></label>
         <div class="col-lg-10">
             <textarea class=" form-control" id="<?=$name?>" name="<?=$name?>" <?=$options?>><?=old($value)?></textarea>
             <?php if(isset($help)){ ?><p><?php echo $help; ?></p><?php } ?>
@@ -66,7 +66,7 @@ if(!function_exists('dm_htextareaUpdate')){
     function dm_htextareaUpdate($name,$caption="",$value="",$options=''){
     ?>
     <div class="form-group ">
-        <label for="<?=$name?>" class="control-label col-lg-2"><?=$caption?></label>
+        <label for="<?=$name?>" class="control-label"><?=$caption?></label>
         <div class="col-lg-10">
             <textarea class=" form-control" id="<?=$name?>" name="<?=$name?>" <?=$options?>><?=$value?></textarea>
             <?php if(isset($help)){ ?><p><?php echo $help; ?></p><?php } ?>
@@ -79,7 +79,7 @@ if(!function_exists('dm_htexteditor')){
     function dm_htexteditor($name,$caption="",$value="",$options=''){
     ?>
     <div class="form-group">
-        <label for="<?=$name?>" class="control-label col-lg-2"><?=$caption?></label>
+        <label for="<?=$name?>" class="control-label"><?=$caption?></label>
         <div class="col-lg-10">
             <textarea class="ckeditor form-control" id="<?=$name?>" name="<?=$name?>" <?=$options?>><?=$value?></textarea>
         </div>
@@ -91,7 +91,7 @@ if(!function_exists('dm_hcheckbox')){
     function dm_hcheckbox($type="checkbox",$name,$caption="",$checked=null,$value=1,$options=''){
     ?>
     <div class="form-group ">
-        <label for="<?=$name?>" class="control-label col-lg-2"><?=$caption?></label>
+        <label for="<?=$name?>" class="control-label"><?=$caption?></label>
         <div class="custom-control custom-checkbox">
             <input type="hidden" name="<?=$name?>" value=0>
             <input type="checkbox" name="<?=$name?>" value=1 <?php if($checked == 1){ echo "checked"; }?>>
@@ -120,10 +120,10 @@ if(!function_exists('dm_hckeditor')){
     function dm_hckeditor( $name="",$caption="",$value=""){
         ?>
         <div class="form-group">
-            <label for="<?=$name?>" class="control-label col-lg-2"><?=$caption?></label>
+            <label for="<?=$name?>" class="control-label"><?=$caption?></label>
             <div class="col-lg-10">
                 <textarea id="<?=$name?>" name="<?=$name?>" class="form-control"><?=old($value)?></textarea>
-                <script src="//cdn.ckeditor.com/4.6.2/standard/ckeditor.js"></script>
+                <script src="//cdn.ckeditor.com/4.6.2/full/ckeditor.js"></script>
                 <script>
                 var options = {
                     filebrowserImageBrowseUrl: '/laravel-filemanager?type=Images',
@@ -143,10 +143,10 @@ if(!function_exists('dm_hckeditorUpdate')){
     function dm_hckeditorUpdate( $name="",$caption="",$value=""){
         ?>
         <div class="form-group">
-            <label for="<?=$name?>" class="control-label col-lg-2"><?=$caption?></label>
+            <label for="<?=$name?>" class="control-label"><?=$caption?></label>
             <div class="col-lg-10">
                 <textarea id="<?=$name?>" name="<?=$name?>" class="form-control"><?=$value?></textarea>
-                <script src="//cdn.ckeditor.com/4.6.2/standard/ckeditor.js"></script>
+                <script src="//cdn.ckeditor.com/4.6.2/full/ckeditor.js"></script>
                 <script>
                 var options = {
                     filebrowserImageBrowseUrl: '/laravel-filemanager?type=Images',
@@ -164,7 +164,7 @@ if(!function_exists('dm_hdropdown')){
     function dm_hdropdown($name="",$caption="",$data="", $old_data_name="Uncategorized") {
         ?>
         <div class="form-group">
-            <label for="<?=$name?>" class="control-label col-lg-2"><?=$caption?></label>
+            <label for="<?=$name?>" class="control-label"><?=$caption?></label>
                 <div class="col-lg-10">
                     <select name="<?=$name?>" id="<?=$name?>" class="form-control">
                         <option value=<?=$old_data_name?>><?=$old_data_name?></option>
@@ -260,7 +260,7 @@ if(!function_exists('dm_ckeditor')){
         <div class="form-group">
             <label for="<?=$name?>" class=""><?=$caption?></label>
                 <textarea id="<?=$id?>" name="<?=$name?>" class="form-control"><?=old($value);?></textarea>
-                <script src="//cdn.ckeditor.com/4.6.2/standard/ckeditor.js"></script>
+                <script src="//cdn.ckeditor.com/4.6.2/full/ckeditor.js"></script>
                 <script>
                 var options = {
                     filebrowserImageBrowseUrl: '/laravel-filemanager?type=Images',
@@ -281,7 +281,7 @@ if(!function_exists('dm_ckeditorUpdate')){
         <div class="form-group">
             <label for="<?=$name?>" class=""><?=$caption?></label>
                 <textarea id="<?=$id?>" name="<?=$name?>" class="form-control"><?=$value?></textarea>
-                <script src="//cdn.ckeditor.com/4.6.2/standard/ckeditor.js"></script>
+                <script src="//cdn.ckeditor.com/4.6.2/full/ckeditor.js"></script>
                 <script>
                 var options = {
                     filebrowserImageBrowseUrl: '/laravel-filemanager?type=Images',
@@ -334,7 +334,7 @@ if(!function_exists('dm_branchDropdown')){
     function dm_branchDropdown($name="",$caption="",$data="", $old_data = '', $old_data_name="No Parent Branch") {
         ?>
         <div class="form-group">
-            <label for="<?=$name?>" class="control-label col-lg-2"><?=$caption?></label>
+            <label for="<?=$name?>" class="control-label"><?=$caption?></label>
             <div class="col-lg-10">
                 <select name="<?=$name?>" id="<?=$name?>" class="form-control">
                     <option value=<?=$old_data?>><?=$old_data_name?></option>
@@ -371,7 +371,7 @@ if(!function_exists('dm_menu_dropdown')){
     function dm_menu_dropdown($class="", $name="",$caption="",$data="", $old_data_name="") {
     ?>
     <div class="form-group <?=$class?>">
-        <label for="<?=$name?>" class="control-label col-lg-2"><?=$caption?></label>
+        <label for="<?=$name?>" class="control-label"><?=$caption?></label>
         <div class="col-lg-6">
             <select name="<?=$name?>" id="<?=$name?>" class="form-control">
                 <option value=<?=$old_data_name?>><?=$old_data_name?></option>
@@ -388,7 +388,7 @@ if(!function_exists('dm_menu_type_dropdown')){
     function dm_menu_type_dropdown($class="", $name="",$caption="",$data="", $old_data ="", $old_data_name="") {
     ?>
     <div class="form-group <?=$class?>" >
-        <label for="<?=$name?>" class="control-label col-lg-2"><?=$caption?></label>
+        <label for="<?=$name?>" class="control-label"><?=$caption?></label>
         <div class="col-lg-6">
             <select name="<?=$name?>" id="<?=$name?>" onchange="menuTypeFunction()"  class="form-control">
                 <option id="old_value" value=<?=$old_data?>><?=$old_data_name?></option>
@@ -405,7 +405,7 @@ if(!function_exists('dm_post_dropdown')){
     function dm_post_dropdown($class="", $name="",$caption="",$data="", $old_data =0, $old_data_name="") {
     ?>
     <div class="form-group <?=$class?>" id="<?=$name.'_'.$caption?>">
-        <label for="<?=$name?>" class="control-label col-lg-2"><?=$caption?></label>
+        <label for="<?=$name?>" class="control-label"><?=$caption?></label>
         <div class="col-lg-6">
             <select name="<?=$name?>" class="form-control">
                 <option value=<?=$old_data?>><?=$old_data_name?></option>
@@ -422,7 +422,7 @@ if(!function_exists('dm_category_dropdown')){
     function dm_category_dropdown($class="", $name="",$caption="",$data="", $old_data ="", $old_data_name="") {
     ?>
     <div class="form-group <?=$class?>" id="<?=$name.'_'.$caption?>">
-        <label for="<?=$name?>" class="control-label col-lg-2"><?=$caption?></label>
+        <label for="<?=$name?>" class="control-label"><?=$caption?></label>
         <div class="col-lg-6">
             <select name="<?=$name?>" class="form-control">
                 <option value=<?=$old_data?>><?=$old_data_name?></option>
@@ -440,7 +440,7 @@ if(!function_exists('dm_custom_link_hinput')){
     function dm_custom_link_hinput($type,$name,$caption="",$value="",$options=''){
     ?>
     <div class="form-group " id="<?=$name.'_link'?>">
-        <label for="<?=$name?>" class="control-label col-lg-2"><?=$caption?></label>
+        <label for="<?=$name?>" class="control-label"><?=$caption?></label>
         <div class="col-lg-6">
             <input placeholder="http://" class=" form-control" type="<?=$type?>"  name="<?=$name?>" value="<?=old($value);?>" <?=$options?>/>
         </div>
@@ -453,7 +453,7 @@ if(!function_exists('dm_custom_link_hinput_update')){
     function dm_custom_link_hinput_update($type,$name,$caption="",$value="",$options=''){
     ?>
     <div class="form-group " id="<?=$name.'_link'?>">
-        <label for="<?=$name?>" class="control-label col-lg-2"><?=$caption?></label>
+        <label for="<?=$name?>" class="control-label"><?=$caption?></label>
         <div class="col-lg-6">
             <input placeholder="http://" class=" form-control" type="<?=$type?>"  name="<?=$name?>" value="<?=$value?>" <?=$options?>/>
         </div>
@@ -466,7 +466,7 @@ if(!function_exists('dm_menu_hinput')){
     function dm_menu_hinput($type,$name,$caption="",$value="",$options=''){
     ?>
     <div class="form-group ">
-        <label for="<?=$name?>" class="control-label col-lg-2"><?=$caption?></label>
+        <label for="<?=$name?>" class="control-label"><?=$caption?></label>
         <div class="col-lg-6">
             <input class=" form-control" type="<?=$type?>" id="<?=$name?>" name="<?=$name?>" value="<?=old($value)?>" <?=$options?>/>
         </div>
@@ -479,7 +479,7 @@ if(!function_exists('dm_menu_hinput_update')){
     function dm_menu_hinput_update($type,$name,$caption="",$value="",$options=''){
     ?>
     <div class="form-group ">
-        <label for="<?=$name?>" class="control-label col-lg-2"><?=$caption?></label>
+        <label for="<?=$name?>" class="control-label"><?=$caption?></label>
         <div class="col-lg-6">
             <input class=" form-control" type="<?=$type?>" id="<?=$name?>" name="<?=$name?>" value="<?=$value?>" <?=$options?>/>
         </div>

@@ -46,16 +46,16 @@ class Post extends DM_BaseModel
 
     public function storeData(Request $request, $category, $type, $rows, $image, $tag, $status, $file_title, $files){
         $post_unique_id = uniqid(Auth::user()->id.'_');
-        // for thumbnail 
+        // for thumbnail
         if($request->hasFile('image')){
-            $post_thumbnail = parent::uploadImage($request, $this->folder_path_image ,$this->prefix_path_image,'image','20','20');  
+            $post_thumbnail = parent::uploadImage($request, $this->folder_path_image ,$this->prefix_path_image,'image','','');
         }
         else {
             $post_thumbnail = null;
         }
         $array_file_title = array_filter($file_title);
 
-        // for  multiple files 
+        // for  multiple files
         if($request->hasFile('files')){
             $post_files = parent::uploadMultipleFiles($request, $this->folder_path_file, $this->prefix_path_file, 'files');
         }
@@ -105,16 +105,16 @@ class Post extends DM_BaseModel
     }
 
     public function updateData(Request $request, $category, $type, $rows, $image, $tag, $status, $file_title, $files, $post_unique_id){
-        // for thumbnail 
+        // for thumbnail
         if($request->hasFile('image')){
-            $post_thumbnail = parent::uploadImage($request, $this->folder_path_image ,$this->prefix_path_image,'image','20','20');  
+            $post_thumbnail = parent::uploadImage($request, $this->folder_path_image ,$this->prefix_path_image,'image','','');
         }
         else {
             $post_thumbnail = null;
         }
         $array_file_title = array_filter($file_title);
 
-        // for  multiple files 
+        // for  multiple files
         if($request->hasFile('files')){
             $post_files = parent::uploadMultipleFiles($request, $this->folder_path_file, $this->prefix_path_file, 'files');
         }
