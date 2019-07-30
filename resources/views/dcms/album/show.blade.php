@@ -31,9 +31,9 @@
                             <div class="user-heading alt green-bg">
                                 <a href="#">
                                     @if(isset($row->cover_image))
-                                    <img src="{{ asset($row->cover_image) }}" height="500" width="500" alt="img04">
+                                    <img src="{{ asset($row->cover_image) }}" height="200" width="200" alt="img04">
                                     @else
-                                    <img src="{{ asset('assets/dcms/img/gallery.png') }}"  alt="img04">
+                                    <img src="{{ asset('assets/dcms/img/gallery.png') }}"  alt="img04" height="200" width="200">
                                     @endif
                                 </a>
                                 <h1>{{ $albums_name->title }}</h1>
@@ -42,10 +42,10 @@
                         </section>
                     </aside>
                     <!--widget end-->
-                    
-         
+
+
                 <ul class="grid cs-style-3">
-                     @if(count($row->photos) !=0 ) 
+                     @if(count($row->photos) !=0 )
                          @foreach($row->photos as $row)
                          <li>
                               <figure>
@@ -60,15 +60,15 @@
                                        <h3>{{ $row->title }}</h3>
                                        <div class="pull-right">
                                           @include('dcms.includes.buttons.button-delete-photo')
-                                       </div>                        
+                                       </div>
                                     </figcaption>
                               </figure>
                          </li>
                          @endforeach
-                     @else 
+                     @else
                      <h1>No Photos Avilable</h1>
                      @endif
-             
+
                    </ul>
           </div>
        </section>

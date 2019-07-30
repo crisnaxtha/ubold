@@ -24,9 +24,9 @@
                                 <figure>
                                     <a href="{{ route('dcms.album.show', ['id' => $row->id ]) }}">
                                     @if(isset($row->cover_image))
-                                    <img src="{{ asset($row->cover_image) }}" alt="img04">
+                                    <img src="{{ asset($row->cover_image) }}" alt="img04" height="250">
                                     @else
-                                    <img src="{{ asset('assets/dcms/img/gallery.png') }}" alt="img04">
+                                    <img src="{{ asset('assets/dcms/img/gallery.png') }}" alt="img04" height="250">
                                     @endif
                                     </a>
                                     <figcaption>
