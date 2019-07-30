@@ -18,7 +18,6 @@
                 @include('site.includes.index-about')
                 @include('site.includes.index-sewa')
                 @include('site.includes.index-gallery')
-
             </div>
         </div>
     </div>

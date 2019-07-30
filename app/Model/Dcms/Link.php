@@ -7,11 +7,13 @@ use Auth;
 
 class Link extends DM_BaseModel
 {
-    public function storeData($rows, $status, $order, $url) {
+    public function storeData($icon, $color, $rows, $status, $order, $url) {
         $link_unique_id = uniqid(Auth::user()->id.'_');
         foreach( $rows as $row) {
             $links[] = [
                 'link_unique_id' => $link_unique_id,
+                'icon' => $icon,
+                'color' => $color,
                 'lang_id' => $row['lang_id'],
                 'name' => $row['name'],
                 'url'  => $url,
@@ -26,7 +28,7 @@ class Link extends DM_BaseModel
         }
     }
 
-    public function updateData($link_unique_id, $rows, $status, $order, $url) {
+    public function updateData($link_unique_id, $icon, $color, $rows, $status, $order, $url) {
         foreach( $rows as $row) {
             if(isset($row['id'])){
                 $link = Link::findOrFail($row['id']);
@@ -35,9 +37,11 @@ class Link extends DM_BaseModel
                 $link->link_unique_id = $link_unique_id;
             }
             $link->lang_id = $row['lang_id'];
+            $link->icon = $icon;
+            $link->color = $color;
             $link->name = $row['name'];
             $link->order = $order;
-            $link->url = $url; 
+            $link->url = $url;
             $link->status = $status;
             $link->save();
         }

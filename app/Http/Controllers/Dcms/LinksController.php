@@ -7,6 +7,7 @@ use App\Http\Controllers\Dcms\DM_BaseController;
 use App\Model\Dcms\Link;
 use App\Model\Dcms\Tracker;
 use App\Model\Dcms\Eloquent\DM_Post;
+use App\DM_Libraries\Spyc;
 
 class LinksController extends DM_BaseController
 {
@@ -43,8 +44,11 @@ class LinksController extends DM_BaseController
      */
     public function create()
     {
+        $spyc = new Spyc();
+        $icons = $spyc::YAMLLoad(app_path()."/DM_Treasure/icons.yml");
+        $data['fa-icons'] = $icons["fa"];
         $data['lang'] = $this->dm_post::getLanguage();
-        return view(parent::loadView($this->view_path.'.create'), compact('data')); 
+        return view(parent::loadView($this->view_path.'.create'), compact('data'));
     }
 
     /**
@@ -63,7 +67,7 @@ class LinksController extends DM_BaseController
         ], [
             'rows.*.name.required' => 'You have to enter the name of Link.',
         ]);
-        if($this->model->storeData($request->rows, $request->status, $request->order, $request->url ) ){
+        if($this->model->storeData($request->icon, $request->color, $request->rows, $request->status, $request->order, $request->url ) ){
             session()->flash('alert-success', $this->panel.' Successfully Store');
         }else {
             session()->flash('alert-danger', $this->panel.' can not be Store');
@@ -90,10 +94,13 @@ class LinksController extends DM_BaseController
      */
     public function edit($link_unique_id)
     {
+        $spyc = new Spyc();
+        $icons = $spyc::YAMLLoad(app_path()."/DM_Treasure/icons.yml");
+        $data['fa-icons'] = $icons["fa"];
         $links = $this->model::where('link_unique_id', '=', $link_unique_id)->get();
         $data['lang'] = $this->dm_post::getLanguage();
         $data['single'] = $this->model::where('link_unique_id', '=', $link_unique_id)->first();
-        return view(parent::loadView($this->view_path.'.edit'), compact('data', 'links')); 
+        return view(parent::loadView($this->view_path.'.edit'), compact('data', 'links'));
     }
 
     /**
@@ -113,7 +120,7 @@ class LinksController extends DM_BaseController
         ], [
             'rows.*.name.required' => 'You have to enter the name of Link.',
         ]);
-        if($this->model->updateData($request->link_unique_id, $request->rows, $request->status, $request->order, $request->url ) ){
+        if($this->model->updateData($request->link_unique_id, $request->icon, $request->color, $request->rows, $request->status, $request->order, $request->url ) ){
             session()->flash('alert-success', $this->panel.' Successfully Store');
         }else {
             session()->flash('alert-danger', $this->panel.' can not be Store');

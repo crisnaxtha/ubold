@@ -7,7 +7,7 @@
         <ul class="useful-link">
 @foreach($data['imp_link'] as $row)
             <li>
-                <a href="{{ $row->url }}" class="btn btn-info hover-ripple">{{ $row->name }}</a>
+                <a href="{{ $row->url }}" class="btn btn-info hover-ripple"><i class="fa {{ $row->icon }}"></i>&nbsp;{{ $row->name }}</a>
             </li>
 @endforeach
         </ul>

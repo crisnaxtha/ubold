@@ -498,3 +498,42 @@ if(!function_exists('dm_switch')) {
     <?php
     }
 }
+if(!function_exists('dm_hselect_faicon')){
+    function dm_hselect_faicon($name,$caption="",$options_data=null,$value=null){
+        ?>
+        <div class="form-group ">
+            <label for="<?=$name?>" class="control-label"><?=$caption?></label>
+            <div class="col-lg-10 col-sm-10">
+                <div class="btn-group btn-block">
+                    <button data-toggle="dropdown" class="btn btn-primary dropdown-toggle" >
+                        <b class="caret"></b>
+                        <i id="btn_icon_<?=str_replace(array("[","]"),"",$name)?>" class="fa fa-2x <?=$value?>"></i>
+                    </button>
+                    <div class="dropdown-menu" style="width: 100%;">
+                        <div class="select_icon scroll-box" style="overflow: hidden;max-height: 300px;">
+                            <label <?=($value==null)?'class="checked"':''?>><input type="radio" name="<?=$name?>" value="" onclick="$('input[type=radio]:not(:checked)').parent().removeClass('checked'); $(this).parent().addClass('checked'); $('#btn_icon_<?=str_replace(array("[","]"),"",$name)?>').attr('class',$(this).next().attr('class'))" <?=($value==null)?"checked":""?>> <i class="fa fa-stop fa-2x text-danger"></i></label>
+                            <?php if($options_data!=null){ ?>
+                            <?php foreach($options_data as $data){ ?>
+                                <label <?=($value!=null && $value==$data)?'class="checked"':''?>><input type="radio" name="<?=$name?>" value="<?=$data?>" onclick="$('input[type=radio]:not(:checked)').parent().removeClass('checked'); $(this).parent().addClass('checked'); $('#btn_icon_<?=str_replace(array("[","]"),"",$name)?>').attr('class',$(this).next().attr('class'))" <?=($value!=null && $value==$data)?"checked":""?>> <i class="fa <?=$data?> fa-2x"></i></label>
+                                <?php } ?>
+                            <?php } ?>
+                        </div>
+                    </div>
+                </div>
+            </div>
+        </div>
+        <?php
+    }
+}
+if(!function_exists('dm_hcolor_picker')){
+    function dm_hcolor_picker($name, $caption="", $value=null, $options_data="null"){
+        ?>
+         <div class="form-group">
+            <label for="example-color"><?= $caption ?></label>
+            <div class="col-lg-10">
+            <input class="form-control" id="example-color" type="color" name="<?= $name ?>" value="<?= $value ?>" <?=$options_data?>>
+            </div>
+        </div>
+        <?php
+    }
+}

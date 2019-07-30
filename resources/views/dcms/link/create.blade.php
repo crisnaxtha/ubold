@@ -11,6 +11,8 @@
                 <div class=" form">
                     <?php
                     dm_hpostform(URL::route($_base_route.'.store'), 'POST');
+                    dm_hselect_faicon('icon', 'Icon', $data['fa-icons']);
+                    dm_hcolor_picker('color', "Select Color");
                     ?>
                     @foreach($data['lang'] as $row)
                     <?php

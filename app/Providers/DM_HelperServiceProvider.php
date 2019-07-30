@@ -27,5 +27,7 @@ class DM_HelperServiceProvider extends ServiceProvider
         require base_path().'/app/DM_Helpers/DM_common_library.php';
         require base_path().'/app/DM_Helpers/DM_general_library.php';
         require base_path().'/app/DM_Helpers/DM_db_backup_library.php';
+        require base_path().'/app/DM_Libraries/Spyc.php';
+
     }
 }

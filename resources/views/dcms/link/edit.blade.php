@@ -10,6 +10,8 @@
                 <div class=" form">
                         <?php
                         dm_hpostform(URL::route($_base_route.'.update', ['link_unique_id' => $data['single']->link_unique_id]), 'PUT');
+                        dm_hselect_faicon('icon', 'Icon', $data['fa-icons'], $data['single']->icon);
+                        dm_hcolor_picker('color', "Select Color", $data['single']->color);
                         ?>
                         @foreach($data['lang'] as $row)
                         <?php
