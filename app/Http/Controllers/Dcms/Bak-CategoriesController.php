@@ -8,8 +8,6 @@ use App\Model\Dcms\Category;
 use App\Model\Dcms\Tracker;
 use App\Model\Dcms\Eloquent\DM_Post;
 use Illuminate\Support\Str;
-use App\DM_Libraries\Spyc;
-
 use Response;
 
 class CategoriesController extends DM_BaseController
@@ -19,14 +17,13 @@ class CategoriesController extends DM_BaseController
     protected $view_path = 'dcms.category';
     protected $model;
     protected $table;
-
+    
     public function __construct(Category $category, Tracker $tracker, DM_Post $dm_post) {
         $this->middleware('auth');
         $this->middleware('role:admin')->only('destroy');
         $this->model = $category;
         $this->tracker = $tracker::hit();
         $this->lang_id = $dm_post::setLanguage();
-        $this->dm_post = $dm_post;
 
     }
     /**
@@ -37,14 +34,9 @@ class CategoriesController extends DM_BaseController
     public function index()
     {
         $this->tracker;
-        $spyc = new Spyc();
-        $icons = $spyc::YAMLLoad(app_path()."/DM_Treasure/icons.yml");
-        $data['fa-icons'] = $icons["fa"];
-        $data['lang'] = $this->dm_post::getLanguage();
-
         $items = $this->model->categoryTree();
         $category = $this->model->getHtml($items);
-        return view(parent::loadView($this->view_path.'.index'), compact('category', 'data'));
+        return view(parent::loadView($this->view_path.'.index'), compact('category'));
     }
 
     /**
@@ -65,20 +57,21 @@ class CategoriesController extends DM_BaseController
      */
     public function store(Request $request)
     {
-        $this->tracker;
         $request->validate([
-            'rows.*.name' => 'required|max:225',
-            'featured' => 'required|boolean'
-        ], [
-            'rows.*.name.required' => 'You have to enter the name of Category.',
+            'name' => 'required|max:225',
         ]);
-
-        if($this->model->storeData($request->icon, $request->color, $request->rows, $request->featured)){
-            session()->flash('alert-success', $this->panel.' Successfully Store');
-        }else {
-            session()->flash('alert-danger', $this->panel.' can not be Store');
+        $this->tracker;
+        $row = $this->model;
+        $row->name = $request->name;
+        $row->slug = Str::slug($request->name);
+        $row->save();
+        if($row->save()){
+            session()->flash('alert-success', $this->panel.' Successfully Added');
         }
-        return redirect()->route($this->base_route.'.index');
+        else{
+            session()->flash('alert-success', $this->panel.' Can not be Added');
+        }
+        return back();
     }
 
     /**
@@ -98,16 +91,12 @@ class CategoriesController extends DM_BaseController
      * @param  int  $id
      * @return \Illuminate\Http\Response
      */
-    public function edit($category_unique_id)
-    {
+    public function edit($id)
+    {   
         $this->tracker;
-        $spyc = new Spyc();
-        $icons = $spyc::YAMLLoad(app_path()."/DM_Treasure/icons.yml");
-        $data['fa-icons'] = $icons["fa"];
-        $category = $this->model::where('category_unique_id', '=', $category_unique_id)->get();
-        $data['lang'] = $this->dm_post::getLanguage();
-        $data['single'] = $this->model::where('category_unique_id', '=', $category_unique_id)->first();
-        return view(parent::loadView($this->view_path.'.edit'), compact('data', 'category'));
+        $data['rows'] = $this->model::all();
+        $row = $this->model::findOrFail($id);
+        return view(parent::loadView($this->view_path.'.edit'), compact('row', 'data'));
     }
 
     /**
@@ -120,15 +109,18 @@ class CategoriesController extends DM_BaseController
     public function update(Request $request, $id)
     {
         $request->validate([
-            'rows.*.name' => 'required|max:225',
-            'featured' => 'required|boolean',
-        ], [
-            'rows.*.name.required' => 'You have to enter the name of Category.',
+            'name' => 'required|max:225',
         ]);
-        if($this->model->updateData($request->category_unique_id, $request->icon, $request->color, $request->rows, $request->featured ) ){
-            session()->flash('alert-success', $this->panel.' Successfully Store');
-        }else {
-            session()->flash('alert-danger', $this->panel.' can not be Store');
+        $this->tracker;
+        $row = $this->model::findOrFail($id);
+        $row->name = $request->name;
+        $row->slug = Str::slug($request->name);
+        $row->save();
+        if($row->save()){
+            session()->flash('alert-success', $this->panel.' Successfully Updated');
+        }
+        else{
+            session()->flash('alert-danger', $this->panel.' Can not be Updated');
         }
         return redirect()->route($this->base_route.'.index');
     }
@@ -139,13 +131,10 @@ class CategoriesController extends DM_BaseController
      * @param  int  $id
      * @return \Illuminate\Http\Response
      */
-    public function destroy($category_unique_id)
+    public function destroy($id)
     {
         $this->tracker;
-        $data = $this->model::where('category_unique_id', '=', $category_unique_id)->get();
-        foreach( $data as $row) {
-            $row->delete();
-        }
+        $this->model::destroy($id);
     }
 
     /** Store the order from ajax */
@@ -158,11 +147,10 @@ class CategoriesController extends DM_BaseController
                 $i++;
                 $category = Category::findOrFail($row['id']);
                 $category->parent_id = $row['parentID'];
-                $category->order = $i;
                $category->save();
             }
             // return var_dump(Response::json($category));
         }
     }
-
+    
 }

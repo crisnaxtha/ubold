@@ -32,12 +32,13 @@ class CreateBranchesTable extends Migration
             $table->unsignedInteger('branch_id');
             $table->string('name');
             $table->timestamps();
+            $table->foreign('branch_id')
+                ->references('id')->on('branches')
+                ->onDelete('cascade');
             $table->foreign('lang_id')
                     ->references('id')->on('languages')
                     ->onDelete('cascade');
-            $table->foreign('branch_id')
-                    ->references('id')->on('branches')
-                    ->onDelete('cascade');
+
         });
     }
 

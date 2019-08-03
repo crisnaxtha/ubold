@@ -34,15 +34,25 @@
             <div class="modal-dialog">
                 <div class="modal-content">
                     <div class="modal-header">
-                        <button type="button" class="close" data-dismiss="modal" aria-hidden="true">&times;</button>
                         <h4 class="modal-title">Create {{ $_panel }}</h4>
+                        <button type="button" class="close" data-dismiss="modal" aria-hidden="true">&times;</button>
                     </div>
                     <div class="modal-body">
                         <div class=" form">
                               <?php
-                              dm_postform(URL::route($_base_route.'.store'), 'POST');
-                              dm_input('text','name', "Category Name(*)", 'name');
-                              ?>
+                            dm_postform(URL::route($_base_route.'.store'), 'POST');
+                            dm_hselect_faicon('icon', 'Icon', $data['fa-icons']);
+                            dm_hcolor_picker('color', "Select Color");
+                            ?>
+                            @foreach($data['lang'] as $row)
+                            <?php
+                            dm_hidden('rows['.$loop->index.'][lang_id]', $row->id);
+                            dm_hinput('text','rows['.$loop->index.'][name]', "Name Of Link (<strong>$row->name</strong>)(*)", 'rows.'.$loop->index.'.name');
+                            ?>
+                            @endforeach
+                            <?php
+                            dm_hcheckbox('checkbox', 'featured', 'Featured');
+                            ?>
                           </div>
 
                     </div>

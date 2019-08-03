@@ -15,6 +15,7 @@ class CreateCategoriesTable extends Migration
     {
             Schema::create('categories', function (Blueprint $table) {
                 $table->increments('id');
+                $table->unsignedInteger('lang_id');
                 $table->unsignedInteger('parent_id')->nullable();
                 $table->unsignedInteger('order')->nullable();
                 $table->string('category_unique_id');
@@ -26,6 +27,9 @@ class CreateCategoriesTable extends Migration
                 $table->unsignedInteger('category_post_count')->default(0);
                 $table->boolean('featured')->nullable();
                 $table->timestamps();
+                $table->foreign('lang_id')
+                            ->references('id')->on('languages')
+                            ->onDelete('cascade');
         });
     }
 
