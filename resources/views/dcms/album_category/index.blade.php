@@ -43,7 +43,6 @@
                             dm_postform(URL::route($_base_route.'.store'), 'POST');
                             dm_hselect_faicon('icon', 'Icon', $data['fa-icons']);
                             dm_hcolor_picker('color', "Select Color");
-                            dm_hinput('text','name', "Name Of Link", 'name');
                             ?>
                             @foreach($data['lang'] as $row)
                             <?php
@@ -92,7 +91,7 @@
               console.log(dataString);
               $.ajax({
                   type: "POST",
-                  url: '/dashboard/category/order',
+                  url: '/dashboard/album_category/order',
                   data:  dataString,
                   beforeSend: function (xhr) {
                       var token = $('meta[name="csrf-token"]').attr('content');

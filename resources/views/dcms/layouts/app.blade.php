@@ -23,6 +23,8 @@
     <!-- App CSS -->
     <link href="{{ asset('assets/dcms/assets/css/bootstrap.min.css') }}" rel="stylesheet">
     <link href="{{ asset('assets/dcms/assets/css/icons.min.css') }}" rel="stylesheet">
+       <!--toastr-->
+       <link href="{{ asset('assets/dcms/assets/toastr-master/toastr.css') }}" rel="stylesheet" type="text/css" />
     <link href="{{ asset('assets/dcms/assets/css/app.min.css') }}" rel="stylesheet" />
 
 
@@ -91,6 +93,8 @@
     <!-- Dashboar 1 init js-->
     <script src="{{ asset('assets/dcms/assets/js/pages/dashboard-1.init.js') }}"></script>
 
+     <!--toastr-->
+   <script src="{{ asset('assets/dcms/assets/toastr-master/toastr.js') }}"></script>
     <!-- App js-->
     <script src="{{ asset('assets/dcms/assets/js/app.min.js') }}"></script>
     <script src="{{ asset('assets/dcms/dm_js/app.js') }}"></script>

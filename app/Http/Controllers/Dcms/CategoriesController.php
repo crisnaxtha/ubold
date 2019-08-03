@@ -7,16 +7,15 @@ use App\Http\Controllers\Dcms\DM_BaseController;
 use App\Model\Dcms\Category;
 use App\Model\Dcms\Tracker;
 use App\Model\Dcms\Eloquent\DM_Post;
-use Illuminate\Support\Str;
 use App\DM_Libraries\Spyc;
 
 use Response;
 
 class CategoriesController extends DM_BaseController
 {
-    protected $panel = 'Album Category';
-    protected $base_route = 'dcms.album_category';
-    protected $view_path = 'dcms.album_category';
+    protected $panel = 'Category';
+    protected $base_route = 'dcms.category';
+    protected $view_path = 'dcms.category';
     protected $model;
     protected $table;
 
@@ -41,7 +40,6 @@ class CategoriesController extends DM_BaseController
         $icons = $spyc::YAMLLoad(app_path()."/DM_Treasure/icons.yml");
         $data['fa-icons'] = $icons["fa"];
         $data['lang'] = $this->dm_post::getLanguage();
-
         $items = $this->model->categoryTree();
         $category = $this->model->getHtml($items);
         return view(parent::loadView($this->view_path.'.index'), compact('category', 'data'));

@@ -24,7 +24,6 @@ class CreateAlbumCategoriesTable extends Migration
                 $table->string('name');
                 $table->string('slug');
                 $table->text('description')->nullable();
-                $table->unsignedInteger('category_post_count')->default(0);
                 $table->boolean('featured')->nullable();
                 $table->timestamps();
                 $table->foreign('lang_id')

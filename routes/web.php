@@ -36,7 +36,7 @@ Route::get('/route-cache', function() {
 });
 
 /**
- * 
+ *
  * /Clear Route cache:
  */
 Route::get('/route-clear', function() {
@@ -45,7 +45,7 @@ Route::get('/route-clear', function() {
 });
 
 /**
- * 
+ *
  * /Clear View cache:
  */
 Route::get('/view-clear', function() {
@@ -94,8 +94,8 @@ $this->get('dcms/login', 'Auth\LoginController@showLoginForm')->name('dcms.login
 $this->post('login', 'Auth\LoginController@login')->name('login');
 $this->get('logout', 'Auth\LoginController@logout')->name('logout');
 
-/**  
- * 
+/**
+ *
  * Registration Routes...
  * */
 // $this->get('register', 'Auth\RegisterController@showRegistrationForm');
@@ -116,7 +116,7 @@ $this->post('password/reset', 'Auth\ResetPasswordController@reset');
 $this->get('login', function() { return view('dcms.404');});
 $this->get('register', function() { return view('dcms.404');});
 /**
- * 
+ *
  * Admin Panel route (Dashboard)
  */
 
@@ -159,7 +159,7 @@ Route::group(['prefix' => 'dashboard', 'as'=> 'dcms.', 'namespace'=>'Dcms', 'mid
         Route::delete('file/{post}',                        ['as'=>'destroyFile',              'uses'=>'PostsController@destroyFile']);
         /**Soft Delete Url */
         Route::get('delete_item',                            ['as'=>'deleted_item',              'uses'=>'PostsController@deletedPost']);
-        Route::put('restore/{post}',                                ['as'=>'restore',              'uses'=>'PostsController@restore']);
+        Route::put('restore/{post}',                         ['as'=>'restore',              'uses'=>'PostsController@restore']);
         Route::delete('permanent_delete/{post}',             ['as'=>'delete',              'uses'=>'PostsController@permanentDelete']);
     });
     /**
@@ -182,9 +182,9 @@ Route::group(['prefix' => 'dashboard', 'as'=> 'dcms.', 'namespace'=>'Dcms', 'mid
         Route::get('',                                      ['as'=>'index',              'uses'=>'SlidersController@index']);
         Route::get('create',                                ['as'=>'create',              'uses'=>'SlidersController@create']);
         Route::post('',                                     ['as'=>'store',              'uses'=>'SlidersController@store']);
-        Route::get('{slider}/edit',                           ['as'=>'edit',              'uses'=>'SlidersController@edit']);
-        Route::put('{slider}',                                ['as'=>'update',              'uses'=>'SlidersController@update']);
-        Route::delete('{slider}',                             ['as'=>'destroy',              'uses'=>'SlidersController@destroy'])->middleware('role:admin');
+        Route::get('{slider}/edit',                         ['as'=>'edit',              'uses'=>'SlidersController@edit']);
+        Route::put('{slider}',                              ['as'=>'update',              'uses'=>'SlidersController@update']);
+        Route::delete('{slider}',                           ['as'=>'destroy',              'uses'=>'SlidersController@destroy'])->middleware('role:admin');
     });
     /**
      * User Profile Routes
@@ -202,7 +202,7 @@ Route::group(['prefix' => 'dashboard', 'as'=> 'dcms.', 'namespace'=>'Dcms', 'mid
 
     /**
      * User Messages
-     * 
+     *
      */
     Route::group(['prefix' => 'message', 'as'=>'message.'], function () {
         Route::get('',                                      ['as'=>'index',              'uses'=>'ContactsController@index']);
@@ -215,7 +215,7 @@ Route::group(['prefix' => 'dashboard', 'as'=> 'dcms.', 'namespace'=>'Dcms', 'mid
     });
     /**
      * File
-     * 
+     *
      */
     Route::group(['prefix' => 'file', 'as'=>'file.'], function () {
         Route::get('',                                      ['as'=>'index',              'uses'=>'FilesController@index']);
@@ -228,7 +228,7 @@ Route::group(['prefix' => 'dashboard', 'as'=> 'dcms.', 'namespace'=>'Dcms', 'mid
     });
     /**
      * Link
-     * 
+     *
      */
     Route::group(['prefix' => 'link', 'as'=>'link.'], function () {
         Route::get('',                                      ['as'=>'index',              'uses'=>'LinksController@index']);
@@ -239,9 +239,20 @@ Route::group(['prefix' => 'dashboard', 'as'=> 'dcms.', 'namespace'=>'Dcms', 'mid
         Route::put('{link}',                             ['as'=>'update',              'uses'=>'LinksController@update']);
         Route::delete('{link}',                          ['as'=>'destroy',              'uses'=>'LinksController@destroy']);
     });
+    /** Album Category */
+    Route::group(['prefix' => 'album_category', 'as'=>'album_category.'], function () {
+        Route::get('',                                      ['as'=>'index',              'uses'=>'AlbumCategoriesController@index']);
+        Route::get('create',                                ['as'=>'create',              'uses'=>'AlbumCategoriesController@create']);
+        Route::post('',                                     ['as'=>'store',              'uses'=>'AlbumCategoriesController@store']);
+        Route::get('{album_category}/edit',                 ['as'=>'edit',              'uses'=>'AlbumCategoriesController@edit']);
+        Route::put('{album_category}',                      ['as'=>'update',              'uses'=>'AlbumCategoriesController@update']);
+        Route::delete('{album_category}',                   ['as'=>'destroy',              'uses'=>'AlbumCategoriesController@destroy'])->middleware('role:admin');
+        /** Category Nestable Order */
+         Route::post('order',                                ['as'=>'order',              'uses'=>'AlbumCategoriesController@storeOrder']);
+    });
     /**
      * Album
-     * 
+     *
      */
     Route::group(['prefix' => 'album', 'as'=>'album.'], function () {
         Route::get('',                                    ['as'=>'index',              'uses'=>'AlbumController@index']);
@@ -256,7 +267,7 @@ Route::group(['prefix' => 'dashboard', 'as'=> 'dcms.', 'namespace'=>'Dcms', 'mid
     });
     /**
      * Gallery
-     * 
+     *
      */
     Route::group(['prefix' => 'gallery', 'as'=>'gallery.'], function () {
         Route::get('',                                      ['as'=>'index',              'uses'=>'GalleryController@index']);
@@ -268,7 +279,7 @@ Route::group(['prefix' => 'dashboard', 'as'=> 'dcms.', 'namespace'=>'Dcms', 'mid
         Route::delete('{gallery}',                          ['as'=>'destroy',              'uses'=>'GalleryController@destroy']);
     });
     /**
-     * 
+     *
      * Menu Routes
      */
     Route::group(['prefix' => 'menu', 'as'=>'menu.', 'middleware'=>'role:admin'], function () {
@@ -280,10 +291,10 @@ Route::group(['prefix' => 'dashboard', 'as'=> 'dcms.', 'namespace'=>'Dcms', 'mid
         Route::delete('{menu}',                             ['as'=>'destroy',              'uses'=>'MenusController@destroy']);
         /** Menu Nestable Order */
         Route::post('order',                                ['as'=>'order',              'uses'=>'MenusController@storeOrder']);
-    });                    
+    });
 
     /**
-     * 
+     *
      * Branch Office Routes
      */
     Route::group(['prefix' => 'branch', 'as'=>'branch.', 'middleware'=>'role:admin'], function () {
@@ -297,7 +308,7 @@ Route::group(['prefix' => 'dashboard', 'as'=> 'dcms.', 'namespace'=>'Dcms', 'mid
         Route::post('order',                                ['as'=>'order',              'uses'=>'BranchesController@storeOrder']);
     });
     /**
-     * 
+     *
      * Staff Office Routes
      */
     Route::group(['prefix' => 'staff', 'as'=>'staff.', 'middleware'=>'role:admin'], function () {
@@ -374,11 +385,10 @@ Route::group(['prefix' => 'dashboard', 'as'=> 'dcms.', 'namespace'=>'Dcms', 'mid
         Route::get('',                                      ['as'=>'index',              'uses'=>'DatabasesBackupController@index']);
         Route::get('download',                              ['as'=>'download',           'uses'=>'DatabasesBackupController@databaseDownload']);
         Route::get('backup',                                ['as'=>'backup',             'uses'=>'DatabasesBackupController@databaseBackup']);
-
-        
     });
-
+    /** Video  */
     Route::resource('blog',                     'BlogsController')->middleware('role:super-admin');
+
 
 });
 
@@ -399,7 +409,7 @@ Route::group([ 'as'=>'site.', 'namespace'=>'Site'], function(){
      * Route For Page Show
      */
     Route::get('/page/{page}',                  ['as' => 'page.show',       'uses'=>'SiteController@showPage']);
-    /** 
+    /**
      * Route For all Category Based Pages
      */
     Route::get('/category/{category}',          ['as' => 'category.show',   'uses' =>'SiteController@showCategoryPost']);
@@ -407,28 +417,28 @@ Route::group([ 'as'=>'site.', 'namespace'=>'Site'], function(){
      * Route to download Files
      */
     Route::get('/download/{download}',          ['as' => 'file.download',   'uses'=>'SiteController@downloadFile']);
-    /** 
+    /**
      * Route for contact Page
      */
     Route::get('/contact',                      ['as' => 'contact',         'uses' => 'SiteController@showContact']);
-    /** 
+    /**
      * Route for contact Page
      */
     Route::post('/message',                      ['as' => 'message',        'uses' => 'SiteController@storeMessage']);
     /**
-     * Staff 
+     * Staff
      */
     Route::get('/staff',                         ['as' => 'staff',          'uses' => 'SiteController@showStaff']);
     /**
-     * Post archive 
+     * Post archive
      */
     Route::get('/post',                         ['as' => 'post',            'uses' => 'SiteController@showAllPost']);
     /**
-     * Page archive 
+     * Page archive
      */
     Route::get('/page',                         ['as' => 'page',            'uses' => 'SiteController@showAllPage']);
     /**
-     * Category archive 
+     * Category archive
      */
     Route::get('/category',                      ['as' => 'category',       'uses' => 'SiteController@showAllCategory']);
     /**
@@ -436,7 +446,7 @@ Route::group([ 'as'=>'site.', 'namespace'=>'Site'], function(){
      */
     Route::get('/album',                          ['as' => 'album',         'uses' => 'SiteController@showAlbum']);
     /**
-     * Album Show 
+     * Album Show
      */
     Route::get('/album/{album}/show',             ['as'=>'album.show',      'uses'=>'SiteController@showPhotos']);
 
@@ -447,7 +457,7 @@ Route::group([ 'as'=>'site.', 'namespace'=>'Site'], function(){
      * Swap Language
      */
     Route::get('/swap/language/{lang_id}',        ['as'=>'swap_language',   'uses'=>'SiteController@swapLanguage']);
-    
+
 });
 
 

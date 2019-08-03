@@ -30,6 +30,9 @@
                 @if( Route::has('dcms.link.index'))
                 <li><a class="{{ ($_panel == 'Links') ? 'active' : '' }}" href="{{ URL::route('dcms.link.index') }}" ><i class="fa fa-link"></i><span>{{__('Links')}}</span></a></li>
                 @endif
+                @if( Route::has('dcms.album_category.index'))
+                <li><a class="{{ ($_panel == 'Album Category') ? 'active' : '' }}" href="{{ URL::route('dcms.album_category.index') }}" ><i class="fas fa-camera-retro"></i><span>{{__('Album Category')}}</span></a></li>
+                @endif
                 @if( Route::has('dcms.album.index'))
                 <li><a class="{{ ($_panel == 'Album' || $_panel == 'Gallery') ? 'active' : '' }}" href="{{ URL::route('dcms.album.index') }}" ><i class="fas fa-camera-retro"></i><span>{{__('Photo Album')}}</span></a></li>
                 @endif

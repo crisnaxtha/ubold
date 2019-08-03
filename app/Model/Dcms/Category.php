@@ -99,6 +99,7 @@ class Category extends DM_BaseModel
             $category->icon = $icon;
             $category->color = $color;
             $category->name = $row['name'];
+            $category->slug = Str::slug($row['name']);
             $category->featured = $featured;
             $category->save();
         }
