@@ -14,9 +14,9 @@ use Response;
 
 class CategoriesController extends DM_BaseController
 {
-    protected $panel = 'Category';
-    protected $base_route = 'dcms.category';
-    protected $view_path = 'dcms.category';
+    protected $panel = 'Album Category';
+    protected $base_route = 'dcms.album_category';
+    protected $view_path = 'dcms.album_category';
     protected $model;
     protected $table;
 
