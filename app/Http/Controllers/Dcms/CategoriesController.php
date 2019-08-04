@@ -8,6 +8,7 @@ use App\Model\Dcms\Category;
 use App\Model\Dcms\Tracker;
 use App\Model\Dcms\Eloquent\DM_Post;
 use App\DM_Libraries\Spyc;
+use DB;
 
 use Response;
 
@@ -71,7 +72,7 @@ class CategoriesController extends DM_BaseController
             'rows.*.name.required' => 'You have to enter the name of Category.',
         ]);
 
-        if($this->model->storeData($request->icon, $request->color, $request->rows, $request->featured)){
+        if($this->model->storeData($request->icon, $request->color, $request->name, $request->rows, $request->featured)){
             session()->flash('alert-success', $this->panel.' Successfully Store');
         }else {
             session()->flash('alert-danger', $this->panel.' can not be Store');
@@ -96,16 +97,16 @@ class CategoriesController extends DM_BaseController
      * @param  int  $id
      * @return \Illuminate\Http\Response
      */
-    public function edit($category_unique_id)
+    public function edit($id)
     {
         $this->tracker;
         $spyc = new Spyc();
         $icons = $spyc::YAMLLoad(app_path()."/DM_Treasure/icons.yml");
         $data['fa-icons'] = $icons["fa"];
-        $category = $this->model::where('category_unique_id', '=', $category_unique_id)->get();
+        $data['category'] = $this->model::findOrFail($id);
         $data['lang'] = $this->dm_post::getLanguage();
-        $data['single'] = $this->model::where('category_unique_id', '=', $category_unique_id)->first();
-        return view(parent::loadView($this->view_path.'.edit'), compact('data', 'category'));
+        $category_name = DB::table('categories_name')->where('category_id', '=', $id)->get();
+        return view(parent::loadView($this->view_path.'.edit'), compact('data', 'category_name'));
     }
 
     /**
@@ -123,7 +124,7 @@ class CategoriesController extends DM_BaseController
         ], [
             'rows.*.name.required' => 'You have to enter the name of Category.',
         ]);
-        if($this->model->updateData($request->category_unique_id, $request->icon, $request->color, $request->rows, $request->featured ) ){
+        if($this->model->updateData($id, $request->icon, $request->color, $request->name, $request->rows, $request->featured ) ){
             session()->flash('alert-success', $this->panel.' Successfully Store');
         }else {
             session()->flash('alert-danger', $this->panel.' can not be Store');
@@ -137,13 +138,10 @@ class CategoriesController extends DM_BaseController
      * @param  int  $id
      * @return \Illuminate\Http\Response
      */
-    public function destroy($category_unique_id)
+    public function destroy($id)
     {
         $this->tracker;
-        $data = $this->model::where('category_unique_id', '=', $category_unique_id)->get();
-        foreach( $data as $row) {
-            $row->delete();
-        }
+       $this->model->destroy($id);
     }
 
     /** Store the order from ajax */

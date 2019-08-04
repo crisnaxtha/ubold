@@ -5,6 +5,7 @@ namespace App\Model\Dcms;
 use App\Model\Dcms\DM_BaseModel;
 use Auth;
 use Illuminate\Support\Str;
+use DB;
 
 class Category extends DM_BaseModel
 {
@@ -47,8 +48,8 @@ class Category extends DM_BaseModel
                                 <span id="link_show'.$value['id'].'">Featured:'.$value['featured'].'</span>
 
                                 &nbsp;&nbsp;
-                                <a class="btn btn-warning" id="'.$value['id'].'" label="'.$value['name'].'" href="\dashboard/category/'. $value['category_unique_id'].'/edit" ><i class="fas fa-pencil-alt"></i></a>
-                                <a class="btn btn-danger del-button" id="'.$value['category_unique_id'].'" ><i class="far fa-trash-alt"></i></a>
+                                <a class="btn btn-warning" id="'.$value['id'].'" label="'.$value['name'].'" href="\dashboard/category/'. $value['id'].'/edit" ><i class="fas fa-pencil-alt"></i></a>
+                                <a class="btn btn-danger del-button" id="'.$value['id'].'" ><i class="far fa-trash-alt"></i></a>
                             </span>
                         </div>';
             if(array_key_exists('child',$value)) {
@@ -66,48 +67,45 @@ class Category extends DM_BaseModel
 		return $this->buildCategory($items);
 	}
 
-    public function storeData($icon, $color, $rows, $featured) {
-        $category_unique_id = uniqid(Auth::user()->id.'_');
-        foreach( $rows as $row) {
-            $links[] = [
-                'category_unique_id' => $category_unique_id,
-                'icon' => $icon,
-                'color' => $color,
+    public function storeData($icon, $color, $name, $rows, $featured) {
+
+        $row = new Category;
+        $row->icon = $icon;
+        $row->color = $color;
+        $row->name = $name;
+        $row->slug = Str::slug($name);
+        $row->featured = $featured;
+
+        $row->save();
+        $cat_id = $row->id;
+        foreach($rows as $row) {
+            DB::table('categories_name')->insert(array([
+                'category_id' => $cat_id,
                 'lang_id' => $row['lang_id'],
                 'name' => $row['name'],
-                'slug' => Str::slug($row['name']),
-                // 'description' => $row['description'],
-                'featured' => $featured
-            ];
+            ]));
         }
-        if(Category::insert($links)) {
-            return true;
-        }else {
-            return false;
-        }
+        return true;
     }
 
-    public function updateData($category_unique_id, $icon, $color, $rows, $featured) {
-        foreach( $rows as $row) {
-            if(isset($row['id'])){
-                $category = Category::findOrFail($row['id']);
-            }else{
-                $category = new Category;
-                $category->category_unique_id = $category_unique_id;
-            }
-            $category->lang_id = $row['lang_id'];
-            $category->icon = $icon;
-            $category->color = $color;
-            $category->name = $row['name'];
-            $category->slug = Str::slug($row['name']);
-            $category->featured = $featured;
-            $category->save();
+    public function updateData($id, $icon, $color, $name, $rows, $featured) {
+        $row = Category::findOrFail($id);
+        $row->icon = $icon;
+        $row->color = $color;
+        $row->name = $name;
+        $row->featured = $featured;
+        $row->save();
+        $cat_id = $row->id;
+        foreach($rows as $row) {
+            DB::table('categories_name')->where('category_id', $id)
+            ->where('lang_id', $row['lang_id'])
+            ->update([
+                'category_id' => $cat_id,
+                'lang_id' => $row['lang_id'],
+                'name' => $row['name'],
+            ]);
         }
-        if($category->save()) {
-            return true;
-        }else {
-            return false;
-        }
+        return true;
     }
 
 }
