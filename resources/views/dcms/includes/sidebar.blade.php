@@ -41,6 +41,9 @@
                 @endif
                 {{-- Check if the user is admin or super-admin  --}}
                 @if(Auth::user()->role == 'super-admin' || Auth::user()->role == 'admin')
+                    @if( Route::has('dcms.service.index'))
+                    <li><a class="{{ ($_panel == 'Services') ? 'active' : '' }}" href="{{ URL::route('dcms.service.index') }}" ><i class="fa fa-bars"></i><span>{{__('Services') }}</span></a></li>
+                    @endif
                     @if( Route::has('dcms.menu.index'))
                     <li><a class="{{ ($_panel == 'Menus') ? 'active' : '' }}" href="{{ URL::route('dcms.menu.index') }}" ><i class="fa fa-bars"></i><span>{{__('Menus')}}</span></a></li>
                     @endif

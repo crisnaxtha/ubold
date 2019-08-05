@@ -389,6 +389,17 @@ Route::group(['prefix' => 'dashboard', 'as'=> 'dcms.', 'namespace'=>'Dcms', 'mid
     /** Video  */
     Route::resource('blog',                     'BlogsController')->middleware('role:super-admin');
 
+    /**
+     * User Routes
+     */
+    Route::group(['prefix' => 'service', 'as'=>'service.', 'middleware'=>'role:super-admin'], function () {
+        Route::get('',                                      ['as'=>'index',              'uses'=>'ServicesController@index']);
+        Route::get('create',                                ['as'=>'create',              'uses'=>'ServicesController@create']);
+        Route::post('',                                     ['as'=>'store',              'uses'=>'ServicesController@store']);
+        Route::get('{service}/edit',                           ['as'=>'edit',              'uses'=>'ServicesController@edit']);
+        Route::put('{service}',                                ['as'=>'update',              'uses'=>'ServicesController@update']);
+        Route::delete('{service}',                             ['as'=>'destroy',              'uses'=>'ServicesController@destroy']);
+    });
 
 });
 

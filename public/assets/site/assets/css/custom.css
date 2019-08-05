@@ -1,0 +1,100 @@
+.inner-panel-intro{
+    padding: 60px 0;
+  }
+
+  /* ============================================ */
+/*  Team page css  */
+/* ============================================ */
+.main-section__content{
+    padding:60px 0;
+  }
+  .content--two-half{
+
+  }
+  .center-intro-text{
+    max-width: 850px;
+    display: flex;
+    justify-content: center;
+    margin: 0 auto;
+
+  }
+  .center-intro-text p{
+    text-align: center;
+    font-weight: 300;
+    line-height: 26px;
+  }
+  .team-panel .center-intro-text{
+    text-align: left;
+    max-width: 100%;
+    margin: 0;
+  }
+  .team-panel .hero-panel-title{
+    text-align: left;
+    justify-content: flex-start;
+    align-items: flex-start;
+  }
+  .team-panel .center-intro-text p{
+    text-align: left;
+  }
+  .team-panel{
+    padding-bottom: 60px;
+    padding-left: 30px;
+  }
+  .team-panel h4{
+    font-size: 28px;
+    font-weight: 500;
+    margin-bottom: 30px;
+  }
+  .team-panel .home-sidebar{
+    display: flex;
+    flex-flow: row wrap;
+    justify-content: center;
+  }
+  .home-sidebar .sidebar-image-block {
+  background: #2262b9;
+  text-align: center;
+  max-width: 300px;
+  width: 300px;
+  margin: 15px;
+  border: 1px solid #2163b9;
+  }
+  /* ======== Vertical tab panel css inner page ========== */
+  .vertical-tabpanel{
+    padding-right: 20px;
+  }
+  .vertical-tabpanel .nav-pills{
+    border: 1px solid #cecece;
+  }
+  .vertical-tabpanel .nav-item {
+    padding: 15px;
+    border: 1px solid #cecece;
+  }
+  .vertical-tabpanel .nav-item:last-child{
+    border-bottom: 1px solid #cecece;
+  }
+  .vertical-tabpanel .nav-pills .nav-link {
+    border-radius:0;
+    background-color: transparent;
+    color: #212529;
+    padding: 0;
+    font-weight: 300;
+    font-size: 16px;
+    position: relative;
+  }
+  .vertical-tabpanel .nav-pills .nav-link:after{
+    position: absolute;
+    content: "\f178";
+    color: #212529;
+    font-family: fontawesome;
+    right: 0;
+    transition: right 0.25s ease-in-out;
+  }
+  .vertical-tabpanel .nav-pills .nav-link:hover:after{
+    right: -10px;
+  }
+  .vertical-tabpanel .nav-pills .nav-link.active, .vertical-tabpanel .nav-pills .nav-link:hover{
+    color: #e80d0f;
+  }
+  .vertical-tabpanel .nav-pills .nav-link.active:after{
+    color: #e80d0f;
+  }

@@ -38,7 +38,9 @@
     <link href="{{ asset('assets/site/assets/css/animate.css') }}" rel="stylesheet" type="text/css">
 
     <!--Custom CSS -->
+
     <link href="{{ asset('assets/site/assets/css/style.css') }}" rel="stylesheet">
+    <link href="{{ asset('assets/site/assets/css/custom.css') }}" rel="stylesheet">
 
     @yield('css')
     <!-- HTML5 shim and Respond.js for IE8 support of HTML5 elements and media queries -->
@@ -59,7 +61,11 @@
 
 
     @include('site.includes.header')
-    @include('site.includes.nav')
+    {{-- <div class="menu-panel">
+        <div class="container"> --}}
+            @include('site.includes.nav')
+        {{-- </div>
+    </div> --}}
     @yield('content')
     @include('site.includes.footer')
 

@@ -10,10 +10,10 @@
 <div class="row">
    <div class="col-12">
        <div class="card-box">
-           <h4 class="header-title">Filtering</h4>
+           {{-- <h4 class="header-title">Filtering</h4>
            <p class="sub-header">
                include filtering in your FooTable.
-           </p>
+           </p> --}}
 
            @include('dcms.includes.buttons.button-create')
            <hr>
@@ -49,7 +49,7 @@
                        </tr>
                    </thead>
                    <tbody>
-                     @if(isset($data['rows'])) 
+                     @if(isset($data['rows']))
                      @foreach($data['rows'] as $row)
                      <tr class="gradeX" id="{{ $row->id }}">
                         <td>{{ $loop->iteration }}</td>
@@ -59,7 +59,7 @@
                         <td>{{ $row->level }}</td>
                         <td><?php dm_flag($row->status) ?></td>
                         <td>
-                           @include('dcms.includes.buttons.button-edit-staff')                              
+                           @include('dcms.includes.buttons.button-edit-staff')
                            @include('dcms.includes.buttons.button-delete-staff')
                         </td>
                      </tr>
