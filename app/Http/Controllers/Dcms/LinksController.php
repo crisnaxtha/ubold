@@ -62,7 +62,7 @@ class LinksController extends DM_BaseController
         $request->validate([
             'rows.*.name' => 'required|max:225',
             'url' => 'url',
-            'status' => 'required|boolean',
+            // 'status' => 'required|boolean',
             'order' => 'numeric|nullable'
         ], [
             'rows.*.name.required' => 'You have to enter the name of Link.',
@@ -115,7 +115,7 @@ class LinksController extends DM_BaseController
         $request->validate([
             'rows.*.name' => 'required|max:225',
             'url' => 'url',
-            'status' => 'required|boolean',
+            // 'status' => 'required|boolean',
             'order' => 'numeric|nullable'
         ], [
             'rows.*.name.required' => 'You have to enter the name of Link.',

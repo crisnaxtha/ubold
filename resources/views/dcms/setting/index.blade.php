@@ -7,7 +7,11 @@
         <div class="col-lg-12 col-md-12 col-xs-12">
             <section class="card">
                 <div class="card-body">
-                        @include('dcms.includes.flash_message_error')                    
+                        <div class="btn-group">
+                                <a href="{{ route('dcms.setting.title.index') }}" class="btn btn-sm btn-info"><i class="fa fa-arrow-left">&nbsp;Title And Logo</i></a>
+                        </div>
+                        <hr>
+                        @include('dcms.includes.flash_message_error')
                     <div class=" form">
                         <?php
                         dm_hpostform(URL::route($_base_route.'.store', ['id'=>$row->id]), 'POST');
@@ -16,12 +20,12 @@
                         dm_hinputUpdate('text','title', "Site Title", $row->site_title);
                         dm_hckeditorUpdate('description', "Site Description", $row->site_description);
                         dm_htextareaUpdate('meta', "Enter Meta Keyword", $row->meta_keyword);
-                        dm_hinputUpdate('file', 'logo', 'Logo', '', '');                     
-                        dm_hdropdown('language', 'Default Language', $all_view['lang'], $row->language);                     
+                        dm_hinputUpdate('file', 'logo', 'Logo', '', '');
+                        dm_hdropdown('language', 'Default Language', $all_view['lang'], $row->language);
                         dm_hsubmit('Submit', URL::route($_base_route.'.index'), 'Cancel');
                         dm_closeform();
                         ?>
-                        
+
 
                     </div>
                 </div>

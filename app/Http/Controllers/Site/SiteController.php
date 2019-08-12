@@ -15,6 +15,7 @@ use App\Model\Dcms\Staff;
 use App\Model\Dcms\Link;
 use App\Model\Dcms\Category;
 use App\Model\Dcms\Blog;
+use App\Model\Dcms\Service;
 use DB;
 use Session;
 
@@ -42,16 +43,25 @@ class SiteController extends DM_BaseController
         $data['member'] = Staff::where('featured', '=', 1)->where('lang_id', '=', $this->lang_id)->orderBy('level')->get();
 
         $data['album'] = $this->dm_post::joinAlbum($this->lang_id);
-        $data['category'] = Category::take(4)->get();
+        $data['category'] = $this->dm_post::getCategoryList($this->lang_id);
+        $data['album_category'] = $this->dm_post::getAlbumCategoryList($this->lang_id);
+        // dd($data['album_category']);
+        $data['count_cat'] = count($data['category']);
 
-        $i = 1;
         foreach($data['category'] as $row) {
-            $data['cat_post_'.$i] = $this->dm_post::categoryPost($row->id, $this->lang_id, 6);
-            $data['cat_'.$i] = $row->id;
-            $i++;
+            $data['cat_post_'.$row->slug] = $this->dm_post::categoryPost($row->id, $this->lang_id, $data['count_cat']);
+            $data['cat_'.$row->slug] = $row->id;
         }
-        $data['about_us'] = $this->dm_post::getSinglePage('1_5d3e5689aef01', $this->lang_id);
+
+        foreach($data['album_category'] as $row) {
+            $data['cat_album_photo_'.$row->slug] = $this->dm_post::categoryAlbum($row->id, $this->lang_id, 3);
+            $data['cat_album_'.$row->slug] = $row->id;
+        }
+
+        $data['about_us'] = $this->dm_post::getSinglePage('1_5d4f7e4a7ff7f', $this->lang_id);
         $data['video'] = Blog::where('status', '=', 1)->get();
+
+        $data['services'] = Service::where('status', '=', 1)->take(8)->get();
 
         return view(parent::loadView($this->view_path.'.index'), compact('data'));
     }

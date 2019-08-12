@@ -9,6 +9,8 @@ use App\Model\Dcms\Post;
 use App\Model\Dcms\File;
 use App\Model\Dcms\Menu;
 use App\Model\Dcms\Category;
+use App\Model\Dcms\AlbumCategory;
+use App\Model\Dcms\Album;
 use Session;
 use App;
 use Auth;
@@ -174,5 +176,33 @@ class DM_Post extends Model{
            return Auth::user()->id;
         }
         return null;
+    }
+
+    public static function getCategoryList($lang_id) {
+        $album =  DB::table('categories')
+            ->join('categories_name', 'categories.id', '=', 'categories_name.category_id')
+            ->select('categories.*', 'categories_name.name as cat_name', 'categories_name.lang_id')
+            ->where('categories_name.lang_id', '=', $lang_id)
+            ->where('categories.featured', '=', 1)->orderBy('order')
+            ->get();
+            return $album;
+    }
+
+    public static function getAlbumCategoryList($lang_id) {
+        $album =  DB::table('album_categories')
+            ->join('album_categories_name', 'album_categories.id', '=', 'album_categories_name.album_category_id')
+            ->select('album_categories.*', 'album_categories_name.name as cat_name', 'album_categories_name.lang_id')
+            ->where('album_categories_name.lang_id', '=', $lang_id)
+            ->where('album_categories.featured', '=', 1)->orderBy('order')
+            ->take(3)->get();
+            return $album;
+    }
+
+    public static function getAlbumCategories(){
+        return AlbumCategory::get();
+    }
+
+    public static function categoryAlbum($category_id, $lang_id, $number = '5') {
+        return Album::where('album_category_id', '=', $category_id)->take($number)->get();
     }
 }

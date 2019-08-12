@@ -166,7 +166,7 @@ $(document).ready(function() {
       autoplayHoverPause:true,
       responsiveClass: true,
       nav: false,
-      dots:true,
+      dots:false,
       responsive: {
         0: {
           items: 1,
@@ -176,7 +176,61 @@ $(document).ready(function() {
         },
         1000: {
           items: 3,
-          dots:true,
+          dots:false,
+          margin: 10
+        }
+      }
+    })
+  })
+
+$(document).ready(function() {
+    $('.info-carousel2').owlCarousel({
+      loop: true,
+      margin: 10,
+      autoplay:true,
+      autoplayTimeout:14000,
+      smartSpeed:1400,
+      autoplayHoverPause:true,
+      responsiveClass: true,
+      nav: false,
+      dots:false,
+      responsive: {
+        0: {
+          items: 1,
+        },
+        600: {
+          items: 1,
+        },
+        1000: {
+          items: 1,
+          dots:false,
+          margin: 10
+        }
+      }
+    })
+  })
+
+$(document).ready(function() {
+    $('.info-carousel3').owlCarousel({
+      loop: true,
+      margin: 10,
+      autoplay:true,
+      autoplayTimeout:14000,
+      smartSpeed:1400,
+      autoplayHoverPause:true,
+      responsiveClass: true,
+      nav: true,
+      dots:false,
+      responsive: {
+        0: {
+          items: 1,
+        },
+        600: {
+          items: 1,
+        },
+        1000: {
+          items: 1,
+          dots:false,
           margin: 10
         }
       }
@@ -197,11 +251,28 @@ $('#return-to-top').click(function() {      // When arrow is clicked
     }, 500);
 });
 
-// $(window).scroll(function() {
-//     if ($(this).scrollTop() > 250){  
-//         $('.nav_sec').addClass("sticky");
-//     }
-//     else{
-//         $('.nav_sec').removeClass("sticky");
-//     }
-// });
+$(window).scroll(function() {
+    if ($(this).scrollTop() > 10){  
+        $('.top_sec').addClass("sticky");
+    }
+    else{
+        $('.top_sec').removeClass("sticky");
+    }
+});
+
+
+$(window).scroll(function() {
+  if ($(window).scrollTop() + $(window).height() > ($(document).height() - $("#footer").height())) {
+    $("#sidebar").hide();
+  } else {
+    $("#sidebar").show();
+  }
+
+});
+// side bar
+$('#sidebar').affix({
+  offset : {
+    top : 100,
+    bottom : 600
+  }
+})

@@ -11,8 +11,8 @@
                     <div class=" form">
                         <?php
                         dm_hpostform(URL::route($_base_route.'.update', ['id' => $data['albums']]), 'PUT');
+                        dm_dropdown('category','Category(*)', $data['categories'], $data['albums']->album_category_id, $data['albums']->albumCategory->name);
                         dm_hinputUpdate('text','name', "Album Name(*)", $data['albums']->name);
-
                         ?>
                         @foreach($data['lang'] as $lang)
                         <?php
@@ -22,8 +22,14 @@
                         else {
                         $albums_title = '';
                         }
+                        // if(isset($albums_name[$loop->index]['description'])){
+                        //     $description = $post[$loop->index]['description'];
+                        // }else {
+                        //     $description = '';
+                        // }
                         dm_hidden('rows['.$loop->index.'][lang_id]', $lang->id);
                         dm_hinputUpdate('text','rows['.$loop->index.'][name]', "Album Name (<strong>$lang->name</strong>)(*)", $albums_title);
+                        // dm_textareaUpdate('rows['.$loop->index.'][description]', 'Description', $description, '');
                         ?>
                         @endforeach
                         <?php

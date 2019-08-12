@@ -339,6 +339,14 @@ Route::group(['prefix' => 'dashboard', 'as'=> 'dcms.', 'namespace'=>'Dcms', 'mid
             Route::get('',                      ['as' =>'index',     'uses'=>'SettingsController@getGeneralSetting']);
             Route::post('{setting}',            ['as' =>'store',     'uses'=>'SettingsController@updateGeneralSetting']);
         });
+        Route::group(['prefix'=>'title', 'as'=>'title.'], function(){
+            Route::get('',                      ['as' =>'index',     'uses'=>'CommonController@getTitleSetting']);
+            Route::put('{title}',              ['as' =>'store',     'uses'=>'CommonController@updateTitleSetting']);
+        });
+        Route::group(['prefix'=>'footer', 'as'=>'footer.'], function(){
+            Route::get('',                      ['as' =>'index',     'uses'=>'CommonController@getTitleSetting']);
+            Route::post('{footer}',             ['as' =>'store',     'uses'=>'CommonController@updateTitleSetting']);
+        });
     });
     /**
      * Language route

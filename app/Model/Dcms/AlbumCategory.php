@@ -3,8 +3,10 @@
 namespace App\Model\Dcms;
 
 use App\Model\Dcms\DM_BaseModel;
+use App\Model\Dcms\Album;
 use Auth;
 use Illuminate\Support\Str;
+use DB;
 
 class AlbumCategory extends DM_BaseModel
 {
@@ -47,8 +49,8 @@ class AlbumCategory extends DM_BaseModel
                                 <span id="link_show'.$value['id'].'">Featured:'.$value['featured'].'</span>
 
                                 &nbsp;&nbsp;
-                                <a class="btn btn-warning" id="'.$value['id'].'" label="'.$value['name'].'" href="\dashboard/category/'. $value['category_unique_id'].'/edit" ><i class="fas fa-pencil-alt"></i></a>
-                                <a class="btn btn-danger del-button" id="'.$value['category_unique_id'].'" ><i class="far fa-trash-alt"></i></a>
+                                <a class="btn btn-warning" id="'.$value['id'].'" label="'.$value['name'].'" href="\dashboard/album_category/'. $value['id'].'/edit" ><i class="fas fa-pencil-alt"></i></a>
+                                <a class="btn btn-danger del-button" id="'.$value['id'].'" ><i class="far fa-trash-alt"></i></a>
                             </span>
                         </div>';
             if(array_key_exists('child',$value)) {
@@ -66,47 +68,49 @@ class AlbumCategory extends DM_BaseModel
 		return $this->buildCategory($items);
 	}
 
-    public function storeData($icon, $color, $rows, $featured) {
-        $category_unique_id = uniqid(Auth::user()->id.'_');
-        foreach( $rows as $row) {
-            $links[] = [
-                'category_unique_id' => $category_unique_id,
-                'icon' => $icon,
-                'color' => $color,
+    public function storeData($icon, $color, $name, $rows, $featured) {
+        $row = new AlbumCategory;
+        $row->icon = $icon;
+        $row->color = $color;
+        $row->name = $name;
+        $row->slug = Str::slug($name);
+        $row->featured = $featured;
+
+        $row->save();
+        $cat_id = $row->id;
+        foreach($rows as $row) {
+            DB::table('album_categories_name')->insert(array([
+                'album_category_id' => $cat_id,
                 'lang_id' => $row['lang_id'],
                 'name' => $row['name'],
-                'slug' => Str::slug($row['name']),
-                // 'description' => $row['description'],
-                'featured' => $featured
-            ];
+            ]));
         }
-        if(AlbumCategory::insert($links)) {
-            return true;
-        }else {
-            return false;
-        }
+        return true;
     }
 
-    public function updateData($category_unique_id, $icon, $color, $rows, $featured) {
-        foreach( $rows as $row) {
-            if(isset($row['id'])){
-                $category = AlbumCategory::findOrFail($row['id']);
-            }else{
-                $category = new AlbumCategory;
-                $category->category_unique_id = $category_unique_id;
-            }
-            $category->lang_id = $row['lang_id'];
-            $category->icon = $icon;
-            $category->color = $color;
-            $category->name = $row['name'];
-            $category->featured = $featured;
-            $category->save();
+    public function updateData($id, $icon, $color, $name, $rows, $featured) {
+        $row = AlbumCategory::findOrFail($id);
+        $row->icon = $icon;
+        $row->color = $color;
+        $row->name = $name;
+        $row->featured = $featured;
+        $row->save();
+        $cat_id = $row->id;
+        foreach($rows as $row) {
+            DB::table('album_categories_name')->where('album_category_id', $id)
+            ->where('lang_id', $row['lang_id'])
+            ->update([
+                'album_category_id' => $cat_id,
+                'lang_id' => $row['lang_id'],
+                'name' => $row['name'],
+            ]);
         }
-        if($category->save()) {
-            return true;
-        }else {
-            return false;
-        }
+        return true;
+    }
+
+     /** One to many Relationship between Posts and Category */
+     public function albums() {
+        return $this->hasMany(Album::class);
     }
 
 }

@@ -15,11 +15,15 @@ class CreateAlbumsTable extends Migration
     {
         Schema::create('albums', function (Blueprint $table) {
             $table->increments('id');
+            $table->unsignedInteger('album_category_id');
             $table->string('name');
             $table->unsignedInteger('order')->nullable();
             $table->text('cover_image')->nullable();
             $table->boolean('status');
             $table->timestamps();
+            $table->foreign('album_category_id')
+                    ->references('id')->on('album_categories')
+                    ->onDelete('cascade');
         });
         Schema::create('albums_name', function (Blueprint $table) {
             $table->increments('id');

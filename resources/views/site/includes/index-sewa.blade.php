@@ -1,3 +1,4 @@
+@if(isset($data['services']))
 <div class="white-box sewa">
         <div class="container">
             <div class="card">
@@ -6,13 +7,15 @@
                 </div>
                 <div class="card-body">
                     <div class="row">
+                        @foreach($data['services'] as $row)
                         <div class="col-lg-3 col-md-4 col-sm-6 wow fadeInUp" data-wow-duration="2s" data-wow-delay=".2s">
                             <h5>
-                                <i class="fa fa-user">&nbsp;</i> स्वचालित कार्य
+                                <i class="fa {{ $row->icon }}">&nbsp;</i>{{ $row->title }}
                             </h5>
-                            <a href="#">स्वचालित कार्य प्रणालि हेर्न यहाँ  क्लिक गर्नुहोस्</a>
+                            <a href="{{ $row->link }}">{{ $row->description }}</a>
                         </div>
-                        <div class="col-lg-3 col-md-4 col-sm-6 wow fadeInUp" data-wow-duration="2s" data-wow-delay=".3s">
+                        @endforeach
+                        {{-- <div class="col-lg-3 col-md-4 col-sm-6 wow fadeInUp" data-wow-duration="2s" data-wow-delay=".3s">
                             <h5>
                                 <i class="fa fa-user">&nbsp;</i> जन गुनासो
                             </h5>
@@ -53,10 +56,11 @@
                                 <i class="fa fa-user">&nbsp;</i> वेबसाइट (स्थानीय तह)
                             </h5>
                             <a href="#">स्थानीय तह को वेबसाइटहरु  हेर्न यहाँ  क्लिक गर्नुहोस्</a>
-                        </div>
+                        </div> --}}
                         <div class="clearfix"></div>
                     </div>
                 </div>
             </div>
         </div>
     </div>
+@endif

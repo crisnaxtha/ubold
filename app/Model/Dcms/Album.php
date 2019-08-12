@@ -6,6 +6,7 @@ use App\Model\Dcms\DM_BaseModel;
 use Illuminate\Http\Request;
 use DB;
 use App\Model\Dcms\Gallery;
+use App\Model\Dcms\AlbumCategory;
 
 
 class Album extends DM_BaseModel
@@ -41,14 +42,15 @@ class Album extends DM_BaseModel
     /**
      * store album to the database
      */
-    public function storeData(Request $request,$name, $rows, $image, $status, $order) {
+    public function storeData(Request $request, $category, $name, $rows, $image, $status, $order) {
         if($request->hasFile('image')){
-            $cover_image = parent::uploadImage($request, $this->folder_path_image ,$this->prefix_path_image,'image');  
+            $cover_image = parent::uploadImage($request, $this->folder_path_image ,$this->prefix_path_image,'image');
         }
         else {
             $cover_image = null;
         }
         $row = new Album;
+        $row->album_category_id = $category;
         $row->name = $name;
         $row->order = $order;
         $row->status = $status;
@@ -68,13 +70,14 @@ class Album extends DM_BaseModel
     /**
      * update album to the database
      */
-    public function updateData(Request $request, $id, $name, $rows, $image, $status, $order) {
+    public function updateData(Request $request, $id, $category, $name, $rows, $image, $status, $order) {
         $row = Album::findOrFail($id);
+        $row->category = $category;
         $row->name = $name;
         $row->order = $order;
         $row->status = $status;
         if($request->hasFile('image')){
-            $row->cover_image = parent::uploadImage($request, $this->folder_path_image ,$this->prefix_path_image,'image');  
+            $row->cover_image = parent::uploadImage($request, $this->folder_path_image ,$this->prefix_path_image,'image');
         }
         $row->save();
         $album_id = $row->id;
@@ -86,5 +89,9 @@ class Album extends DM_BaseModel
             ]);
         }
         return true;
+    }
+
+    public function albumCategory() {
+        return $this->belongsTo(AlbumCategory::class, 'album_category_id');
     }
 }

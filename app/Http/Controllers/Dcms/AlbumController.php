@@ -9,7 +9,7 @@ use App\Model\Dcms\Tracker;
 use App\Model\Dcms\Eloquent\DM_Post;
 use DB;
 use Illuminate\Support\Facades\Validator;
-use Session; 
+use Session;
 
 class AlbumController extends DM_BaseController
 {
@@ -26,7 +26,7 @@ class AlbumController extends DM_BaseController
         $this->dm_post = $dm_post;
         $this->lang_id = $dm_post::setLanguage();
     }
-    
+
     /**
      * Display a listing of the resource.
      *
@@ -48,6 +48,7 @@ class AlbumController extends DM_BaseController
     {
         $this->tracker;
         $data['lang'] = $this->dm_post::getLanguage();
+        $data['categories'] = $this->dm_post::getAlbumCategories();
         return view(parent::loadView($this->view_path.'.create'), compact('data'));
     }
 
@@ -68,7 +69,7 @@ class AlbumController extends DM_BaseController
         ], [
             'rows.*.name.required' => 'You have to enter the name of Album',
         ]);
-        if($this->model->storeData($request,$request->name, $request->rows, $request->image, $request->status, $request->order ) ){
+        if($this->model->storeData($request, $request->category, $request->name, $request->rows, $request->image, $request->status, $request->order ) ){
             session()->flash('alert-success', $this->panel.' Successfully Store');
         }else {
             session()->flash('alert-danger', $this->panel.' can not be Store');
@@ -101,6 +102,7 @@ class AlbumController extends DM_BaseController
         $data['lang']= $this->dm_post::getLanguage();
         $data['albums'] = $this->model::findOrFail($id);
         $albums_name = DB::table('albums_name')->where('album_id', '=', $id)->get();
+        $data['categories'] = $this->dm_post::getAlbumCategories();
         return view(parent::loadView($this->view_path.'.edit'), compact('data', 'albums_name'));
     }
 
@@ -123,7 +125,7 @@ class AlbumController extends DM_BaseController
         ],[
             'rows.*.name.required' => 'You have to enter the name of Album',
         ]);
-        if($this->model->updateData($request, $id, $request->name, $request->rows, $request->image, $request->status, $request->order ) ){
+        if($this->model->updateData($request, $id, $request->category, $request->name, $request->rows, $request->image, $request->status, $request->order ) ){
             session()->flash('alert-success', $this->panel.' Successfully Store');
         }else {
             session()->flash('alert-danger', $this->panel.' can not be Store');

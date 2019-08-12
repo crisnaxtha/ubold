@@ -2,81 +2,440 @@
 
 @section('content')
 <div class="mid_part inner_page">
+        <div class="inner_banner" style="background: url({{asset('assets/site/assets/images/sheetal.jpg') }}); background-size: cover; background-attachment: fixed; width: 100%;"></div>
+
         <div class="breadcrumb-col">
           <div class="container">
-            <h4><i class="fa fa-info-circle" aria-hidden="true">&nbsp;</i> {{ $data['row']->title }}</h4>
             <ol class="breadcrumb">
-              <li><a href="{{ route('site.index')  }}">Home</a></li>
+              <li><a href="{{ route('site.index')  }}"><i class="fa fa-home"></i></a></li>
               <li class="active">{{ ucwords(str_replace('-',' ',Request::segment(1)))}}</li>
             </ol>
           </div>
+          <!-- <div class="btm_style"><svg viewBox="0 0 1440 120" width="100%" height="100%" fill="#fff"><path d="M1440,21.2101911 L1440,120 L0,120 L0,21.2101911 C120,35.0700637 240,42 360,42 C480,42 600,35.0700637 720,21.2101911 C808.32779,12.416393 874.573633,6.87702029 918.737528,4.59207306 C972.491685,1.8109458 1026.24584,0.420382166 1080,0.420382166 C1200,0.420382166 1320,7.35031847 1440,21.2101911 Z"></path></svg></div> -->
         </div>
 
           <section class="dtl_sec">
             <div class="container">
               <div class="row">
                 <div class="col-md-9 col-sm-8">
-                    @if(isset($data['row']->thumbanil))
-                  <figure class="wow fadeInUp" data-wow-duration="2s" data-wow-delay=".2s">
-                    <img src="{{ $data['row']->thumbnail }}" alt="Details Image" />
-                  </figure>
+                  <div class="card">
+                    <div class="card-header">
+
+
+      <div class="row">
+        <div class="col-lg-9 col-md-9">
+          <h4>&nbsp; <i class="fa fa-info-circle">&nbsp;</i> {{ $data['row']->title }}</h4>
+        </div>
+        <div class="col-lg-3 col-md-3">
+          <div class="share-box">
+          <ul>
+                @php $current_url = url()->current(); @endphp
+            <li><a href="https://twitter.com/share?url={{$current_url}}" class="social-color-1"><i class="fa fa-twitter" aria-hidden="true"></i></a></li>
+            <li><a href="http://www.facebook.com/sharer.php?u={{$current_url}}" class="social-color-2"><i class="fa fa-facebook" aria-hidden="true"></i></a></li>
+            <li><a href="https://plus.google.com/share?url={{$current_url}}" class="social-color-3"><i class="fa fa-google-plus" aria-hidden="true"></i></a></li>
+            {{-- <li><a href="javascript:void(0)" class="social-color-3"><i class="fa fa-linkedin" aria-hidden="true"></i></a></li>
+            <li><a href="javascript:void(0)" class="social-color-4"><i class="fa fa-instagram" aria-hidden="true"></i></a></li> --}}
+          </ul>
+          <div class="clearfix"></div>
+        </div>
+        </div>
+        <div class="clearfix"></div>
+      </div>
+
+                    </div>
+                      <div class="card-body">
+                            {!!$data['row']->content !!}
+                      </div>
+                  </div>
+                  @if(count($data['file']) != 0)
+                  @foreach($data['file'] as $row)
+                  <div class="card dwn_box">
+                    <div class="card-body">
+                      <div class="row">
+                        <div class="col-lg-4 col-md-3"><span class="ttl">{{ $row->title }}</span></div>
+                        <div class="col-lg-4 col-md-5">{{ $row->download_count }}'s Downloaded</div>
+                        <div class="col-lg-2 col-md-2 text-center"><a href="{{ asset( $row->file) }}">
+                          <i class="fa fa-eye">&nbsp;</i> View
+                        </a></div>
+                        <div class="col-lg-2 col-md-2 text-center"><a href="{{ route('site.file.download', ['id'=> $row->id]) }}">
+                          <i class="fa fa-download">&nbsp;</i> Download </a></div>
+                        <div class="clearfix"></div>
+                      </div>
+                    </div>
+                  </div>
+                  @endforeach
                   @endif
-                {!!$data['row']->content !!}
 
-                  <br/>
+                  <!-- basic modal -->
+      {{-- <div class="modal fade" id="basicModal" tabindex="-1" role="dialog" aria-labelledby="basicModal" aria-hidden="true">
+        <div class="modal-dialog">
+          <div class="modal-content">
+            <div class="modal-body">
+              <button type="button" class="close" data-dismiss="modal" aria-label="Close">
+                <span aria-hidden="true">&times;</span>
+              </button>
+             <ul>
+               <li><span>File Name:</span> जनसंख्या तथा सवारी चाप सम्बन्धमा</li>
+               <li><span>File Size:</span> 670KB</li>
+               <li><span>Create Type:</span> application/pdf</li>
+               <li><span>Create Date:</span> 2076/04/20</li>
+               <li><span>Description:</span> काठमाण्डौ उपत्यकामा दिन प्रतिदिन बढ्दै गएको जनसंख्या तथा सवारी चाप, सिमित साघुरा सडकहरू सवारी नियम तथा ट्राफिक संकेत सम्बन्धी सडक प्रयोगकर्ताहरुमा रहेको ज्ञानको कमी र ज्ञान भएकाहरुबाट समेत ट्राफिक नियमको उलंघन गर्ने प्रवृतिका कारण काठमाण्डौ उपत्यकाको ट्राफिक व्यवस्थापन गर्ने कार्य जटिल एंव चुनौतिपुर्ण बन्दै गएको छ । </li>
+             </ul>
+            </div>
+            <div class="modal-footer">
+              <button type="button" class="btn btn-default" data-dismiss="modal">Close</button>
+            </div>
+          </div>
+        </div>
+      </div> --}}
 
-                      {{-- <table width="100%" border="0" class="table">
-                              <thead>
-                                <tr>
-                                  <th scope="col">Title</th>
-                                  <th scope="col">Size</th>
-                                  <th scope="col">Type</th>
-                                  <th scope="col">View</th>
-                                  <th scope="col">Download</th>
-                                </tr>
-                               </thead>
-                               <tbody>
-                                <tr>
-                                  <td>सम्पत्ति विवरण सम्बन्धमा</td>
-                                  <td>670 Kb</td>
-                                  <td>application/pdf</td>
-                                  <td><a href="#" class="btn btn-sm btn-danger"><i class="fa fa-eye">&nbsp;</i> View</a></td>
-                                  <td><a href="#" class="btn btn-sm btn-success"><i class="fa fa-download">&nbsp;</i> Download</a></td>
-                                </tr>
+      <div class="clearfix"></div>
 
-                                <tr>
-                                  <td>सम्पत्ति विवरण सम्बन्धमा</td>
-                                  <td>670 Kb</td>
-                                  <td>application/pdf</td>
-                                  <td><a href="#" class="btn btn-sm btn-danger"><i class="fa fa-eye">&nbsp;</i> View</a></td>
-                                  <td><a href="#" class="btn btn-sm btn-success"><i class="fa fa-download">&nbsp;</i> Download</a></td>
-                                </tr>
-                                <tr>
-                                  <td>सम्पत्ति विवरण सम्बन्धमा</td>
-                                  <td>670 Kb</td>
-                                  <td>application/pdf</td>
-                                  <td><a href="#" class="btn btn-sm btn-danger"><i class="fa fa-eye">&nbsp;</i> View</a></td>
-                                  <td><a href="#" class="btn btn-sm btn-success"><i class="fa fa-download">&nbsp;</i> Download</a></td>
-                                </tr>
+      <hr/>
 
-                                <tr>
-                                  <td>सम्पत्ति विवरण सम्बन्धमा</td>
-                                  <td>670 Kb</td>
-                                  <td>application/pdf</td>
-                                  <td><a href="#" class="btn btn-sm btn-danger"><i class="fa fa-eye">&nbsp;</i> View</a></td>
-                                  <td><a href="#" class="btn btn-sm btn-success"><i class="fa fa-download">&nbsp;</i> Download</a></td>
-                                </tr>
-                                </tbody>
+      <form>
+        <div class="row">
+          <div class="col-lg-3 col-md-4">
+            <b>Rate This:</b>
+            <div id="smileys">
+              <input type="radio" name="smiley" value="sad" class="sad">
+              <input type="radio" name="smiley" value="neutral" class="neutral">
+              <input type="radio" name="smiley" value="happy" class="happy" checked="checked">
+              <div> &nbsp; Feeling <span id="result">happy</span></div>
+            </div>
+          </div>
+          <div class="col-lg-7 col-md-5">
+            <input type="text" class="form-control" name="text" placeholder="Your Name" />
+          </div>
+          <div class="col-lg-2 col-md-3">
+            <button type="button" class="btn btn-success">Submit</button>
+          </div>
+          <div class="clearfix"></div>
+        </div>
 
-                              </table> --}}
+
+        <div class="clearfix"></div>
+      </form>
 
                 </div>
 
-                <div class="col-lg-3 col-md-3 page_sidebar">
+        <div class="col-lg-3 col-md-3 page_sidebar">
 
-                        @include('site.includes.sidebar')
+          <div class="widget-box">
+            <div class="dash_info">
+              <div class="owl-carousel info-carousel2">
+                <div class="item">
+                  <div class="card">
+                    <div class="card-header"><i class="fa fa-clock-o">&nbsp;</i> आजको दिन </div>
+                    <div class="card-body">
+                      <div class="row">
+                        <div class="col-md-6">
+                          <span>मो.बि.न :</span> <span class="counter">456654</span>
+                        </div>
+                        <div class="col-md-6">
+                          <span>का.बि.न :</span> <span class="counter">433143</span>
+                        </div>
+                        <div class="col-md-6">
+                          <span>ले बि न :</span> <span class="counter">456654</span>
+                        </div>
+                        <div class="col-md-6">
+                          <span>ठ.बि.न  :</span> <span class="counter">433143</span>
+                        </div>
+                        <div class="clearfix"></div>
+                      </div>
+                    </div>
+                  </div>
+                </div>
+                <div class="item">
+                  <div class="card">
+                    <div class="card-header"><i class="fa fa-calendar">&nbsp;</i> Last Week </div>
+                    <div class="card-body">
+                      <div class="row">
+                        <div class="col-md-6">
+                          <span>मो.बि.न :</span> <span class="counter">456654</span>
+                        </div>
+                        <div class="col-md-6">
+                          <span>का.बि.न :</span> <span class="counter">433143</span>
+                        </div>
+                        <div class="col-md-6">
+                          <span>ले बि न :</span> <span class="counter">456654</span>
+                        </div>
+                        <div class="col-md-6">
+                          <span>ठ.बि.न :</span> <span class="counter">433143</span>
+                        </div>
+                        <div class="clearfix"></div>
+                      </div>
+                    </div>
+                  </div>
+                </div>
+                <div class="item">
+                  <div class="card">
+                    <div class="card-header"><i class="fa fa-calendar">&nbsp;</i> Last Month </div>
+                    <div class="card-body">
+                      <div class="row">
+                        <div class="col-md-6">
+                          <span>मो.बि.न :</span> <span class="counter">456654</span>
+                        </div>
+                        <div class="col-md-6">
+                          <span>का.बि.न :</span> <span class="counter">433143</span>
+                        </div>
+                        <div class="col-md-6">
+                          <span>ले बि न :</span> <span class="counter">456654</span>
+                        </div>
+                        <div class="col-md-6">
+                          <span>ठ.बि.न :</span> <span class="counter">433143</span>
+                        </div>
+                        <div class="clearfix"></div>
+                      </div>
+                    </div>
+                  </div>
+                </div>
+                <div class="item">
+                  <div class="card">
+                    <div class="card-header"><i class="fa fa-clock-o">&nbsp;</i> आजको दिन </div>
+                    <div class="card-body">
+                      <div class="row">
+                        <div class="col-md-6">
+                          <span>मो.बि.न :</span> <span class="counter">456654</span>
+                        </div>
+                        <div class="col-md-6">
+                          <span>का.बि.न :</span> <span class="counter">433143</span>
+                        </div>
+                        <div class="col-md-6">
+                          <span>ले बि न :</span> <span class="counter">456654</span>
+                        </div>
+                        <div class="col-md-6">
+                          <span>ठ.बि.न  :</span> <span class="counter">433143</span>
+                        </div>
+                        <div class="clearfix"></div>
+                      </div>
+                    </div>
+                  </div>
+                </div>
+                <div class="item">
+                  <div class="card">
+                    <div class="card-header"><i class="fa fa-calendar">&nbsp;</i> Last Week </div>
+                    <div class="card-body">
+                      <div class="row">
+                        <div class="col-md-6">
+                          <span>मो.बि.न :</span> <span class="counter">456654</span>
+                        </div>
+                        <div class="col-md-6">
+                          <span>का.बि.न :</span> <span class="counter">433143</span>
+                        </div>
+                        <div class="col-md-6">
+                          <span>ले बि न :</span> <span class="counter">456654</span>
+                        </div>
+                        <div class="col-md-6">
+                          <span>ठ.बि.न :</span> <span class="counter">433143</span>
+                        </div>
+                        <div class="clearfix"></div>
+                      </div>
+                    </div>
+                  </div>
+                </div>
+                <div class="item">
+                  <div class="card">
+                    <div class="card-header"><i class="fa fa-calendar">&nbsp;</i> Last Month </div>
+                    <div class="card-body">
+                      <div class="row">
+                        <div class="col-md-6">
+                          <span>मो.बि.न :</span> <span class="counter">456654</span>
+                        </div>
+                        <div class="col-md-6">
+                          <span>का.बि.न :</span> <span class="counter">433143</span>
+                        </div>
+                        <div class="col-md-6">
+                          <span>ले बि न :</span> <span class="counter">456654</span>
+                        </div>
+                        <div class="col-md-6">
+                          <span>ठ.बि.न :</span> <span class="counter">433143</span>
+                        </div>
+                        <div class="clearfix"></div>
+                      </div>
+                    </div>
+                  </div>
+                </div>
+                </div>
+            </div>
+          </div>
+              <div class="widget-box">
+              <h3> <i class="fa fa-link" aria-hidden="true">&nbsp;</i> महत्त्वपूर्ण लिङ्कहरू</h3>
+              <ul class="useful-link">
+                  <li><a href="#" class=""><i class="fa fa-bell"></i>
+                   Information Rights</a></li>
+                   <li><a href="#" class=""><i class="fa fa-fa fa-leanpub"></i>
+                   Publications</a></li>
+                   <li><a href="#" class=""><i class="fa fa-comments-o"></i>
+                   Feedbacks</a></li>
+                   <li><a href="#" class=""><i class="fa fa-file-archive-o"></i>
+                   Archive</a></li>
+                   <li><a href="#" class=""><i class="fa fa-envelope"></i>
+                   मेल हेर्नुहोस</a></li>
+                   <li><a href="#" class=""><i class="fa fa-copy"></i>
+                   बिलहरुको सार्बजनिकरण</a></li>
+                </ul>
 
+          </div>
 
+                  <div class="widget-box">
+                      <h3><i class="fa fa-external-link-square">&nbsp;</i> Category List
+                        <a href="#">View All</a> </h3>
+                        <div class="archive-widget">
+                          <ul>
+                            <li>
+                            <a href="javascript:void(0)">
+                              <span>
+                                <i class="fa fa-bookmark" aria-hidden="true"></i>
+                              </span>
+                              Gov of Nepal
+                            </a>
+                            </li>
+                            <li>
+                            <a href="javascript:void(0)">
+                              <span>
+                                <i class="fa fa-bookmark" aria-hidden="true"></i>
+                              </span>
+                              Ministry of EDU
+                            </a>
+                            </li>
+                            <li>
+                            <a href="javascript:void(0)">
+                              <span>
+                                <i class="fa fa-bookmark" aria-hidden="true"></i>
+                              </span>
+                              Ministry of Finance
+                            </a>
+                            </li>
+                            <li>
+                            <a href="javascript:void(0)">
+                              <span>
+                                <i class="fa fa-bookmark" aria-hidden="true"></i>
+                              </span>
+                              Dept. of EDU
+                            </a>
+                            </li>
+                          </ul>
+                        </div>
+                      </div>
+
+            {{-- <div class="widget-box">
+            <h3> <i class="fa fa-newspaper-o">&nbsp;</i> Publications</h3>
+            <div class="side-widget">
+            <div class="owl-carousel info-carousel3">
+                <div class="item">
+                  <ul>
+                      <li class="wow fadeInUp" data-wow-duration="2s" data-wow-delay=".2s">
+                        <div class="thumb"><a href="javascript:void(0)"><img src="images/news/news-widget-img-2.jpg" alt="img"></a></div>
+                        <div class="text-area">
+                          <a href="javascript:void(0)">Internship Jobs join in next week dummy text...</a>
+                        </div>
+                        <div class="author_sec">
+                          <span><i class="fa fa-eye" aria-hidden="true"></i> <em>10</em></span>
+                          <span><i class="fa fa-user" aria-hidden="true"></i> <em>Admin</em></span>
+                          <span><i class="fa fa-clock-o" aria-hidden="true"></i> <em>8/6/2019</em></span>
+                        </div>
+                      </li>
+                      <li class="wow fadeInUp" data-wow-duration="2s" data-wow-delay=".2s">
+                        <div class="thumb"><a href="javascript:void(0)"><img src="images/news/news-widget-img-3.jpg" alt="img"></a></div>
+                        <div class="text-area"> <a href="javascript:void(0)">Contractors decide to
+                          built housing  week dummy text...</a>
+                        </div>
+                        <div class="author_sec">
+                          <span><i class="fa fa-eye" aria-hidden="true"></i> <em>10</em></span>
+                          <span><i class="fa fa-user" aria-hidden="true"></i> <em>Bikash Bhandari</em></span>
+                          <span><i class="fa fa-clock-o" aria-hidden="true"></i> <em>8/6/2019</em></span>
+                        </div>
+                      </li>
+                      <li class="wow fadeInUp" data-wow-duration="2s" data-wow-delay=".2s">
+                        <div class="thumb"><a href="javascript:void(0)"><img src="images/news/news-widget-img-4.jpg" alt="img"></a></div>
+                        <div class="text-area"> <a href="javascript:void(0)">Contractors decide to
+                          built housing dummy text...</a>
+                        </div>
+                        <div class="author_sec">
+                          <span><i class="fa fa-eye" aria-hidden="true"></i> <em>10</em></span>
+                          <span><i class="fa fa-user" aria-hidden="true"></i> <em>Admin</em></span>
+                          <span><i class="fa fa-clock-o" aria-hidden="true"></i> <em>8/6/2019</em></span>
+                        </div>
+                      </li>
+                    </ul>
+                </div>
+                <div class="item">
+                  <ul>
+                    <li class="wow fadeInUp" data-wow-duration="2s" data-wow-delay=".2s">
+                        <div class="thumb"><a href="javascript:void(0)"><img src="images/news/news-widget-img-4.jpg" alt="img"></a></div>
+                        <div class="text-area"> <a href="javascript:void(0)">Contractors decide to
+                          built housing dummy text...</a>
+                        </div>
+                        <div class="author_sec">
+                          <span><i class="fa fa-eye" aria-hidden="true"></i> <em>10</em></span>
+                          <span><i class="fa fa-user" aria-hidden="true"></i> <em>Bikash Bhandari</em></span>
+                          <span><i class="fa fa-clock-o" aria-hidden="true"></i> <em>8/6/2019</em></span>
+                        </div>
+                      </li>
+                      <li class="wow fadeInUp" data-wow-duration="2s" data-wow-delay=".2s">
+                        <div class="thumb"><a href="javascript:void(0)"><img src="images/news/news-widget-img-2.jpg" alt="img"></a></div>
+                        <div class="text-area"> <a href="javascript:void(0)">Internship Jobs join in next week dummy text...</a>
+                        </div>
+                        <div class="author_sec">
+                          <span><i class="fa fa-eye" aria-hidden="true"></i> <em>10</em></span>
+                          <span><i class="fa fa-user" aria-hidden="true"></i> <em>Bikash Bhandari</em></span>
+                          <span><i class="fa fa-clock-o" aria-hidden="true"></i> <em>8/6/2019</em></span>
+                        </div>
+                      </li>
+                      <li class="wow fadeInUp" data-wow-duration="2s" data-wow-delay=".2s">
+                        <div class="thumb"><a href="javascript:void(0)"><img src="images/news/news-widget-img-3.jpg" alt="img"></a></div>
+                        <div class="text-area"> <a href="javascript:void(0)">Contractors decide to
+                          built housing dummy text...</a>
+                        </div>
+                        <div class="author_sec">
+                          <span><i class="fa fa-eye" aria-hidden="true"></i> <em>10</em></span>
+                          <span><i class="fa fa-user" aria-hidden="true"></i> <em>Bikash Bhandari</em></span>
+                          <span><i class="fa fa-clock-o" aria-hidden="true"></i> <em>8/6/2019</em></span>
+                        </div>
+                      </li>
+                    </ul>
+                </div>
+                <div class="item">
+                  <ul>
+                    <li class="wow fadeInUp" data-wow-duration="2s" data-wow-delay=".2s">
+                        <div class="thumb"><a href="javascript:void(0)"><img src="images/news/news-widget-img-2.jpg" alt="img"></a></div>
+                        <div class="text-area"> <a href="javascript:void(0)">Internship Jobs join in next week dummy text...</a>
+                        </div>
+                        <div class="author_sec">
+                          <span><i class="fa fa-eye" aria-hidden="true"></i> <em>10</em></span>
+                          <span><i class="fa fa-user" aria-hidden="true"></i> <em>Bikash Bhandari</em></span>
+                          <span><i class="fa fa-clock-o" aria-hidden="true"></i> <em>8/6/2019</em></span>
+                        </div>
+                      </li>
+                      <li class="wow fadeInUp" data-wow-duration="2s" data-wow-delay=".2s">
+                        <div class="thumb"><a href="javascript:void(0)"><img src="images/news/news-widget-img-3.jpg" alt="img"></a></div>
+                        <div class="text-area"> <a href="javascript:void(0)">Contractors decide to
+                          built housing dumy text...</a>
+                        </div>
+                        <div class="author_sec">
+                          <span><i class="fa fa-eye" aria-hidden="true"></i> <em>10</em></span>
+                          <span><i class="fa fa-user" aria-hidden="true"></i> <em>Bikash Bhandari</em></span>
+                          <span><i class="fa fa-clock-o" aria-hidden="true"></i> <em>8/6/2019</em></span>
+                        </div>
+                      </li>
+                    <li class="wow fadeInUp" data-wow-duration="2s" data-wow-delay=".2s">
+                        <div class="thumb"><a href="javascript:void(0)"><img src="images/news/news-widget-img-4.jpg" alt="img"></a></div>
+                        <div class="text-area"> <a href="javascript:void(0)">Contractors decide to
+                          built housing dummy text...</a>
+                        </div>
+                        <div class="author_sec">
+                          <span><i class="fa fa-eye" aria-hidden="true"></i> <em>10</em></span>
+                          <span><i class="fa fa-user" aria-hidden="true"></i> <em>Bikash Bhandari</em></span>
+                          <span><i class="fa fa-clock-o" aria-hidden="true"></i> <em>8/6/2019</em></span>
+                        </div>
+                      </li>
+                    </ul>
+                </div>
+            </div> --}}
+
+        </div>
+                    </div>
                 </div>
               </div>
             </div>
@@ -84,6 +443,7 @@
 
         <div class="clearfix"></div>
       </div>
+
 
 
 @endsection

@@ -39,15 +39,16 @@
                     </div>
                     <div class="modal-body">
                         <div class=" form">
-                              <?php
+                            <?php
                             dm_postform(URL::route($_base_route.'.store'), 'POST');
                             dm_hselect_faicon('icon', 'Icon', $data['fa-icons']);
                             dm_hcolor_picker('color', "Select Color");
+                            dm_hinput('text','name', "Name Of Category", 'name');
                             ?>
                             @foreach($data['lang'] as $row)
                             <?php
                             dm_hidden('rows['.$loop->index.'][lang_id]', $row->id);
-                            dm_hinput('text','rows['.$loop->index.'][name]', "Name Of Link (<strong>$row->name</strong>)(*)", 'rows.'.$loop->index.'.name');
+                            dm_hinput('text','rows['.$loop->index.'][name]', "Name Of Category (<strong>$row->name</strong>)(*)", 'rows.'.$loop->index.'.name');
                             ?>
                             @endforeach
                             <?php
@@ -128,7 +129,7 @@
               var x = confirm('Delete this Category?');
               var id = $(this).attr('id');
             //   debugger;
-              var url = "category/"+id;
+              var url = "album_category/"+id;
             //   alert(url);
             $object=$(this);
               if(x){

@@ -23,7 +23,7 @@
                     <?php
                     dm_hinput('url','url', "URL of Website(*)", 'url');
                     dm_hinput('number','order', "Order", 'order');
-                    dm_hcheckbox('checkbox', 'featured', 'Featured');
+                    dm_hcheckbox('checkbox', 'status', 'Featured');
                     dm_hsubmit('Submit', URL::route($_base_route.'.index'), 'Cancel');
                     dm_closeform();
                     ?>
