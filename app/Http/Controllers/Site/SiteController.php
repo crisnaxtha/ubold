@@ -16,6 +16,7 @@ use App\Model\Dcms\Link;
 use App\Model\Dcms\Category;
 use App\Model\Dcms\Blog;
 use App\Model\Dcms\Service;
+use App\Model\Dcms\Common;
 use DB;
 use Session;
 
@@ -38,6 +39,7 @@ class SiteController extends DM_BaseController
         $this->panel = "Home";
         $this->view_path = 'site.';
         $this->tracker; //to track the user
+        $data['common'] = Common::where('lang_id', '=', $this->lang_id)->first();
         $data['menu'] = Menu::tree($this->lang_id);
         $data['imp_link'] = Link::where('status', '=', 1)->where('lang_id', '=', $this->lang_id)->get();
         $data['member'] = Staff::where('featured', '=', 1)->where('lang_id', '=', $this->lang_id)->orderBy('level')->get();
@@ -73,6 +75,8 @@ class SiteController extends DM_BaseController
         $this->panel = "Contact";
         $this->view_path = 'site.';
         $this->tracker;// to track user
+        $data['common'] = Common::where('lang_id', '=', $this->lang_id)->first();
+
         $data['menu'] = Menu::tree($this->lang_id);
         return view(parent::loadView($this->view_path.'.contact'), compact('data'));
     }
@@ -97,6 +101,7 @@ class SiteController extends DM_BaseController
     //to show post
     public function showPost($post_unique_id) {
         $this->tracker;
+        $data['common'] = Common::where('lang_id', '=', $this->lang_id)->first();
         $data['menu'] = Menu::tree($this->lang_id);
         $data['row'] = $this->dm_post::getSinglePost($post_unique_id, $this->lang_id);
         $data['file'] = $this->dm_post::getFile($post_unique_id);
@@ -106,6 +111,7 @@ class SiteController extends DM_BaseController
     /** Show Single Page */
     public function showPage($post_unique_id){
         $this->tracker;
+        $data['common'] = Common::where('lang_id', '=', $this->lang_id)->first();
         $data['menu'] = Menu::tree($this->lang_id);
         $data['row'] = $this->dm_post::getSinglePage($post_unique_id, $this->lang_id);
         $data['file'] = $this->dm_post::getFile($post_unique_id);
@@ -116,6 +122,7 @@ class SiteController extends DM_BaseController
     //to show post category with post archive
     public function showCategoryPost($category_id) {
         $this->tracker;
+        $data['common'] = Common::where('lang_id', '=', $this->lang_id)->first();
         $data['menu'] = Menu::tree($this->lang_id);
         $data['rows'] = $this->dm_post::categoryPost($category_id, $this->lang_id);
         $data['cat'] = $this->dm_post::getCategory($category_id);
@@ -131,6 +138,7 @@ class SiteController extends DM_BaseController
     /** Show All Post Collection */
     public function showAllPost() {
         $this->tracker;
+        $data['common'] = Common::where('lang_id', '=', $this->lang_id)->first();
         $data['menu'] = Menu::tree($this->lang_id);
         $data['rows'] = $this->dm_post::getAllPosts($this->lang_id);
         $data['recent_post'] = DB::table('posts')->where('type', '=', 'post')->where('status', '=', 1)->where('lang_id', '=', $this->lang_id)->take(5)->get();
@@ -140,6 +148,7 @@ class SiteController extends DM_BaseController
 
     public function showAllPage() {
         $this->tracker;
+        $data['common'] = Common::where('lang_id', '=', $this->lang_id)->first();
         $data['menu'] = Menu::tree($this->lang_id);
         $data['rows'] = $this->dm_post::getAllPages($this->lang_id);
         $data['recent_post'] = DB::table('posts')->where('type', '=', 'post')->where('status', '=', 1)->where('lang_id', '=', $this->lang_id)->take(5)->get();
@@ -149,6 +158,7 @@ class SiteController extends DM_BaseController
 
     public function showAllCategory() {
         $this->tracker;
+        $data['common'] = Common::where('lang_id', '=', $this->lang_id)->first();
         $data['menu'] = Menu::tree($this->lang_id);
         $data['rows'] = $this->dm_post::getCategories();
         $data['recent_post'] = DB::table('posts')->where('type', '=', 'post')->where('status', '=', 1)->where('lang_id', '=', $this->lang_id)->take(5)->get();
@@ -159,6 +169,7 @@ class SiteController extends DM_BaseController
      */
     public function showAlbum() {
         $this->tracker;
+        $data['common'] = Common::where('lang_id', '=', $this->lang_id)->first();
         $data['menu'] = Menu::tree($this->lang_id);
         $data['recent_post'] = DB::table('posts')->where('type', '=', 'post')->where('status', '=', 1)->where('lang_id', '=', $this->lang_id)->take(5)->get();
         $data['album'] = $this->dm_post::joinAlbum($this->lang_id);
@@ -169,6 +180,7 @@ class SiteController extends DM_BaseController
      */
     public function showPhotos($album_id) {
         $this->tracker;
+        $data['common'] = Common::where('lang_id', '=', $this->lang_id)->first();
         $data['menu'] = Menu::tree($this->lang_id);
         $data['recent_post'] = DB::table('posts')->where('type', '=', 'post')->where('status', '=', 1)->where('lang_id', '=', $this->lang_id)->take(5)->get();
         $data['album'] = Album::findOrFail($album_id);
@@ -176,6 +188,7 @@ class SiteController extends DM_BaseController
     }
 
     public function showStaff() {
+        $data['common'] = Common::where('lang_id', '=', $this->lang_id)->first();
         $data['menu'] = Menu::tree($this->lang_id);
         $data['recent_post'] = DB::table('posts')->where('type', '=', 'post')->where('status', '=', 1)->where('lang_id', '=', $this->lang_id)->take(5)->get();
         $data['branch'] = Branch::where('status', '=', 1)->orderBy('order')->get();
@@ -189,6 +202,7 @@ class SiteController extends DM_BaseController
     }
 
     public function search(Request $request) {
+        $data['common'] = Common::where('lang_id', '=', $this->lang_id)->first();
         $data['menu'] = Menu::tree($this->lang_id);
         $data['recent_post'] = DB::table('posts')->where('type', '=', 'post')->where('status', '=', 1)->where('lang_id', '=', $this->lang_id)->take(5)->get();
         $query = $request->get('keyword');

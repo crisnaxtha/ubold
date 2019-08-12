@@ -5,11 +5,14 @@
         <div class="col-lg-6 col-md-6 col-sm-6"> <a href="{{ route('site.index') }}" class="logo_sec">
           <div class="row">
             <div class="col-lg-3 col-md-4 pad-right-0">
-            @if(isset($all_view['setting']->logo))
-                <img src="{{ asset($all_view['setting']->logo) }}" alt="Main Logo" />
+            @if(isset($data['common']->logo))
+                <img src="{{ asset($data['common']->logo) }}" alt="Main Logo" />
             @endif
              </div>
-            <div class="col-lg-9 col-md-8 text-left logo_text"> <span>{{ __('Lorem ipsum dolor sit amet') }}</span> <b>{{ __('Lorem ipsum dolor sit amet') }}</b> <span>{{ __('Kathmandu, Nepal') }}</span> </div>
+            <div class="col-lg-9 col-md-8 text-left logo_text">
+                <span>{{ $data['common']->header_first_title }}</span>
+                 <b>{{ $data['common']->header_second_title }}</b>
+                 <span>{{ $data['common']->header_third_title}}</span> </div>
             <div class="clearfix"></div>
           </div>
           </a> </div>
