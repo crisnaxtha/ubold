@@ -21,15 +21,15 @@ class CreateCommonsTable extends Migration
             $table->string('header_first_title')->nullable();
             $table->string('header_second_title')->nullable();
             $table->string('header_third_title')->nullable();
-            $table->string('header_forth_title')->nullable();
+            $table->string('header_fourth_title')->nullable();
             $table->string('footer_first_title')->nullable();
             $table->text('footer_first_description')->nullable();
             $table->string('footer_second_title')->nullable();
             $table->text('footer_second_description')->nullable();
             $table->string('footer_third_title')->nullable();
             $table->text('footer_third_description')->nullable();
-            $table->string('footer_forth_title')->nullable();
-            $table->text('footer_forth_description')->nullable();
+            $table->string('footer_fourth_title')->nullable();
+            $table->text('footer_fourth_description')->nullable();
             $table->timestamps();
         });
     }

@@ -29,9 +29,9 @@ class CommonController extends DM_BaseController
         $this->tracker = $tracker::hit();
         $this->lang_id = $dm_post::setLanguage();
         $this->dm_post = $dm_post;
-        $this->folder_path = getcwd() . DIRECTORY_SEPARATOR . 'upload_file' . DIRECTORY_SEPARATOR .'images'. DIRECTORY_SEPARATOR . $this->folder . DIRECTORY_SEPARATOR;    
+        $this->folder_path = getcwd() . DIRECTORY_SEPARATOR . 'upload_file' . DIRECTORY_SEPARATOR .'images'. DIRECTORY_SEPARATOR . $this->folder . DIRECTORY_SEPARATOR;
     }
- 
+
     public function getTitleSetting() {
         $this->tracker;
         $this->panel = 'Setting';
@@ -58,9 +58,9 @@ class CommonController extends DM_BaseController
         //     'logo' => 'image',
         // ]);
         $this->tracker;
-       
+
         if($request->hasFile('logo')){
-            $logo = parent::uploadFile($this->folder_path, $this->image_prefix_path, 'logo', $request); 
+            $logo = parent::uploadFile($this->folder_path, $this->image_prefix_path, 'logo', $request);
         }
         else {
             $logo = null;
@@ -77,7 +77,50 @@ class CommonController extends DM_BaseController
             $link->header_first_title = $row['header_first_title'];
             $link->header_second_title = $row['header_second_title'];
             $link->header_third_title = $row['header_third_title'];
-            // $link->header_fourth_title = $row['header_fourth_title'];
+            $link->header_fourth_title = $row['header_fourth_title'];
+            $link->save();
+        }
+        if($link->save()) {
+            session()->flash('alert-success', $this->panel.' Successfully added');
+        }else {
+            return false;
+        }
+        return back();
+    }
+
+    public function getFooterSetting() {
+        $this->tracker;
+        $this->panel = 'Setting';
+        $data['single'] = $this->model::where('common_unique_id', '=', 1)->first();
+        $data['lang'] = $this->dm_post::getLanguage();
+        $titles = $this->model::where('common_unique_id', '=', 1)->get();
+        if(!isset($data['single']) || !is_object($data['single']) ) {
+            $data = $this->model;
+            $data->lang_id = $this->lang_id;
+            $data->common_unique_id = 1;
+            $data->save();
+        }
+        return view(parent::loadView($this->view_path.'.footer.index'), compact('data', 'titles'));
+    }
+
+    public function updateFooterSetting(Request $request){
+        $this->tracker;
+        foreach( $request->rows as $row) {
+            if(isset($row['id'])){
+                $link = $this->model::findOrFail($row['id']);
+            }else{
+                $link = new $this->model;
+                $link->common_unique_id = $request->common_unique_id;
+            }
+            $link->lang_id = $row['lang_id'];
+            $link->footer_first_title = $row['footer_first_title'];
+            $link->footer_first_description = $row['footer_first_description'];
+            $link->footer_second_title = $row['footer_second_title'];
+            $link->footer_second_description = $row['footer_second_description'];
+            $link->footer_third_title = $row['footer_third_title'];
+            $link->footer_third_description = $row['footer_third_description'];
+            $link->footer_fourth_title = $row['footer_fourth_title'];
+            $link->footer_fourth_description = $row['footer_fourth_description'];
             $link->save();
         }
         if($link->save()) {

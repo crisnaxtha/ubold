@@ -7,10 +7,7 @@
         <div class="col-lg-12 col-md-12 col-xs-12">
             <section class="card">
                 <div class="card-body">
-                        <div class="btn-group">
-                                <a href="{{ route('dcms.setting.title.index') }}" class="btn btn-sm btn-info"><i class="fa fa-arrow-left">&nbsp;Title And Logo</i></a>
-                        </div>
-                        <hr>
+                        @include('dcms.setting.includes.button-nav')
                         @include('dcms.includes.flash_message_error')
                     <div class=" form">
                         <?php

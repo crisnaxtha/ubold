@@ -7,6 +7,7 @@
         <div class="col-lg-12 col-md-12 col-xs-12">
             <section class="card">
                 <div class="card-body">
+                        @include('dcms.setting.includes.button-nav')
                         @include('dcms.includes.flash_message_error')
                     <div class=" form">
                         <?php
@@ -48,10 +49,10 @@
                                                 $header_third_title = $titles[$loop->index]['header_third_title'];
                                             }else {
                                                 $header_third_title = '';
-                                            } if(isset($titles[$loop->index]['header_forth_title'])){
-                                                $header_forth_title = $titles[$loop->index]['header_forth_title'];
+                                            } if(isset($titles[$loop->index]['header_fourth_title'])){
+                                                $header_fourth_title = $titles[$loop->index]['header_fourth_title'];
                                             }else {
-                                                $header_forth_title = '';
+                                                $header_fourth_title = '';
                                             }
                                             dm_hidden('rows['.$loop->index.'][lang_id]', $row->id);
                                             dm_hidden('rows['.$loop->index.'][id]', $id);
@@ -59,7 +60,7 @@
                                             dm_hinputUpdate('text','rows['.$loop->index.'][header_first_title]', "Site First Title (*)", $header_first_title);
                                             dm_hinputUpdate('text','rows['.$loop->index.'][header_second_title]', "Site Second Title (*)", $header_second_title);
                                             dm_hinputUpdate('text','rows['.$loop->index.'][header_third_title]', "Site Third Title (*)", $header_third_title);
-                                            // dm_hinputUpdate('text','rows['.$loop->index.'][header_forth_title]', "Site Forth Title ", $header_forth_title);
+                                            dm_hinputUpdate('text','rows['.$loop->index.'][header_fourth_title]', "Site Forth Title ", $header_fourth_title);
                                             ?>
                                         </div>
                                     @endforeach
