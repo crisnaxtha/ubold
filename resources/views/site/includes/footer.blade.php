@@ -7,25 +7,23 @@
         <div class="row">
           <div class="col-lg-3 col-md-6 col-sm-6 contact_person">
             <h4>{{ $data['common']->footer_first_title }}</h4>
-
-            {!! $data['common']->footer_first_title !!}
+                {!! $data['common']->footer_first_description !!}
                 <div class="clearfix"></div>
-
-
              </div>
           <div class="col-lg-3 col-md-6 col-sm-6">
             <h4>{{ $data['common']->footer_second_title }}</h4>
             {!! $data['common']->footer_second_description !!}
+            <div class="clearfix"></div>
           </div>
           <div class="col-lg-3 col-md-6 col-sm-6">
             <h4>{{ $data['common']->footer_third_title }}</h4>
             {!! $data['common']->footer_third_description !!}
+            <div class="clearfix"></div>
           </div>
           <div class="col-lg-3 col-md-6 col-sm-6">
             <h4>{{ $data['common']->footer_fourth_title }}</h4>
             {!! $data['common']->footer_fourth_description !!}
-
-
+            <div class="clearfix"></div>
           </div>
           <div class="col-lg-12 col-md-12 col-sm-12"> </div>
           <div class="clearfix"></div>

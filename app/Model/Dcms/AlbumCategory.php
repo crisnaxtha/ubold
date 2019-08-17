@@ -11,8 +11,9 @@ use DB;
 class AlbumCategory extends DM_BaseModel
 {
     /** One to many Relationship between Posts and Category */
-    public function album() {
-        return $this->hasMany(Album::class);
+    public function photoAlbum() {
+        dd('hello');
+        return $this->hasMany(Album::class, 'album_category_id', 'id');
     }
 
      /** Category Tree */

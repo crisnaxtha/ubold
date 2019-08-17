@@ -203,6 +203,12 @@ class DM_Post extends Model{
     }
 
     public static function categoryAlbum($category_id, $lang_id, $number = '5') {
-        return Album::where('album_category_id', '=', $category_id)->take($number)->get();
+        $album =  DB::table('albums')
+        ->join('albums_name', 'albums.id', '=', 'albums_name.album_id')
+        ->select('albums.*', 'albums_name.title as album_name', 'albums_name.lang_id')
+        ->where('albums_name.lang_id', '=', $lang_id)
+        ->where('albums.status', '=', 1)->orderBy('order')
+        ->take($number)->get();
+        return $album;
     }
 }
