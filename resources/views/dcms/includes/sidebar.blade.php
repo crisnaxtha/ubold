@@ -50,8 +50,8 @@
                     </ul>
                 </li>
 
-                <li class="sub-menu {{ ($_panel == 'Sliders' || $_panel == 'Links' || $_panel == 'Services' || $_panel == 'Pop Up') ? 'active' : '' }}">
-                    <a href="javascript:;" class="{{ ($_panel == 'Sliders' || $_panel == 'Links' || $_panel == 'Services') ? 'active' : '' }}"><i class="fas fa-cart-plus"></i>
+                <li class="sub-menu {{ ($_panel == 'Sliders' || $_panel == 'Links' || $_panel == 'Services' || $_panel == 'Popup') ? 'active' : '' }}">
+                    <a href="javascript:;" class="{{ ($_panel == 'Sliders' || $_panel == 'Links' || $_panel == 'Services' || $_panel == 'Popup') ? 'active' : '' }}"><i class="fas fa-cart-plus"></i>
                         <span class="menu-arrow"></span>
                         <span>{{ __('Accessories ') }}</span>
                     </a>
@@ -66,7 +66,7 @@
                         <li class="{{ ($_panel == 'Services') ? 'active' : '' }}"><a href="{{ URL::route('dcms.service.index') }}" ><i class="fa fa-bars"></i>&nbsp;&nbsp;<span>{{__('Services') }}</span></a></li>
                         @endif
                         @if( Route::has('dcms.popup.index'))
-                        <li class="{{ ($_panel == 'Pop Up') ? 'active' : '' }}"><a href="{{ URL::route('dcms.popup.index') }}" ><i class="fas fa-expand"></i>&nbsp;&nbsp;<span>{{__('Pop Up') }}</span></a></li>
+                        <li class="{{ ($_panel == 'Popup') ? 'active' : '' }}"><a href="{{ URL::route('dcms.popup.index') }}" ><i class="fas fa-expand"></i>&nbsp;&nbsp;<span>{{__('Pop Up') }}</span></a></li>
                         @endif
                     </ul>
                 </li>
