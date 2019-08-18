@@ -14,36 +14,65 @@
                 @if(Route::has('dcms.dashboard'))
                 <li><a class="{{ ($_panel == 'Home') ? 'active' : '' }}" href="{{ URL::route('dcms.dashboard') }}"><i class="fe-airplay"></i><span>{{__('Dashboard')}}</span></a></li>
                 @endif
-                @if(Route::has('dcms.post.index'))
-                <li><a href="{{ URL::route('dcms.post.index') }}" class="{{ ($_panel == 'Posts') ? 'active' : '' }}"><i class="fa fa-book"></i><span>{{__('Posts')}}</span></a></li>
-                @endif
-                @if(Route::has('dcms.category.index'))
-                <li><a href="{{ URL::route('dcms.category.index') }}" class="{{ ($_panel == 'Category') ? 'active' : '' }}"><i class="fa fa-list-alt"></i><span>{{__('Categories')}}</span></a></li>
-                @endif
-                @if( Route::has('dcms.page.index'))
-                <li><a class="{{ ($_panel == 'Pages') ? 'active' : '' }}" href="{{ URL::route('dcms.page.index') }}" ><i class="fe-package"></i><span>{{__('Pages')}}</span></a></li>
-                @endif
+                <li class="sub-menu {{ ($_panel == 'Posts' || $_panel == 'Category' || $_panel == 'Pages') ? 'active' : '' }}">
+                    <a href="javascript:;" class="{{ ($_panel == 'Posts' || $_panel == 'Category' || $_panel == 'Pages') ? 'active' : '' }}"><i class="far fa-gem"></i>
+                        <span class="menu-arrow"></span>
+                        <span>{{ __('Content') }}</span>
+                    </a>
+                    <ul class="nav-second-level" aria-expanded="false">
+                        @if(Route::has('dcms.post.index'))
+                        <li class="{{ ($_panel == 'Posts') ? 'active' : '' }}"><a href="{{ URL::route('dcms.post.index') }}" ><i class="fa fa-book"></i>&nbsp;&nbsp;<span>{{__('Posts')}}</span></a></li>
+                        @endif
+                        @if(Route::has('dcms.category.index'))
+                        <li class="{{ ($_panel == 'Category') ? 'active' : '' }}"><a href="{{ URL::route('dcms.category.index') }}" ><i class="fa fa-list-alt"></i>&nbsp;&nbsp;<span>{{__('Categories')}}</span></a></li>
+                        @endif
+                        @if( Route::has('dcms.page.index'))
+                        <li class="{{ ($_panel == 'Pages') ? 'active' : '' }}"><a  href="{{ URL::route('dcms.page.index') }}" ><i class="fe-package"></i>&nbsp;&nbsp;<span>{{__('Pages')}}</span></a></li>
+                        @endif
+                    </ul>
+                </li>
 
-                @if( Route::has('dcms.slider.index'))
-                <li><a class="{{ ($_panel == 'Sliders') ? 'active' : '' }}" href="{{ URL::route('dcms.slider.index') }}" ><i class=" fas fa-arrows-alt-h"></i><span>{{__('Sliders')}}</span></a></li>
-                @endif
-                @if( Route::has('dcms.link.index'))
-                <li><a class="{{ ($_panel == 'Links') ? 'active' : '' }}" href="{{ URL::route('dcms.link.index') }}" ><i class="fa fa-link"></i><span>{{__('Links')}}</span></a></li>
-                @endif
-                @if( Route::has('dcms.album_category.index'))
-                <li><a class="{{ ($_panel == 'Album Category') ? 'active' : '' }}" href="{{ URL::route('dcms.album_category.index') }}" ><i class="fas fa-camera-retro"></i><span>{{__('Album Category')}}</span></a></li>
-                @endif
-                @if( Route::has('dcms.album.index'))
-                <li><a class="{{ ($_panel == 'Album' || $_panel == 'Gallery') ? 'active' : '' }}" href="{{ URL::route('dcms.album.index') }}" ><i class="fas fa-camera-retro"></i><span>{{__('Photo Album')}}</span></a></li>
-                @endif
-                @if(Route::has('dcms.blog.index'))
-                <li><a class="{{ ($_panel == 'Blogs') ? 'active' : '' }}" href="{{ URL::route('dcms.blog.index') }}"><i class="fa fa-book"></i><span>Videos</span></a></li>
-                @endif
+                <li class="sub-menu {{ ($_panel == 'Album Category' || $_panel == 'Album' || $_panel == 'Videos') ? 'active' : '' }}">
+                    <a href="javascript:;" class="{{ ($_panel == 'Album Category' || $_panel == 'Album' || $_panel == 'Videos') ? 'active' : '' }}"><i class="fas fa-vr-cardboard"></i>
+                        <span class="menu-arrow"></span>
+                        <span>{{ __('Multimedia') }}</span>
+                    </a>
+                    <ul class="nav-second-level" aria-expanded="false">
+                        @if( Route::has('dcms.album_category.index'))
+                        <li><a class="{{ ($_panel == 'Album Category') ? 'active' : '' }}" href="{{ URL::route('dcms.album_category.index') }}" ><i class="fas fa-camera-retro"></i>&nbsp;&nbsp;<span>{{__('Album Category')}}</span></a></li>
+                        @endif
+                        @if( Route::has('dcms.album.index'))
+                        <li><a class="{{ ($_panel == 'Album' || $_panel == 'Gallery') ? 'active' : '' }}" href="{{ URL::route('dcms.album.index') }}" ><i class="fas fa-images"></i>&nbsp;&nbsp;<span>{{__('Photo Album')}}</span></a></li>
+                        @endif
+                        @if(Route::has('dcms.blog.index'))
+                        <li><a class="{{ ($_panel == 'Videos') ? 'active' : '' }}" href="{{ URL::route('dcms.blog.index') }}"><i class="fas fa-video"></i>&nbsp;&nbsp;<span>Videos</span></a></li>
+                        @endif
+                    </ul>
+                </li>
+
+                <li class="sub-menu {{ ($_panel == 'Sliders' || $_panel == 'Links' || $_panel == 'Services' || $_panel == 'Pop Up') ? 'active' : '' }}">
+                    <a href="javascript:;" class="{{ ($_panel == 'Sliders' || $_panel == 'Links' || $_panel == 'Services') ? 'active' : '' }}"><i class="fas fa-cart-plus"></i>
+                        <span class="menu-arrow"></span>
+                        <span>{{ __('Accessories ') }}</span>
+                    </a>
+                    <ul class="nav-second-level" aria-expanded="true">
+                        @if( Route::has('dcms.slider.index'))
+                        <li class="{{ ($_panel == 'Sliders') ? 'active' : '' }}"><a href="{{ URL::route('dcms.slider.index') }}" ><i class=" fas fa-arrows-alt-h">&nbsp;&nbsp;</i><span>{{__('Sliders')}}</span></a></li>
+                        @endif
+                        @if( Route::has('dcms.link.index'))
+                        <li class="{{ ($_panel == 'Links') ? 'active' : '' }}"><a href="{{ URL::route('dcms.link.index') }}" ><i class="fa fa-link"></i>&nbsp;&nbsp;<span>{{__('Links')}}</span></a></li>
+                        @endif
+                        @if( Route::has('dcms.service.index'))
+                        <li class="{{ ($_panel == 'Services') ? 'active' : '' }}"><a href="{{ URL::route('dcms.service.index') }}" ><i class="fa fa-bars"></i>&nbsp;&nbsp;<span>{{__('Services') }}</span></a></li>
+                        @endif
+                        @if( Route::has('dcms.popup.index'))
+                        <li class="{{ ($_panel == 'Pop Up') ? 'active' : '' }}"><a href="{{ URL::route('dcms.popup.index') }}" ><i class="fas fa-expand"></i>&nbsp;&nbsp;<span>{{__('Pop Up') }}</span></a></li>
+                        @endif
+                    </ul>
+                </li>
+
                 {{-- Check if the user is admin or super-admin  --}}
                 @if(Auth::user()->role == 'super-admin' || Auth::user()->role == 'admin')
-                    @if( Route::has('dcms.service.index'))
-                    <li><a class="{{ ($_panel == 'Services') ? 'active' : '' }}" href="{{ URL::route('dcms.service.index') }}" ><i class="fa fa-bars"></i><span>{{__('Services') }}</span></a></li>
-                    @endif
                     @if( Route::has('dcms.menu.index'))
                     <li><a class="{{ ($_panel == 'Menus') ? 'active' : '' }}" href="{{ URL::route('dcms.menu.index') }}" ><i class="fa fa-bars"></i><span>{{__('Menus')}}</span></a></li>
                     @endif

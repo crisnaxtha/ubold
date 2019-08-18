@@ -11,7 +11,7 @@ use App\Model\Dcms\Blog;
 
 class BlogsController extends DM_BaseController
 {
-    protected $panel = 'Blogs';
+    protected $panel = 'Videos';
     protected $base_route = 'dcms.blog';
     protected $view_path = 'dcms.blog';
     protected $model;

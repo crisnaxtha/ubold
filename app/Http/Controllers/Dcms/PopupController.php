@@ -3,10 +3,27 @@
 namespace App\Http\Controllers\Dcms;
 
 use Illuminate\Http\Request;
-use App\Http\Controllers\Controller;
+use App\Http\Controllers\Dcms\DM_BaseController;
+use App\Model\Dcms\Popup;
+use App\Model\Dcms\Tracker;
+use App\Model\Dcms\Eloquent\DM_Post;
 
-class PopupController extends Controller
+class PopupController extends DM_BaseController
 {
+    protected $panel = 'Popup';
+    protected $base_route = 'dcms.popup';
+    protected $view_path ='dcms.popup';
+    protected $model;
+    protected $table;
+
+    public function __construct(Request $request, Tracker $tracker, Popup $popup, DM_Post $dm_post) {
+        $this->middleware('auth');
+        $this->model = $popup;
+        $this->tracker = $tracker::hit();
+        $this->dm_post = $dm_post;
+        $this->lang_id = $dm_post::setLanguage();
+
+    }
     /**
      * Display a listing of the resource.
      *
@@ -14,7 +31,9 @@ class PopupController extends Controller
      */
     public function index()
     {
-        //
+        $this->tracker;
+        $data['rows'] = $this->model::where('lang_id', '=', $this->lang_id)->get();
+        return view(parent::loadView($this->view_path.'.index'), compact('data'));
     }
 
     /**
@@ -24,7 +43,8 @@ class PopupController extends Controller
      */
     public function create()
     {
-        //
+        $data['lang'] = $this->dm_post::getLanguage();
+        return view(parent::loadView($this->view_path.'.create'), compact('data'));
     }
 
     /**
@@ -35,7 +55,13 @@ class PopupController extends Controller
      */
     public function store(Request $request)
     {
-        //
+        if($this->model->storeData($request->icon, $request->color, $request->rows, $request->status, $request->order, $request->url ) ){
+            session()->flash('alert-success', $this->panel.' Successfully Store');
+        }else {
+            session()->flash('alert-danger', $this->panel.' can not be Store');
+        }
+        return redirect()->route($this->base_route.'.index');
+
     }
 
     /**
@@ -57,7 +83,10 @@ class PopupController extends Controller
      */
     public function edit($id)
     {
-        //
+        $links = $this->model::where('link_unique_id', '=', $link_unique_id)->get();
+        $data['lang'] = $this->dm_post::getLanguage();
+        $data['single'] = $this->model::where('link_unique_id', '=', $link_unique_id)->first();
+        return view(parent::loadView($this->view_path.'.edit'), compact('data', 'links'));
     }
 
     /**
@@ -69,7 +98,12 @@ class PopupController extends Controller
      */
     public function update(Request $request, $id)
     {
-        //
+        if($this->model->updateData($request->link_unique_id, $request->icon, $request->color, $request->rows, $request->status, $request->order, $request->url ) ){
+            session()->flash('alert-success', $this->panel.' Successfully Store');
+        }else {
+            session()->flash('alert-danger', $this->panel.' can not be Store');
+        }
+        return redirect()->route($this->base_route.'.index');
     }
 
     /**
@@ -78,8 +112,12 @@ class PopupController extends Controller
      * @param  int  $id
      * @return \Illuminate\Http\Response
      */
-    public function destroy($id)
+    public function destroy($popup_unique_id)
     {
-        //
+        $this->tracker;
+        $data = $this->model::where('popup_unique_id', '=', $popup_unique_id)->get();
+        foreach( $data as $row) {
+            $row->delete();
+        }
     }
 }

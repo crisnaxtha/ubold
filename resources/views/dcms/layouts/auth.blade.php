@@ -40,7 +40,7 @@
                                     {{-- <a href="index.html">
                                         <span><img src="assets/images/logo-dark.png" alt="" height="22"></span>
                                     </a> --}}
-                                    <h3 class="text-muted mb-4 mt-3"><strong>{{ __('DCMS:') }}</strong>{{ __('Sign In') }}</h3>
+                                    <h3 class="text-muted mb-4 mt-3"><strong>{{ __('UBOLD:') }}</strong>{{ __('Sign In') }}</h3>
                                 </div>
 
                                     @yield('content')

@@ -239,6 +239,21 @@ Route::group(['prefix' => 'dashboard', 'as'=> 'dcms.', 'namespace'=>'Dcms', 'mid
         Route::put('{link}',                             ['as'=>'update',              'uses'=>'LinksController@update']);
         Route::delete('{link}',                          ['as'=>'destroy',              'uses'=>'LinksController@destroy']);
     });
+
+    /**
+     * Link
+     *
+     */
+    Route::group(['prefix' => 'popup', 'as'=>'popup.'], function () {
+        Route::get('',                                      ['as'=>'index',              'uses'=>'PopupController@index']);
+        Route::get('create',                                ['as'=>'create',              'uses'=>'PopupController@create']);
+        Route::post('',                                     ['as'=>'store',              'uses'=>'PopupController@store']);
+        Route::get('{popup}/show',                          ['as'=>'show',              'uses'=>'PopupController@show']);
+        Route::get('{popup}/edit',                          ['as'=>'edit',              'uses'=>'PopupController@edit']);
+        Route::put('{popup}',                               ['as'=>'update',              'uses'=>'PopupController@update']);
+        Route::delete('{popup}',                            ['as'=>'destroy',              'uses'=>'PopupController@destroy']);
+    });
+
     /** Album Category */
     Route::group(['prefix' => 'album_category', 'as'=>'album_category.'], function () {
         Route::get('',                                      ['as'=>'index',              'uses'=>'AlbumCategoriesController@index']);
