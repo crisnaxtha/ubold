@@ -3,49 +3,78 @@
 namespace App\Model\Dcms;
 
 use App\Model\Dcms\DM_BaseModel;
+use Illuminate\Http\Request;
 use Auth;
 
 class Popup extends DM_BaseModel
 {
-    public function storeData($icon, $color, $rows, $status, $order, $url) {
-        $link_unique_id = uniqid(Auth::user()->id.'_');
+    protected $panel;
+    protected $base_route;
+    protected $view_path;
+    protected $model;
+    protected $table = 'popups';
+
+    protected $folder_path_image;
+    protected $folder_path_file;
+    protected $folder = 'pop';
+    protected $prefix_path_image = '/upload_file/images/popup/';
+
+    public function __construct() {
+        $this->folder_path_image = getcwd() . DIRECTORY_SEPARATOR . 'upload_file' . DIRECTORY_SEPARATOR . 'images' . DIRECTORY_SEPARATOR . $this->folder . DIRECTORY_SEPARATOR;
+    }
+
+    public function storeData(Request $request, $image, $rows, $link, $order, $status ) {
+        if($request->hasFile('image')){
+            $image = parent::uploadImage($request, $this->folder_path_image ,$this->prefix_path_image,'image','','');
+        }
+        else {
+            $image = null;
+        }
+        $popup_unique_id = uniqid(Auth::user()->id.'_');
         foreach( $rows as $row) {
             $links[] = [
-                'link_unique_id' => $link_unique_id,
-                'icon' => $icon,
-                'color' => $color,
+                'popup_unique_id' => $popup_unique_id,
                 'lang_id' => $row['lang_id'],
-                'name' => $row['name'],
-                'url'  => $url,
+                'title' => $row['title'],
+                'description' => $row['description'],
+                'link'  => $link,
                 'order' => $order,
                 'status' => $status,
+                'image' => $image,
+                'created_at' => date('Y-m-d-h-m-s')
             ];
         }
-        if(Link::insert($links)) {
+        if(Popup::insert($links)) {
             return true;
         }else {
             return false;
         }
     }
 
-    public function updateData($link_unique_id, $icon, $color, $rows, $status, $order, $url) {
+    public function updateData(Request $request, $popup_unique_id, $image, $rows, $link, $order, $status ) {
+        if($request->hasFile('image')){
+            $image = parent::uploadImage($request, $this->folder_path_image ,$this->prefix_path_image,'image','','');
+        }
+        else {
+            $image = '';
+        }
         foreach( $rows as $row) {
             if(isset($row['id'])){
-                $link = Link::findOrFail($row['id']);
+                $popup = Popup::findOrFail($row['id']);
             }else{
-                $link = new Link;
-                $link->link_unique_id = $link_unique_id;
+                $popup = new Popup;
+                $popup->popup_unique_id = $popup_unique_id;
             }
-            $link->lang_id = $row['lang_id'];
-            $link->icon = $icon;
-            $link->color = $color;
-            $link->name = $row['name'];
-            $link->order = $order;
-            $link->url = $url;
-            $link->status = $status;
-            $link->save();
+            $popup->lang_id = $row['lang_id'];
+            $popup->title = $row['title'];
+            $popup->description = $row['description'];
+            $popup->order = $order;
+            $popup->link = $link;
+            $popup->image = $image;
+            $popup->status = $status;
+            $popup->save();
         }
-        if($link->save()) {
+        if($popup->save()) {
             return true;
         }else {
             return false;

@@ -55,7 +55,7 @@ class PopupController extends DM_BaseController
      */
     public function store(Request $request)
     {
-        if($this->model->storeData($request->icon, $request->color, $request->rows, $request->status, $request->order, $request->url ) ){
+        if($this->model->storeData($request, $request->image, $request->rows, $request->link, $request->order, $request->status ) ){
             session()->flash('alert-success', $this->panel.' Successfully Store');
         }else {
             session()->flash('alert-danger', $this->panel.' can not be Store');
@@ -81,11 +81,11 @@ class PopupController extends DM_BaseController
      * @param  int  $id
      * @return \Illuminate\Http\Response
      */
-    public function edit($id)
+    public function edit($popup_unique_id)
     {
-        $links = $this->model::where('link_unique_id', '=', $link_unique_id)->get();
+        $links = $this->model::where('popup_unique_id', '=', $popup_unique_id)->get();
         $data['lang'] = $this->dm_post::getLanguage();
-        $data['single'] = $this->model::where('link_unique_id', '=', $link_unique_id)->first();
+        $data['single'] = $this->model::where('popup_unique_id', '=', $popup_unique_id)->first();
         return view(parent::loadView($this->view_path.'.edit'), compact('data', 'links'));
     }
 
@@ -98,7 +98,7 @@ class PopupController extends DM_BaseController
      */
     public function update(Request $request, $id)
     {
-        if($this->model->updateData($request->link_unique_id, $request->icon, $request->color, $request->rows, $request->status, $request->order, $request->url ) ){
+        if($this->model->updateData($request, $request->popup_unique_id, $request->image, $request->rows, $request->link, $request->order, $request->status ) ){
             session()->flash('alert-success', $this->panel.' Successfully Store');
         }else {
             session()->flash('alert-danger', $this->panel.' can not be Store');
