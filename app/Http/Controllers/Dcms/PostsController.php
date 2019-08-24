@@ -73,18 +73,18 @@ class PostsController extends DM_BaseController
         }
         return redirect()->route($this->base_route.'.index');
     }
-    public function editPage(Request $request, $post_unique_id) {
+    public function editPage(Request $request, $unique_id) {
         $this->tracker;
         $this->panel = 'Pages';
         $this->base_route = 'dcms.page';
         $this->view_path = 'dcms.page';
-        $post = $this->model::where('post_unique_id', '=', $post_unique_id)->get();
-        $data['file'] = $this->file_model::where('post_unique_id', '=', $post_unique_id)->get();
-        $data['single'] = $this->model::where('post_unique_id', '=', $post_unique_id)->first();
+        $post = $this->model::where('unique_id', '=', $unique_id)->get();
+        $data['file'] = $this->file_model::where('unique_id', '=', $unique_id)->get();
+        $data['single'] = $this->model::where('unique_id', '=', $unique_id)->first();
         $data['lang'] = $this->dm_post::getLanguage();
         return view(parent::loadView($this->view_path.'.edit'), compact('data', 'post'));
     }
-    public function updatePage(Request $request, $post_unique_id) {
+    public function updatePage(Request $request, $unique_id) {
         $request->validate([
             'rows.*.title' => 'required|max:225',
             'rows.*.description' => 'required',
@@ -101,7 +101,7 @@ class PostsController extends DM_BaseController
         $this->panel = 'Pages';
         $this->base_route = 'dcms.page';
         $this->view_path = 'dcms.page';
-        if($this->model->updateData($request, $request->category, $request->type, $request->rows, $request->image, $request->tag, $request->status, $request->file_title, $request->file, $post_unique_id)){
+        if($this->model->updateData($request, $request->category, $request->type, $request->rows, $request->image, $request->tag, $request->status, $request->file_title, $request->file, $unique_id)){
             session()->flash('alert-success', $this->panel.' Successfully updated');
         }
         else {
@@ -109,9 +109,9 @@ class PostsController extends DM_BaseController
         }
         return redirect()->route($this->base_route.'.index');
     }
-    public function destroy($post_unique_id) {
+    public function destroy($unique_id) {
         $this->tracker;
-        $data = $this->model::where('post_unique_id', '=', $post_unique_id)->get();
+        $data = $this->model::where('unique_id', '=', $unique_id)->get();
         foreach( $data as $row) {
             $row->deleted_at = new DateTime();
             $row->save();
@@ -183,19 +183,19 @@ class PostsController extends DM_BaseController
         }
         return redirect()->route($this->base_route.'.index');
     }
-    public function editPost(Request $request, $post_unique_id) {
+    public function editPost(Request $request, $unique_id) {
         $this->tracker;
         $this->panel = 'Posts';
         $this->base_route = 'dcms.post';
         $this->view_path = 'dcms.post';
-        $post = $this->model::where('post_unique_id', '=', $post_unique_id)->get();
-        $data['file'] = $this->file_model::where('post_unique_id', '=', $post_unique_id)->get();
-        $data['single'] = $this->model::where('post_unique_id', '=', $post_unique_id)->first();
+        $post = $this->model::where('unique_id', '=', $unique_id)->get();
+        $data['file'] = $this->file_model::where('unique_id', '=', $unique_id)->get();
+        $data['single'] = $this->model::where('unique_id', '=', $unique_id)->first();
         $data['lang'] = $this->dm_post::getLanguage();
         $data['categories'] = $this->dm_post::getCategories();
         return view(parent::loadView($this->view_path.'.edit'), compact('data', 'post'));
     }
-    public function updatePost(Request $request, $post_unique_id) {
+    public function updatePost(Request $request, $unique_id) {
         $request->validate([
             'rows.*.title' => 'required|max:225',
             'rows.*.description' => 'required',
@@ -213,7 +213,7 @@ class PostsController extends DM_BaseController
         $this->panel = 'Posts';
         $this->base_route = 'dcms.post';
         $this->view_path = 'dcms.post';
-        if($this->model->updateData($request, $request->category, $request->type, $request->rows, $request->image, $request->tag, $request->status, $request->file_title, $request->file, $post_unique_id)){
+        if($this->model->updateData($request, $request->category, $request->type, $request->rows, $request->image, $request->tag, $request->status, $request->file_title, $request->file, $unique_id)){
             session()->flash('alert-success', $this->panel.' Successfully updated');
         }
         else {
@@ -233,20 +233,20 @@ class PostsController extends DM_BaseController
     }
 
 
-    public function restore($post_unique_id) {
+    public function restore($unique_id) {
         $this->tracker;
-        $data = $this->model::where('post_unique_id', '=', $post_unique_id)->get();
+        $data = $this->model::where('unique_id', '=', $unique_id)->get();
         foreach( $data as $row) {
             $row->deleted_at = null;
             $row->save();
         }
     }
 
-    public function permanentDelete($post_unique_id) {
+    public function permanentDelete($unique_id) {
         $this->tracker;
-        $data = $this->model::where('post_unique_id', '=', $post_unique_id)->get();
+        $data = $this->model::where('unique_id', '=', $unique_id)->get();
         foreach( $data as $row) {
-            $this->model::where('post_unique_id', '=', $post_unique_id)->delete();
+            $this->model::where('unique_id', '=', $unique_id)->delete();
         }
     }
 

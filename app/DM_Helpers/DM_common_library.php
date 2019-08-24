@@ -5,12 +5,12 @@
 if(!function_exists('dm_flag')){
     function dm_flag($value) {
         if($value){?>
-    <button class="btn btn-round btn-success">
+    <button class="btn btn-xs btn-round btn-success">
         <i class="fa fa-check"></i>
     </button>
        <?php }
     else{ ?>
-        <button class="btn btn-round btn-danger">
+        <button class="btn btn-xs btn-round btn-danger">
             <i class="fa fa-minus-circle"></i>
         </button>                                
        <?php

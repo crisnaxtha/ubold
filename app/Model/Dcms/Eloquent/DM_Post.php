@@ -27,11 +27,11 @@ class DM_Post extends Model{
     /**
      * to get all the post file using joint post with file
      */
-    public static function joinPostFile($post_unique_id) {
+    public static function joinPostFile($unique_id) {
         return DB::table('posts')
-                ->join('files', 'posts.post_unique_id', '=', 'files.post_unique_id')
+                ->join('files', 'posts.unique_id', '=', 'files.unique_id')
                 ->where('posts.deleted_at', '=', null)
-                ->where('posts.post_unique_id', '=', $post_unique_id)
+                ->where('posts.unique_id', '=', $unique_id)
                 ->select('posts.*', 'files.title as file_tile', 'files.file')
                 ->get();
     }
@@ -50,10 +50,10 @@ class DM_Post extends Model{
 
     /**
      *
-     * get the post's id  using post_unique_id
+     * get the post's id  using unique_id
      *  */
-    public static function getPostId($post_unique_id) {
-        return Post::where('post_unique_id', $post_unique_id)
+    public static function getPostId($unique_id) {
+        return Post::where('unique_id', $unique_id)
                 ->select('id')->get();
     }
 
@@ -73,8 +73,8 @@ class DM_Post extends Model{
     }
 
     // get single page of particular language
-    public static function getSinglePage($post_unique_id, $lang_id) {
-        $post =  Post::where('deleted_at', '=', null)->where('status', '=', 1)->where('type', '=', 'page')->where('post_unique_id', '=', $post_unique_id)->where('lang_id', '=', $lang_id)->first();
+    public static function getSinglePage($unique_id, $lang_id) {
+        $post =  Post::where('deleted_at', '=', null)->where('status', '=', 1)->where('type', '=', 'page')->where('unique_id', '=', $unique_id)->where('lang_id', '=', $lang_id)->first();
         if(isset($post)){
         $post->increment('visit_no');
         }
@@ -82,8 +82,8 @@ class DM_Post extends Model{
     }
 
     // get the single post of particular language
-    public static function getSinglePost($post_unique_id, $lang_id) {
-        $post = Post::where('deleted_at', '=', null)->where('type', '=', 'post')->where('post_unique_id', '=', $post_unique_id)->where('lang_id', '=', $lang_id)->first();
+    public static function getSinglePost($unique_id, $lang_id) {
+        $post = Post::where('deleted_at', '=', null)->where('type', '=', 'post')->where('unique_id', '=', $unique_id)->where('lang_id', '=', $lang_id)->first();
         if(isset($post)){
             $post->increment('visit_no');
         }
@@ -91,8 +91,8 @@ class DM_Post extends Model{
 
     }
     // get the file
-    public static function getFile($post_unique_id) {
-        return File::where('post_unique_id', '=', $post_unique_id)->get();
+    public static function getFile($unique_id) {
+        return File::where('unique_id', '=', $unique_id)->get();
     }
 
     /**

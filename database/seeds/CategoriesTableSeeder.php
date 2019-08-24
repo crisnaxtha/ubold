@@ -1,7 +1,7 @@
 <?php
 
 use Illuminate\Database\Seeder;
-use App\Model\Dcms\Category;
+use App\Model\Dcms\Setting;
 
 class CategoriesTableSeeder extends Seeder
 {
@@ -12,6 +12,8 @@ class CategoriesTableSeeder extends Seeder
      */
     public function run()
     {
-       
+       Setting::create([
+           'language' => 1
+       ]);
     }
 }

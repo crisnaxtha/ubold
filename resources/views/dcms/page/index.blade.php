@@ -57,7 +57,7 @@
                         @foreach($data['rows'] as $row)
                         <tr class="gradeX" id="{{ $row->id }}">
                                 <td width="25px">{{ $loop->iteration }}</td>
-                                <td width="25px">{{ $row->post_unique_id }}</td>
+                                <td width="25px">{{ $row->unique_id }}</td>
                                 <td width="25px" class="hidden-phone">
                                     @if($row->language->image)
                                     <img style="width: 24px;" src="{{asset($row->language->image)}}">
@@ -70,8 +70,8 @@
                                     <?php dm_flag($row->status) ?>
                                 </td>
                                 <td width="150px" class="hidden-phone">
-                                    @include('dcms.includes.buttons.button-edit-post')
-                                    @include('dcms.includes.buttons.button-delete-post')
+                                    @include('dcms.includes.buttons.button-unique-edit')
+                                    @include('dcms.includes.buttons.button-unique-delete')
                                 </td>
                             </tr>
                         @endforeach

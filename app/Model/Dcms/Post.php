@@ -45,7 +45,7 @@ class Post extends DM_BaseModel
     }
 
     public function storeData(Request $request, $category, $type, $rows, $image, $tag, $status, $file_title, $files){
-        $post_unique_id = uniqid(Auth::user()->id.'_');
+        $unique_id = uniqid(Auth::user()->id.'_');
         // for thumbnail
         if($request->hasFile('image')){
             $post_thumbnail = parent::uploadImage($request, $this->folder_path_image ,$this->prefix_path_image,'image','','');
@@ -75,7 +75,7 @@ class Post extends DM_BaseModel
                 'user_id' => Auth::user()->id,
                 'category_id' => $category,
                 'lang_id' => $row['lang_id'],
-                'post_unique_id' => $post_unique_id,
+                'unique_id' => $unique_id,
                 'title' => $row['title'],
                 'slug' => Str::slug($row['title']),
                 'thumbnail' => $post_thumbnail,
@@ -91,7 +91,7 @@ class Post extends DM_BaseModel
         if(isset($array_file)){
             foreach($array_file as $file_row)
                 File::create([
-                    'post_unique_id' => $post_unique_id,
+                    'unique_id' => $unique_id,
                     'title'=> $file_row[0],
                     'file' => $file_row[1],
                 ]);
@@ -104,7 +104,7 @@ class Post extends DM_BaseModel
         }
     }
 
-    public function updateData(Request $request, $category, $type, $rows, $image, $tag, $status, $file_title, $files, $post_unique_id){
+    public function updateData(Request $request, $category, $type, $rows, $image, $tag, $status, $file_title, $files, $unique_id){
         // for thumbnail
         if($request->hasFile('image')){
             $post_thumbnail = parent::uploadImage($request, $this->folder_path_image ,$this->prefix_path_image,'image','','');
@@ -135,7 +135,7 @@ class Post extends DM_BaseModel
             }else{
                 $post = new Post;
                 $post->user_id = Auth::user()->id;
-                $post->post_unique_id = $request->post_unique_id;
+                $post->unique_id = $unique_id;
             }
             $post->category_id = $category;
             $post->lang_id = $row['lang_id'];
@@ -147,13 +147,13 @@ class Post extends DM_BaseModel
             $post->status = $status;
             $post->tag = $tag;
             $post->type = $type;
-            $post->updated_at = new DateTime();
+            $post->updated_at = date('Y-m-d');
             $post->save();
         }
         if(isset($array_file)){
             foreach($array_file as $file_row)
                 File::create([
-                    'post_unique_id' => $post_unique_id,
+                    'unique_id' => $unique_id,
                     'title'=> $file_row[0],
                     'file' => $file_row[1],
                 ]);
@@ -171,7 +171,7 @@ class Post extends DM_BaseModel
     }
 
     public function file() {
-        return $this->hasMany(File::class, 'post_unique_id');
+        return $this->hasMany(File::class, 'unique_id');
     }
 
     public function postCategory() {

@@ -9,7 +9,7 @@
                 @include('dcms.includes.buttons.button-back')
                 @include('dcms.includes.flash_message_error')
                 <?php
-                    dm_postform(URL::route($_base_route.'.update', ['id' => $data['single']->post_unique_id]), 'PUT');
+                    dm_postform(URL::route($_base_route.'.update', ['unique_id' => $data['single']->unique_id]), 'PUT');
                 ?>
                 <ul class="nav nav-tabs nav-bordered">
                     @if(isset($data['lang']))
@@ -48,7 +48,7 @@
                                 }
                                 dm_hidden('rows['.$loop->index.'][lang_id]', $row->id);
                                 dm_hidden('type', 'page');
-                                dm_hidden('post_unique_id', $data['single']->post_unique_id);
+                                dm_hidden('unique_id', $data['single']->unique_id);
                                 dm_hidden('rows['.$loop->index.'][id]', $id);
                                 dm_hidden( 'category', '');
                                 dm_inputUpdate('text', 'rows['.$loop->index.'][title]', 'Title(*)', $title, '');
@@ -78,7 +78,7 @@
             <div class="card-body">
                 <p class="header-title">File Section</p>
                 <?php
-                    dm_button("button", "btn-success btn-file btn-small", "Add Files");
+                    dm_button("button", "btn-success btn-file btn-xs", "Add Files");
                 ?>
                 <div class="file-block">
 
@@ -88,7 +88,7 @@
                         <?php
                             dm_input('text', 'file_title[]', 'File Title', '', '');
                             dm_input('file', 'files[]', 'Upload File', '', '');
-                            dm_button("button", "btn-danger btn-remove pull-right", "Remove Files");
+                            dm_button("button", "btn-danger btn-remove float-right btn-xs", "Remove Files");
                         ?>
                         <br>
                         @if(isset($data['file']))

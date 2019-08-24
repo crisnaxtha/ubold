@@ -7,7 +7,7 @@
             <div class="card-body">
                 @include('dcms.includes.buttons.button-back')
                 @include('dcms.includes.flash_message_error')
-                <?php  dm_postform(URL::route($_base_route.'.update', ['id' => $data['single']->post_unique_id]), 'PUT');?>
+                <?php  dm_postform(URL::route($_base_route.'.update', ['id' => $data['single']->unique_id]), 'PUT');?>
                 <p class="header-title">Select Category</p>
                 <?php
                     dm_dropdown('category','Category(*)', $data['categories'], $data['single']->category_id, $data['single']->postCategory->name);
@@ -49,7 +49,7 @@
                                        }
                                        dm_hidden('rows['.$loop->index.'][lang_id]', $row->id);
                                        dm_hidden('type', 'post');
-                                       dm_hidden('post_unique_id', $data['single']->post_unique_id);
+                                       dm_hidden('unique_id', $data['single']->unique_id);
                                        dm_hidden('rows['.$loop->index.'][id]', $id);
                                        dm_inputUpdate('text', 'rows['.$loop->index.'][title]', 'Title(*)', $title, '');
                                        dm_ckeditorUpdate($row->code.$loop->iteration, 'rows['.$loop->index.'][description]', 'Description(*)', $content);
@@ -78,7 +78,7 @@
             <div class="card-body">
                 <p class="header-title">File Section</p>
                 <?php
-                    dm_button("button", "btn-success btn-file btn-small", "Add Files");
+                    dm_button("button", "btn-success btn-file btn-xs", "Add Files");
                 ?>
                 <div class="file-block">
 
@@ -88,7 +88,7 @@
                         <?php
                             dm_input('text', 'file_title[]', 'File Title', '', '');
                             dm_input('file', 'files[]', 'Upload File', '', '');
-                            dm_button("button", "btn-danger btn-remove float-right btn-small", "Remove Files");
+                            dm_button("button", "btn-danger btn-remove float-right btn-xs", "Remove Files");
                         ?>
                         <br>
                         @if(isset($data['file']))

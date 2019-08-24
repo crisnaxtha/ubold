@@ -16,7 +16,7 @@ class CreateCommonsTable extends Migration
         Schema::create('commons', function (Blueprint $table) {
             $table->increments('id');
             $table->unsignedInteger('lang_id');
-            $table->string('common_unique_id');
+            $table->string('unique_id');
             $table->text('logo')->nullable();
             $table->string('header_first_title')->nullable();
             $table->string('header_second_title')->nullable();

@@ -109,12 +109,12 @@ class SiteController extends DM_BaseController
         return view(parent::loadView($this->view_path.'.single'), compact('data'));
     }
     /** Show Single Page */
-    public function showPage($post_unique_id){
+    public function showPage($unique_id){
         $this->tracker;
         $data['common'] = Common::where('lang_id', '=', $this->lang_id)->first();
         $data['menu'] = Menu::tree($this->lang_id);
-        $data['row'] = $this->dm_post::getSinglePage($post_unique_id, $this->lang_id);
-        $data['file'] = $this->dm_post::getFile($post_unique_id);
+        $data['row'] = $this->dm_post::getSinglePage($unique_id, $this->lang_id);
+        $data['file'] = $this->dm_post::getFile($unique_id);
         $data['recent_post'] = DB::table('posts')->where('type', '=', 'post')->where('status', '=', 1)->where('lang_id', '=', $this->lang_id)->take(5)->get();
         return view(parent::loadView($this->view_path.'.single'), compact('data'));
     }

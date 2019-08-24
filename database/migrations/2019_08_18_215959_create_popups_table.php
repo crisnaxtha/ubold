@@ -16,7 +16,7 @@ class CreatePopupsTable extends Migration
         Schema::create('popups', function (Blueprint $table) {
             $table->increments('id');
             $table->unsignedInteger('lang_id');
-            $table->string('popup_unique_id');
+            $table->string('unique_id');
             $table->string('title')->nullable();
             $table->text('description')->nullable();
             $table->text('image')->nullable();

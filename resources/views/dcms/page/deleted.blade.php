@@ -32,7 +32,7 @@
                         @foreach($data['rows'] as $row)
                         <tr class="gradeX" id="{{ $row->id }}">
                            <td width="25px">{{ $loop->iteration }}</td>
-                           <td width="25px">{{ $row->post_unique_id }}</td>
+                           <td width="25px">{{ $row->unique_id }}</td>
                            <td width="25px">
                               {{ $row->deleted_at }}
                            </td>

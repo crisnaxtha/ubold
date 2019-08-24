@@ -53,7 +53,7 @@
             <div class="card-body">
                 <p class="header-title">File Section</p>
                 <?php
-                    dm_button("button", "btn-success btn-file btn-small", "Add Files");
+                    dm_button("button", "btn-success btn-file btn-xs", "Add Files");
                 ?>
                 <div class="file-block">
 
@@ -63,7 +63,7 @@
                         <?php
                             dm_input('text', 'file_title[]', 'File Title', '', '');
                             dm_input('file', 'files[]', 'Upload File', '', '');
-                            dm_button("button", "btn-danger btn-remove float-right btn-small", "Remove Files");
+                            dm_button("button", "btn-danger btn-remove float-right btn-xs", "Remove Files");
                         ?>
                         <br>
                     </div>
