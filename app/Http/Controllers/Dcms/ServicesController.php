@@ -90,14 +90,14 @@ class ServicesController extends DM_BaseController
      * @param  int  $id
      * @return \Illuminate\Http\Response
      */
-    public function edit($service_unique_id)
+    public function edit($unique_id)
     {
         $spyc = new Spyc();
         $icons = $spyc::YAMLLoad(app_path()."/DM_Treasure/icons.yml");
         $data['fa-icons'] = $icons["fa"];
-        $links = $this->model::where('service_unique_id', '=', $service_unique_id)->get();
+        $links = $this->model::where('unique_id', '=', $unique_id)->get();
         $data['lang'] = $this->dm_post::getLanguage();
-        $data['single'] = $this->model::where('service_unique_id', '=', $service_unique_id)->first();
+        $data['single'] = $this->model::where('unique_id', '=', $unique_id)->first();
         return view(parent::loadView($this->view_path.'.edit'), compact('data', 'links')); 
     }
 
@@ -118,7 +118,7 @@ class ServicesController extends DM_BaseController
         ], [
             'rows.*.title.required' => 'You have to enter the name of Service.',
         ]);
-        if($this->model->updateData($request->service_unique_id, $request->icon, $request->color, $request->rows, $request->link, $request->order, $request->status ) ){
+        if($this->model->updateData($request->unique_id, $request->icon, $request->color, $request->rows, $request->link, $request->order, $request->status ) ){
             session()->flash('alert-success', $this->panel.' Successfully Store');
         }else {
             session()->flash('alert-danger', $this->panel.' can not be Store');
@@ -132,10 +132,10 @@ class ServicesController extends DM_BaseController
      * @param  int  $id
      * @return \Illuminate\Http\Response
      */
-    public function destroy($service_unique_id)
+    public function destroy($unique_id)
     {
         $this->tracker;
-        $data = $this->model::where('service_unique_id', '=', $service_unique_id)->get();
+        $data = $this->model::where('unique_id', '=', $unique_id)->get();
         foreach( $data as $row) {
             $row->delete();
         }
