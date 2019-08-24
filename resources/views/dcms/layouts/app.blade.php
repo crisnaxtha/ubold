@@ -12,7 +12,7 @@
     <link rel="shortcut icon" href="{{ asset('assets/dcms/assets/images/favicon.ico') }}">
 
     @if(isset($_panel))
-    <title>{{ $_panel }} | DCMS</title>
+    <title>{{ $_panel }} | UBOLD</title>
     @else
     <title>DCMS</title>
     @endif

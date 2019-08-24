@@ -7,9 +7,9 @@
     <meta name="description" content="">
     <meta name="author" content="LOCHAN">
     <meta name="keyword" content="">
-    <link rel="shortcut icon" href="">
+    <link rel="shortcut icon" href="{{ asset('assets/dcms/assets/images/favicon.ico') }}">
 
-    <title>DCMS|</title>
+    <title>Login | UBOLD</title>
 
     <!-- App css -->
     <link href="{{ asset('assets/dcms/assets/css/bootstrap.min.css') }}" rel="stylesheet" type="text/css" />
