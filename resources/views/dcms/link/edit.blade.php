@@ -9,7 +9,7 @@
                     @include('dcms.includes.flash_message_error')
                 <div class=" form">
                         <?php
-                        dm_hpostform(URL::route($_base_route.'.update', ['link_unique_id' => $data['single']->link_unique_id]), 'PUT');
+                        dm_hpostform(URL::route($_base_route.'.update', ['unique_id' => $data['single']->unique_id]), 'PUT');
                         dm_hselect_faicon('icon', 'Icon', $data['fa-icons'], $data['single']->icon);
                         dm_hcolor_picker('color', "Select Color", $data['single']->color);
                         ?>
@@ -27,7 +27,7 @@
                         }
                         dm_hidden('rows['.$loop->index.'][lang_id]', $row->id);
                         dm_hidden('rows['.$loop->index.'][id]', $id);
-                        dm_hidden('link_unique_id', $data['single']->link_unique_id);
+                        dm_hidden('unique_id', $data['single']->unique_id);
                         dm_hinputUpdate('text','rows['.$loop->index.'][name]', "Name Of Link (<strong>$row->name</strong>)(*)", $name);
                         ?>
                         @endforeach

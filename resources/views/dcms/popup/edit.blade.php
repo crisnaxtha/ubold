@@ -8,7 +8,7 @@
             <div class="card-body">
                 @include('dcms.includes.buttons.button-back')
                 @include('dcms.includes.flash_message_error')
-                <?php dm_hpostform(URL::route($_base_route.'.update', ['popup_unique_id' => $data['single']->popup_unique_id]), 'PUT'); ?>
+                <?php dm_hpostform(URL::route($_base_route.'.update', ['unique_id' => $data['single']->unique_id]), 'PUT'); ?>
                 <ul class="nav nav-tabs nav-bordered">
                     @if(isset($data['lang']))
                         @foreach($data['lang'] as $row )
@@ -39,7 +39,7 @@
                                         $description = '';
                                     }
                                     dm_hidden('rows['.$loop->index.'][lang_id]', $row->id);
-                                    dm_hidden('popup_unique_id', $data['single']->popup_unique_id);
+                                    dm_hidden('unique_id', $data['single']->unique_id);
                                     dm_hidden('rows['.$loop->index.'][id]', $id);
                                     dm_inputUpdate('text', 'rows['.$loop->index.'][title]', 'Title(*)', $name, '');
                                     dm_ckeditorUpdate($row->code.$loop->iteration, 'rows['.$loop->index.'][description]', 'Description(*)', $description);

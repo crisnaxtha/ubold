@@ -8,10 +8,10 @@ use Auth;
 class Link extends DM_BaseModel
 {
     public function storeData($icon, $color, $rows, $status, $order, $url) {
-        $link_unique_id = uniqid(Auth::user()->id.'_');
+        $unique_id = uniqid(Auth::user()->id.'_');
         foreach( $rows as $row) {
             $links[] = [
-                'link_unique_id' => $link_unique_id,
+                'unique_id' => $unique_id,
                 'icon' => $icon,
                 'color' => $color,
                 'lang_id' => $row['lang_id'],
@@ -28,13 +28,13 @@ class Link extends DM_BaseModel
         }
     }
 
-    public function updateData($link_unique_id, $icon, $color, $rows, $status, $order, $url) {
+    public function updateData($unique_id, $icon, $color, $rows, $status, $order, $url) {
         foreach( $rows as $row) {
             if(isset($row['id'])){
                 $link = Link::findOrFail($row['id']);
             }else{
                 $link = new Link;
-                $link->link_unique_id = $link_unique_id;
+                $link->unique_id = $unique_id;
             }
             $link->lang_id = $row['lang_id'];
             $link->icon = $icon;

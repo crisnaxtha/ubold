@@ -33,7 +33,7 @@ class Staff extends DM_BaseModel
     }
 
     public function storeData(Request $request, $rows, $image, $branch_id, $status, $level, $featured){
-        $staff_unique_id = uniqid(Auth::user()->id.'_');
+        $unique_id = uniqid(Auth::user()->id.'_');
         // for thumbnail
         if($request->hasFile('image')){
             $staff_image = parent::uploadImage($request, $this->folder_path_image ,$this->prefix_path_image,'image');
@@ -45,7 +45,7 @@ class Staff extends DM_BaseModel
         foreach($rows as $row) {
             $staff[] =[
                 'lang_id' => $row['lang_id'],
-                'staff_unique_id' => $staff_unique_id,
+                'unique_id' => $unique_id,
                 'name' => $row['name'],
                 'image' => $staff_image,
                 'description' => $row['description'],
@@ -71,13 +71,13 @@ class Staff extends DM_BaseModel
      * Update the branch office
      */
     public function updateData(Request $request, $rows, $image, $branch_id, $status, $level, $featured) {
-        $staff_unique_id = uniqid(Auth::user()->id.'_');
+        $unique_id = uniqid(Auth::user()->id.'_');
         foreach( $rows as $row) {
             if(isset($row['id'])){
                 $staff = Staff::findOrFail($row['id']);
             }else{
                 $staff = new Staff;
-                $staff->staff_unique_id = $staff_unique_id;
+                $staff->unique_id = $unique_id;
             }
             $staff->lang_id = $row['lang_id'];
             $staff->name = $row['name'];

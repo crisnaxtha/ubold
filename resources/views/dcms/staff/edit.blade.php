@@ -11,7 +11,7 @@
                 @include('dcms.includes.flash_message_error')
 
         <?php
-        dm_postform(URL::route($_base_route.'.update', ['staff_unique_id'=> $data['single']->staff_unique_id]), 'PUT');
+        dm_postform(URL::route($_base_route.'.update', ['unique_id'=> $data['single']->unique_id]), 'PUT');
         ?>
             <ul class="nav nav-tabs nav-bordered">
                 @if(isset($data['lang']))
@@ -52,7 +52,7 @@
 
                                 dm_hidden('rows['.$loop->index.'][lang_id]', $row->id);
                                 dm_hidden('rows['.$loop->index.'][id]', $id);
-                                dm_hidden('staff_unique_id', $data['single']->staff_unique_id);
+                                dm_hidden('unique_id', $data['single']->unique_id);
                                 dm_inputUpdate('text', 'rows['.$loop->index.'][name]', 'Name(*)', $name, '');
                                 dm_inputUpdate('text', 'rows['.$loop->index.'][designation]', 'Designation', $designation, '');
                                 dm_ckeditorUpdate($row->code.$loop->iteration, 'rows['.$loop->index.'][description]', 'Description', $description);

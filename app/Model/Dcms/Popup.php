@@ -30,10 +30,10 @@ class Popup extends DM_BaseModel
         else {
             $image = null;
         }
-        $popup_unique_id = uniqid(Auth::user()->id.'_');
+        $unique_id = uniqid(Auth::user()->id.'_');
         foreach( $rows as $row) {
             $links[] = [
-                'popup_unique_id' => $popup_unique_id,
+                'unique_id' => $unique_id,
                 'lang_id' => $row['lang_id'],
                 'title' => $row['title'],
                 'description' => $row['description'],
@@ -51,7 +51,7 @@ class Popup extends DM_BaseModel
         }
     }
 
-    public function updateData(Request $request, $popup_unique_id, $image, $rows, $link, $order, $status ) {
+    public function updateData(Request $request, $unique_id, $image, $rows, $link, $order, $status ) {
         if($request->hasFile('image')){
             $image = parent::uploadImage($request, $this->folder_path_image ,$this->prefix_path_image,'image','','');
         }
@@ -63,7 +63,7 @@ class Popup extends DM_BaseModel
                 $popup = Popup::findOrFail($row['id']);
             }else{
                 $popup = new Popup;
-                $popup->popup_unique_id = $popup_unique_id;
+                $popup->unique_id = $unique_id;
             }
             $popup->lang_id = $row['lang_id'];
             $popup->title = $row['title'];

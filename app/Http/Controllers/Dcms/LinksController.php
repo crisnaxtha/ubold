@@ -92,14 +92,14 @@ class LinksController extends DM_BaseController
      * @param  int  $id
      * @return \Illuminate\Http\Response
      */
-    public function edit($link_unique_id)
+    public function edit($unique_id)
     {
         $spyc = new Spyc();
         $icons = $spyc::YAMLLoad(app_path()."/DM_Treasure/icons.yml");
         $data['fa-icons'] = $icons["fa"];
-        $links = $this->model::where('link_unique_id', '=', $link_unique_id)->get();
+        $links = $this->model::where('unique_id', '=', $unique_id)->get();
         $data['lang'] = $this->dm_post::getLanguage();
-        $data['single'] = $this->model::where('link_unique_id', '=', $link_unique_id)->first();
+        $data['single'] = $this->model::where('unique_id', '=', $unique_id)->first();
         return view(parent::loadView($this->view_path.'.edit'), compact('data', 'links'));
     }
 
@@ -120,7 +120,7 @@ class LinksController extends DM_BaseController
         ], [
             'rows.*.name.required' => 'You have to enter the name of Link.',
         ]);
-        if($this->model->updateData($request->link_unique_id, $request->icon, $request->color, $request->rows, $request->status, $request->order, $request->url ) ){
+        if($this->model->updateData($request->unique_id, $request->icon, $request->color, $request->rows, $request->status, $request->order, $request->url ) ){
             session()->flash('alert-success', $this->panel.' Successfully Store');
         }else {
             session()->flash('alert-danger', $this->panel.' can not be Store');
@@ -134,10 +134,10 @@ class LinksController extends DM_BaseController
      * @param  int  $id
      * @return \Illuminate\Http\Response
      */
-    public function destroy($link_unique_id)
+    public function destroy($unique_id)
     {
         $this->tracker;
-        $data = $this->model::where('link_unique_id', '=', $link_unique_id)->get();
+        $data = $this->model::where('unique_id', '=', $unique_id)->get();
         foreach( $data as $row) {
             $row->delete();
         }

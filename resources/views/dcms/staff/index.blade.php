@@ -60,8 +60,9 @@
                         <td>{{ $row->level }}</td>
                         <td><?php dm_flag($row->status) ?></td>
                         <td>
-                           @include('dcms.includes.buttons.button-edit-staff')
-                           @include('dcms.includes.buttons.button-delete-staff')
+                                @include('dcms.includes.buttons.button-unique-edit')
+                                @include('dcms.includes.buttons.button-unique-delete')
+                            </td>
                         </td>
                      </tr>
                      @endforeach

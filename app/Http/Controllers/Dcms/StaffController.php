@@ -92,12 +92,12 @@ class StaffController extends DM_BaseController
      * @param  int  $id
      * @return \Illuminate\Http\Response
      */
-    public function edit($staff_unique_id)
+    public function edit($unique_id)
     {
-        $staff = $this->model::where('staff_unique_id', '=', $staff_unique_id)->get();
+        $staff = $this->model::where('unique_id', '=', $unique_id)->get();
         $data['lang'] = $this->dm_post::getLanguage();
         $data['branch'] = $this->branch::where('status', '=', 1)->get();
-        $data['single'] = $this->model::where('staff_unique_id', '=', $staff_unique_id)->first();
+        $data['single'] = $this->model::where('unique_id', '=', $unique_id)->first();
         return view(parent::loadView($this->view_path.'.edit'), compact('data', 'staff'));
     }
 
@@ -134,10 +134,10 @@ class StaffController extends DM_BaseController
      * @param  int  $id
      * @return \Illuminate\Http\Response
      */
-    public function destroy($staff_unique_id)
+    public function destroy($unique_id)
     {
         $this->tracker;
-        $data = $this->model::where('staff_unique_id', '=', $staff_unique_id)->get();
+        $data = $this->model::where('unique_id', '=', $unique_id)->get();
         foreach( $data as $row) {
             $row->delete();
         }
@@ -164,7 +164,7 @@ class StaffController extends DM_BaseController
             $i = 0;
             foreach( $readbleArray as $row) {
                 $i++;
-                $menu = Staff::where('staff_unique_id', '=', $row['unique'])->get();
+                $menu = Staff::where('unique_id', '=', $row['unique'])->get();
                 foreach($menu as $stf) {
                     $staff = Staff::findOrFail($stf->id);
                     $staff->order = $i;

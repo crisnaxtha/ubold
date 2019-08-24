@@ -16,7 +16,7 @@
                         ?>
                         @foreach($data['lang'] as $lang)
                           <?php   dm_hidden('rows['.$loop->index.'][lang_id]', $lang->id);
-                                  dm_menu_hinput('text','rows['.$loop->index.'][lang_name]', "Menu Name (<strong>$lang->name</strong>)(*)", 'rows.'.$loop->index.'.lang_name');
+                                  dm_menu_hinput('text','rows['.$loop->index.'][lang_name]', " Name (<strong>$lang->name</strong>)(*)", 'rows.'.$loop->index.'.lang_name');
                          ?>
                         @endforeach
                         <?php

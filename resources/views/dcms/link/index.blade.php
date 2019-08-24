@@ -55,8 +55,8 @@
                                <td>{{ $row->url }}</td>
                                <td><?php dm_flag($row->status) ?></td>
                                <td>
-                                  @include('dcms.includes.buttons.button-edit-link')
-                                  @include('dcms.includes.buttons.button-delete-link')
+                                    @include('dcms.includes.buttons.button-unique-edit')
+                                    @include('dcms.includes.buttons.button-unique-delete')
                                </td>
                             </tr>
                             @endforeach
