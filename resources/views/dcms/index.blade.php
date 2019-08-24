@@ -90,19 +90,19 @@
     <!-- end row-->
 
     <div class="row">
-        <div class="col-xl-4">
+        <div class="col-xl-6">
             <div class="card-box">
-                <h4 class="header-title mb-3">Visit</h4>
-
+                <h4 class="header-title mb-3">Last 12 Month Visit Analytics</h4>
                 <div class="widget-chart text-center" dir="ltr">
-
+                    <canvas id="myChartOne"  width="390" height="370" aria-label="Hello ARIA World" role="img"></canvas>
                 </div>
             </div> <!-- end card-box -->
         </div> <!-- end col-->
 
-        <div class="col-xl-8">
+        <div class="col-xl-6">
             <div class="card-box">
-                <h4 class="header-title mb-3">Visti Analytics</h4>
+                <h4 class="header-title mb-3">Last 12 Days Vist Analytics</h4>
+                <canvas id="myChart"  width="30" height="30" aria-label="Hello ARIA World" role="img"></canvas>
             </div> <!-- end card-box -->
         </div> <!-- end col-->
     </div>
@@ -113,4 +113,62 @@
 
 @section('js')
 @include('dcms.includes.flash-message')
+
+
+<script>
+        var color = Chart.helpers.color;
+        var barChartData = {
+                labels: <?php echo json_encode($data['day_date'], JSON_NUMERIC_CHECK); ?>,
+                datasets: [{
+                    label: 'Number Of Visit',
+                    data: <?php echo json_encode($data['day_count'], JSON_NUMERIC_CHECK); ?>,
+                    backgroundColor:color(window.chartColors.red).alpha(0.5).rgbString(),
+                    borderColor: window.chartColors.red,
+                    borderWidth: 1
+                }]
+            }
+        var ctx = document.getElementById('myChart').getContext('2d');
+        var myChart = new Chart(ctx, {
+            type: 'bar',
+            data: barChartData,
+            options: {
+                scales: {
+                    yAxes: [{
+                        ticks: {
+                            beginAtZero: true
+                        }
+                    }]
+                }
+            }
+        });
+</script>
+
+<script>
+var color = Chart.helpers.color;
+var lineData = {
+        labels: <?php echo json_encode($data['month_date'], JSON_NUMERIC_CHECK); ?>,
+        datasets: [{
+            steppedLine: false,
+            label: 'Number Of Visit',
+            data: <?php echo json_encode($data['month_count'], JSON_NUMERIC_CHECK); ?>,
+            backgroundColor:color(window.chartColors.red).alpha(0.5).rgbString(),
+            borderColor: window.chartColors.red,
+            fill: false,
+        }]
+    }
+var ctx = document.getElementById('myChartOne').getContext('2d');
+var myChart = new Chart(ctx, {
+    type: 'line',
+    data: lineData,
+    options: {
+        scales: {
+            yAxes: [{
+                ticks: {
+                    beginAtZero: true
+                }
+            }]
+        }
+    }
+});
+</script>	
 @endsection

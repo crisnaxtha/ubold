@@ -11,13 +11,8 @@
 <div class="row">
     <div class="col-12">
         <div class="card-box">
-            <h4 class="header-title">Filtering</h4>
-            <p class="sub-header">
-                include filtering in your FooTable.
-            </p>
-
-            <a href="{{ route('dcms.database.backup') }}" type="button" class="btn btn-primary"><i class="fa fa-cloud-upload"></i>&nbsp;Backup In Server</a>
-                <a href="{{ route('dcms.database.download') }}" type="button" class="btn btn-success"><i class="fa  fa-cloud-download"></i>&nbsp;Download to Your Computer</a>
+            <a href="{{ route('dcms.database.backup') }}" type="button" class="btn btn-xs btn-primary"><i class="fa fa-cloud-upload"></i>&nbsp;Backup In Server</a>
+            <a href="{{ route('dcms.database.download') }}" type="button" class="btn btn-xs btn-success"><i class="fa  fa-cloud-download"></i>&nbsp;Download to Your Computer</a>
             <hr>
             <div class="mb-2">
                 <div class="row">

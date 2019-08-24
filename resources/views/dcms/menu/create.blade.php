@@ -4,7 +4,7 @@
 @include('dcms.includes.breadcrumb')
 
 <div class="row">
-        <div class="col-lg-8 col-md-8 col-xs-12">
+        <div class="col-lg-12">
             <section class="card">
                 <div class="card-body">
                     @include('dcms.includes.buttons.button-back')

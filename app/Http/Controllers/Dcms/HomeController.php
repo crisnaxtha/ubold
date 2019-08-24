@@ -33,16 +33,22 @@ class HomeController extends DM_BaseController
         $data['count_post'] = $this->post::where('type', '=', 'post')->where('lang_id', '=', $this->lang_id)->where('deleted_at', '=', null)->count();
         $data['count_page'] = $this->post::where('type', '=', 'page')->where('lang_id', '=', $this->lang_id)->where('deleted_at', '=', null)->count();
 
+        $data['day_date'] = [];
+        $data['day_count'] = [];
+
+        $data['month_date'] = [];
+        $data['month_count'] = [];
+
+
         for($i = -11; $i <= 0; $i++ ) {
             $j = $i+1;
-            $day_date[] =  date('Y-m-d', strtotime("$i day"));
-            $day_count[] = DB::table('trackers')->where('visit_date', '=', date('Y-m-d', strtotime("$i day")))->sum('hits');
+            array_push($data['day_date'], date('y-m-d', strtotime("$i day")));
+            array_push($data['day_count'], DB::table('trackers')->where('visit_date', '=', date('Y-m-d', strtotime("$i day")))->sum('hits'));
 
-            $month_date[] = date('Y-m-d', strtotime("$i month"));
-            $month_count[] = DB::table('trackers')->whereBetween('visit_date', [date('Y-m-01', strtotime("$i month")), date('Y-m-t', strtotime("$i month"))])->sum('hits');
+            array_push($data['month_date'] , date('Y-m', strtotime("$i month")));
+            array_push($data['month_count'] , DB::table('trackers')->whereBetween('visit_date', [date('Y-m-01', strtotime("$i month")), date('Y-m-t', strtotime("$i month"))])->sum('hits'));
         }
-        $data['last_twelve_day_data'] = array_map(null, $day_date, $day_count);
-        $data['last_twelve_month_data'] = array_map(null, $month_date, $month_count);
+    
         return view(parent::loadView($this->view_path.'.index'), compact('data')); 
     }
 
