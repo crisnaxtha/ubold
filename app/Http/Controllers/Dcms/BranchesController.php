@@ -11,7 +11,7 @@ use DB;
 
 class BranchesController extends DM_BaseController
 {
-    protected $panel = 'Office Branch';
+    protected $panel = 'Office Department';
     protected $base_route = 'dcms.branch';
     protected $view_path = 'dcms.branch';
     protected $model;

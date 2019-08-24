@@ -73,15 +73,20 @@
 
                 {{-- Check if the user is admin or super-admin  --}}
                 @if(Auth::user()->role == 'super-admin' || Auth::user()->role == 'admin')
-                    @if( Route::has('dcms.menu.index'))
-                    <li><a class="{{ ($_panel == 'Menus') ? 'active' : '' }}" href="{{ URL::route('dcms.menu.index') }}" ><i class="fa fa-bars"></i><span>{{__('Menus')}}</span></a></li>
-                    @endif
-                    @if( Route::has('dcms.branch.index'))
-                    <li><a class="{{ ($_panel == 'Office Branch') ? 'active' : '' }}" href="{{ URL::route('dcms.branch.index') }}" ><i class="fa fa-sitemap"></i><span>{{__('Branch Office')}}</span></a></li>
-                    @endif
-                    @if( Route::has('dcms.staff.index'))
-                    <li><a class="{{ ($_panel == 'Staff') ? 'active' : '' }}" href="{{ URL::route('dcms.staff.index') }}" ><i class="fa fa-users"></i><span>{{__('Staff')}}</span></a></li>
-                    @endif
+                    <li class="sub-menu {{ ($_panel == 'Office Department' || $_panel == 'Staff') ? 'active' : '' }}">
+                        <a href="javascript:;" class="{{ ($_panel == 'Office Department' || $_panel == 'Staff') ? 'active' : '' }}"><i class="fas fa-briefcase"></i>
+                            <span class="menu-arrow"></span>
+                            <span>{{ __('Office ') }}</span>
+                        </a>
+                        <ul class="nav-second-level" aria-expanded="true">
+                            @if( Route::has('dcms.branch.index'))
+                            <li  class="{{ ($_panel == 'Office Department') ? 'active' : '' }}"><a href="{{ URL::route('dcms.branch.index') }}" ><i class="fa fa-sitemap"></i>&nbsp;<span>{{__('Office Department')}}</span></a></li>
+                            @endif
+                            @if( Route::has('dcms.staff.index'))
+                            <li class="{{ ($_panel == 'Staff') ? 'active' : '' }}"><a href="{{ URL::route('dcms.staff.index') }}" ><i class="fa fa-users"></i>&nbsp;<span>{{__('Staff')}}</span></a></li>
+                            @endif
+                        </ul>
+                    </li>
                     <li class="sub-menu">
                         <a href="javascript:;" class="{{ ($_base_route == 'dcms.setting') ? 'active' : '' }}"><i class="fe-settings"></i>
                             <span class="menu-arrow"></span>
@@ -102,6 +107,10 @@
                             @endif
                         </ul>
                     </li>
+                    @if( Route::has('dcms.menu.index'))
+                    <li><a class="{{ ($_panel == 'Menus') ? 'active' : '' }}" href="{{ URL::route('dcms.menu.index') }}" ><i class="fa fa-bars"></i><span>{{__('Menus')}}</span></a></li>
+                    @endif
+                    
                 @endif
                 {{-- END::Check if the user is admin or super-admin  --}}
                 {{-- Check if the user is SUPER-ADMIN --}}
