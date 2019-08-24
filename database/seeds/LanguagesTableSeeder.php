@@ -1,7 +1,7 @@
 <?php
 
 use Illuminate\Database\Seeder;
-use Illuminate\Support\Facades\DB;
+use App\Model\Dcms\Setting;
 
 class LanguagesTableSeeder extends Seeder
 {
@@ -12,10 +12,15 @@ class LanguagesTableSeeder extends Seeder
      */
     public function run()
     {
-        DB::table('languages')->insert([
+        Setting::create([
             'name'=>'English',
             'code'=>'en',
             'status'=>1
+        ]);
+        Setting::create([
+            'name' => "Nepali",
+            'code' => 'np',
+            'status' => 1
         ]);
     }
 }
