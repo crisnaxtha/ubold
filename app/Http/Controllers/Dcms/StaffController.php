@@ -142,4 +142,36 @@ class StaffController extends DM_BaseController
             $row->delete();
         }
     }
+
+    public function getSortList() {
+        $this->tracker;
+        $data['branch'] = $this->branch::where('status', '=', 1)->get();
+        return view(parent::loadView($this->view_path.'.sort'), compact('data')); 
+    }
+
+    public function getStaffs($id) {
+        $this->tracker;
+        $data = $this->model::where('lang_id', '=', $this->lang_id)->where('branch_id', '=', $id)->orderBy('order')->get();
+       
+        // return Response::json($data);
+        return json_decode($data);
+    }
+
+    public function storeOrder(Request $request){
+        if($request->ajax()) {
+            $data = json_decode($_POST['data']);
+            $readbleArray = parent::uniqueParseJsonArray($data);
+            $i = 0;
+            foreach( $readbleArray as $row) {
+                $i++;
+                $menu = Staff::where('staff_unique_id', '=', $row['unique'])->get();
+                foreach($menu as $stf) {
+                    $staff = Staff::findOrFail($stf->id);
+                    $staff->order = $i;
+                    $staff->save();
+                }
+            }
+            return var_dump(Response::json($readbleArray));
+        }
+    }
 }

@@ -333,6 +333,9 @@ Route::group(['prefix' => 'dashboard', 'as'=> 'dcms.', 'namespace'=>'Dcms', 'mid
         Route::get('{staff}/edit',                         ['as'=>'edit',              'uses'=>'StaffController@edit']);
         Route::put('{staff}',                              ['as'=>'update',              'uses'=>'StaffController@update']);
         Route::delete('{staff}',                           ['as'=>'destroy',              'uses'=>'StaffController@destroy']);
+        Route::get('get_sort_list',                        ['as'=>'get_sort',              'uses'=>'StaffController@getSortList']);
+        Route::get('get_staffs/{staff}',                   ['as'=>'get_staff',              'uses'=>'StaffController@getStaffs']);
+        Route::post('order',                                 ['as'=>'order',              'uses'=>'StaffController@storeOrder']);
     });
      /**
      * Setting Routes

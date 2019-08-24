@@ -10,9 +10,15 @@
             @endif
              </div>
             <div class="col-lg-9 col-md-8 text-left logo_text">
+                @if(isset($data['common']->header_first_title))
                 <span>{{ $data['common']->header_first_title }}</span>
+                @endif
+                @if(isset($data['common']->header_second_title))
                  <b>{{ $data['common']->header_second_title }}</b>
+                @endif
+                @if(isset($data['common']->header_third_title))
                  <span>{{ $data['common']->header_third_title}}</span> </div>
+                @endif
             <div class="clearfix"></div>
           </div>
           </a> </div>

@@ -134,4 +134,17 @@ class DM_BaseController extends Controller
         }
         return $return;
     }
+
+    protected function uniqueParseJsonArray($jsonArray, $parentID = Null) {
+        $return = array();
+        foreach($jsonArray as $subArray) {
+            $returnSubSubArray = array();
+            if (isset($subArray->children)) {
+                $returnSubSubArray = $this->parseJsonArray($subArray->children, $subArray->id );
+            }
+           $return[] = array('id' => $subArray->id, 'unique' => $subArray->unique, 'parentID' => $parentID);
+           $return = array_merge($return, $returnSubSubArray);
+        }
+        return $return;
+    }
 }

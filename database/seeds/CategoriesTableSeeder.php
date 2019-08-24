@@ -12,12 +12,6 @@ class CategoriesTableSeeder extends Seeder
      */
     public function run()
     {
-        Category::create([
-            'parent_id' => 0,
-            'name'      => 'Uncategorized',
-            'slug'      => 'uncategoriezed',
-            'category_post_count' => 0
-            
-        ]);
+       
     }
 }
