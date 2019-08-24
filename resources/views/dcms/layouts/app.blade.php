@@ -9,7 +9,7 @@
     <meta name="description" content="">
     <meta name="author" content="Lochan">
     <meta name="keyword" content="">
-    <link rel="shortcut icon" href="{{ asset('assets/dcms/img/favicon.png') }}">
+    <link rel="shortcut icon" href="{{ asset('assets/dcms/assets/images/favicon.ico') }}">
 
     @if(isset($_panel))
     <title>{{ $_panel }} | DCMS</title>
