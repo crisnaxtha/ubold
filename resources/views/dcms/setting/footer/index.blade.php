@@ -10,7 +10,7 @@
 
                 <h4 class="header-title mb-3">Footer</h4>
 
-                <form action="{{URL::route($_base_route.'.footer.store', ['common_title_id'=>1])}}" method="POST" enctype="multipart/form-data">
+                <form action="{{URL::route($_base_route.'.footer.store', ['unique_id'=>1])}}" method="POST" enctype="multipart/form-data">
                         {{ method_field('PUT') }} {{ csrf_field() }}
                     <div id="basicwizard">
 
@@ -76,7 +76,7 @@
                                                         }
                                                         dm_hidden('rows['.$loop->index.'][lang_id]', $row->id);
                                                         dm_hidden('rows['.$loop->index.'][id]', $id);
-                                                        dm_hidden('common_unique_id', 1);
+                                                        dm_hidden('unique_id', 1);
                                                         dm_inputUpdate('text','rows['.$loop->index.'][footer_first_title]', "Site First Title (*)", $footer_first_title);
                                                         dm_ckeditorUpdate($row->code.$loop->iteration."1", 'rows['.$loop->index.'][footer_first_description]', 'Description(*)', $footer_first_description);
 

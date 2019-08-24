@@ -35,13 +35,13 @@ class CommonController extends DM_BaseController
     public function getTitleSetting() {
         $this->tracker;
         $this->panel = 'Setting';
-        $data['single'] = $this->model::where('common_unique_id', '=', 1)->first();
+        $data['single'] = $this->model::where('unique_id', '=', 1)->first();
         $data['lang'] = $this->dm_post::getLanguage();
-        $titles = $this->model::where('common_unique_id', '=', 1)->get();
+        $titles = $this->model::where('unique_id', '=', 1)->get();
         if(!isset($data['single']) || !is_object($data['single']) ) {
             $data = $this->model;
             $data->lang_id = $this->lang_id;
-            $data->common_unique_id = 1;
+            $data->unique_id = 1;
             $data->save();
         }
         return view(parent::loadView($this->view_path.'.header.index'), compact('data', 'titles'));
@@ -70,7 +70,7 @@ class CommonController extends DM_BaseController
                 $link = $this->model::findOrFail($row['id']);
             }else{
                 $link = new $this->model;
-                $link->common_unique_id = $request->common_unique_id;
+                $link->unique_id = $request->unique_id;
             }
             $link->lang_id = $row['lang_id'];
             $link->logo = $logo;
@@ -91,13 +91,13 @@ class CommonController extends DM_BaseController
     public function getFooterSetting() {
         $this->tracker;
         $this->panel = 'Setting';
-        $data['single'] = $this->model::where('common_unique_id', '=', 1)->first();
+        $data['single'] = $this->model::where('unique_id', '=', 1)->first();
         $data['lang'] = $this->dm_post::getLanguage();
-        $titles = $this->model::where('common_unique_id', '=', 1)->get();
+        $titles = $this->model::where('unique_id', '=', 1)->get();
         if(!isset($data['single']) || !is_object($data['single']) ) {
             $data = $this->model;
             $data->lang_id = $this->lang_id;
-            $data->common_unique_id = 1;
+            $data->unique_id = 1;
             $data->save();
         }
         return view(parent::loadView($this->view_path.'.footer.index'), compact('data', 'titles'));
@@ -110,7 +110,7 @@ class CommonController extends DM_BaseController
                 $link = $this->model::findOrFail($row['id']);
             }else{
                 $link = new $this->model;
-                $link->common_unique_id = $request->common_unique_id;
+                $link->unique_id = $request->unique_id;
             }
             $link->lang_id = $row['lang_id'];
             $link->footer_first_title = $row['footer_first_title'];

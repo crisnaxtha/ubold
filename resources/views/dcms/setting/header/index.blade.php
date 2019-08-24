@@ -11,7 +11,7 @@
                         @include('dcms.includes.flash_message_error')
                     <div class=" form">
                         <?php
-                        dm_hpostform(URL::route($_base_route.'.title.store', ['common_unique_id'=>1]), 'PUT');
+                        dm_hpostform(URL::route($_base_route.'.title.store', ['unique_id'=>1]), 'PUT');
                         dm_hinputUpdate('file', 'logo', 'Logo', '', '');
                         ?>
                             <ul class="nav nav-tabs nav-bordered">
@@ -56,7 +56,7 @@
                                             }
                                             dm_hidden('rows['.$loop->index.'][lang_id]', $row->id);
                                             dm_hidden('rows['.$loop->index.'][id]', $id);
-                                            dm_hidden('common_unique_id', 1);
+                                            dm_hidden('unique_id', 1);
                                             dm_hinputUpdate('text','rows['.$loop->index.'][header_first_title]', "Site First Title (*)", $header_first_title);
                                             dm_hinputUpdate('text','rows['.$loop->index.'][header_second_title]', "Site Second Title (*)", $header_second_title);
                                             dm_hinputUpdate('text','rows['.$loop->index.'][header_third_title]', "Site Third Title (*)", $header_third_title);
