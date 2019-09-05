@@ -2,67 +2,67 @@
 
 @section('content')
 <div class="mid_part inner_page">
-        <div class="inner_banner" style="background: url({{asset('assets/site/assets/images/sheetal.jpg') }}); background-size: cover; background-attachment: fixed; width: 100%;"></div>
-
-        <div class="breadcrumb-col">
-          <div class="container">
-            <ol class="breadcrumb">
-              <li><a href="{{ route('site.index')  }}"><i class="fa fa-home"></i></a></li>
-              <li class="active">{{ ucwords(str_replace('-',' ',Request::segment(1)))}}</li>
-            </ol>
-          </div>
-          <!-- <div class="btm_style"><svg viewBox="0 0 1440 120" width="100%" height="100%" fill="#fff"><path d="M1440,21.2101911 L1440,120 L0,120 L0,21.2101911 C120,35.0700637 240,42 360,42 C480,42 600,35.0700637 720,21.2101911 C808.32779,12.416393 874.573633,6.87702029 918.737528,4.59207306 C972.491685,1.8109458 1026.24584,0.420382166 1080,0.420382166 C1200,0.420382166 1320,7.35031847 1440,21.2101911 Z"></path></svg></div> -->
+    <div class="inner_banner" style="background: url({{asset('assets/site/assets/images/sheetal.jpg') }}); background-size: cover; background-attachment: fixed; width: 100%;">
+    </div>
+    <div class="breadcrumb-col">
+        <div class="container">
+        <ol class="breadcrumb">
+            <li><a href="{{ route('site.index')  }}"><i class="fa fa-home"></i></a></li>
+            <li class="active">{{ ucwords(str_replace('-',' ',Request::segment(1)))}}</li>
+        </ol>
         </div>
-
+    </div>
           <section class="dtl_sec">
             <div class="container">
               <div class="row">
                 <div class="col-md-9 col-sm-8">
                   <div class="card">
                     <div class="card-header">
-
-
-      <div class="row">
-        <div class="col-lg-9 col-md-9">
-          <h4>&nbsp; <i class="fa fa-info-circle">&nbsp;</i> {{ $data['row']->title }}</h4>
-        </div>
-        <div class="col-lg-3 col-md-3">
-          <div class="share-box">
-          <ul>
-                @php $current_url = url()->current(); @endphp
-            <li><a href="https://twitter.com/share?url={{$current_url}}" class="social-color-1"><i class="fa fa-twitter" aria-hidden="true"></i></a></li>
-            <li><a href="http://www.facebook.com/sharer.php?u={{$current_url}}" class="social-color-2"><i class="fa fa-facebook" aria-hidden="true"></i></a></li>
-            <li><a href="https://plus.google.com/share?url={{$current_url}}" class="social-color-3"><i class="fa fa-google-plus" aria-hidden="true"></i></a></li>
-            {{-- <li><a href="javascript:void(0)" class="social-color-3"><i class="fa fa-linkedin" aria-hidden="true"></i></a></li>
-            <li><a href="javascript:void(0)" class="social-color-4"><i class="fa fa-instagram" aria-hidden="true"></i></a></li> --}}
-          </ul>
-          <div class="clearfix"></div>
-        </div>
-        </div>
-        <div class="clearfix"></div>
-      </div>
-
+                        <div class="row">
+                            <div class="col-lg-9 col-md-9">
+                            <h4>&nbsp; <i class="fa fa-info-circle">&nbsp;</i> {{ $data['row']->title }}</h4>
+                            </div>
+                            <div class="col-lg-3 col-md-3">
+                            <div class="share-box">
+                            <ul>
+                                    @php $current_url = url()->current(); @endphp
+                                <li><a href="https://twitter.com/share?url={{$current_url}}" class="social-color-1"><i class="fa fa-twitter" aria-hidden="true"></i></a></li>
+                                <li><a href="http://www.facebook.com/sharer.php?u={{$current_url}}" class="social-color-2"><i class="fa fa-facebook" aria-hidden="true"></i></a></li>
+                                <li><a href="https://plus.google.com/share?url={{$current_url}}" class="social-color-3"><i class="fa fa-google-plus" aria-hidden="true"></i></a></li>
+                                {{-- <li><a href="javascript:void(0)" class="social-color-3"><i class="fa fa-linkedin" aria-hidden="true"></i></a></li>
+                                <li><a href="javascript:void(0)" class="social-color-4"><i class="fa fa-instagram" aria-hidden="true"></i></a></li> --}}
+                            </ul>
+                            <div class="clearfix"></div>
+                            </div>
+                            </div>
+                            <div class="clearfix"></div>
+                        </div>
                     </div>
-                      <div class="card-body">
-                            {!!$data['row']->content !!}
-                      </div>
+                    <div class="card-body">
+                        {!!$data['row']->content !!}
+                    </div>
                   </div>
                   @if(count($data['file']) != 0)
                   @foreach($data['file'] as $row)
-                  <div class="card dwn_box">
-                    <div class="card-body">
-                      <div class="row">
-                        <div class="col-lg-4 col-md-3"><span class="ttl">{{ $row->title }}</span></div>
-                        <div class="col-lg-4 col-md-5">{{ $row->download_count }}'s Downloaded</div>
-                        <div class="col-lg-2 col-md-2 text-center"><a href="{{ asset( $row->file) }}">
-                          <i class="fa fa-eye">&nbsp;</i> View
-                        </a></div>
-                        <div class="col-lg-2 col-md-2 text-center"><a href="{{ route('site.file.download', ['id'=> $row->id]) }}">
-                          <i class="fa fa-download">&nbsp;</i> Download </a></div>
-                        <div class="clearfix"></div>
-                      </div>
+                    <div class="row">
+                        <div class="col-lg-3 col-md-4 col-sm-6">
+                            <div class="card dwn_box">
+                                <div class="card-body text-center">
+                                    <div class="ttl">{{ $row->title }}</div>
+                                    <small>{{ $row->download_count }}'s Downloaded</small>
+                                    <h6>
+                                        <span><a href="{{ asset( $row->file) }}">
+                                            <i class="fa fa-eye">&nbsp;</i> View
+                                        </a></span> &nbsp; &nbsp; &nbsp;
+                                        <span>
+                                            <a href="{{ route('site.file.download', ['id'=> $row->id]) }}">
+                                        <i class="fa fa-download">&nbsp;</i> Download </a>
+                                        </span>
+                                    </h6>
+                                </div>
+                            </div>
+                        </div>
                     </div>
-                  </div>
                   @endforeach
                   @endif
 

@@ -2,11 +2,11 @@
 <div class="gallery">
     <div class="container">
        <h4>ग्यालरी  एल्बम
-          <span class="pull-right">
-          <a href="#" target="_blank" class="btn btn-info btn-sm more_btn">View All &nbsp;
-          <i class="fa fa-angle-double-right"></i>
-          </a>
-          </span>
+            <span class="pull-right">
+            @if(Route::has('site.album'))
+            <a href="{{ Route('site.album') }}" target="_blank" class="btn btn-info btn-sm more_btn">View All &nbsp;<i class="fa fa-angle-double-right"></i></a>
+            @endif
+            </span>
        </h4>
        <div class="row">
             @foreach($data['album_category'] as $row)

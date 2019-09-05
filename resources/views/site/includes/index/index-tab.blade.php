@@ -21,6 +21,17 @@
 @foreach($data['cat_post_'.$row->slug] as $row)
                     <div class="item">
                         <div class="item-inner card">
+                                <figure>
+                                    @if(route::has('site.post.show'))
+                                    <a href="{{ route('site.post.show', ['id'=> $row->unique_id]) }}">
+                                        @if(isset($row->thumbnail))
+                                        <img src="{{$row->thumbnail}}" class="img-fluid" alt="image">
+                                        @else
+                                        <img src="{{asset('assets/site/assets/images/thumbnail.jpg')}}" class="img-fluid" alt="image">
+                                        @endif
+                                    </a>
+                                    @endif
+                                </figure>
                                 <div class="card-body">
                                     <div class="card-meta">
                                         <i class="fa fa-clock-o">&nbsp;</i>{{ $row->created_at }}

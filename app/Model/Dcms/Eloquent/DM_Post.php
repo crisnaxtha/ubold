@@ -208,6 +208,7 @@ class DM_Post extends Model{
         ->select('albums.*', 'albums_name.title as album_name', 'albums_name.lang_id')
         ->where('albums_name.lang_id', '=', $lang_id)
         ->where('albums.status', '=', 1)->orderBy('order')
+        ->where('albums.album_category_id', '=', $category_id)
         ->take($number)->get();
         return $album;
     }

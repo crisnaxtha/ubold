@@ -44,7 +44,7 @@ class Album extends DM_BaseModel
      */
     public function storeData(Request $request, $category, $name, $rows, $image, $status, $order) {
         if($request->hasFile('image')){
-            $cover_image = parent::uploadImage($request, $this->folder_path_image ,$this->prefix_path_image,'image');
+            $cover_image = parent::uploadImage($request, $this->folder_path_image ,$this->prefix_path_image,'image', 392, 392);
         }
         else {
             $cover_image = null;
@@ -72,12 +72,12 @@ class Album extends DM_BaseModel
      */
     public function updateData(Request $request, $id, $category, $name, $rows, $image, $status, $order) {
         $row = Album::findOrFail($id);
-        $row->category = $category;
+        $row->album_category_id = $category;
         $row->name = $name;
         $row->order = $order;
         $row->status = $status;
         if($request->hasFile('image')){
-            $row->cover_image = parent::uploadImage($request, $this->folder_path_image ,$this->prefix_path_image,'image');
+            $row->cover_image = parent::uploadImage($request, $this->folder_path_image ,$this->prefix_path_image,'image',  392, 392);
         }
         $row->save();
         $album_id = $row->id;
