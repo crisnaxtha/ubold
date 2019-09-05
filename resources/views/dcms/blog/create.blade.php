@@ -14,7 +14,7 @@
                         // dm_hinput('text','name', "Title" );
                         // dm_hckeditor('description', "Description");
                         // dm_hinput('file', 'thumbnail', 'Thumbnail Image', '', '');
-                        dm_textarea('text','link', "Youtube Link( Embed)" );
+                        dm_textarea('link', "Youtube Link( Embed)" );
                         dm_hcheckbox('checkbox','status', "Status");
                         // dm_hcheckbox('checkbox','featured', "Featured");
                         dm_hsubmit('Submit', URL::route($_base_route.'.index'), 'Cancel');

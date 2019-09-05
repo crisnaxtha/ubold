@@ -17,6 +17,7 @@ use App\Model\Dcms\Category;
 use App\Model\Dcms\Blog;
 use App\Model\Dcms\Service;
 use App\Model\Dcms\Common;
+use App\Model\Dcms\Popup;
 use DB;
 use Session;
 
@@ -60,10 +61,11 @@ class SiteController extends DM_BaseController
             $data['cat_album_'.$row->slug] = $row->id;
         }
 
-        $data['about_us'] = $this->dm_post::getSinglePage('1_5d4f7e4a7ff7f', $this->lang_id);
+        $data['about_us'] = $this->dm_post::getSinglePage('1_5d70d58478f88', $this->lang_id);
         $data['video'] = Blog::where('status', '=', 1)->get();
+        $data['popup'] = Popup::where('status', '=', 1)->where('lang_id', '=', $this->lang_id)->get();
 
-        $data['services'] = Service::where('status', '=', 1)->take(8)->get();
+        $data['services'] = Service::where('status', '=', 1)->where('lang_id', '=', $this->lang_id)->take(8)->get();
 
         return view(parent::loadView($this->view_path.'.index'), compact('data'));
     }

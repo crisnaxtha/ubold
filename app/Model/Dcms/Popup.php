@@ -16,7 +16,7 @@ class Popup extends DM_BaseModel
 
     protected $folder_path_image;
     protected $folder_path_file;
-    protected $folder = 'pop';
+    protected $folder = 'popup';
     protected $prefix_path_image = '/upload_file/images/popup/';
 
     public function __construct() {

@@ -1,4 +1,4 @@
-@if(isset($data['album_category']))
+@if(count($data['album_category']) != 0)
 <div class="gallery">
     <div class="container">
        <h4>ग्यालरी  एल्बम

@@ -69,7 +69,8 @@
     @yield('content')
     @include('site.includes.footer')
 
-
+<!-- Return to Top -->
+<a href="javascript:" id="return-to-top"><i class="fa fa-arrow-up"></i></a>
 
     <script src="{{ asset('assets/site/assets/js/jquery.min.js') }}"></script>
 

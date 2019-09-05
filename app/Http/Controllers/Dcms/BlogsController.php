@@ -71,7 +71,7 @@ class BlogsController extends DM_BaseController
             $row->thumbnail = parent::uploadFile($this->folder_path, $this->image_prefix_path, 'thumbnail', $request);
         }
         $row->description = $request->description;
-        $row->link = $request->link;
+        $row->link = dm_linkToEmbed($request->link);
         $row->status = $request->status;
         $row->featured = $request->featured;
         $row->save();
@@ -125,7 +125,7 @@ class BlogsController extends DM_BaseController
             $row->thumbnail = parent::uploadFile($this->folder_path, $this->image_prefix_path, 'thumbnail', $request);
         }
         $row->description = $request->description;
-        $row->link = $request->link;
+        $row->link = dm_linkToEmbed($request->link);
         $row->status = $request->status;
         $row->featured = $request->featured;
         $row->save();

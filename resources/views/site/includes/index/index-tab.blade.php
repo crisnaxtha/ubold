@@ -25,9 +25,11 @@
                                     <div class="card-meta">
                                         <i class="fa fa-clock-o">&nbsp;</i>{{ $row->created_at }}
                                     </div>
-                                    <a href="#">
+                                    @if(route::has('site.post.show'))
+                                    <a href="{{ route('site.post.show', ['id'=> $row->unique_id]) }}">
                                         <h6 class="card-title">{{ $row->title }}</h6>
                                     </a>
+                                    @endif
       {!! mb_strimwidth($row->content, 0, 100, "...") !!}
 
                                 </div>

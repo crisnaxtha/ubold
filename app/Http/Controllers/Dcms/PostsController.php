@@ -15,7 +15,7 @@ use App\Model\Dcms\Tracker;
 
 class PostsController extends DM_BaseController
 {
-    
+
     protected $panel;
     protected $base_route;
     protected $view_path;
@@ -55,11 +55,11 @@ class PostsController extends DM_BaseController
             'image' => 'image',
             'file_title' => 'array|max:225',
             // 'files' => 'array|mimes:pdf,docx,xlsx',
-            'tag' => 'required|max:255',
-            'status' => 'required|boolean' 
+            'tag' => 'nullable|max:255',
+            'status' => 'required|boolean'
         ], [
             'rows.*.title.required' => 'The Page title is required (Language)',
-            'rows.*.description.required' => 'The Page description is required (Language)' 
+            'rows.*.description.required' => 'The Page description is required (Language)'
         ]);
         $this->tracker;
         $this->panel = 'Pages';
@@ -91,11 +91,11 @@ class PostsController extends DM_BaseController
             'image' => 'image',
             'file_title' => 'array|max:225',
             // 'files' => 'array|mimes:pdf,docx,xlsx',
-            'tag' => 'required|max:255',
-            'status' => 'required|boolean' 
+            'tag' => 'nullable|max:255',
+            'status' => 'required|boolean'
         ], [
             'rows.*.title.required' => 'The Page title is required (Language)',
-            'rows.*.description.required' => 'The Page description is required (Language)' 
+            'rows.*.description.required' => 'The Page description is required (Language)'
         ]);
         $this->tracker;
         $this->panel = 'Pages';
@@ -164,12 +164,12 @@ class PostsController extends DM_BaseController
             'image' => 'image',
             'file_title' => 'array|max:225',
             // 'files' => 'array|mimes:pdf,docx,xlsx',
-            'tag' => 'required|max:255',
+            'tag' => 'nullable|max:255',
             'status' => 'required|boolean' ,
             'category' => 'required'
         ], [
             'rows.*.title.required' => 'The Post title is required (Language)',
-            'rows.*.description.required' => 'The Post description is required (Language)' 
+            'rows.*.description.required' => 'The Post description is required (Language)'
         ]);
         $this->tracker;
         $this->panel = 'Posts';
@@ -202,12 +202,12 @@ class PostsController extends DM_BaseController
             'image' => 'image',
             'file_title' => 'array|max:225',
             // 'files' => 'array|mimes:pdf,docx,xlsx',
-            'tag' => 'required|max:255',
+            'tag' => 'nullable|max:255',
             'status' => 'required|boolean' ,
             'category' => 'required'
         ], [
             'rows.*.title.required' => 'The Posts title is required (Language)',
-            'rows.*.description.required' => 'The Posts description is required (Language)' 
+            'rows.*.description.required' => 'The Posts description is required (Language)'
         ]);
         $this->tracker;
         $this->panel = 'Posts';

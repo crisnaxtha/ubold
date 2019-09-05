@@ -1,4 +1,4 @@
-@if(isset($data['album']))
+@if(count($data['album']) != 0)
 <div class="gallery">
     <div class="container">
         <h4>{{ __('Gallery')}}</h4>

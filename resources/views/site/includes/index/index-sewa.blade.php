@@ -1,4 +1,4 @@
-@if(isset($data['services']))
+@if(count($data['services']) != 0)
 <div class="white-box sewa">
         <div class="container">
             <div class="card">

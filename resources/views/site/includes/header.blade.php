@@ -1,3 +1,4 @@
+<div class="top_sec">
 <!-- header -->
 <header>
     <div class="container">
@@ -29,9 +30,44 @@
               <div class="input-group">
                 <input class="form-control" placeholder="Search" name="keyword" id="srch-term" type="text">
                 <div class="input-group-append">
-                  <button class="btn btn-info" type="submit"><i class="fa fa-search"></i></button>
+                    <button class="btn btn-info" type="submit"><i class="fa fa-search"></i></button>
+                    <a href="javascript:void(0)" class="src-drop" title="Advance Search">
+                        <span class="fa fa-sliders"></span>
+                    </a>
                 </div>
               </div>
+
+                <div class="src-drop-menu" style="display: none;">
+                    <div class="text-left">
+                      <h5><i class="fa fa-search"></i> Advance Search:</h5>
+                      <div class="form-group">
+                        <input type="text" name="text" class="form-control" placeholder="Name">
+                      </div>
+                      <div class="form-group">
+                        <input type="text" name="text" class="form-control" placeholder="Address">
+                      </div>
+                      <div class="form-group">
+                        <select class="form-control classic classic2">
+                       input-group-prepend     <option> Select Training / Consulting </option>
+                            <option>Service Category Training</option>
+                            <option>Service Category Consulting</option>
+                             <option>Service Category Coaching</option>
+                          </select>
+                      </div>
+                      <div class="form-group">
+                        <input type="date" name="date" class="form-control" placeholder="Date">
+                      </div>
+
+                     <div class="row">
+                      <div class="col-sm-6 text-left">
+                        <button type="reset" name="button" class="btn btn-sm btn-danger">Reset</button>
+                      </div>
+                      <div class="col-sm-6 text-right">
+                        <button type="submit" name="button" class="btn btn-sm btn-primary">Search</button>
+                      </div>
+                     </div>
+                  </div>
+                </div>
             </form>
             <ul>
             @if(isset($all_view['lang']))
@@ -52,3 +88,4 @@
     </div>
   </header>
   <!-- /header -->
+

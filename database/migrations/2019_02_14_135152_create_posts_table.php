@@ -27,7 +27,7 @@ class CreatePostsTable extends Migration
             $table->text('excerpt')->nullable();
             $table->boolean('status');
             $table->boolean('featured')->nullable();
-            $table->string('tag');
+            $table->string('tag')->nullable();
             $table->string('author')->nullable();
             $table->string('url')->nullable();
             $table->unsignedInteger('visit_no')->default(0);
@@ -46,11 +46,11 @@ class CreatePostsTable extends Migration
                         ->references('id')->on('languages')
                         ->onDelete('cascade');
         });
-    
+
     }
 
 
-    
+
     /**
      * Reverse the migrations.
      *

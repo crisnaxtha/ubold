@@ -14,7 +14,11 @@
             </div>
             <div class="col-md-6 col-sm-6 wow fadeInRight" data-wow-duration="1s" data-wow-delay=".3s">
                 <figure>
+                    @if(isset($data['about_us']->thumbnail))
                     <img src="{{ $data['about_us']->thumbnail }}" alt="banner image" class="img-fluid"/>
+                    @else
+                    <img src="{{ asset('assets/site/assets/images/thumbnail.jpg')}}" alt="banner image" class="img-fluid"/>
+                    @endif
                 </figure>
             </div>
             <div class="clearfix"></div>
