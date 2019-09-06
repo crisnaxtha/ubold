@@ -8,7 +8,7 @@
 {!! mb_strimwidth($data['about_us']->content, 0, 1100, "...") !!}
 @if(route::has('site.page.show'))
 
-                <a href="{{ route('site.page.show', ['id' => $data['about_us']->post_unique_id]) }}" class="btn btn-info">{{__('View more')}}</a>
+                <a href="{{ route('site.page.show', ['id' => $data['about_us']->unique_id]) }}" class="btn btn-info">{{__('View more')}}</a>
 @endif
 
             </div>

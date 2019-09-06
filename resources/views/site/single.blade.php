@@ -65,32 +65,7 @@
                     </div>
                   @endforeach
                   @endif
-
-                  <!-- basic modal -->
-      {{-- <div class="modal fade" id="basicModal" tabindex="-1" role="dialog" aria-labelledby="basicModal" aria-hidden="true">
-        <div class="modal-dialog">
-          <div class="modal-content">
-            <div class="modal-body">
-              <button type="button" class="close" data-dismiss="modal" aria-label="Close">
-                <span aria-hidden="true">&times;</span>
-              </button>
-             <ul>
-               <li><span>File Name:</span> जनसंख्या तथा सवारी चाप सम्बन्धमा</li>
-               <li><span>File Size:</span> 670KB</li>
-               <li><span>Create Type:</span> application/pdf</li>
-               <li><span>Create Date:</span> 2076/04/20</li>
-               <li><span>Description:</span> काठमाण्डौ उपत्यकामा दिन प्रतिदिन बढ्दै गएको जनसंख्या तथा सवारी चाप, सिमित साघुरा सडकहरू सवारी नियम तथा ट्राफिक संकेत सम्बन्धी सडक प्रयोगकर्ताहरुमा रहेको ज्ञानको कमी र ज्ञान भएकाहरुबाट समेत ट्राफिक नियमको उलंघन गर्ने प्रवृतिका कारण काठमाण्डौ उपत्यकाको ट्राफिक व्यवस्थापन गर्ने कार्य जटिल एंव चुनौतिपुर्ण बन्दै गएको छ । </li>
-             </ul>
-            </div>
-            <div class="modal-footer">
-              <button type="button" class="btn btn-default" data-dismiss="modal">Close</button>
-            </div>
-          </div>
-        </div>
-      </div> --}}
-
       <div class="clearfix"></div>
-
       <hr/>
 
       <form>
