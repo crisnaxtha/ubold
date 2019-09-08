@@ -7,28 +7,28 @@
             <section class="card">
                 <div class="card-body">
                         @include('dcms.includes.buttons.button-back')
-                        @include('dcms.includes.flash_message_error')                    
+                        @include('dcms.includes.flash_message_error')
                     <div class=" form">
                         @if(isset($data['menus']) && isset($menus_name))
                         @php $data['menus']->post_unique_id @endphp
                         <?php
-                            dm_hpostform(URL::route($_base_route.'.update', ['id'=>$data['menus']->id]), 'PUT');  
+                            dm_hpostform(URL::route($_base_route.'.update', ['id'=>$data['menus']->id]), 'PUT');
                             dm_hidden('order', $data['menus']->order);
                             // dm_hidden('type', $data['menus']->type);
                             dm_menu_type_dropdown('', 'type','Menu Type', $data['type'], $data['menus']->type, $data['menus']->type);
                             if(isset($data['single_page']->title)){
-                                dm_post_dropdown('', 'page_unique_id', 'Pages', $data['pages'], $data['menus']->post_unique_id, $data['single_page']->title );                            
+                                dm_post_dropdown('', 'page_unique_id', 'Pages', $data['pages'], $data['menus']->post_unique_id, $data['single_page']->title );
                             }
                             if(isset($data['single_post']->title)){
                             dm_post_dropdown('', 'post_unique_id', 'Posts', $data['posts'], $data['menus']->post_unique_id, $data['single_post']->title);
                             }
                             if(isset($data['category']->title)){
-                            dm_category_dropdown('', 'category_id', 'Category', $data['categories'], $data['menus']->category_id, $data['category']->title);  
-                            }                          
-                            dm_custom_link_hinput_update( 'text','link', "Custom Link", $data['menus']->url);                                                    
+                            dm_category_dropdown('', 'category_id', 'Category', $data['categories'], $data['menus']->category_id, $data['category']->title);
+                            }
+                            dm_custom_link_hinput_update( 'text','link', "Custom Link", $data['menus']->url);
                             dm_menu_hinput_update('text','name', "Menu Name", $data['menus']->name);?>
                             @foreach($data['lang'] as $lang)
-                            <?php   
+                            <?php
                               if(isset($menus_name[$loop->index]->name)){
                                   $menu_name = $menus_name[$loop->index]->name;
                               }
@@ -37,10 +37,10 @@
                               }
                               dm_hidden('rows['.$loop->index.'][lang_id]', $lang->id);
                               dm_menu_hinput_update('text','rows['.$loop->index.'][lang_name]', "Menu Name (<strong>$lang->name</strong> )", $menu_name); ?>
-                            @endforeach 
-                            <?php 
-                            // dm_menu_hinput('number','order', "Menu Order", $data['menus']->order); 
-                            dm_menu_dropdown('', 'target', "Target", $data['target'], $data['menus']->target);                      
+                            @endforeach
+                            <?php
+                            // dm_menu_hinput('number','order', "Menu Order", $data['menus']->order);
+                            dm_menu_dropdown('', 'target', "Target", $data['target'], $data['menus']->target);
                             dm_hcheckbox('checkbox', 'status', 'Public', $data['menus']->status);
                             dm_hsubmit('Submit', URL::route($_base_route.'.index'), 'Cancel');
                             dm_closeform();

@@ -410,7 +410,7 @@ if(!function_exists('dm_post_dropdown')){
             <select name="<?=$name?>" class="form-control">
                 <option value=<?=$old_data?>><?=$old_data_name?></option>
                 <?php foreach($data as $key => $row){ ?>
-                    <option value="<?=$row->post_unique_id ?>"><?= $row->title; ?></option>
+                    <option value="<?=$row->unique_id ?>"><?= $row->title; ?></option>
                 <?php } ?>
             </select>
         </div>

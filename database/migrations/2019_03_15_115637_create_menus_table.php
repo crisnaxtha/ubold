@@ -25,7 +25,7 @@ class CreateMenusTable extends Migration
             $table->string('parameter')->nullable();
             $table->string('target')->default('_self');
             $table->string('category_id')->nullable();
-            $table->string('post_unique_id')->nullable();
+            $table->string('unique_id')->nullable();
             $table->boolean('status');
             $table->timestamps();
             $table->foreign('parent_id')

@@ -9,7 +9,7 @@ use App\Model\Dcms\Eloquent\DM_Post;
 use App\Model\Dcms\Tracker;
 use App\Model\Dcms\Post;
 use DB;
-use Response; 
+use Response;
 
 class MenusController extends DM_BaseController
 {
@@ -19,14 +19,14 @@ class MenusController extends DM_BaseController
     protected $model;
     protected $table;
     protected $post;
-    
+
 
     public function __construct(Request $request, Menu $menu, DM_Post $dm_post, Tracker $tracker) {
         // $this->middleware('auth');
         // $this->middleware('role:admin');
         $this->model = $menu;
         $this->dm_post = $dm_post;
-        $this->lang_id = $dm_post::setLanguage();        
+        $this->lang_id = $dm_post::setLanguage();
         $this->tracker = $tracker::hit();
         // $menu_data = $menu::DTree();
     }
@@ -68,7 +68,7 @@ class MenusController extends DM_BaseController
      * @return \Illuminate\Http\Response
      */
     public function store(Request $request)
-    {   
+    {
         $request->validate([
             'type' => 'required',
             'url'   => 'nullable|url',
@@ -88,13 +88,13 @@ class MenusController extends DM_BaseController
             $row->url = "/page/$request->page_unique_id";
             $row->route = "'site.pages', ['id' => $request->page_unique_id]";
             $row->parameter = $request->page_unique_id;
-            $row->post_unique_id = $request->page_unique_id;
+            $row->unique_id = $request->page_unique_id;
         }
         elseif($row->type == "Post") {
             $row->url = "/post/$request->post_unique_id";
             $row->route = "'site.post', ['id' => $request->post_unique_id]";
             $row->parameter = $request->post_unique_id;
-            $row->post_unique_id = $request->post_unique_id;
+            $row->unique_id = $request->post_unique_id;
         }
         elseif( $row->type == "Category") {
             $row->url = "/category/{$request->category_id}";
@@ -195,13 +195,13 @@ class MenusController extends DM_BaseController
             $row->url = "/page/$request->page_unique_id";
             $row->route = "'site.pages', ['id' => $request->page_unique_id]";
             $row->parameter = $request->page_unique_id;
-            $row->post_unique_id = $request->page_unique_id;
+            $row->unique_id = $request->page_unique_id;
         }
         elseif($row->type == "Post") {
             $row->url = "/post/$request->post_unique_id";
             $row->route = "'site.post', ['id' => $request->post_unique_id]";
             $row->parameter = $request->post_unique_id;
-            $row->post_unique_id = $request->post_unique_id;
+            $row->unique_id = $request->post_unique_id;
         }
         elseif( $row->type == "Category") {
             $row->url = "/category/{$request->category_id}";
@@ -264,5 +264,5 @@ class MenusController extends DM_BaseController
             // return var_dump(Response::json($menu));
         }
     }
-    
+
 }

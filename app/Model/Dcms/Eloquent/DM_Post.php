@@ -178,6 +178,16 @@ class DM_Post extends Model{
         return null;
     }
 
+    public static function getCategoryFirst($lang_id) {
+        $album =  DB::table('categories')
+        ->join('categories_name', 'categories.id', '=', 'categories_name.category_id')
+        ->select('categories.*', 'categories_name.name as cat_name', 'categories_name.lang_id')
+        ->where('categories_name.lang_id', '=', $lang_id)
+        ->where('categories.featured', '=', 1)
+        ->first();
+        return $album;
+    }
+
     public static function getCategoryList($lang_id) {
         $album =  DB::table('categories')
             ->join('categories_name', 'categories.id', '=', 'categories_name.category_id')

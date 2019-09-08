@@ -48,7 +48,6 @@ class SiteController extends DM_BaseController
         $data['album'] = $this->dm_post::joinAlbum($this->lang_id);
         $data['category'] = $this->dm_post::getCategoryList($this->lang_id);
         $data['album_category'] = $this->dm_post::getAlbumCategoryList($this->lang_id);
-        // dd($data['album_category']);
         $data['count_cat'] = count($data['category']);
 
         foreach($data['category'] as $row) {
@@ -104,6 +103,10 @@ class SiteController extends DM_BaseController
     public function showPost($post_unique_id) {
         $this->tracker;
         $data['common'] = Common::where('lang_id', '=', $this->lang_id)->first();
+        $data['imp_link'] = Link::where('status', '=', 1)->where('lang_id', '=', $this->lang_id)->get();
+        $data['category'] = $this->dm_post::getCategoryList($this->lang_id);
+        $data['category_first'] = $this->dm_post::getCategoryFirst($this->lang_id);
+        $data['category_first_post'] = $this->dm_post::categoryPost($data['category_first']->id, $this->lang_id, 20);
         $data['menu'] = Menu::tree($this->lang_id);
         $data['row'] = $this->dm_post::getSinglePost($post_unique_id, $this->lang_id);
         $data['file'] = $this->dm_post::getFile($post_unique_id);
@@ -115,6 +118,10 @@ class SiteController extends DM_BaseController
         $this->tracker;
         $data['common'] = Common::where('lang_id', '=', $this->lang_id)->first();
         $data['menu'] = Menu::tree($this->lang_id);
+        $data['imp_link'] = Link::where('status', '=', 1)->where('lang_id', '=', $this->lang_id)->get();
+        $data['category'] = $this->dm_post::getCategoryList($this->lang_id);
+        $data['category_first'] = $this->dm_post::getCategoryFirst($this->lang_id);
+        $data['category_first_post'] = $this->dm_post::categoryPost($data['category_first']->id, $this->lang_id, 20);
         $data['row'] = $this->dm_post::getSinglePage($unique_id, $this->lang_id);
         $data['file'] = $this->dm_post::getFile($unique_id);
         $data['recent_post'] = DB::table('posts')->where('type', '=', 'post')->where('status', '=', 1)->where('lang_id', '=', $this->lang_id)->take(5)->get();
