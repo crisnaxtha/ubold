@@ -18,6 +18,7 @@ use App\Model\Dcms\Blog;
 use App\Model\Dcms\Service;
 use App\Model\Dcms\Common;
 use App\Model\Dcms\Popup;
+use App\Model\Dcms\Process;
 use DB;
 use Session;
 
@@ -220,6 +221,17 @@ class SiteController extends DM_BaseController
                         ->orWhere('tag', 'LIKE', '%'. $query.'%')
                         ->orWhere('author', 'LIKE', '%'. $query.'%')->get();
         return view(parent::loadView($this->view_path.'.category'), compact('data'));
+    }
+
+    /**
+     * Showing of the process
+     */
+    public function showProcess(Request $request) {
+        $data['common'] = Common::where('lang_id', '=', $this->lang_id)->first();
+        $data['menu'] = Menu::tree($this->lang_id);
+        $data['processes'] = Process::tree($this->lang_id);
+        // dd($data);
+        return view(parent::loadView($this->view_path.'.process'), compact('data'));
     }
 
 }

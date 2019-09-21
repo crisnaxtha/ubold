@@ -509,6 +509,11 @@ Route::group([ 'as'=>'site.', 'namespace'=>'Site'], function(){
      */
     Route::get('/swap/language/{lang_id}',        ['as'=>'swap_language',   'uses'=>'SiteController@swapLanguage']);
 
+    /**
+     * Process
+     */
+    Route::get('/process',                          ['as'=>'process',      'uses'=>'SiteController@showProcess']);
+
 });
 
 

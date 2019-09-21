@@ -117,7 +117,35 @@ class Process extends DM_BaseModel
 	public function getHTML($items)
 	{
 		return $this->buildCategory($items);
-	}
+    }
+
+    /** Navigation for Frontend */
+    public static function tree($lang_id) {
+        $data['rows'] = DB::table('processes')->where('status', '=', 1)->orderBy('order')
+                    ->join('process_name', 'processes.id', '=', 'process_name.process_id')
+                    ->where('process_name.lang_id', '=', $lang_id)
+                    ->select('processes.*', 'process_name.lang_id', 'process_name.name as process_name','process_name.description')->orderBy('order')
+                    ->get();
+        $ref = [];
+        $items = [];
+        foreach($data['rows'] as $row){
+            $thisRef = &$ref[$row->id];
+            $thisRef['name'] = $row->name;
+            $thisRef['slug'] = $row->slug;
+            $thisRef['order'] = $row->order;
+            $thisRef['parent_id'] = $row->parent_id;
+            $thisRef['id'] = $row->id;
+            $thisRef['url'] = $row->url;
+            $thisRef['process_name'] = $row->process_name;
+            $thisRef['description'] = $row->description;
+            if($row->parent_id == 0) {
+                $items[$row->id] = &$thisRef;
+            } else {
+                $ref[$row->parent_id]['child'][$row->id] = &$thisRef;
+            }
+        }
+        return $items;
+    }
 
 }
 

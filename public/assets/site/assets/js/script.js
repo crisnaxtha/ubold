@@ -237,7 +237,6 @@ $(document).ready(function() {
     })
   })
 
-
 $(document).ready(function() {
 
     $('.popup-carousel').owlCarousel({
@@ -370,6 +369,8 @@ $exitButton.click(function() {
 
 
 
+
+
 // ===== Scroll to Top ====
 $(window).scroll(function() {
     if ($(this).scrollTop() >= 50) {        // If page is scrolled more than 50px
@@ -393,19 +394,76 @@ $(window).scroll(function() {
     }
 });
 
+$(document).ready(function() {
+// $(window).scroll(function() {
+    var top = $('#sidebar').offset().top - parseFloat($('#sidebar').css('marginTop').replace(/auto/, 0));
+    var footTop = $('#footer').offset().top - parseFloat($('#footer').css('marginTop').replace(/auto/, 0));
 
-$(window).scroll(function() {
-  if ($(window).scrollTop() + $(window).height() > ($(document).height() - $("#footer").height())) {
-    $("#sidebar").hide();
-  } else {
-    $("#sidebar").show();
-  }
+    var maxY = footTop - $('#sidebar').outerHeight();
 
+    $(window).scroll(function(evt) {
+        var y = $(this).scrollTop();
+        if (y > top) {
+
+//Quand scroll, ajoute une classe ".fixed" et supprime le Css existant
+            if (y < maxY) {
+                $('#sidebar').addClass('fixed').removeAttr('style');
+            } else {
+
+//Quand la sidebar arrive au footer, supprime la classe "fixed" précèdement ajouté
+                $('#sidebar').removeClass('fixed').css({
+                    position: 'absolute',
+                    top: (maxY - top) + 'px'
+                });
+            }
+        } else {
+            $('#sidebar').removeClass('fixed');
+        }
+    });
 });
-// side bar
-$('#sidebar').affix({
-  offset : {
-    top : 100,
-    bottom : 600
+
+
+
+
+
+$( function() {
+  $( "#datepicker" ).datepicker({
+    dateFormat: "dd-mm-yy"
+    , duration: "fast"
+  });
+} );
+
+
+(function() {
+
+  'use strict';
+
+  // define variables
+  var items = document.querySelectorAll(".timeline li");
+
+  // check if an element is in viewport
+  // http://stackoverflow.com/questions/123999/how-to-tell-if-a-dom-element-is-visible-in-the-current-viewport
+  function isElementInViewport(el) {
+    var rect = el.getBoundingClientRect();
+    return (
+      rect.top >= 0 &&
+      rect.left >= 0 &&
+      rect.bottom <= (window.innerHeight || document.documentElement.clientHeight) &&
+      rect.right <= (window.innerWidth || document.documentElement.clientWidth)
+    );
   }
-})
+
+  function callbackFunc() {
+    for (var i = 0; i < items.length; i++) {
+      if (isElementInViewport(items[i])) {
+        items[i].classList.add("in-view");
+      }
+    }
+  }
+
+  // listen for events
+  window.addEventListener("load", callbackFunc);
+  window.addEventListener("resize", callbackFunc);
+  window.addEventListener("scroll", callbackFunc);
+
+})();
