@@ -327,15 +327,17 @@ Route::group(['prefix' => 'dashboard', 'as'=> 'dcms.', 'namespace'=>'Dcms', 'mid
      * Staff Office Routes
      */
     Route::group(['prefix' => 'staff', 'as'=>'staff.', 'middleware'=>'role:admin'], function () {
-        Route::get('',                                      ['as'=>'index',              'uses'=>'StaffController@index']);
-        Route::get('create',                                ['as'=>'create',              'uses'=>'StaffController@create']);
-        Route::post('',                                     ['as'=>'store',              'uses'=>'StaffController@store']);
+        Route::get('',                                     ['as'=>'index',              'uses'=>'StaffController@index']);
+        Route::get('create',                               ['as'=>'create',              'uses'=>'StaffController@create']);
+        Route::post('',                                    ['as'=>'store',              'uses'=>'StaffController@store']);
         Route::get('{staff}/edit',                         ['as'=>'edit',              'uses'=>'StaffController@edit']);
         Route::put('{staff}',                              ['as'=>'update',              'uses'=>'StaffController@update']);
         Route::delete('{staff}',                           ['as'=>'destroy',              'uses'=>'StaffController@destroy']);
         Route::get('get_sort_list',                        ['as'=>'get_sort',              'uses'=>'StaffController@getSortList']);
         Route::get('get_staffs/{staff}',                   ['as'=>'get_staff',              'uses'=>'StaffController@getStaffs']);
-        Route::post('order',                                 ['as'=>'order',              'uses'=>'StaffController@storeOrder']);
+        Route::post('order',                               ['as'=>'order',              'uses'=>'StaffController@storeOrder']);
+        Route::get('get_feature_list',                     ['as'=>'get_feature_list',              'uses'=>'StaffController@getFeatureList']);
+        Route::post('feature/order',                       ['as'=>'feature.order',              'uses'=>'StaffController@storeFeatureOrder']);
     });
      /**
      * Setting Routes

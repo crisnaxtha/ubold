@@ -8,6 +8,7 @@ use App\Model\Dcms\Staff;
 use App\Model\Dcms\Branch;
 use App\Model\Dcms\Tracker;
 use App\Model\Dcms\Eloquent\DM_Post;
+use Response;
 
 class StaffController extends DM_BaseController
 {
@@ -146,13 +147,13 @@ class StaffController extends DM_BaseController
     public function getSortList() {
         $this->tracker;
         $data['branch'] = $this->branch::where('status', '=', 1)->get();
-        return view(parent::loadView($this->view_path.'.sort'), compact('data')); 
+        return view(parent::loadView($this->view_path.'.sort'), compact('data'));
     }
 
     public function getStaffs($id) {
         $this->tracker;
         $data = $this->model::where('lang_id', '=', $this->lang_id)->where('branch_id', '=', $id)->orderBy('order')->get();
-       
+
         // return Response::json($data);
         return json_decode($data);
     }
@@ -168,6 +169,30 @@ class StaffController extends DM_BaseController
                 foreach($menu as $stf) {
                     $staff = Staff::findOrFail($stf->id);
                     $staff->order = $i;
+                    $staff->save();
+                }
+            }
+            return var_dump(Response::json($readbleArray));
+        }
+    }
+
+    public function getFeatureList() {
+        $this->tracker;
+        $data['rows'] = $this->model::where('status', '=', 1)->where('featured', '=', 1)->where('lang_id', '=', $this->lang_id)->orderBy('feature_order')->get();
+        return view(parent::loadView($this->view_path.'.featured_list'), compact('data'));
+    }
+
+    public function storeFeatureOrder(Request $request){
+        if($request->ajax()) {
+            $data = json_decode($_POST['data']);
+            $readbleArray = parent::uniqueParseJsonArray($data);
+            $i = 0;
+            foreach( $readbleArray as $row) {
+                $i++;
+                $menu = Staff::where('unique_id', '=', $row['unique'])->get();
+                foreach($menu as $stf) {
+                    $staff = Staff::findOrFail($stf->id);
+                    $staff->feature_order = $i;
                     $staff->save();
                 }
             }

@@ -91,7 +91,7 @@
     <script src="{{ asset('assets/dcms/assets/libs/flot-charts/jquery.flot.crosshair.js') }}"></script> --}}
 
     <!-- Dashboar 1 init js-->
-    <script src="{{ asset('assets/dcms/assets/js/pages/dashboard-1.init.js') }}"></script>
+    {{-- <script src="{{ asset('assets/dcms/assets/js/pages/dashboard-1.init.js') }}"></script> --}}
  <!-- Chart JS -->
  <script src="{{ asset('assets/dcms/assets/libs/chart-js/Chart.bundle.min.js') }}"></script>
 

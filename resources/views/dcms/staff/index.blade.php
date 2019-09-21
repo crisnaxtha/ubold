@@ -17,6 +17,7 @@
 
            @include('dcms.includes.buttons.button-create')
            @include('dcms.staff.includes.button-sort')
+           @include('dcms.staff.includes.button-feature')
            <hr>
            <div class="mb-2">
                <div class="row">

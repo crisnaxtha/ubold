@@ -27,13 +27,14 @@ $(document).on('click','#delete', function () {
             error: function(xhr) {
                 console.log(xhr.responseText); // this line will save you tons of hours while debugging
                // do something here because of error
-              } 
+              }
         });
+        reload();
     }
     else {
 
     }
- 
+
 });
 
 $(document).on('click','#restore', function () {
@@ -67,7 +68,7 @@ $(document).on('click','#restore', function () {
         });
     }
     else {
-    
+
     }
 
 });
