@@ -1,18 +1,6 @@
 @extends('dcms.layouts.app')
 
 @section('content')
-
-
-    <!-- start page title -->
-    <div class="row">
-        <div class="col-12">
-            <div class="page-title-box">
-                <h4 class="page-title">Dashboard</h4>
-            </div>
-        </div>
-    </div>
-    <!-- end page title -->
-
     <div class="row">
         @if(Auth::user()->role == "super-admin")
         <div class="col-md-6 col-xl-3">
@@ -170,5 +158,5 @@ var myChart = new Chart(ctx, {
         }
     }
 });
-</script>	
+</script>
 @endsection
