@@ -427,6 +427,20 @@ Route::group(['prefix' => 'dashboard', 'as'=> 'dcms.', 'namespace'=>'Dcms', 'mid
         Route::delete('{service}',                             ['as'=>'destroy',              'uses'=>'ServicesController@destroy']);
     });
 
+    /**
+     * Process Routes
+     */
+    Route::group(['prefix' => 'process', 'as'=>'process.', 'middleware'=>'role:super-admin'], function () {
+        Route::get('',                                      ['as'=>'index',              'uses'=>'ProcessController@index']);
+        Route::get('create',                                ['as'=>'create',              'uses'=>'ProcessController@create']);
+        Route::post('',                                     ['as'=>'store',              'uses'=>'ProcessController@store']);
+        Route::get('{process}/edit',                           ['as'=>'edit',              'uses'=>'ProcessController@edit']);
+        Route::put('{process}',                                ['as'=>'update',              'uses'=>'ProcessController@update']);
+        Route::delete('{process}',                             ['as'=>'destroy',              'uses'=>'ProcessController@destroy']);
+         /** Process Nestable Order */
+         Route::post('order',                                ['as'=>'order',              'uses'=>'ProcessController@storeOrder']);
+    });
+
 });
 
 /**

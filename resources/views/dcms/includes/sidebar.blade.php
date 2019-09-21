@@ -7,10 +7,6 @@
         <div id="sidebar-menu">
 
             <ul class="metismenu" id="side-menu">
-
-                <li class="menu-title">Navigation</li>
-
-
                 @if(Route::has('dcms.dashboard'))
                 <li><a class="{{ ($_panel == 'Home') ? 'active' : '' }}" href="{{ URL::route('dcms.dashboard') }}"><i class="fe-airplay"></i><span>{{__('Dashboard')}}</span></a></li>
                 @endif
@@ -68,6 +64,9 @@
                         @if( Route::has('dcms.popup.index'))
                         <li class="{{ ($_panel == 'Popup') ? 'active' : '' }}"><a href="{{ URL::route('dcms.popup.index') }}" ><i class="fas fa-expand"></i>&nbsp;&nbsp;<span>{{__('Pop Up') }}</span></a></li>
                         @endif
+                        @if( Route::has('dcms.process.index'))
+                        <li class="{{ ($_panel == 'Process') ? 'active' : '' }}"><a href="{{ URL::route('dcms.process.index') }}" ><i class="fas fa-expand"></i>&nbsp;&nbsp;<span>{{__('Process') }}</span></a></li>
+                        @endif
                     </ul>
                 </li>
 
@@ -110,7 +109,7 @@
                     @if( Route::has('dcms.menu.index'))
                     <li><a class="{{ ($_panel == 'Menus') ? 'active' : '' }}" href="{{ URL::route('dcms.menu.index') }}" ><i class="fa fa-bars"></i><span>{{__('Menus')}}</span></a></li>
                     @endif
-                    
+
                 @endif
                 {{-- END::Check if the user is admin or super-admin  --}}
                 {{-- Check if the user is SUPER-ADMIN --}}
