@@ -44,7 +44,7 @@ class SiteController extends DM_BaseController
         $data['common'] = Common::where('lang_id', '=', $this->lang_id)->first();
         $data['menu'] = Menu::tree($this->lang_id);
         $data['imp_link'] = Link::where('status', '=', 1)->where('lang_id', '=', $this->lang_id)->get();
-        $data['member'] = Staff::where('featured', '=', 1)->where('lang_id', '=', $this->lang_id)->orderBy('level')->get();
+        $data['member'] = Staff::where('featured', '=', 1)->where('lang_id', '=', $this->lang_id)->orderBy('feature_order')->get();
 
         $data['album'] = $this->dm_post::joinAlbum($this->lang_id);
         $data['category'] = $this->dm_post::getCategoryList($this->lang_id);
