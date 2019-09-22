@@ -15,13 +15,13 @@
             <div class="col-lg-3 col-md-4">
                 @include('site.includes.index.index-member')
                 @include('site.includes.index.index-tweet')
-                @include('site.includes.index.index-about')
-                @include('site.includes.index.index-sewa')
-                @include('site.includes.index.index-gallery')
             </div>
         </div>
     </div>
     <div class="clearfix"></div>
+    @include('site.includes.index.index-about')
+    @include('site.includes.index.index-sewa')
+    @include('site.includes.index.index-gallery')
 </div>
 @include('site.includes.index.popup')
 @endsection

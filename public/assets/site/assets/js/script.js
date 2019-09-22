@@ -426,12 +426,12 @@ $(document).ready(function() {
 
 
 
-$( function() {
-  $( "#datepicker" ).datepicker({
-    dateFormat: "dd-mm-yy"
-    , duration: "fast"
-  });
-} );
+// $( function() {
+//   $( "#datepicker" ).datepicker({
+//     dateFormat: "dd-mm-yy"
+//     , duration: "fast"
+//   });
+// } );
 
 
 (function() {
