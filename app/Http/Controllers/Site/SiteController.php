@@ -19,8 +19,11 @@ use App\Model\Dcms\Service;
 use App\Model\Dcms\Common;
 use App\Model\Dcms\Popup;
 use App\Model\Dcms\Process;
+use App\Model\Dcms\Comment;
 use DB;
 use Session;
+use Response;
+use Illuminate\Support\Facades\Input;
 
 class SiteController extends DM_BaseController
 {
@@ -233,5 +236,31 @@ class SiteController extends DM_BaseController
         // dd($data);
         return view(parent::loadView($this->view_path.'.process'), compact('data'));
     }
+
+    public function postReaction(Request $request) {
+        if($request->ajax()) {
+            $id = Input::get( 'id' );
+            $value = Input::get('value');
+            $type = 'reaction';
+            $reaction = new Comment;
+            $reaction->unique_id = $id;
+            $reaction->type = $type;
+            $reaction->comment = $value;
+            $reaction->save();
+            return (Response::json($id));
+        }
+    }
+
+    public function postComment(Request $request) {
+        if($request->ajax()) {
+          $comment = new Comment;
+          $comment->comment = $request->comment;
+          $comment->unique_id = $request->unique_id;
+          $comment->type = "comment";
+          $comment->save();
+            return Response::json($comment);
+        }
+    }
+
 
 }

@@ -2,7 +2,7 @@
 $(document).on('click','#delete', function () {
     var id = $(this).data('id');
     var url = $(this).data('url');
-    // alert(url);
+    alert(url);
     $object=$(this);
     if (confirm("Do you want to delete??")) {
         $.ajax ({

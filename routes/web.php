@@ -516,6 +516,14 @@ Route::group([ 'as'=>'site.', 'namespace'=>'Site'], function(){
      */
     Route::get('/process',                          ['as'=>'process',      'uses'=>'SiteController@showProcess']);
 
+    /**
+     * Reaction
+     */
+    Route::post('/reaction',                        ['as'=>'reaction',      'uses'=>'SiteController@postReaction']);
+     /**
+     * Comment
+     */
+    Route::post('/comment',                         ['as'=>'comment',       'uses'=>'SiteController@postComment']);
 });
 
 

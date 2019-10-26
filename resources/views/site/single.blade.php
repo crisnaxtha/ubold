@@ -70,22 +70,26 @@
 
       <form>
         <div class="row">
-          <div class="col-lg-3 col-md-4">
-            <b>Rate This:</b>
-            <div id="smileys">
-              <input type="radio" name="smiley" value="sad" class="sad">
-              <input type="radio" name="smiley" value="neutral" class="neutral">
-              <input type="radio" name="smiley" value="happy" class="happy" checked="checked">
-              <div> &nbsp; Feeling <span id="result">happy</span></div>
+            <div class="col-lg-3 col-md-4">
+                <b>Rate This:</b>
+                <div id="smileys">
+                <input type="radio" name="reaction" data-value="sad" data-url="{{ URL::route('site.reaction') }}" data-id="{{ $data['row']->unique_id }}" class="sad" id="reaction">
+                <input type="radio" name="reaction" data-value="neutral" data-url="{{ URL::route('site.reaction') }}" data-id="{{ $data['row']->unique_id }}" class="neutral" id="reaction">
+                <input type="radio" name="reaction" data-value="happy" data-url="{{ URL::route('site.reaction') }}" data-id="{{ $data['row']->unique_id }}" class="happy" id="reaction" >
+                {{-- <div> &nbsp; Feeling <span id="result">happy</span></div> --}}
+                </div>
             </div>
-          </div>
-          <div class="col-lg-7 col-md-5">
-            <input type="text" class="form-control" name="text" placeholder="Your Name" />
-          </div>
-          <div class="col-lg-2 col-md-3">
-            <button type="button" class="btn btn-success">Submit</button>
-          </div>
-          <div class="clearfix"></div>
+            <form action="{{ URL::route('site.comment') }}" method="POST" enctype="multipart/form-data">
+                @csrf
+                <div class="col-lg-7 col-md-5">
+                    <input type="text" class="form-control" name="comment" placeholder="Your Comment" id="u_comment"  />
+                    <input type="hidden" name="unique_id" value="{{ $data['row']->unique_id }}" id="u_unique_id">
+                </div>
+                <div class="col-lg-2 col-md-3">
+                    <button type="submit" id="submit" class="btn btn-success" data-url="{{ URL::route('site.comment') }}">Submit</button>
+                </div>
+            </form>
+            <div class="clearfix"></div>
         </div>
 
 
@@ -129,5 +133,84 @@
       return true;
 
     });
+
+
+$(document).on('click','#reaction', function () {
+    var value = $(this).data('value');
+    var id = $(this).data('id');
+    var url = $(this).data('url');
+    // alert(id);
+    $object=$(this);
+        $.ajax ({
+            url: url,
+            type: 'POST',
+            dataType: "JSON",
+            beforeSend: function (xhr) {
+                var token = $('meta[name="csrf-token"]').attr('content');
+                    if (token) {
+                        return xhr.setRequestHeader('X-CSRF-TOKEN', token);
+                    }
+                },
+            data: {
+                id: id,
+                value: value,
+            },
+            success: function(response){
+                console.log(response);
+                // $($object).parents('tr').remove();
+                alert('Successfully!!');
+                // location.reload(true);
+            },
+            error: function(xhr) {
+                console.log(xhr.responseText); // this line will save you tons of hours while debugging
+               // do something here because of error
+              }
+        });
+        // reload();
+});
+
+// Ajax for our form
+$(document).on('click','#submit', function () {
+    event.preventDefault();
+    var comment = $('#u_comment').val();
+    var unique_id = $('#u_unique_id').val();
+    var url = $(this).data('url');;
+    // alert(comment);
+    // alert(unique_id);
+    // alert(url);
+
+    var formData = {
+        comment     : comment,
+        unique_id    : unique_id,
+    }
+
+    $.ajax({
+        type     : "POST",
+        url      : url,
+        beforeSend: function (xhr) {
+                var token = $('meta[name="csrf-token"]').attr('content');
+                    if (token) {
+                        return xhr.setRequestHeader('X-CSRF-TOKEN', token);
+                    }
+                },
+        data     : formData,
+        cache    : false,
+
+        success  : function(response) {
+            console.log(response);
+                // $($object).parents('tr').remove();
+                alert('Successfully Deleted!!');
+                // location.reload(true);
+        },
+            error: function(xhr) {
+                console.log(xhr.responseText); // this line will save you tons of hours while debugging
+               // do something here because of error
+              }
+    });
+
+
+});
+
+
   </script>
 @endsection

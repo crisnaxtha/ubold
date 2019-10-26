@@ -31,6 +31,7 @@ p, .paragraph {
   font-size: 15px;
   line-height: 1.6;
   font-family: roboto,sans-serif;
+  text-align: justify;
 }
 a{color: #2460b9;}
 
@@ -1242,6 +1243,7 @@ img{max-width: 100%;
 }
 .card-body {
     padding: 1.25rem;
+    text-align: justify;
 }
 .chart_sec .card-header h5{font-weight: 500;}
 .chart_sec .card-body{padding-left: 0px; padding-right: 0px;}
