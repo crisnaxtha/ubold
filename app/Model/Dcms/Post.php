@@ -110,7 +110,7 @@ class Post extends DM_BaseModel
             $post_thumbnail = parent::uploadImage($request, $this->folder_path_image ,$this->prefix_path_image,'image','','');
         }
         else {
-            $post_thumbnail = null;
+            $post_thumbnail = Post::findOrFail($rows[0]['id'])->thumbnail;
         }
         $array_file_title = array_filter($file_title);
 
