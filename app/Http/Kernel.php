@@ -19,7 +19,7 @@ class Kernel extends HttpKernel
         \App\Http\Middleware\TrimStrings::class,
         \Illuminate\Foundation\Http\Middleware\ConvertEmptyStringsToNull::class,
         \App\Http\Middleware\TrustProxies::class,
-        \Illuminate\Session\Middleware\StartSession::class, //to get session value in constructor in controller 
+        \Illuminate\Session\Middleware\StartSession::class, //to get session value in constructor in controller
         // \App\Http\Middleware\DM_Localization::class,
     ];
 
@@ -62,13 +62,14 @@ class Kernel extends HttpKernel
         'signed' => \Illuminate\Routing\Middleware\ValidateSignature::class,
         'throttle' => \Illuminate\Routing\Middleware\ThrottleRequests::class,
         'verified' => \Illuminate\Auth\Middleware\EnsureEmailIsVerified::class,
-  
+
         /**
          * Custom User Status Check for DCMS
          */
         'status' => \App\Http\Middleware\DM_CheckUserStatus::class,
-        'role'   => \App\Http\Middleware\DM_CheckRole::class
-          
+        'role'   => \App\Http\Middleware\DM_CheckRole::class,
+        'permission' => \App\Http\Middleware\DM_CheckPermission::class,
+
     ];
 
     /**

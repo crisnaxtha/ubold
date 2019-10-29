@@ -23,10 +23,14 @@ class CreateUsersTable extends Migration
             $table->string('username')->nullable()->unique();
             $table->string('avatar')->nullable();
             $table->string('phone')->nullable();
-            $table->string('role')->nullable();
+            $table->boolean('role_super')->nullable();
+            $table->unsignedInteger('role_id')->nullable();
             $table->integer('forgotten_password_time')->nullable();
             $table->boolean('status')->default(1);
             $table->timestamps();
+            $table->foreign('role_id')
+                ->references('id')->on('roles')
+                ->onDelete('cascade');
         });
     }
 

@@ -16,7 +16,7 @@ class UsersTableSeeder extends Seeder
             'name'=>'Lochan',
             'email'=>'Krishnashrestha49@gmail.com',
             'password'=>bcrypt('password'),
-            'role' => 'super-admin'
+            'role_super' => 1
         ]);
     }
 }

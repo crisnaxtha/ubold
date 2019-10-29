@@ -70,64 +70,58 @@
                     </ul>
                 </li>
 
-                {{-- Check if the user is admin or super-admin  --}}
-                @if(Auth::user()->role == 'super-admin' || Auth::user()->role == 'admin')
-                    <li class="sub-menu {{ ($_panel == 'Office Department' || $_panel == 'Staff') ? 'active' : '' }}">
-                        <a href="javascript:;" class="{{ ($_panel == 'Office Department' || $_panel == 'Staff') ? 'active' : '' }}"><i class="fas fa-briefcase"></i>
-                            <span class="menu-arrow"></span>
-                            <span>{{ __('Office ') }}</span>
-                        </a>
-                        <ul class="nav-second-level" aria-expanded="true">
-                            @if( Route::has('dcms.branch.index'))
-                            <li  class="{{ ($_panel == 'Office Department') ? 'active' : '' }}"><a href="{{ URL::route('dcms.branch.index') }}" ><i class="fa fa-sitemap"></i>&nbsp;<span>{{__('Office Department')}}</span></a></li>
-                            @endif
-                            @if( Route::has('dcms.staff.index'))
-                            <li class="{{ ($_panel == 'Staff') ? 'active' : '' }}"><a href="{{ URL::route('dcms.staff.index') }}" ><i class="fa fa-users"></i>&nbsp;<span>{{__('Staff')}}</span></a></li>
-                            @endif
-                        </ul>
-                    </li>
-                    <li class="sub-menu">
-                        <a href="javascript:;" class="{{ ($_base_route == 'dcms.setting') ? 'active' : '' }}"><i class="fe-settings"></i>
-                            <span class="menu-arrow"></span>
-                            <span>{{ __('Settings') }}</span>
-                        </a>
-                        <ul class="nav-second-level" aria-expanded="false">
-                            @if(Route::has('dcms.setting.index'))
-                                <li class="{{ ($_panel == 'Setting') ? 'active' : '' }}"><a href="{{ URL::route('dcms.setting.index') }}">{{ __('General Settings') }}</a></li>
-                            @endif
-                            @if(Route::has('dcms.setting.about.index'))
-                                <li class="{{ ($_panel == 'About') ? 'active' : '' }}"><a href="{{ URL::route('dcms.setting.about.index') }}">{{ __('About Us') }}</a></li>
-                            @endif
-                            @if(Route::has('dcms.setting.contact.index'))
-                                <li class="{{ ($_panel == 'Contact') ? 'active' : '' }}"><a href="{{ URL::route('dcms.setting.contact.index') }}">{{ __('Contact Info') }}</a></li>
-                            @endif
-                            @if(Route::has('dcms.setting.social.index'))
-                                <li class="{{ ($_panel == 'Social Profile') ? 'active' : '' }}"><a href="{{ URL::route('dcms.setting.social.index') }}">{{ __('Social Linkss') }}</a></li>
-                            @endif
-                        </ul>
-                    </li>
-                    @if( Route::has('dcms.menu.index'))
-                    <li><a class="{{ ($_panel == 'Menus') ? 'active' : '' }}" href="{{ URL::route('dcms.menu.index') }}" ><i class="fa fa-bars"></i><span>{{__('Menus')}}</span></a></li>
-                    @endif
+                <li class="sub-menu {{ ($_panel == 'Office Department' || $_panel == 'Staff') ? 'active' : '' }}">
+                    <a href="javascript:;" class="{{ ($_panel == 'Office Department' || $_panel == 'Staff') ? 'active' : '' }}"><i class="fas fa-briefcase"></i>
+                        <span class="menu-arrow"></span>
+                        <span>{{ __('Office ') }}</span>
+                    </a>
+                    <ul class="nav-second-level" aria-expanded="true">
+                        @if( Route::has('dcms.branch.index'))
+                        <li  class="{{ ($_panel == 'Office Department') ? 'active' : '' }}"><a href="{{ URL::route('dcms.branch.index') }}" ><i class="fa fa-sitemap"></i>&nbsp;<span>{{__('Office Department')}}</span></a></li>
+                        @endif
+                        @if( Route::has('dcms.staff.index'))
+                        <li class="{{ ($_panel == 'Staff') ? 'active' : '' }}"><a href="{{ URL::route('dcms.staff.index') }}" ><i class="fa fa-users"></i>&nbsp;<span>{{__('Staff')}}</span></a></li>
+                        @endif
+                    </ul>
+                </li>
+                <li class="sub-menu">
+                    <a href="javascript:;" class="{{ ($_base_route == 'dcms.setting') ? 'active' : '' }}"><i class="fe-settings"></i>
+                        <span class="menu-arrow"></span>
+                        <span>{{ __('Settings') }}</span>
+                    </a>
+                    <ul class="nav-second-level" aria-expanded="false">
+                        @if(Route::has('dcms.setting.index'))
+                            <li class="{{ ($_panel == 'Setting') ? 'active' : '' }}"><a href="{{ URL::route('dcms.setting.index') }}">{{ __('General Settings') }}</a></li>
+                        @endif
+                        @if(Route::has('dcms.setting.about.index'))
+                            <li class="{{ ($_panel == 'About') ? 'active' : '' }}"><a href="{{ URL::route('dcms.setting.about.index') }}">{{ __('About Us') }}</a></li>
+                        @endif
+                        @if(Route::has('dcms.setting.contact.index'))
+                            <li class="{{ ($_panel == 'Contact') ? 'active' : '' }}"><a href="{{ URL::route('dcms.setting.contact.index') }}">{{ __('Contact Info') }}</a></li>
+                        @endif
+                        @if(Route::has('dcms.setting.social.index'))
+                            <li class="{{ ($_panel == 'Social Profile') ? 'active' : '' }}"><a href="{{ URL::route('dcms.setting.social.index') }}">{{ __('Social Linkss') }}</a></li>
+                        @endif
+                    </ul>
+                </li>
+                @if( Route::has('dcms.menu.index'))
+                <li><a class="{{ ($_panel == 'Menus') ? 'active' : '' }}" href="{{ URL::route('dcms.menu.index') }}" ><i class="fa fa-bars"></i><span>{{__('Menus')}}</span></a></li>
+                @endif
 
+
+                @if( Route::has('dcms.user.index'))
+                <li><a class="{{ ($_panel == 'Users') ? 'active' : '' }}" href="{{ URL::route('dcms.user.index') }}" ><i class="fa fa-user"></i><span>{{__('Users')}}</span></a></li>
                 @endif
-                {{-- END::Check if the user is admin or super-admin  --}}
-                {{-- Check if the user is SUPER-ADMIN --}}
-                @if(Auth::user()->role == "super-admin")
-                    @if( Route::has('dcms.user.index'))
-                    <li><a class="{{ ($_panel == 'Users') ? 'active' : '' }}" href="{{ URL::route('dcms.user.index') }}" ><i class="fa fa-user"></i><span>{{__('Users')}}</span></a></li>
-                    @endif
-                    @if( Route::has('dcms.tracker.index'))
-                    <li><a class="{{ ($_panel == 'Tracker') ? 'active' : '' }}" href="{{ URL::route('dcms.tracker.index') }}" ><i class="fa fa-map-marker"></i><span>{{__('User Tracker')}}</span></a></li>
-                    @endif
-                    @if( Route::has('dcms.database.index'))
-                    <li><a class="{{ ($_panel == 'DB Backup') ? 'active' : '' }}" href="{{ URL::route('dcms.database.index') }}" ><i class=" fas fa-file-download"></i><span>{{__('DB Backup')}}</span></a></li>
-                    @endif
-                    @if(Route::has('dcms.language.index'))
-                    <li><a class="{{ ($_panel == 'Language') ? 'active' : '' }}" href="{{ URL::route('dcms.language.index') }}" ><i class="fa fa-globe"></i><span>{{__('Language')}}</span></a></li>
-                    @endif
+                @if( Route::has('dcms.tracker.index'))
+                <li><a class="{{ ($_panel == 'Tracker') ? 'active' : '' }}" href="{{ URL::route('dcms.tracker.index') }}" ><i class="fa fa-map-marker"></i><span>{{__('User Tracker')}}</span></a></li>
                 @endif
-                {{--  END:: Check if the user is SUPER-ADMIN --}}
+                @if( Route::has('dcms.database.index'))
+                <li><a class="{{ ($_panel == 'DB Backup') ? 'active' : '' }}" href="{{ URL::route('dcms.database.index') }}" ><i class=" fas fa-file-download"></i><span>{{__('DB Backup')}}</span></a></li>
+                @endif
+                @if(Route::has('dcms.language.index'))
+                <li><a class="{{ ($_panel == 'Language') ? 'active' : '' }}" href="{{ URL::route('dcms.language.index') }}" ><i class="fa fa-globe"></i><span>{{__('Language')}}</span></a></li>
+                @endif
+
             </ul>
 
         </div>
