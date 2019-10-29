@@ -102,6 +102,7 @@
     <!-- App js-->
     <script src="{{ asset('assets/dcms/assets/js/app.min.js') }}"></script>
     <script src="{{ asset('assets/dcms/dm_js/app.js') }}"></script>
+    @include('dcms.includes.flash-message')
 
     @yield('js')
   </body>

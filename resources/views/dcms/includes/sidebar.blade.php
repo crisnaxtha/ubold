@@ -115,13 +115,15 @@
                 @if( Route::has('dcms.tracker.index'))
                 <li><a class="{{ ($_panel == 'Tracker') ? 'active' : '' }}" href="{{ URL::route('dcms.tracker.index') }}" ><i class="fa fa-map-marker"></i><span>{{__('User Tracker')}}</span></a></li>
                 @endif
+                @if( Route::has('dcms.role.index'))
+                <li><a class="{{ ($_panel == 'Role') ? 'active' : '' }}" href="{{ URL::route('dcms.role.index') }}" ><i class="fa fa-map-marker"></i><span>{{__('Role')}}</span></a></li>
+                @endif
                 @if( Route::has('dcms.database.index'))
                 <li><a class="{{ ($_panel == 'DB Backup') ? 'active' : '' }}" href="{{ URL::route('dcms.database.index') }}" ><i class=" fas fa-file-download"></i><span>{{__('DB Backup')}}</span></a></li>
                 @endif
                 @if(Route::has('dcms.language.index'))
                 <li><a class="{{ ($_panel == 'Language') ? 'active' : '' }}" href="{{ URL::route('dcms.language.index') }}" ><i class="fa fa-globe"></i><span>{{__('Language')}}</span></a></li>
                 @endif
-
             </ul>
 
         </div>

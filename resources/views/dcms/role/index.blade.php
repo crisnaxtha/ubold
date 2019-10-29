@@ -2,19 +2,15 @@
 @section('css')
        <!--dynamic table-->
        @include('dcms.includes.footable-assets.css')
+
 @endsection
 
 @section('content')
 <!-- page start-->
 @include('dcms.includes.breadcrumb')
 <div class="row">
-    <div class="col-12">
-        <div class="card-box">
-            {{-- <h4 class="header-title">Filtering</h4>
-            <p class="sub-header">
-                include filtering in your FooTable.
-            </p> --}}
-
+    <div class="col-sm-12">
+       <div class="card-box">
             @include('dcms.includes.buttons.button-create')
             <hr>
             <div class="mb-2">
@@ -39,28 +35,29 @@
                 <table id="demo-foo-pagination" class="table table-bordered toggle-circle mb-0" data-page-size="7">
                     <thead>
                         <tr>
-                            <th>#</th>
-                         <th>Name</th>
-                         <th>Link</th>
-                         <th>Status</th>
-                         <th>Action</th>
+                        <th>#</th>
+                            <th>Name</th>
+                            <th>slug</th>
+                            <th>Status</th>
+                            <th>Action</th>
                         </tr>
                     </thead>
                     <tbody>
                         @if(isset($data['rows']))
                         @foreach($data['rows'] as $row)
                         <tr class="gradeX" id="{{ $row->id }}">
-                           <td>{{ $loop->iteration }}</td>
-                           <td>{{ $row->title }}</td>
-                           <td>{{ $row->link }}</td>
-                           <td><?php dm_flag($row->status) ?></td>
-                           <td>
-                                @include('dcms.includes.buttons.button-unique-edit')
-                                @include('dcms.includes.buttons.button-unique-delete')
-                           </td>
+                            <td>{{ $loop->iteration }}</td>
+                            <td>{{ $row->name }}</td>
+                            <td>{{ $row->slug }}</td>
+                            <td><?php dm_flag($row->status) ?></td>
+                            <td>
+                                @include('dcms.role.includes.buttons.edit-assign')
+                                @include('dcms.includes.buttons.button-edit')
+                                @include('dcms.includes.buttons.button-delete')
+                            </td>
                         </tr>
                         @endforeach
-                     @endif
+                        @endif
                     </tbody>
                     <tfoot>
                     <tr class="active">
@@ -77,10 +74,11 @@
     </div> <!-- end col -->
 </div>
 <!-- page start-->
+
 @endsection
 
 @section('js')
+
 @include('dcms.includes.flash-message')
-{{-- @include('dcms.includes.datatable-assets.js') --}}
 @include('dcms.includes.footable-assets.js')
 @endsection

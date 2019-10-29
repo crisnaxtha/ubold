@@ -8,7 +8,7 @@
             <section class="card">
                 <div class="card-body">
                         @include('dcms.includes.buttons.button-back')
-                        @include('dcms.includes.flash-message') 
+                        @include('dcms.includes.flash-message')
 
                     <form class="" action="{{ route('dcms.user.update', ['id' => $row->id]) }}" method="PUT" enctype="multipart/form-data">
                             {{ method_field('PUT'), csrf_field() }}
@@ -27,29 +27,27 @@
                                     <span class="help-block">{{ $errors->first('email') }}</span>
                                     @endif
                                 </div>
-
+                                @if(isset($roles))
                                 <div class="form-group">
                                     <label name="role" for="inputSuccess">{{__('dcms_lang.register.role') }}</label>
                                         <select name="role" class="form-control m-bot15">
-                                            
-                                            <option value="{{ $row->role }}"><?php dm_userRole($row->role) ?></option>                                            
-                                            <option value="editor">Editor</option>
-                                            <option value="admin">Admin</option>
-                                            <option value="super-admin">Super Admin</option>
+                                            @if($row->role_id)
+                                            <option value="{{ $row->role_id }}">{{ $row->Role->name   }}</option>
+                                            @endif
+                                            @foreach($roles as $role)
+                                            <option value="{{ $role->id }}">{{ $role->name }}</option>
+                                            @endforeach
                                         </select>
                                 </div>
-
-                                <div class="checkbox">
-                                    <label>
-                                        <input type="hidden" name="status" value=0>
-                                        <input type="checkbox" name="status" value=1 @if($row->status){{ "checked" }} @endif>{{__('dcms_lang.register.status') }}
-                                    </label>
-                                </div>
-
+                                @endif
+                                <?php
+                                    dm_checkbox('checkbox', 'role_super', 'Super Admin', $row->role_super);
+                                    dm_checkbox('checkbox', 'status', 'Status', $row->status);
+                                ?>
                                 <button class="btn btn-success" type="submit">{{__('dcms_lang.register.register') }}</button>
                                 <a href="{{ URL::route($_base_route.'.index') }}"><button class="btn btn-danger" type="button">{{__('Cancel') }}</button></a>
 
-                              
+
 
                             </div>
 

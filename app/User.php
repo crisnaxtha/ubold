@@ -5,7 +5,8 @@ namespace App;
 use Illuminate\Notifications\Notifiable;
 use Illuminate\Contracts\Auth\MustVerifyEmail;
 use Illuminate\Foundation\Auth\User as Authenticatable;
-use App\Model\Dcms\UserGroup;
+use App\Model\Dcms\Role;
+use App\DM_Traits\HasPermission;
 
 class User extends Authenticatable
 {
@@ -31,11 +32,7 @@ class User extends Authenticatable
         'password', 'remember_token',
     ];
 
-    public function userGroup() {
-        return $this->belongsTo('usergroup');
-    }
-
-    public function hasRole($role){
-        return User::where('role', $role)->get();
+    public function role() {
+        return $this->belongsTo(Role::class, 'role_id');
     }
 }

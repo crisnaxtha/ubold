@@ -138,7 +138,7 @@ Route::group(['prefix' => 'dashboard', 'as'=> 'dcms.', 'namespace'=>'Dcms', 'mid
         Route::post('',                                     ['as'=>'store',              'uses'=>'PostsController@storePage']);
         Route::get('{page}/edit',                           ['as'=>'edit',              'uses'=>'PostsController@editPage']);
         Route::put('{page}',                                ['as'=>'update',              'uses'=>'PostsController@updatePage']);
-        Route::delete('{page}',                             ['as'=>'destroy',              'uses'=>'PostsController@destroy'])->middleware( 'role:admin');
+        Route::delete('{page}',                             ['as'=>'destroy',              'uses'=>'PostsController@destroy']);
         Route::delete('file/{page}',                        ['as'=>'destroyFile',              'uses'=>'PostsController@destroyFile']);
         /**Soft Delete Url */
         Route::get('delete_item',                            ['as'=>'deleted_item',              'uses'=>'PostsController@deletedPage']);
@@ -155,7 +155,7 @@ Route::group(['prefix' => 'dashboard', 'as'=> 'dcms.', 'namespace'=>'Dcms', 'mid
         Route::post('',                                     ['as'=>'store',              'uses'=>'PostsController@storePost']);
         Route::get('{post}/edit',                           ['as'=>'edit',              'uses'=>'PostsController@editPost']);
         Route::put('{post}',                                ['as'=>'update',              'uses'=>'PostsController@updatePost']);
-        Route::delete('{post}',                             ['as'=>'destroy',              'uses'=>'PostsController@destroy'])->middleware( 'role:admin');
+        Route::delete('{post}',                             ['as'=>'destroy',              'uses'=>'PostsController@destroy']);
         Route::delete('file/{post}',                        ['as'=>'destroyFile',              'uses'=>'PostsController@destroyFile']);
         /**Soft Delete Url */
         Route::get('delete_item',                            ['as'=>'deleted_item',              'uses'=>'PostsController@deletedPost']);
@@ -171,7 +171,7 @@ Route::group(['prefix' => 'dashboard', 'as'=> 'dcms.', 'namespace'=>'Dcms', 'mid
         Route::post('',                                     ['as'=>'store',              'uses'=>'CategoriesController@store']);
         Route::get('{category}/edit',                       ['as'=>'edit',              'uses'=>'CategoriesController@edit']);
         Route::put('{category}',                            ['as'=>'update',              'uses'=>'CategoriesController@update']);
-        Route::delete('{category}',                         ['as'=>'destroy',              'uses'=>'CategoriesController@destroy'])->middleware('role:admin');
+        Route::delete('{category}',                         ['as'=>'destroy',              'uses'=>'CategoriesController@destroy']);
         /** Category Nestable Order */
          Route::post('order',                                ['as'=>'order',              'uses'=>'CategoriesController@storeOrder']);
     });
@@ -184,7 +184,7 @@ Route::group(['prefix' => 'dashboard', 'as'=> 'dcms.', 'namespace'=>'Dcms', 'mid
         Route::post('',                                     ['as'=>'store',              'uses'=>'SlidersController@store']);
         Route::get('{slider}/edit',                         ['as'=>'edit',              'uses'=>'SlidersController@edit']);
         Route::put('{slider}',                              ['as'=>'update',              'uses'=>'SlidersController@update']);
-        Route::delete('{slider}',                           ['as'=>'destroy',              'uses'=>'SlidersController@destroy'])->middleware('role:admin');
+        Route::delete('{slider}',                           ['as'=>'destroy',              'uses'=>'SlidersController@destroy']);
     });
     /**
      * User Profile Routes
@@ -261,7 +261,7 @@ Route::group(['prefix' => 'dashboard', 'as'=> 'dcms.', 'namespace'=>'Dcms', 'mid
         Route::post('',                                     ['as'=>'store',              'uses'=>'AlbumCategoriesController@store']);
         Route::get('{album_category}/edit',                 ['as'=>'edit',              'uses'=>'AlbumCategoriesController@edit']);
         Route::put('{album_category}',                      ['as'=>'update',              'uses'=>'AlbumCategoriesController@update']);
-        Route::delete('{album_category}',                   ['as'=>'destroy',              'uses'=>'AlbumCategoriesController@destroy'])->middleware('role:admin');
+        Route::delete('{album_category}',                   ['as'=>'destroy',              'uses'=>'AlbumCategoriesController@destroy']);
         /** Category Nestable Order */
          Route::post('order',                                ['as'=>'order',              'uses'=>'AlbumCategoriesController@storeOrder']);
     });
@@ -297,7 +297,7 @@ Route::group(['prefix' => 'dashboard', 'as'=> 'dcms.', 'namespace'=>'Dcms', 'mid
      *
      * Menu Routes
      */
-    Route::group(['prefix' => 'menu', 'as'=>'menu.', 'middleware'=>'role:admin'], function () {
+    Route::group(['prefix' => 'menu', 'as'=>'menu.'], function () {
         Route::get('',                                      ['as'=>'index',              'uses'=>'MenusController@index']);
         Route::get('create',                                ['as'=>'create',              'uses'=>'MenusController@create']);
         Route::post('',                                     ['as'=>'store',              'uses'=>'MenusController@store']);
@@ -312,7 +312,7 @@ Route::group(['prefix' => 'dashboard', 'as'=> 'dcms.', 'namespace'=>'Dcms', 'mid
      *
      * Branch Office Routes
      */
-    Route::group(['prefix' => 'branch', 'as'=>'branch.', 'middleware'=>'role:admin'], function () {
+    Route::group(['prefix' => 'branch', 'as'=>'branch.'], function () {
         Route::get('',                                      ['as'=>'index',              'uses'=>'BranchesController@index']);
         Route::get('create',                                ['as'=>'create',              'uses'=>'BranchesController@create']);
         Route::post('',                                     ['as'=>'store',              'uses'=>'BranchesController@store']);
@@ -326,7 +326,7 @@ Route::group(['prefix' => 'dashboard', 'as'=> 'dcms.', 'namespace'=>'Dcms', 'mid
      *
      * Staff Office Routes
      */
-    Route::group(['prefix' => 'staff', 'as'=>'staff.', 'middleware'=>'role:admin'], function () {
+    Route::group(['prefix' => 'staff', 'as'=>'staff.'], function () {
         Route::get('',                                     ['as'=>'index',              'uses'=>'StaffController@index']);
         Route::get('create',                               ['as'=>'create',              'uses'=>'StaffController@create']);
         Route::post('',                                    ['as'=>'store',              'uses'=>'StaffController@store']);
@@ -342,7 +342,7 @@ Route::group(['prefix' => 'dashboard', 'as'=> 'dcms.', 'namespace'=>'Dcms', 'mid
      /**
      * Setting Routes
      */
-    Route::group(['as'=>'setting.', 'middleware'=>'role:admin'], function(){
+    Route::group(['as'=>'setting.'], function(){
         Route::group(['prefix'=>'about', 'as'=>'about.'], function(){
             Route::get('',                      ['as' =>'index',     'uses'=>'SettingsController@getAboutDetails']);
             Route::post('{about}',              ['as' =>'store',     'uses'=>'SettingsController@updateAboutDetails']);
@@ -371,7 +371,7 @@ Route::group(['prefix' => 'dashboard', 'as'=> 'dcms.', 'namespace'=>'Dcms', 'mid
     /**
      * Language route
      */
-    Route::group(['prefix'=>'language', 'as'=>'language.', 'middleware'=>'role:super-admin'], function(){
+    Route::group(['prefix'=>'language', 'as'=>'language.'], function(){
         Route::get('',                                     ['as'=>'index',              'uses'=>'LanguageController@index']);
         Route::get('create',                               ['as'=>'create',             'uses'=>'LanguageController@create']);
         Route::post('',                                    ['as'=>'store',              'uses'=>'LanguageController@store']);
@@ -386,7 +386,7 @@ Route::group(['prefix' => 'dashboard', 'as'=> 'dcms.', 'namespace'=>'Dcms', 'mid
     /**
      * User Routes
      */
-    Route::group(['prefix' => 'user', 'as'=>'user.', 'middleware'=>'role:super-admin'], function () {
+    Route::group(['prefix' => 'user', 'as'=>'user.'], function () {
         Route::get('',                                      ['as'=>'index',              'uses'=>'UsersController@index']);
         Route::get('create',                                ['as'=>'create',              'uses'=>'UsersController@create']);
         Route::post('',                                     ['as'=>'store',              'uses'=>'UsersController@store']);
@@ -397,7 +397,7 @@ Route::group(['prefix' => 'dashboard', 'as'=> 'dcms.', 'namespace'=>'Dcms', 'mid
     /**
      * User Tracking Routes
      */
-    Route::group(['prefix' => 'tracker', 'as'=>'tracker.', 'middleware'=>'role:super-admin'], function () {
+    Route::group(['prefix' => 'tracker', 'as'=>'tracker.'], function () {
         Route::get('',                                      ['as'=>'index',              'uses'=>'TrackersController@index']);
         Route::get('create',                                ['as'=>'create',              'uses'=>'TrackersController@create']);
         Route::post('',                                     ['as'=>'store',              'uses'=>'TrackersController@store']);
@@ -409,7 +409,7 @@ Route::group(['prefix' => 'dashboard', 'as'=> 'dcms.', 'namespace'=>'Dcms', 'mid
     /**
      * DB backup Routes
      */
-    Route::group(['prefix' => 'database', 'as'=>'database.', 'middleware'=>'role:super-admin'], function () {
+    Route::group(['prefix' => 'database', 'as'=>'database.'], function () {
         Route::get('',                                      ['as'=>'index',              'uses'=>'DatabasesBackupController@index']);
         Route::get('download',                              ['as'=>'download',           'uses'=>'DatabasesBackupController@databaseDownload']);
         Route::get('backup',                                ['as'=>'backup',             'uses'=>'DatabasesBackupController@databaseBackup']);
@@ -420,7 +420,7 @@ Route::group(['prefix' => 'dashboard', 'as'=> 'dcms.', 'namespace'=>'Dcms', 'mid
     /**
      * User Routes
      */
-    Route::group(['prefix' => 'service', 'as'=>'service.', 'middleware'=>'role:super-admin'], function () {
+    Route::group(['prefix' => 'service', 'as'=>'service.'], function () {
         Route::get('',                                      ['as'=>'index',              'uses'=>'ServicesController@index']);
         Route::get('create',                                ['as'=>'create',              'uses'=>'ServicesController@create']);
         Route::post('',                                     ['as'=>'store',              'uses'=>'ServicesController@store']);
@@ -432,7 +432,7 @@ Route::group(['prefix' => 'dashboard', 'as'=> 'dcms.', 'namespace'=>'Dcms', 'mid
     /**
      * Process Routes
      */
-    Route::group(['prefix' => 'process', 'as'=>'process.', 'middleware'=>'role:super-admin'], function () {
+    Route::group(['prefix' => 'process', 'as'=>'process.'], function () {
         Route::get('',                                      ['as'=>'index',              'uses'=>'ProcessController@index']);
         Route::get('create',                                ['as'=>'create',              'uses'=>'ProcessController@create']);
         Route::post('',                                     ['as'=>'store',              'uses'=>'ProcessController@store']);
@@ -442,6 +442,19 @@ Route::group(['prefix' => 'dashboard', 'as'=> 'dcms.', 'namespace'=>'Dcms', 'mid
          /** Process Nestable Order */
          Route::post('order',                                ['as'=>'order',              'uses'=>'ProcessController@storeOrder']);
     });
+
+        // Role Route
+
+        Route::group(['prefix' => 'role', 'as'=>'role.',], function () {
+            Route::get('',                                      ['as'=>'index',              'uses'=>'RoleController@index']);
+            Route::get('create',                                ['as'=>'create',              'uses'=>'RoleController@create']);
+            Route::post('',                                     ['as'=>'store',              'uses'=>'RoleController@store']);
+            Route::get('{role}/edit',                           ['as'=>'edit',              'uses'=>'RoleController@edit']);
+            Route::put('{role}',                                ['as'=>'update',              'uses'=>'RoleController@update']);
+            Route::delete('{role}',                             ['as'=>'destroy',              'uses'=>'RoleController@destroy']);
+            Route::get('assign_permission/{id}',                 ['as'=>'assign',                'uses'=>'RoleController@assignPermission']);
+            Route::post('assign_permission/update/{id}',          ['as'=>'assign.update',        'uses'=>'RoleController@updateAssignPermission']);
+        });
 
 });
 

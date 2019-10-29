@@ -11,11 +11,7 @@
 <div class="row">
       <div class="col-12">
           <div class="card-box">
-              <h4 class="header-title">Filtering</h4>
-              <p class="sub-header">
-                  include filtering in your FooTable.
-              </p>
-  
+
               @include('dcms.includes.buttons.button-create')
               <hr>
               <div class="mb-2">
@@ -35,7 +31,7 @@
                       </div>
                   </div>
               </div>
-  
+
               <div class="table-responsive">
                   <table id="demo-foo-pagination" class="table table-bordered toggle-circle mb-0" data-page-size="7">
                       <thead>
@@ -52,9 +48,9 @@
                           </tr>
                       </thead>
                       <tbody>
-                           @if(isset($data['rows'])) 
+                           @if(isset($data['rows']))
                            @foreach($data['rows'] as $row)
-                              
+
                            <tr class="gradeX" id="{{ $row->id }}">
                               <td>{{ $loop->iteration }}</td>
                               <td>{{ $row->name }}</td>
@@ -62,13 +58,13 @@
                               <td>{{ $row->created_at}}<br><strong>[{{ $row->created_at->diffForHumans() }}]</strong></td>
                               <td><?php dm_flag($row->last_login_at) ?>{{ $row->last_login_at }}@if(isset($row->last_login_at))<br><strong>[{{ $row->last_login_at->diffForHumans() }}]</strong>@endif</td>
                               <td><?php dm_flag($row->last_login_ip) ?>{{ $row->last_login_ip }}</td>
-                              <td><?php dm_userRole($row->role) ?></td>
+                              <td>@if($row->role_super) {{ "SUPER" }} @elseif(isset($row->role_id)) {{ $row->Role->name }} @else {{ "No Role Assign"}}  @endif</td>
                               <td><?php dm_flag($row->status) ?></td>
                               <td>
                                  @if(Auth::user()->id == $row->id)
                                     <button class="btn btn-danger"> Self </button>
                                  @else
-                                    @include('dcms.includes.buttons.button-edit')                              
+                                    @include('dcms.includes.buttons.button-edit')
                                     @include('dcms.includes.buttons.button-delete')
                                  @endif
                               </td>
@@ -94,6 +90,6 @@
 @endsection
 
 @section('js')
-@include('dcms.includes.flash-message') 
+@include('dcms.includes.flash-message')
 @include('dcms.includes.footable-assets.js')
 @endsection

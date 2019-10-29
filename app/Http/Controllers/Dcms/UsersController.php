@@ -7,6 +7,7 @@ use App\Http\Controllers\Dcms\DM_BaseController;
 use App\User;
 use App\Model\Dcms\Eloquent\DM_Post;
 use App\Model\Dcms\Tracker;
+use App\Model\Dcms\Role;
 
 class UsersController extends DM_BaseController
 {
@@ -19,10 +20,9 @@ class UsersController extends DM_BaseController
     /**
      * Constructor
      */
-    public function __construct(User $user, Tracker $tracker, DM_Post $dm_post) {
-        $this->middleware('auth');
-        $this->middleware('role:super-admin');
+    public function __construct(User $user, Tracker $tracker, DM_Post $dm_post, Role $role) {
         $this->model = $user;
+        $this->role = $role;
         $this->tracker = $tracker::hit();
         $this->lang_id = $dm_post::setLanguage();
     }
@@ -81,7 +81,8 @@ class UsersController extends DM_BaseController
     {
         $this->tracker;
         $row = $this->model::findOrFail($id);
-        return view(parent::loadView($this->view_path.'.edit'), compact('row'));
+        $roles = $this->role::where('status', '=', 1)->get();
+        return view(parent::loadView($this->view_path.'.edit'), compact('row', 'roles'));
     }
 
     /**
@@ -96,14 +97,15 @@ class UsersController extends DM_BaseController
         $this->tracker;
         $row = $this->model::findOrFail($id);
         $row->name = $request->name;
-        $row->role = $request->role;
+        $row->role_super = $request->role_super;
+        $row->role_id = $request->role;
         $row->status = $request->status;
         if($row->save()) {
             session()->flash('alert-success', $this->panel.' Successfully updated');
         }else{
             session()->flash('alert-danger', $this->panel.' can not be updated');
         }
-        return redirect()->route($this->base_route.'.index'); 
+        return redirect()->route($this->base_route.'.index');
     }
 
     /**
@@ -113,7 +115,7 @@ class UsersController extends DM_BaseController
      * @return \Illuminate\Http\Response
      */
     public function destroy($id)
-    {   
+    {
         $this->tracker;
         $this->model::destroy($id);
     }
