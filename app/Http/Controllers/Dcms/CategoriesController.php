@@ -22,7 +22,11 @@ class CategoriesController extends DM_BaseController
 
     public function __construct(Category $category, Tracker $tracker, DM_Post $dm_post) {
         $this->middleware('auth');
-        $this->middleware('role:admin')->only('destroy');
+        $this->middleware('permission:category-list', ['only' => ['index']]);
+        $this->middleware('permission:category-create', ['only' => ['create','store']]);
+        $this->middleware('permission:category-edit', ['only' => ['edit','update']]);
+        $this->middleware('permission:category-delete', ['only' => ['destroy']]);
+        $this->middleware('permission:category-sort-order', ['only' => ['storeOrder']]);
         $this->model = $category;
         $this->tracker = $tracker::hit();
         $this->lang_id = $dm_post::setLanguage();

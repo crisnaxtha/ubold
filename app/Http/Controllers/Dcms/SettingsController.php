@@ -22,9 +22,11 @@ class SettingsController extends DM_BaseController
 
     public function __construct(Setting $setting, Tracker $tracker, DM_Post $dm_post){
         $this->middleware('auth');
-        $this->middleware('role:admin');
+        $this->middleware('permission:general-setting', ['only' => ['getGeneralSetting', 'updateGeneralSetting']]);
+        $this->middleware('permission:social-setting', ['only' => ['getSocialProfiles','updateSocialProfiles']]);
+        $this->middleware('permission:about-setting', ['only' => ['getContactDetails','updateContactDetails']]);
         $this->model = $setting;
-        $this->folder_path = getcwd() . DIRECTORY_SEPARATOR . 'upload_file' . DIRECTORY_SEPARATOR .'images'. DIRECTORY_SEPARATOR . $this->folder . DIRECTORY_SEPARATOR;    
+        $this->folder_path = getcwd() . DIRECTORY_SEPARATOR . 'upload_file' . DIRECTORY_SEPARATOR .'images'. DIRECTORY_SEPARATOR . $this->folder . DIRECTORY_SEPARATOR;
         $this->tracker = $tracker::hit();
         $this->lang_id = $dm_post::setLanguage();
 
@@ -59,7 +61,7 @@ class SettingsController extends DM_BaseController
         $row->site_description = $request->description;
         $row->meta_keyword = $request->meta;
         if($request->hasFile('logo')){
-            $row->logo = parent::uploadFile($this->folder_path, $this->image_prefix_path, 'logo', $request); 
+            $row->logo = parent::uploadFile($this->folder_path, $this->image_prefix_path, 'logo', $request);
         }
         $row->language = $request->language;
         $row->save();

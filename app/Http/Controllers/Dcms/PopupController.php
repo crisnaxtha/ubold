@@ -18,6 +18,10 @@ class PopupController extends DM_BaseController
 
     public function __construct(Request $request, Tracker $tracker, Popup $popup, DM_Post $dm_post) {
         $this->middleware('auth');
+        $this->middleware('permission:popup-list', ['only' => ['index']]);
+        $this->middleware('permission:popup-create', ['only' => ['create','store']]);
+        $this->middleware('permission:popup-edit', ['only' => ['edit','update']]);
+        $this->middleware('permission:popup-delete', ['only' => ['destroy']]);
         $this->model = $popup;
         $this->tracker = $tracker::hit();
         $this->dm_post = $dm_post;

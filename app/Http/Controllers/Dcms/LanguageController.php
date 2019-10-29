@@ -20,7 +20,10 @@ class LanguageController extends DM_BaseController
 
     public function __construct(Tracker $tracker, DM_Post $dm_post) {
         $this->middleware('auth');
-        $this->middleware('role:super-admin');
+        $this->middleware('permission:language-list', ['only' => ['index']]);
+        $this->middleware('permission:language-create', ['only' => ['create','store']]);
+        $this->middleware('permission:language-edit', ['only' => ['edit','update']]);
+        $this->middleware('permission:language-delete', ['only' => ['destroy']]);
         $this->model = new Language();
         $this->table = DB::table('languages');
         $this->tracker = $tracker::hit();
@@ -51,7 +54,7 @@ class LanguageController extends DM_BaseController
         if($this->model->storeData($request, $request['name'],$request['code'],$request['order'],$request['status'],$request['default'],'image')){
             // $dir = resource_path().'/lang'.'/'.$request['code'].'/';
             // $file = $dir.$request['code'].'_lang.php';
-            
+
             $json_dir = resource_path().'/lang'.'/';
             $json_file = $json_dir.$request['code'].'.json';
             if(!file_exists($json_dir)){

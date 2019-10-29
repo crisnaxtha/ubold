@@ -19,6 +19,10 @@ class LinksController extends DM_BaseController
 
     public function __construct(Request $request, Tracker $tracker, Link $link, DM_Post $dm_post) {
         $this->middleware('auth');
+        $this->middleware('permission:link-list', ['only' => ['index']]);
+        $this->middleware('permission:link-create', ['only' => ['create','store']]);
+        $this->middleware('permission:link-edit', ['only' => ['edit','update']]);
+        $this->middleware('permission:link-delete', ['only' => ['destroy']]);
         $this->model = $link;
         $this->tracker = $tracker::hit();
         $this->dm_post = $dm_post;

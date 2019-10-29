@@ -23,6 +23,10 @@ class GalleryController extends DM_BaseController
 
     public function __construct(Tracker $tracker, DM_Post $dm_post) {
         $this->middleware('auth');
+        $this->middleware('permission:gallery-list', ['only' => ['index']]);
+        $this->middleware('permission:gallery-create', ['only' => ['create','store']]);
+        $this->middleware('permission:gallery-edit', ['only' => ['edit','update']]);
+        $this->middleware('permission:gallery-delete', ['only' => ['destroy']]);
         $this->model = new Gallery;
         $this->table = DB::table('gallery');
         $this->tracker = $tracker::hit();

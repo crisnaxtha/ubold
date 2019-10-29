@@ -20,7 +20,6 @@ class AlbumCategoriesController extends DM_BaseController
 
     public function __construct(AlbumCategory $category, Tracker $tracker, DM_Post $dm_post) {
         $this->middleware('auth');
-        $this->middleware('role:admin')->only('destroy');
         $this->model = $category;
         $this->tracker = $tracker::hit();
         $this->lang_id = $dm_post::setLanguage();

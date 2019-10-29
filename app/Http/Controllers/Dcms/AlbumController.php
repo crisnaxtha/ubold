@@ -21,6 +21,10 @@ class AlbumController extends DM_BaseController
 
     public function __construct(Request $request, Tracker $tracker, Album $album, DM_Post $dm_post) {
         $this->middleware('auth');
+        $this->middleware('permission:album-list', ['only' => ['index']]);
+        $this->middleware('permission:album-create', ['only' => ['create','store']]);
+        $this->middleware('permission:album-edit', ['only' => ['edit','update']]);
+        $this->middleware('permission:album-delete', ['only' => ['destroy']]);
         $this->model = $album;
         $this->tracker = $tracker::hit();
         $this->dm_post = $dm_post;

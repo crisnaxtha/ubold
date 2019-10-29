@@ -22,11 +22,15 @@ class DatabasesBackupController extends DM_BaseController
     protected $dbBackup;
 
     public function __construct(DM_db_backup_library $DB_Backup) {
-        $this->file_path = getcwd() . DIRECTORY_SEPARATOR . 'BACKUP' . DIRECTORY_SEPARATOR . $this->folder . DIRECTORY_SEPARATOR;   
+        $this->middleware('auth');
+        $this->middleware('permission:database-table-list', ['only' => ['index']]);
+        $this->middleware('permission:database-backup-download', ['only' => ['databaseDownload']]);
+        $this->middleware('permission:database-backup-in-server', ['only' => ['databaseBackup']]);
+        $this->file_path = getcwd() . DIRECTORY_SEPARATOR . 'BACKUP' . DIRECTORY_SEPARATOR . $this->folder . DIRECTORY_SEPARATOR;
         $this->username = config('database.connections.mysql.username');
         $this->password = config('database.connections.mysql.password');
         $this->dbname = config('database.connections.mysql.database');
-        $this->filename = $this->dbname.'_'.date("d-M-Y-G-i-s");    
+        $this->filename = $this->dbname.'_'.date("d-M-Y-G-i-s");
         $this->dbBackup = $DB_Backup;
     }
 
@@ -37,7 +41,7 @@ class DatabasesBackupController extends DM_BaseController
     }
     /**
      * Database Download to the Users Computer
-     * 
+     *
      */
     public function databaseDownload() {
         $conn = $this->dbBackup->connect("localhost", $this->username, $this->password, $this->dbname);
@@ -57,5 +61,5 @@ class DatabasesBackupController extends DM_BaseController
         }
         return redirect()->route($this->base_route.'.index');
     }
-  
+
 }

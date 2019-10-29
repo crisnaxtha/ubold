@@ -24,6 +24,20 @@ class PostsController extends DM_BaseController
 
 
     public function __construct(Request $request, Post $post, File $file, DM_Post $dm_post, Tracker $tracker) {
+        $this->middleware('auth');
+        $this->middleware('permission:page-list', ['only' => ['indexPage']]);
+        $this->middleware('permission:page-create', ['only' => ['createPage','storePage']]);
+        $this->middleware('permission:page-edit', ['only' => ['editPage','updatePage']]);
+        $this->middleware('permission:page-delete', ['only' => ['destroy']]);
+        $this->middleware('permission:delete-file', ['only' => ['destroyFile']]);
+        $this->middleware('permission:deleted-page', ['only' => ['deletedPage']]);
+        $this->middleware('permission:post-list', ['only' => ['indexPost']]);
+        $this->middleware('permission:post-create', ['only' => ['createPost','storePost']]);
+        $this->middleware('permission:post-edit', ['only' => ['editPost','updatePost']]);
+        $this->middleware('permission:page-delete', ['only' => ['destroy']]);
+        $this->middleware('permission:deleted-post', ['only' => ['deletedPost']]);
+        $this->middleware('permission:delete-post-permanently', ['only' => ['permanentDelete']]);
+        $this->middleware('permission:restore-post', ['only' => ['restore']]);
         $this->model = $post;
         $this->file_model = $file;
         $this->table = DB::table('posts');

@@ -18,6 +18,11 @@ class ServicesController extends DM_BaseController
     protected $table;
 
     public function __construct(Service $service, Tracker $tracker, DM_Post $dm_post) {
+        $this->middleware('auth');
+        $this->middleware('permission:service-list', ['only' => ['index']]);
+        $this->middleware('permission:service-create', ['only' => ['create','store']]);
+        $this->middleware('permission:service-edit', ['only' => ['edit','update']]);
+        $this->middleware('permission:service-delete', ['only' => ['destroy']]);
         $this->model = $service;
         $this->tracker = $tracker::hit();
         $this->lang_id = $dm_post::setLanguage();
@@ -46,7 +51,7 @@ class ServicesController extends DM_BaseController
         $icons = $spyc::YAMLLoad(app_path()."/DM_Treasure/icons.yml");
         $data['fa-icons'] = $icons["fa"];
         $data['lang'] = $this->dm_post::getLanguage();
-        return view(parent::loadView($this->view_path.'.create'), compact('data')); 
+        return view(parent::loadView($this->view_path.'.create'), compact('data'));
     }
 
     /**
@@ -98,7 +103,7 @@ class ServicesController extends DM_BaseController
         $links = $this->model::where('unique_id', '=', $unique_id)->get();
         $data['lang'] = $this->dm_post::getLanguage();
         $data['single'] = $this->model::where('unique_id', '=', $unique_id)->first();
-        return view(parent::loadView($this->view_path.'.edit'), compact('data', 'links')); 
+        return view(parent::loadView($this->view_path.'.edit'), compact('data', 'links'));
     }
 
     /**

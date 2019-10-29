@@ -26,6 +26,10 @@ class UsersProfileController extends DM_BaseController
      */
     public function __construct(User $user, Tracker $tracker, DM_Post $dm_post) {
         $this->middleware('auth');
+        $this->middleware('permission:user-list', ['only' => ['index']]);
+        $this->middleware('permission:user-create', ['only' => ['create','store']]);
+        $this->middleware('permission:user-edit', ['only' => ['edit','update']]);
+        $this->middleware('permission:user-delete', ['only' => ['destroy']]);
         $this->model = $user;
         $this->tracker = $tracker::hit();
         $this->lang_id = $dm_post::setLanguage();
@@ -124,7 +128,7 @@ class UsersProfileController extends DM_BaseController
     }
 
     /**'
-     * changed password for individual user 
+     * changed password for individual user
      */
     public function changePassword(Request $request) {
         if(Hash::check($request->current_password, Auth::user()->password) ){

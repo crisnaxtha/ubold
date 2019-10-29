@@ -20,6 +20,11 @@ class StaffController extends DM_BaseController
 
     public function __construct(Request $request, Staff $staff, Branch $branch, Tracker $tracker,DM_Post $dm_post) {
         $this->middleware('auth');
+        $this->middleware('permission:staff-list', ['only' => ['index']]);
+        $this->middleware('permission:staff-create', ['only' => ['create','store']]);
+        $this->middleware('permission:staff-edit', ['only' => ['edit','update']]);
+        $this->middleware('permission:staff-delete', ['only' => ['destroy']]);
+        $this->middleware('permission:staff-sort-order', ['only' => ['storeOrder']]);
         $this->model = $staff;
         $this->tracker = $tracker::hit();
         $this->dm_post = $dm_post;

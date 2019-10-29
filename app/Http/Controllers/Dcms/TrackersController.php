@@ -16,11 +16,12 @@ class TrackersController extends DM_BaseController
     protected $table;
 
     /**
-     * 
+     *
      */
     public function __construct(Tracker $tracker, DM_Post $dm_post) {
         $this->middleware('auth');
-        $this->middleware('role:super-admin');
+        $this->middleware('permission:tracker-list', ['only' => ['index']]);
+        $this->middleware('permission:tracker-delete', ['only' => ['deleteAll']]);
         $this->tracker = $tracker::hit();
         $this->model = $tracker;
         $this->lang_id = $dm_post::setLanguage();

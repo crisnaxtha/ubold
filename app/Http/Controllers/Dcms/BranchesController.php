@@ -16,9 +16,14 @@ class BranchesController extends DM_BaseController
     protected $view_path = 'dcms.branch';
     protected $model;
     protected $table;
-    
+
     public function __construct(Request $request, Branch $branch, Tracker $tracker,DM_Post $dm_post) {
         $this->middleware('auth');
+        $this->middleware('permission:branch-list', ['only' => ['index']]);
+        $this->middleware('permission:branch-create', ['only' => ['create','store']]);
+        $this->middleware('permission:branch-edit', ['only' => ['edit','update']]);
+        $this->middleware('permission:branch-delete', ['only' => ['destroy']]);
+        $this->middleware('permission:branch-sort-order', ['only' => ['storeOrder']]);
         $this->model = $branch;
         $this->tracker = $tracker::hit();
         $this->dm_post = $dm_post;
@@ -46,7 +51,7 @@ class BranchesController extends DM_BaseController
     {
         $data['lang'] = $this->dm_post::getLanguage();
         $data['parent_branch'] = $this->model::where('status', '=', 1)->get();
-        return view(parent::loadView($this->view_path.'.create'), compact('data'));        
+        return view(parent::loadView($this->view_path.'.create'), compact('data'));
     }
 
     /**
@@ -91,12 +96,12 @@ class BranchesController extends DM_BaseController
      * @return \Illuminate\Http\Response
      */
     public function edit($id)
-    {   
+    {
         $data['row'] = $this->model::findOrFail($id);
         $data['lang'] = $this->dm_post::getLanguage();
         $branches = DB::table('branches_name')->where('branch_id', $id)->get();
         // dd($branches);
-        return view(parent::loadView($this->view_path.'.edit'), compact('data', 'branches')); 
+        return view(parent::loadView($this->view_path.'.edit'), compact('data', 'branches'));
     }
 
     /**

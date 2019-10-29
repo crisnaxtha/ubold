@@ -185,6 +185,7 @@ return [
         // Custom Service Provider ( Krishna )
 
         App\Providers\DM_HelperServiceProvider::class, //custom Lochan Helper Provider
+        App\Providers\DM_BladeServiceProvider::class, //custom Lochan Helper Provider
     ],
 
     /*

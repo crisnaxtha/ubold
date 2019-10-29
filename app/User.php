@@ -11,6 +11,8 @@ use App\DM_Traits\HasPermission;
 class User extends Authenticatable
 {
     use Notifiable;
+    use HasPermission;
+
 
     /**
      * The attributes that are mass assignable.

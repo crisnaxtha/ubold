@@ -19,7 +19,10 @@ class SlidersController extends DM_BaseController
 
     public function __construct(Slider $slider, DM_Post $dm_post, Tracker $tracker) {
         $this->middleware('auth');
-        $this->middleware('role:admin')->only('destroy');
+        $this->middleware('permission:slider-list', ['only' => ['index']]);
+        $this->middleware('permission:slider-create',['only' => ['create','store']]);
+        $this->middleware('permission:slider-edit', ['only' => ['edit','update']]);
+        $this->middleware('permission:slider-delete', ['only' => ['destroy']]);
         $this->model = $slider;
         $this->dm_post = $dm_post;
         $this->lang_id = $dm_post::setLanguage();
@@ -82,7 +85,7 @@ class SlidersController extends DM_BaseController
      */
     public function show($id)
     {
-       //    
+       //
     }
 
     /**
@@ -97,7 +100,7 @@ class SlidersController extends DM_BaseController
         $data['lang'] = $this->dm_post::getLanguage();
         $data['slider'] = $this->model::findOrFail($id);
         $data['slider_name'] = DB::table('sliders_name')->where('slider_id', '=', $id)->get();
-        return view(parent::loadView($this->view_path.'.edit'), compact('data'));    
+        return view(parent::loadView($this->view_path.'.edit'), compact('data'));
     }
 
     /**
@@ -141,6 +144,6 @@ class SlidersController extends DM_BaseController
             unlink($file_path);
         }
         $this->model::destroy($id);
-        
+
     }
 }

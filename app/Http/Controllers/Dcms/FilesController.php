@@ -16,6 +16,11 @@ class FilesController extends DM_BaseController
     protected $model;
 
     public function __construct(Tracker $tracker, File $file, DM_Post $dm_post) {
+        $this->middleware('auth');
+        $this->middleware('permission:post-file-list', ['only' => ['index']]);
+        $this->middleware('permission:post-file-create', ['only' => ['create','store']]);
+        $this->middleware('permission:post-file-edit', ['only' => ['edit','update']]);
+        $this->middleware('permission:post-file-delete', ['only' => ['destroy']]);
         $this->model = new $file;
         $this->lang_id = $dm_post::setLanguage();
         $this->tracker = $tracker::hit();

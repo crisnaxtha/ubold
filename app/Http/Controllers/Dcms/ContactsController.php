@@ -15,6 +15,11 @@ class ContactsController extends DM_BaseController
     protected $model;
 
     public function __construct(Contact $contact, DM_Post $dm_post) {
+        $this->middleware('permission:contact-list', ['only' => ['index']]);
+        $this->middleware('permission:contact-create', ['only' => ['create','store']]);
+        $this->middleware('permission:contact-edit', ['only' => ['edit','update']]);
+        $this->middleware('permission:contact-delete', ['only' => ['destroy']]);
+        $this->middleware('permission:contact-sort-order', ['only' => ['storeOrder']]);
         $this->model = new $contact;
         $this->lang_id = $dm_post::setLanguage();
 

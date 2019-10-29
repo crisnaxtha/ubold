@@ -21,6 +21,11 @@ class UsersController extends DM_BaseController
      * Constructor
      */
     public function __construct(User $user, Tracker $tracker, DM_Post $dm_post, Role $role) {
+        $this->middleware('auth');
+        $this->middleware('permission:user-list', ['only' => ['index']]);
+        $this->middleware('permission:user-create', ['only' => ['create','store']]);
+        $this->middleware('permission:user-edit', ['only' => ['edit','update']]);
+        $this->middleware('permission:user-delete', ['only' => ['destroy']]);
         $this->model = $user;
         $this->role = $role;
         $this->tracker = $tracker::hit();

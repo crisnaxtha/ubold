@@ -2,7 +2,7 @@
 
 @section('content')
     <div class="row">
-        @if(Auth::user()->role == "super-admin")
+        @permission('user-list')
         <div class="col-md-6 col-xl-3">
             <div class="widget-rounded-circle card-box">
                 <div class="row">
@@ -20,7 +20,7 @@
                 </div> <!-- end row-->
             </div> <!-- end widget-rounded-circle-->
         </div> <!-- end col-->
-        @endif
+        @endpermission
         <div class="col-md-6 col-xl-3">
             <div class="widget-rounded-circle card-box">
                 <div class="row">

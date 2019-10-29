@@ -24,7 +24,8 @@ class CommonController extends DM_BaseController
 
     public function __construct(Common $common, Tracker $tracker, DM_Post $dm_post) {
         $this->middleware('auth');
-        $this->middleware('role:admin')->only('destroy');
+        $this->middleware('permission:header-setting', ['only' => ['getTitleSetting','updateTitleSetting']]);
+        $this->middleware('permission:footer-setting', ['only' => ['getFooterSetting','updateFooterSetting']]);
         $this->model = $common;
         $this->tracker = $tracker::hit();
         $this->lang_id = $dm_post::setLanguage();

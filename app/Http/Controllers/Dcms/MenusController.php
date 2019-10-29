@@ -22,8 +22,11 @@ class MenusController extends DM_BaseController
 
 
     public function __construct(Request $request, Menu $menu, DM_Post $dm_post, Tracker $tracker) {
-        // $this->middleware('auth');
-        // $this->middleware('role:admin');
+        $this->middleware('permission:menu-list', ['only' => ['index']]);
+        $this->middleware('permission:menu-create', ['only' => ['create','store']]);
+        $this->middleware('permission:menu-edit', ['only' => ['edit','update']]);
+        $this->middleware('permission:menu-delete', ['only' => ['destroy']]);
+        $this->middleware('permission:menu-sort-order', ['only' => ['storeOrder']]);
         $this->model = $menu;
         $this->dm_post = $dm_post;
         $this->lang_id = $dm_post::setLanguage();
