@@ -445,7 +445,7 @@ Route::group(['prefix' => 'dashboard', 'as'=> 'dcms.', 'namespace'=>'Dcms', 'mid
 
         // Role Route
 
-        Route::group(['prefix' => 'role', 'as'=>'role.',], function () {
+        Route::group(['prefix' => 'role', 'as'=>'role.'], function () {
             Route::get('',                                      ['as'=>'index',              'uses'=>'RoleController@index']);
             Route::get('create',                                ['as'=>'create',              'uses'=>'RoleController@create']);
             Route::post('',                                     ['as'=>'store',              'uses'=>'RoleController@store']);
@@ -454,6 +454,16 @@ Route::group(['prefix' => 'dashboard', 'as'=> 'dcms.', 'namespace'=>'Dcms', 'mid
             Route::delete('{role}',                             ['as'=>'destroy',              'uses'=>'RoleController@destroy']);
             Route::get('assign_permission/{id}',                 ['as'=>'assign',                'uses'=>'RoleController@assignPermission']);
             Route::post('assign_permission/update/{id}',          ['as'=>'assign.update',        'uses'=>'RoleController@updateAssignPermission']);
+        });
+
+        Route::group(['prefix' => 'comment', 'as' => 'comment.'], function () {
+            Route::get('',                                      ['as'=>'index',              'uses'=>'CommentsController@indexComment']);
+            Route::delete('{comment}',                          ['as'=>'destroy',             'uses'=>'CommentsController@destroy']);
+
+            Route::group(['prefix' => 'reaction', 'as' => 'reaction.'], function() {
+                Route::get('',                                      ['as'=>'index',              'uses'=>'CommentsController@indexReaction']);
+                Route::delete('{reaction}',                          ['as'=>'destroy',             'uses'=>'CommentsController@destroy']);
+            });
         });
 
 });
