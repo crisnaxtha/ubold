@@ -14,7 +14,7 @@ use App\Model\Dcms\Album;
 use Session;
 use App;
 use Auth;
-
+use Monolog\Handler\NullHandler;
 
 class DM_Post extends Model{
     /**
@@ -221,5 +221,9 @@ class DM_Post extends Model{
         ->where('albums.album_category_id', '=', $category_id)
         ->take($number)->get();
         return $album;
+    }
+
+    public static function getContentName($unique_id) {
+        return Post::where('deleted_at', '=', Null)->where('unique_id', '=', $unique_id)->pluck('title')->first();
     }
 }

@@ -44,7 +44,7 @@
                         @foreach($data['rows'] as $row)
                             <tr class="gradeX" id="{{ $row->id }}">
                                <td>{{ $loop->iteration }}</td>
-                               <td>{{ $row->unique_id }}</td>
+                               <td>{{ App\Model\Dcms\Eloquent\DM_Post::getContentName($row->unique_id) }}</td>
                                <td>{{ $row->comment }}</td>
                                <td>
                                     @include('dcms.includes.buttons.button-delete')

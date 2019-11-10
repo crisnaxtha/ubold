@@ -158,7 +158,7 @@ $(document).on('click','#reaction', function () {
             success: function(response){
                 console.log(response);
                 // $($object).parents('tr').remove();
-                alert('Successfully!!');
+                alert('Successfully Submitted !!');
                 // location.reload(true);
             },
             error: function(xhr) {
@@ -199,7 +199,7 @@ $(document).on('click','#submit', function () {
         success  : function(response) {
             console.log(response);
                 // $($object).parents('tr').remove();
-                alert('Successfully Deleted!!');
+                alert('Successfully Submitted!!');
                 // location.reload(true);
         },
             error: function(xhr) {
