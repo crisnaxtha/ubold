@@ -20,6 +20,10 @@ class Tracker extends DM_BaseModel
         parent::boot();
         // Any time the instance is updated (but not created)
         static::saving( function ($tracker) {
+            if(Auth::check()){
+                $tracker->user_id = Auth::user()->id;
+                $tracker->user_name = Auth::user()->name;
+            }
             $tracker->visit_time = date('H:i:s');
             $tracker->hits++;
         } );
@@ -33,6 +37,7 @@ class Tracker extends DM_BaseModel
                     'user_agent' => $_SERVER['HTTP_USER_AGENT'],
                     'request_method' => $_SERVER['REQUEST_METHOD'],
                     'request_uri' => $_SERVER['REQUEST_URI'],
+
               ])->save();
     }
 }
