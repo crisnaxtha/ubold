@@ -136,6 +136,7 @@
         </div>
     </div>
 </div>
+@if(isset($data['imp_link']))
 @if(count($data['imp_link']))
 <div class="widget-box">
     <h3> <i class="fa fa-link" aria-hidden="true">&nbsp;</i> महत्त्वपूर्ण लिङ्कहरू</h3>
@@ -148,6 +149,8 @@
     </ul>
 </div>
 @endif
+@endif
+@if(isset($data['category']))
 @if(count($data['category']))
 <div class="widget-box">
     <h3><i class="fa fa-external-link-square">&nbsp;</i> Category List
@@ -156,8 +159,8 @@
         <ul>
             @foreach($data['category'] as $row)
             <li>
-                @if(Route::has('site.category'))
-                <a href="{{ route('site.category', ['id' => $row->id]) }}">
+                @if(Route::has('site.category.show'))
+                <a href="{{ route('site.category.show', ['id' => $row->id]) }}">
                     <span>
                         <i class="fa fa-bookmark" aria-hidden="true"></i>
                     </span>{{ $row->name }}
@@ -168,6 +171,7 @@
         </ul>
     </div>
 </div>
+@endif
 @endif
 @if(isset($data['category_first']))
 <div class="widget-box">
