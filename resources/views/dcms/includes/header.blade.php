@@ -1,7 +1,7 @@
  <!-- Topbar Start -->
  <div class="navbar-custom">
     <ul class="list-unstyled topnav-menu float-right mb-0">
-            <li class="d-none d-sm-block">
+            {{-- <li class="d-none d-sm-block">
                 <form class="app-search">
                     <div class="app-search-box">
                         <div class="input-group">
@@ -14,8 +14,8 @@
                         </div>
                     </div>
                 </form>
-            </li>
-            <li style="padding-top:25px;"><strong>{{__('Role')}}:</strong>&nbsp;<?php dm_userRole(Auth::user()->role) ?></li>
+            </li> --}}
+            <li style="padding-top:25px;"><strong>{{__('Role')}}:</strong>&nbsp;@if(Auth::user()->role_super) {{ "SUPER" }} @elseif(isset(Auth::user()->role_id)) {{ Auth::user()->Role->name }} @else {{ "No Role Assign"}}  @endif</li>
             {{-- language change  --}}
             <li class="dropdown notification-list">
 
@@ -45,7 +45,7 @@
                 <ul class="dropdown-menu  dropdown-menu-right profile-dropdown ">
                     <!-- item-->
                     <div class="dropdown-header noti-title">
-                        <h6 class="text-overflow m-0">Welcome !</h6>
+                        <h6 class="text-overflow m-0">Welcome ! {{ Auth::user()->name }}</h6>
                     </div>
 
                     @if(route::has('dcms.user_profile.show'))

@@ -21,7 +21,7 @@
 
             <p class="text-muted mb-2 font-13"><strong>Mobile :</strong><span class="ml-2">{{ Auth::user()->Phone }}</span></p>
 
-            <p class="text-muted mb-2 font-13"><strong>Role :</strong> <span class="ml-2 "><?php dm_userRole(Auth::user()->role) ?></span></p>
+            <p class="text-muted mb-2 font-13"><strong>Role :</strong> <span class="ml-2 ">@if(Auth::user()->role_super) {{ "SUPER" }} @elseif(isset(Auth::user()->role_id)) {{ Auth::user()->Role->name }} @else {{ "No Role Assign"}}  @endif</span></p>
 
         </div>
 
