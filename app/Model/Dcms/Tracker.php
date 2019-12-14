@@ -4,6 +4,7 @@ namespace App\Model\Dcms;
 
 use App\Model\Dcms\DM_BaseModel;
 use Auth;
+use DB;
 
 class Tracker extends DM_BaseModel
 {
@@ -19,25 +20,28 @@ class Tracker extends DM_BaseModel
     public static function boot() {
         parent::boot();
         // Any time the instance is updated (but not created)
-        static::saving( function ($tracker) {
-            if(Auth::check()){
-                $tracker->user_id = Auth::user()->id;
-                $tracker->user_name = Auth::user()->name;
-            }
-            $tracker->visit_time = date('H:i:s');
-            $tracker->hits++;
-        } );
-
+        if(DB::table('settings')->first()->tracker_status == 1){
+            static::saving( function ($tracker) {
+                if(Auth::check()){
+                    $tracker->user_id = Auth::user()->id;
+                    $tracker->user_name = Auth::user()->name;
+                }
+                $tracker->visit_time = date('H:i:s');
+                $tracker->hits++;
+            } );
+        }
     }
 
     public static function hit() {
-        static::firstOrCreate([
-                    'visitor'   => $_SERVER['REMOTE_ADDR'],
-                    'visit_date' => date('Y-m-d'),
-                    'user_agent' => $_SERVER['HTTP_USER_AGENT'],
-                    'request_method' => $_SERVER['REQUEST_METHOD'],
-                    'request_uri' => $_SERVER['REQUEST_URI'],
+        if(DB::table('settings')->first()->tracker_status == 1){
+            static::firstOrCreate([
+                        'visitor'   => $_SERVER['REMOTE_ADDR'],
+                        'visit_date' => date('Y-m-d'),
+                        'user_agent' => $_SERVER['HTTP_USER_AGENT'],
+                        'request_method' => $_SERVER['REQUEST_METHOD'],
+                        'request_uri' => $_SERVER['REQUEST_URI'],
 
-              ])->save();
+                ])->save();
+        }
     }
 }
