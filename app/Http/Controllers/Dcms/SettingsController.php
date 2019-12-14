@@ -35,7 +35,7 @@ class SettingsController extends DM_BaseController
     public function getGeneralSetting(){
         $this->tracker;
         $this->panel = 'Setting';
-        $row = DB::table('settings')->select('id', 'site_name', 'site_slogan', 'site_title', 'site_description', 'site_url', 'meta_keyword', 'logo', 'language')->first();
+        $row = DB::table('settings')->select('id', 'site_name', 'site_slogan', 'site_title', 'site_description', 'site_url', 'meta_keyword', 'logo', 'language', 'tracker_status')->first();
         if(!isset($row) || !is_object($row) ) {
             $data = $this->model;
             $data->site_name = null;
@@ -64,6 +64,7 @@ class SettingsController extends DM_BaseController
             $row->logo = parent::uploadFile($this->folder_path, $this->image_prefix_path, 'logo', $request);
         }
         $row->language = $request->language;
+        $row->tracker_status = $request->tracker_status;
         $row->save();
         session()->flash('alert-success', $this->panel.' Successfully added');
         return back();
