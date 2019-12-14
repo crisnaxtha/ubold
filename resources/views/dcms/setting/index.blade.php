@@ -18,7 +18,7 @@
                         dm_hckeditorUpdate('description', "Site Description", $row->site_description);
                         dm_htextareaUpdate('meta', "Enter Meta Keyword", $row->meta_keyword);
                         dm_hinputUpdate('file', 'logo', 'Logo', '', '');
-                        dm_hdropdown('language', 'Default Language', $all_view['lang'], $row->language);
+                        dm_hdropdownLang('language', 'Default Language', $all_view['lang'], $row->language,  App\Model\Dcms\Eloquent\DM_Post::getLanguageName($row->language));
                         dm_hsubmit('Submit', URL::route($_base_route.'.index'), 'Cancel');
                         dm_closeform();
                         ?>

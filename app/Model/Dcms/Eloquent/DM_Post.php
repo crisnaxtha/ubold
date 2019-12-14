@@ -226,4 +226,8 @@ class DM_Post extends Model{
     public static function getContentName($unique_id) {
         return Post::where('deleted_at', '=', Null)->where('unique_id', '=', $unique_id)->pluck('title')->first();
     }
+
+    public static function getLanguageName($id) {
+        return Language::where('id', '=', $id)->pluck('name')->first();
+    }
 }
