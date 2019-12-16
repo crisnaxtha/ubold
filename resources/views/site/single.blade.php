@@ -99,7 +99,11 @@
                 </div>
 
                 <div class="col-lg-3 col-md-3 page_sidebar">
-                    @include('site.includes.sidebar')
+                    @include('site.includes.sidebar.widget-1')
+                    @include('site.includes.sidebar.widget-2')
+                    @include('site.includes.sidebar.widget-3')
+                    @include('site.includes.sidebar.widget-4')
+                    @include('site.includes.sidebar.widget-5')
 
                 </div>
               </div>

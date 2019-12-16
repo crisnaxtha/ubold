@@ -114,7 +114,7 @@ class DM_Post extends Model{
 
     //get category base post
     public static function categoryPost($category_id, $lang_id, $number = '5') {
-        return Post::where('deleted_at', '=', null)->where('category_id', '=', $category_id)->where('lang_id', '=', $lang_id)->take($number)->get();
+        return Post::where('deleted_at', '=', null)->where('type', '=', 'post')->where('category_id', '=', $category_id)->where('lang_id', '=', $lang_id)->take($number)->get();
     }
 
     public static function joinMenu($lang_id) {
