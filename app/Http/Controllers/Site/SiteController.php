@@ -142,6 +142,7 @@ class SiteController extends DM_BaseController
         $data['category_first'] = $this->dm_post::getCategoryFirst($this->lang_id);
         $data['category_first_post'] = $this->dm_post::categoryPost($data['category_first']->id, $this->lang_id, 20);
         $data['recent_post'] = DB::table('posts')->where('type', '=', 'post')->where('status', '=', 1)->where('lang_id', '=', $this->lang_id)->take(5)->get();
+        $data['album'] = Album::where('status', '=', 1)->orderBy('order')->take(6)->get();
         return view(parent::loadView($this->view_path.'.category'), compact('data'));
     }
 

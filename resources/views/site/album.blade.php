@@ -35,7 +35,13 @@
                                 <div class="col-md-4 col-sm-6">
                                     <div class="item-inner card">
                                         <figure>
-                                            <a href="{{ route('site.album.show', ['id'=> $row->id ]) }}"><img src="{{asset($row->cover_image)}}" class="img-fluid" alt="{{ $row->title }}"></a>
+                                            <a href="{{ route('site.album.show', ['id'=> $row->id ]) }}">
+                                                @if(isset($row->cover_image))
+                                                <img src="{{asset($row->cover_image)}}" class="img-fluid" alt="{{ $row->title }}">
+                                                @else
+                                                <img src="{{ asset('assets/site/assets/images/gallery.png')}}" class="img-fluid" alt="{{ $row->title }}">
+                                                @endif
+                                            </a>
                                             <a href="{{ route('site.album.show', ['id'=> $row->id ]) }}" class="btn btn-sm btn-danger catagory_link">Business</a>
                                         </figure>
                                         <div class="card-body">

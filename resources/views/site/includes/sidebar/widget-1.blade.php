@@ -12,7 +12,13 @@
                 <li class="wow fadeInUp" data-wow-duration="2s" data-wow-delay=".2s">
                     <div class="thumb">
                         @if(Route::has('site.post.show'))
-                        <a href="{{ route('site.post.show', ['id' => $row->unique_id])}}"><img src="{{ $row->thumbnail }}" alt="img"></a>
+                        <a href="{{ route('site.post.show', ['id' => $row->unique_id])}}">
+                            @if(isset($row->thumbnail))
+                            <img src="{{ $row->thumbnail }}" alt="img">
+                            @else
+                            <img src="{{  asset('assets/site/assets/images/thumbnail.jpg')}}" alt="img">
+                            @endif
+                        </a>
                         @endif
                     </div>
                     <div class="text-area">
