@@ -194,6 +194,23 @@ if(!function_exists('dm_hdropdownLang')){
         <?php
     }
 }
+if(!function_exists('dm_hdropdownType')){
+    function dm_hdropdownType($name="",$caption="",$data="", $old_data_name="Uncategorized") {
+        ?>
+        <div class="form-group">
+            <label for="<?=$name?>" class="control-label"><?=$caption?></label>
+                <div class="col-lg-10">
+                    <select name="<?=$name?>" id="<?=$name?>" class="form-control">
+                        <option value=<?=$old_data_name?>><?=$old_data_name?></option>
+                        <?php foreach($data as $row){ ?>
+                        <option value="<?=$row?>"><?=$row?></option>
+                        <?php } ?>
+                    </select>
+                </div>
+        </div>
+        <?php
+    }
+}
 if(!function_exists('dm_button')){
     function dm_button($type="button", $class="", $caption="", $id ="", $data_id="", $data_url="", $data_toggle="", $href="") {
     ?>

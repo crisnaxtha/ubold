@@ -52,7 +52,7 @@
                     </ul>
                 </li>
 
-                <li class="sub-menu {{ ($_panel == 'Sliders' || $_panel == 'Links' || $_panel == 'Services' || $_panel == 'Popup') ? 'active' : '' }}">
+                <li class="sub-menu {{ ($_panel == 'Sliders' || $_panel == 'Links' || $_panel == 'Services' || $_panel == 'Popup' || $_panel =="Process" || $_panel =="Banner") ? 'active' : '' }}">
                     <a href="javascript:;" class="{{ ($_panel == 'Sliders' || $_panel == 'Links' || $_panel == 'Services' || $_panel == 'Popup') ? 'active' : '' }}"><i class="fas fa-cart-plus"></i>
                         <span class="menu-arrow"></span>
                         <span>{{ __('Accessories ') }}</span>
@@ -71,7 +71,10 @@
                         <li class="{{ ($_panel == 'Popup') ? 'active' : '' }}"><a href="{{ URL::route('dcms.popup.index') }}" ><i class="fas fa-expand"></i>&nbsp;&nbsp;<span>{{__('Pop Up') }}</span></a></li>
 @endif
 @if( Route::has('dcms.process.index'))
-                        <li class="{{ ($_panel == 'Process') ? 'active' : '' }}"><a href="{{ URL::route('dcms.process.index') }}" ><i class="fas fa-expand"></i>&nbsp;&nbsp;<span>{{__('Process') }}</span></a></li>
+                        <li class="{{ ($_panel == 'Process') ? 'active' : '' }}"><a href="{{ URL::route('dcms.process.index') }}" ><i class="fe-activity"></i>&nbsp;&nbsp;<span>{{__('Process') }}</span></a></li>
+@endif
+@if( Route::has('dcms.banner.index'))
+                        <li class="{{ ($_panel == 'banner') ? 'active' : '' }}"><a href="{{ URL::route('dcms.banner.index') }}" ><i class="mdi mdi-link-box-outline"></i>&nbsp;&nbsp;<span>{{__('Banner') }}</span></a></li>
 @endif
                     </ul>
                 </li>
@@ -132,7 +135,7 @@
                 <li><a class="{{ ($_panel == 'Tracker') ? 'active' : '' }}" href="{{ URL::route('dcms.tracker.index') }}" ><i class="fa fa-map-marker"></i><span> {{__('User Tracker')}}</span></a></li>
 @endif
 @if( Route::has('dcms.role.index'))
-                <li><a class="{{ ($_panel == 'Role') ? 'active' : '' }}" href="{{ URL::route('dcms.role.index') }}" ><i class="fa fa-map-marker"></i><span> {{__('Role')}}</span></a></li>
+                <li><a class="{{ ($_panel == 'Role') ? 'active' : '' }}" href="{{ URL::route('dcms.role.index') }}" ><i class="fe-at-sign"></i><span> {{__('Role')}}</span></a></li>
 @endif
 
             </ul>

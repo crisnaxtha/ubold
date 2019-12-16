@@ -415,7 +415,10 @@ Route::group(['prefix' => 'dashboard', 'as'=> 'dcms.', 'namespace'=>'Dcms', 'mid
         Route::get('backup',                                ['as'=>'backup',             'uses'=>'DatabasesBackupController@databaseBackup']);
     });
     /** Video  */
-    Route::resource('blog',                     'BlogsController')->middleware('role:super-admin');
+    Route::resource('blog',                     'BlogsController');
+    /** Banner */
+    Route::resource('banner',                     'BannersController');
+
 
     /**
      * User Routes
