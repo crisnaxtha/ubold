@@ -466,6 +466,15 @@ Route::group(['prefix' => 'dashboard', 'as'=> 'dcms.', 'namespace'=>'Dcms', 'mid
             });
         });
 
+        Route::group(['prefix' => 'faq', 'as'=>'faq.'], function () {
+            Route::get('',                                      ['as'=>'index',              'uses'=>'FAQController@index']);
+            Route::get('create',                                ['as'=>'create',              'uses'=>'FAQController@create']);
+            Route::post('',                                     ['as'=>'store',              'uses'=>'FAQController@store']);
+            Route::get('{faq}/edit',                           ['as'=>'edit',              'uses'=>'FAQController@edit']);
+            Route::put('{faq}',                                ['as'=>'update',              'uses'=>'FAQController@update']);
+            Route::delete('{faq}',                             ['as'=>'destroy',              'uses'=>'FAQController@destroy']);
+        });
+
 });
 
 /**

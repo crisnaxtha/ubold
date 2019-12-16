@@ -26,7 +26,10 @@
                         <li class="{{ ($_panel == 'Pages') ? 'active' : '' }}"><a  href="{{ URL::route('dcms.page.index') }}" ><i class="fe-package"></i>&nbsp;&nbsp;<span>{{__('Pages')}}</span></a></li>
 @endif
 @if( Route::has('dcms.comment.index'))
-                        <li class="{{ ($_panel == 'Comments') ? 'active' : '' }}"><a  href="{{ URL::route('dcms.comment.index') }}" ><i class="fe-package"></i>&nbsp;&nbsp;<span>{{__('Comments')}}</span></a></li>
+                        <li class="{{ ($_panel == 'Comments') ? 'active' : '' }}"><a  href="{{ URL::route('dcms.comment.index') }}" ><i class="far fa-comment"></i>&nbsp;&nbsp;<span>{{__('Comments')}}</span></a></li>
+@endif
+@if( Route::has('dcms.faq.index'))
+                        <li class="{{ ($_panel == 'FAQ') ? 'active' : '' }}"><a  href="{{ URL::route('dcms.faq.index') }}" ><i class="dripicons-question"></i>&nbsp;&nbsp;<span>{{__('FAQ')}}</span></a></li>
 @endif
                     </ul>
                 </li>
