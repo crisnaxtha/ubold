@@ -274,5 +274,21 @@ class SiteController extends DM_BaseController
 
     }
 
+    public function showComplain(Request $request) {
+        $request->validate([
+            'name'     => 'required|max:255',
+            'email'    => 'required',
+            'message'  => 'required'
+        ]);
+        $row = new Contact;
+        $row->name = $request->name;
+        $row->email = $request->email;
+        $row->number = $request->number;
+        $row->message = $request->message;
+        $row->save();
+        session()->flash('alert-success', $this->panel. ' successfully send.');
+        return redirect()->route('site.contact');
+    }
+
 
 }
