@@ -559,6 +559,8 @@ Route::group([ 'as'=>'site.', 'namespace'=>'Site'], function(){
      * Comment
      */
     Route::post('/comment',                         ['as'=>'comment',       'uses'=>'SiteController@postComment']);
+
+    Route::get('/faq',                              ['as'=>'faq',           'uses'=>'SiteController@showAllFaq']);
 });
 
 

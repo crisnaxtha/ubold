@@ -20,6 +20,7 @@ use App\Model\Dcms\Common;
 use App\Model\Dcms\Popup;
 use App\Model\Dcms\Process;
 use App\Model\Dcms\Comment;
+use App\Model\Dcms\FAQ;
 use DB;
 use Session;
 use Response;
@@ -263,6 +264,14 @@ class SiteController extends DM_BaseController
           $comment->save();
             return Response::json($comment);
         }
+    }
+
+    public function showAllFaq(Request $request) {
+        $data['common'] = Common::where('lang_id', '=', $this->lang_id)->first();
+        $data['menu'] = Menu::tree($this->lang_id);
+        $data['rows'] = FAQ::where('lang_id', '=', $this->lang_id)->where('status', '=', 1)->orderBy('order')->get();
+        return view(parent::loadView($this->view_path.'.faq'), compact('data'));
+
     }
 
 
