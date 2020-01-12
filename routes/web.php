@@ -565,6 +565,16 @@ Route::group([ 'as'=>'site.', 'namespace'=>'Site'], function(){
     Route::get('/complain',                              ['as'=>'complain',           'uses'=>'SiteController@showComplain']);
 });
 
+use GuzzleHttp\Client;
 
+Route::get('/json-api', function() {
+	$client = new Client();
+
+	$response = $client->request('GET', 'https://jsonplaceholder.typicode.com/posts');
+	$statusCode = $response->getStatusCode();
+	$body = $response->getBody()->getContents();
+
+	return $body;
+});
 
 
