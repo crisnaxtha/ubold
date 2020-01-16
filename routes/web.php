@@ -567,14 +567,9 @@ Route::group([ 'as'=>'site.', 'namespace'=>'Site'], function(){
 
 use GuzzleHttp\Client;
 
-Route::get('/json-api', function() {
-	$client = new Client();
-
-	$response = $client->request('GET', 'https://jsonplaceholder.typicode.com/posts');
-	$statusCode = $response->getStatusCode();
-	$body = $response->getBody()->getContents();
-
-	return $body;
-});
+Route::get('/json-api',                                 ['as'=>'api_authentication', 'uses'=>'Site\ExternalServicesController@apiAuthentication']);
+Route::get('/json-api-1',                               ['as'=>'api_authentication', 'uses'=>'Site\ExternalServicesController@apiDistrictWise']);
+Route::get('/json-api-2',                               ['as'=>'api_authentication', 'uses'=>'Site\ExternalServicesController@apiProvinceWise']);
+Route::get('/json-api-3/{from_date}/{to_date}',         ['as'=>'api_authentication', 'uses'=>'Site\ExternalServicesController@apiDateWise']);
 
 
