@@ -5,12 +5,12 @@
       <div class="row">
         <div class="col-lg-6 col-md-6 col-sm-6"> <a href="{{ route('site.index') }}" class="logo_sec">
           <div class="row">
-            <div class="col-lg-3 col-md-4 pad-right-0">
+            <div class="col-lg-2 col-md-3 pad-right-0">
             @if(isset($data['common']->logo))
-                <img src="{{ asset($data['common']->logo) }}" alt="Main Logo" />
+                <img src="{{ asset($data['common']->logo) }}" alt="Main Logo" height="90" width="100"/>
             @endif
              </div>
-            <div class="col-lg-9 col-md-8 text-left logo_text">
+            <div class="col-lg-10 col-md-9 text-left logo_text">
                 @if(isset($data['common']->header_first_title))
                 <span>{{ $data['common']->header_first_title }}</span>
                 @endif

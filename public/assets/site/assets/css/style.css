@@ -890,7 +890,7 @@ textarea.form-control-sm {
           transform: scaleX(1);
 }
 .nav_sec{border-top:1px solid #2460b9 ; border-bottom: 1px solid #2460b9;}
-.nav_sec .navbar-nav .nav-link{padding: .5rem 2.5rem; color: #fff; border-left: 1px solid #104382;
+.nav_sec .navbar-nav .nav-link{padding: .5rem .5rem; color: #fff; border-left: 1px solid #104382;
 border-bottom: 4px solid #2460b9;}
 .nav_sec .navbar-nav .nav-item:last-child .nav-link{border-right: 1px solid #104382;}
 .nav_sec .navbar-nav .nav-item.show .nav-link.dropdown-toggle{background: #fff;
@@ -1155,11 +1155,11 @@ img{max-width: 100%;
 .pad-right-0{padding-right: 0px;}
 .logo_sec{text-decoration: none; color: #e9010e; display: inline-block;
   position: relative; padding: 15px 0px; display: block;}
-.logo_text{padding-top: 5px;}
+.logo_text{padding-top: 15px;}
 .logo_text small{padding-bottom: 10px; font-size: 14px; color: #004A89;}
-.logo_text small, .logo_text span, .logo_text b{display: block; line-height: 24px;}
+.logo_text small, .logo_text span, .logo_text b{display: block; line-height: 0px;}
 .logo_text span{font-size: 18px;}
-.logo_text b{font-size: 30px; font-weight: normal; line-height: 45px;}
+.logo_text b{font-size: 22px; font-weight: normal; line-height: 45px;}
 .logo_sec:hover{text-decoration: none; color: #004A89;}
 .logo_sec:hover small{color: #e9010e;}
 /*Zoom In*/

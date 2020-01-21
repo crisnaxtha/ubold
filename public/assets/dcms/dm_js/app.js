@@ -2,7 +2,7 @@
 $(document).on('click','#delete', function () {
     var id = $(this).data('id');
     var url = $(this).data('url');
-    alert(url);
+    // alert(url);
     $object=$(this);
     if (confirm("Do you want to delete??")) {
         $.ajax ({
@@ -16,11 +16,11 @@ $(document).on('click','#delete', function () {
                     }
                 },
             data: {
-                "id": id,
+                id: id,
             },
             success: function(response){
                 console.log(response);
-                // $($object).parents('tr').remove();
+                $($object).parents('tr').remove();
                 alert('Successfully Deleted!!');
                 location.reload(true);
             },
@@ -29,7 +29,7 @@ $(document).on('click','#delete', function () {
                // do something here because of error
               }
         });
-        reload();
+        // reload();
     }
     else {
 
