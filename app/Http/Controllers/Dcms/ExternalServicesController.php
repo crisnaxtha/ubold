@@ -1,19 +1,23 @@
 <?php
 
-namespace App\Http\Controllers\Site;
+namespace App\Http\Controllers\Dcms;
 
 use Illuminate\Http\Request;
-use App\Http\Controllers\Controller;
+use App\Http\Controllers\Dcms\DM_BaseController;
 use GuzzleHttp\Client;
+use App\Model\Api\DistrictData;
+use App\Model\Api\ProvinceData;
 
-class ExternalServicesController extends Controller
+class ExternalServicesController extends DM_BaseController
 {
     protected $model;
     protected $url = 'http://172.27.1.76:8080';
 
-    public function __construct(Client $model)
+    public function __construct(Client $model, DistrictData $model_1, ProvinceData $model_2)
     {
         $this->model = $model;
+        $this->model_1 = $model_1;
+        $this->model_2 = $model_2;
     }
     public function apiAuthentication() {
         $client = $this->model;
@@ -49,7 +53,16 @@ class ExternalServicesController extends Controller
         ]);
         $statusCode = $district_response->getStatusCode();
         $body = $district_response->getBody()->getContents();
-        return $body;
+        $data = json_decode($body);
+        $this->model_1::truncate();
+
+        foreach($data as $row) {
+            $this->model_1::create([
+                'title' => $row->districtEnglishName,
+                'data'  => $row->totalCompany
+            ]);
+        }
+        // return $body;
     }
 
     public function apiProvinceWise() {
@@ -63,6 +76,15 @@ class ExternalServicesController extends Controller
         ]);
         $statusCode = $province_response->getStatusCode();
         $body = $province_response->getBody()->getContents();
-        return $body;
+        $data = json_decode($body);
+        $this->model_2::truncate();
+
+        foreach($data as $row) {
+            $this->model_2::create([
+                'title' => $row->stateEnglishName,
+                'data'  => $row->totalCompany
+            ]);
+        }
+        // return $body;
     }
 }

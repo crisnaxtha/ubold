@@ -567,9 +567,9 @@ Route::group([ 'as'=>'site.', 'namespace'=>'Site'], function(){
 
 use GuzzleHttp\Client;
 
-Route::get('/json-api',                                 ['as'=>'api_authentication', 'uses'=>'Site\ExternalServicesController@apiAuthentication']);
-Route::get('/json-api-1',                               ['as'=>'api_authentication', 'uses'=>'Site\ExternalServicesController@apiDistrictWise']);
-Route::get('/json-api-2',                               ['as'=>'api_authentication', 'uses'=>'Site\ExternalServicesController@apiProvinceWise']);
-Route::get('/json-api-3/{from_date}/{to_date}',         ['as'=>'api_authentication', 'uses'=>'Site\ExternalServicesController@apiDateWise']);
+Route::get('/json-api',                                 ['as'=>'api_authentication', 'uses'=>'Dsms\ExternalServicesController@apiAuthentication']);
+Route::get('/json-api-1',                               ['as'=>'api_authentication', 'uses'=>'Dcms\ExternalServicesController@apiDistrictWise']);
+Route::get('/json-api-2',                               ['as'=>'api_authentication', 'uses'=>'Dcms\ExternalServicesController@apiProvinceWise']);
+Route::get('/json-api-3/{from_date}/{to_date}',         ['as'=>'api_authentication', 'uses'=>'Dcms\ExternalServicesController@apiDateWise']);
 
 
