@@ -28,7 +28,7 @@
             <form class="navbar-form" role="search" action="{{ Route('site.search')}}" method="POST">
                     {{ csrf_field() }}
               <div class="input-group">
-                <input class="form-control" placeholder="Search" name="keyword" id="srch-term" type="text">
+                <input class="form-control" placeholder="Search" name="keyword" id="srch-term" type="text" value="@if(isset($data['query'])) {{ $data['query'] }} @endif">
                 <div class="input-group-append">
                     <button class="btn btn-info" type="submit"><i class="fa fa-search"></i></button>
                     {{-- <a href="javascript:void(0)" class="src-drop" title="Advance Search">

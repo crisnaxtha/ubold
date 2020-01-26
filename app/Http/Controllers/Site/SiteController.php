@@ -260,12 +260,12 @@ class SiteController extends DM_BaseController
         $data['common'] = Common::where('lang_id', '=', $this->lang_id)->first();
         $data['menu'] = Menu::tree($this->lang_id);
         $data['recent_post'] = DB::table('posts')->where('type', '=', 'post')->where('status', '=', 1)->where('lang_id', '=', $this->lang_id)->take(5)->get();
-        $query = $request->get('keyword');
-        // dd($query);
-        $data['rows'] = Post::where('title', 'LIKE', '%'. $query.'%')
-                        ->orWhere('content', 'LIKE', '%'. $query.'%')
-                        ->orWhere('tag', 'LIKE', '%'. $query.'%')
-                        ->orWhere('author', 'LIKE', '%'. $query.'%')->get();
+        $data['query'] = $request->get('keyword');
+        // dd($data['query']);
+        $data['rows'] = Post::where('title', 'LIKE', '%'. $data['query'].'%')
+                        ->orWhere('content', 'LIKE', '%'. $data['query'].'%')
+                        ->orWhere('tag', 'LIKE', '%'. $data['query'].'%')
+                        ->orWhere('author', 'LIKE', '%'. $data['query'].'%')->get();
         return view(parent::loadView($this->view_path.'.search'), compact('data'));
     }
 
@@ -318,6 +318,7 @@ class SiteController extends DM_BaseController
     }
 
     public function showComplain(Request $request) {
+        dd('hello');
         $request->validate([
             'name'     => 'required|max:255',
             'email'    => 'required',
