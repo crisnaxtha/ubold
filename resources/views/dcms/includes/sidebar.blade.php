@@ -140,6 +140,9 @@
 
             </ul>
         </li>
+@if( Route::has('dcms.api.index'))
+                <li><a class="{{ ($_panel == 'API Data') ? 'active' : '' }}" href="{{ URL::route('dcms.api.index') }}" ><i class="fa fa-bars"></i><span>{{__('Api Data')}}</span></a></li>
+@endif
         </div>
         <!-- End Sidebar -->
 

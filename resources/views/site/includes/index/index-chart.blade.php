@@ -1,5 +1,5 @@
 <div class="chart_sec row">
-    <div class="col-lg-12 c_top">
+    {{-- <div class="col-lg-12 c_top">
         <div class="card-header d-flex align-items-center" style="position: relative;">
             <h5><i class="fa fa-search">&nbsp;</i> Your Title</h5>
         </div>
@@ -45,14 +45,14 @@
                 </div>
             </form>
         </div>
-    </div>
+    </div> --}}
     <div class="col-lg-6 pad-right-0">
         <div class="card bar-chart-example">
             <div class="card-header d-flex align-items-center">
                 <h5>Yearly Expense</h5>
             </div>
             <div class="card-body">
-                <canvas id="barChartExample"></canvas>
+                <canvas id="chart-area"></canvas>
             </div>
         </div>
     </div>

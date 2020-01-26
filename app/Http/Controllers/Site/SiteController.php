@@ -21,6 +21,9 @@ use App\Model\Dcms\Popup;
 use App\Model\Dcms\Process;
 use App\Model\Dcms\Comment;
 use App\Model\Dcms\FAQ;
+use App\Model\Api\DistrictData;
+use App\Model\Api\ProvinceData;
+use App\Model\Api\DateData;
 use DB;
 use Session;
 use Response;
@@ -71,6 +74,28 @@ class SiteController extends DM_BaseController
 
         $data['services'] = Service::where('status', '=', 1)->where('lang_id', '=', $this->lang_id)->take(8)->get();
 
+
+        $data['district_api'] = DistrictData::all();
+        $data['province_api'] = ProvinceData::all();
+        $data['districtLabel'] = [];
+        $data['districtData'] = [];
+
+        $data['provinceLabel'] = [];
+        $data['provinceData'] = [];
+
+        foreach($data['district_api'] as $row) {
+            array_push($data['districtLabel'], $row->title);
+            array_push($data['districtData'], $row->data);
+        }
+
+        foreach($data['province_api'] as $row) {
+            array_push($data['provinceLabel'], $row->title);
+            array_push($data['provinceData'], $row->data);
+        }
+
+        $data['date_api'] = DB::table('date_data')->get();
+        $data['date_data'] = $this->dm_post::arrayGroupBy($data['date_api'], 'flag');
+        // dd($data['date_data']);
         return view(parent::loadView($this->view_path.'.index'), compact('data'));
     }
 

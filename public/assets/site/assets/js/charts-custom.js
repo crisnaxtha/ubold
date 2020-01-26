@@ -1,223 +1,147 @@
-// *Front-End Design And Developed By: Bikash Bhandari
-/*global $, document, LINECHARTEXMPLE*/
-$(document).ready(function () {
+'use strict';
 
-    'use strict';
+window.chartColors = {
+	red: 'rgb(255, 99, 132)',
+	orange: 'rgb(255, 159, 64)',
+	yellow: 'rgb(255, 205, 86)',
+	green: 'rgb(75, 192, 192)',
+	blue: 'rgb(54, 162, 235)',
+	purple: 'rgb(153, 102, 255)',
+	grey: 'rgb(201, 203, 207)'
+};
 
-    var brandPrimary = 'rgba(51, 179, 90, 1)';
+(function(global) {
+	var MONTHS = [
+		'January',
+		'February',
+		'March',
+		'April',
+		'May',
+		'June',
+		'July',
+		'August',
+		'September',
+		'October',
+		'November',
+		'December'
+	];
 
-    var LINECHARTEXMPLE   = $('#lineChartExample'),
-        PIECHARTEXMPLE    = $('#pieChartExample'),
-        BARCHARTEXMPLE    = $('#barChartExample'),
-        RADARCHARTEXMPLE  = $('#radarChartExample'),
-        POLARCHARTEXMPLE  = $('#polarChartExample');
+	var COLORS = [
+		'#4dc9f6',
+		'#f67019',
+		'#f53794',
+		'#537bc4',
+		'#acc236',
+		'#166a8f',
+		'#00a950',
+		'#58595b',
+		'#8549ba'
+	];
 
+	var Samples = global.Samples || (global.Samples = {});
+	var Color = global.Color;
 
-    var lineChartExample = new Chart(LINECHARTEXMPLE, {
-        type: 'line',
-        data: {
-            labels: ["January", "February", "March", "April", "May", "June", "July"],
-            datasets: [
-                {
-                    label: "Data Set One",
-                    fill: true,
-                    lineTension: 0.3,
-                    backgroundColor: "rgba(51, 179, 90, 0.38)",
-                    borderColor: brandPrimary,
-                    borderCapStyle: 'butt',
-                    borderDash: [],
-                    borderDashOffset: 0.0,
-                    borderJoinStyle: 'miter',
-                    borderWidth: 1,
-                    pointBorderColor: brandPrimary,
-                    pointBackgroundColor: "#fff",
-                    pointBorderWidth: 1,
-                    pointHoverRadius: 5,
-                    pointHoverBackgroundColor: brandPrimary,
-                    pointHoverBorderColor: "rgba(220,220,220,1)",
-                    pointHoverBorderWidth: 2,
-                    pointRadius: 1,
-                    pointHitRadius: 10,
-                    data: [50, 20, 40, 31, 32, 22, 10],
-                    spanGaps: false
-                },
-                {
-                    label: "Data Set Two",
-                    fill: true,
-                    lineTension: 0.3,
-                    backgroundColor: "rgba(75,192,192,0.4)",
-                    borderColor: "rgba(75,192,192,1)",
-                    borderCapStyle: 'butt',
-                    borderDash: [],
-                    borderDashOffset: 0.0,
-                    borderJoinStyle: 'miter',
-                    borderWidth: 1,
-                    pointBorderColor: "rgba(75,192,192,1)",
-                    pointBackgroundColor: "#fff",
-                    pointBorderWidth: 1,
-                    pointHoverRadius: 5,
-                    pointHoverBackgroundColor: "rgba(75,192,192,1)",
-                    pointHoverBorderColor: "rgba(220,220,220,1)",
-                    pointHoverBorderWidth: 2,
-                    pointRadius: 1,
-                    pointHitRadius: 10,
-                    data: [65, 59, 30, 81, 56, 55, 40],
-                    spanGaps: false
-                }
-            ]
-        }
-    });
+	Samples.utils = {
+		// Adapted from http://indiegamr.com/generate-repeatable-random-numbers-in-js/
+		srand: function(seed) {
+			this._seed = seed;
+		},
 
-    var pieChartExample = new Chart(PIECHARTEXMPLE, {
-        type: 'doughnut',
-        data: {
-            labels: [
-                "First",
-                "Second",
-                "Third"
-            ],
-            datasets: [
-                {
-                    data: [300, 50, 100],
-                    borderWidth: [1, 1, 1],
-                    backgroundColor: [
-                        brandPrimary,
-                        "rgba(75,192,192,1)",
-                        "#FFCE56"
-                    ],
-                    hoverBackgroundColor: [
-                        brandPrimary,
-                        "rgba(75,192,192,1)",
-                        "#FFCE56"
-                    ]
-                }]
-            }
-    });
+		rand: function(min, max) {
+			var seed = this._seed;
+			min = min === undefined ? 0 : min;
+			max = max === undefined ? 1 : max;
+			this._seed = (seed * 9301 + 49297) % 233280;
+			return min + (this._seed / 233280) * (max - min);
+		},
 
-    var pieChartExample = {
-        responsive: true
-    };
+		numbers: function(config) {
+			var cfg = config || {};
+			var min = cfg.min || 0;
+			var max = cfg.max || 1;
+			var from = cfg.from || [];
+			var count = cfg.count || 8;
+			var decimals = cfg.decimals || 8;
+			var continuity = cfg.continuity || 1;
+			var dfactor = Math.pow(10, decimals) || 0;
+			var data = [];
+			var i, value;
 
-    var barChartExample = new Chart(BARCHARTEXMPLE, {
-        type: 'bar',
-        data: {
-            labels: ["2069/70", "2070/71", "2071/72", "2072/73", "2073/74", "2074/75","2075/76"],
-            datasets: [
-                {
-                    label: "Profit %",
-                    backgroundColor: [
-                        'rgba(51, 179, 90, 1)',
-                        'rgba(51, 179, 90, 1)',
-                        'rgba(51, 179, 90, 1)',
-                        'rgba(51, 179, 90, 1)',
-                        'rgba(51, 179, 90, 1)',
-                        'rgba(51, 179, 90, 1)',
-                        'rgba(51, 179, 90, 1)'
-                    ],
-                    borderColor: [
-                        'rgba(51, 179, 90, 1)',
-                        'rgba(51, 179, 90, 1)',
-                        'rgba(51, 179, 90, 1)',
-                        'rgba(51, 179, 90, 1)',
-                        'rgba(51, 179, 90, 1)',
-                        'rgba(51, 179, 90, 1)',
-                        'rgba(51, 179, 90, 1)'
-                    ],
-                    borderWidth: 1,
-                    data: [35, 59, 42, 48, 56, 55, 40],
-                },
-                {
-                    label: "Loss %",
-                    backgroundColor: [
-                        'rgb(233, 1, 13)',
-                        'rgb(233, 1, 13)',
-                        'rgb(233, 1, 13)',
-                        'rgb(233, 1, 13)',
-                        'rgb(233, 1, 13)',
-                        'rgb(233, 1, 13)',
-                        'rgb(233, 1, 13)'
-                    ],
-                    borderColor: [
-                        'rgb(233, 1, 13)',
-                        'rgb(233, 1, 13)',
-                        'rgb(233, 1, 13)',
-                        'rgb(233, 1, 13)',
-                        'rgb(233, 1, 13)',
-                        'rgb(233, 1, 13)',
-                        'rgb(233, 1, 13)'
-                    ],
-                    borderWidth: 1,
-                    data: [65, 40, 58, 47, 44, 27, 30],
-                }
-            ]
-        }
-    });
+			for (i = 0; i < count; ++i) {
+				value = (from[i] || 0) + this.rand(min, max);
+				if (this.rand() <= continuity) {
+					data.push(Math.round(dfactor * value) / dfactor);
+				} else {
+					data.push(null);
+				}
+			}
 
+			return data;
+		},
 
+		labels: function(config) {
+			var cfg = config || {};
+			var min = cfg.min || 0;
+			var max = cfg.max || 100;
+			var count = cfg.count || 8;
+			var step = (max - min) / count;
+			var decimals = cfg.decimals || 8;
+			var dfactor = Math.pow(10, decimals) || 0;
+			var prefix = cfg.prefix || '';
+			var values = [];
+			var i;
 
-    var polarChartExample = new Chart(POLARCHARTEXMPLE, {
-        type: 'polarArea',
-        data: {
-            datasets: [{
-                data: [
-                    11,
-                    16,
-                    7
-                ],
-                backgroundColor: [
-                    "rgba(51, 179, 90, 1)",
-                    "#FF6384",
-                    "#FFCE56"
-                ],
-                label: 'My dataset' // for legend
-            }],
-            labels: [
-                "First",
-                "Second",
-                "Third"
-            ]
-        }
-    });
+			for (i = min; i < max; i += step) {
+				values.push(prefix + Math.round(dfactor * i) / dfactor);
+			}
 
-    var polarChartExample = {
-        responsive: true
-    };
+			return values;
+		},
 
+		months: function(config) {
+			var cfg = config || {};
+			var count = cfg.count || 12;
+			var section = cfg.section;
+			var values = [];
+			var i, value;
 
-    var radarChartExample = new Chart(RADARCHARTEXMPLE, {
-        type: 'radar',
-        data: {
-            labels: ["Eating", "Drinking", "Sleeping", "Designing", "Coding", "Cycling"],
-            datasets: [
-                {
-                    label: "My First dataset",
-                    backgroundColor: "rgba(179,181,198,0.2)",
-                    borderWidth: 2,
-                    borderColor: "rgba(179,181,198,1)",
-                    pointBackgroundColor: "rgba(179,181,198,1)",
-                    pointBorderColor: "#fff",
-                    pointHoverBackgroundColor: "#fff",
-                    pointHoverBorderColor: "rgba(179,181,198,1)",
-                    data: [65, 59, 90, 81, 56, 55]
-                },
-                {
-                    label: "My Second dataset",
-                    backgroundColor: "rgba(51, 179, 90, 0.2)",
-                    borderWidth: 2,
-                    borderColor: "rgba(51, 179, 90, 1)",
-                    pointBackgroundColor: "rgba(51, 179, 90, 1)",
-                    pointBorderColor: "#fff",
-                    pointHoverBackgroundColor: "#fff",
-                    pointHoverBorderColor: "rgba(51, 179, 90, 1)",
-                    data: [28, 48, 40, 19, 96, 27]
-                }
-            ]
-        }
-    });
-    var radarChartExample = {
-        responsive: true
-    };
+			for (i = 0; i < count; ++i) {
+				value = MONTHS[Math.ceil(i) % 12];
+				values.push(value.substring(0, section));
+			}
 
+			return values;
+		},
 
+		color: function(index) {
+			return COLORS[index % COLORS.length];
+		},
 
-});
+		transparentize: function(color, opacity) {
+			var alpha = opacity === undefined ? 0.5 : 1 - opacity;
+			return Color(color).alpha(alpha).rgbString();
+		}
+	};
+
+	// DEPRECATED
+	window.randomScalingFactor = function() {
+		return Math.round(Samples.utils.rand(-100, 100));
+	};
+
+	// INITIALIZATION
+
+	Samples.utils.srand(Date.now());
+
+	// Google Analytics
+	/* eslint-disable */
+	if (document.location.hostname.match(/^(www\.)?chartjs\.org$/)) {
+		(function(i,s,o,g,r,a,m){i['GoogleAnalyticsObject']=r;i[r]=i[r]||function(){
+		(i[r].q=i[r].q||[]).push(arguments)},i[r].l=1*new Date();a=s.createElement(o),
+		m=s.getElementsByTagName(o)[0];a.async=1;a.src=g;m.parentNode.insertBefore(a,m)
+		})(window,document,'script','//www.google-analytics.com/analytics.js','ga');
+		ga('create', 'UA-28909194-3', 'auto');
+		ga('send', 'pageview');
+	}
+	/* eslint-enable */
+
+}(this));

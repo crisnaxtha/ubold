@@ -230,4 +230,16 @@ class DM_Post extends Model{
     public static function getLanguageName($id) {
         return Language::where('id', '=', $id)->pluck('name')->first();
     }
+
+    public static function arrayGroupBy($old_arr_1, $based_on) {
+        $arr = array();
+        $old_arr = json_decode($old_arr_1, true);
+        foreach($old_arr as $key => $item)
+        {
+            if(array_key_exists($based_on, $item))
+                $arr[$item[$based_on]][$key] = $item;
+        }
+        ksort($arr, SORT_NUMERIC);
+        return $arr;
+    }
 }

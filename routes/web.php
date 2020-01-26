@@ -478,6 +478,13 @@ Route::group(['prefix' => 'dashboard', 'as'=> 'dcms.', 'namespace'=>'Dcms', 'mid
             Route::delete('{faq}',                             ['as'=>'destroy',              'uses'=>'FAQController@destroy']);
         });
 
+        Route::group(['prefix' => 'api', 'as'=>'api.'], function () {
+            Route::get('',                                      ['as'=>'index',              'uses'=>'ExternalServicesController@index']);
+            Route::get('district',                                      ['as'=>'district',              'uses'=>'ExternalServicesController@apiDistrictWise']);
+            Route::get('province',                                      ['as'=>'province',              'uses'=>'ExternalServicesController@apiProvinceWise']);
+            Route::get('date',                                      ['as'=>'date',              'uses'=>'ExternalServicesController@apiDateWise']);
+        });
+
 });
 
 /**
@@ -570,6 +577,6 @@ use GuzzleHttp\Client;
 Route::get('/json-api',                                 ['as'=>'api_authentication', 'uses'=>'Dsms\ExternalServicesController@apiAuthentication']);
 Route::get('/json-api-1',                               ['as'=>'api_authentication', 'uses'=>'Dcms\ExternalServicesController@apiDistrictWise']);
 Route::get('/json-api-2',                               ['as'=>'api_authentication', 'uses'=>'Dcms\ExternalServicesController@apiProvinceWise']);
-Route::get('/json-api-3/{from_date}/{to_date}',         ['as'=>'api_authentication', 'uses'=>'Dcms\ExternalServicesController@apiDateWise']);
+Route::get('/json-api-3',         ['as'=>'api_authentication', 'uses'=>'Dcms\ExternalServicesController@apiDateWise']);
 
 
