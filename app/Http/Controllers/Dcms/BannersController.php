@@ -68,14 +68,9 @@ class BannersController extends DM_BaseController
 
         $row = $this->model;
             $row->type = $request->type;
-        // $row->title = $request->name;
         if($request->hasFile('image')){
-            $row->image = parent::uploadFile($this->folder_path, $this->image_prefix_path, 'thumbnail', $request);
+            $row->image = parent::uploadImage($request, $this->folder_path ,$this->image_prefix_path,'image');
         }
-        // $row->description = $request->description;
-        // $row->link = dm_linkToEmbed($request->link);
-        // $row->status = $request->status;
-        // $row->featured = $request->featured;
         $row->save();
         session()->flash('alert-success', $this->panel. ' successfully added.');
         return redirect()->route($this->base_route.'.index');
@@ -124,14 +119,9 @@ class BannersController extends DM_BaseController
 
         $row = $this->model::findOrFail($id);
         $row->type = $request->type;
-        // $row->title = $request->name;
         if($request->hasFile('image')){
-            $row->image = parent::uploadFile($this->folder_path, $this->image_prefix_path, 'thumbnail', $request);
+            $row->image = parent::uploadImage($request, $this->folder_path ,$this->image_prefix_path,'image');
         }
-        // $row->description = $request->description;
-        // $row->link = dm_linkToEmbed($request->link);
-        // $row->status = $request->status;
-        // $row->featured = $request->featured;
         $row->save();
         session()->flash('alert-success', $this->panel. ' successfully added.');
         return redirect()->route($this->base_route.'.index');

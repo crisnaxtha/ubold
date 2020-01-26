@@ -95,7 +95,6 @@ class SiteController extends DM_BaseController
 
         $data['date_api'] = DB::table('date_data')->get();
         $data['date_data'] = $this->dm_post::arrayGroupBy($data['date_api'], 'flag');
-        // dd($data['date_data']);
         return view(parent::loadView($this->view_path.'.index'), compact('data'));
     }
 

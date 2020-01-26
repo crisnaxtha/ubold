@@ -14,7 +14,7 @@
                         dm_hdropdownType('type','Type', $data['type'], $row->type );
                         // dm_hinput('text','name', "Title", $row->title );
                         // dm_hckeditor('description', "Description", $row->description);
-                        dm_hinput('file', 'image', 'Banner Image', '', '');
+                        dm_hinputUpdate('file', 'image', 'Banner Image', '', '');
 
                         // dm_textareaUpdate('link', "Youtube Link( Embed)", $row->link );
                         // dm_hcheckbox('checkbox','status', "Status", $row->status);

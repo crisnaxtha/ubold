@@ -27,6 +27,7 @@ class AppServiceProvider extends ServiceProvider
         $all_view['contact_count'] = DB::table('contacts')->count();
         $all_view['file_count'] = DB::table('files')->count();
         $all_view['photo_count'] = DB::table('galleries')->count();
+        $all_view['banner'] = DB::table('banners')->get();
         View::share(compact('all_view'));
     }
 

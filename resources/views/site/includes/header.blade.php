@@ -31,9 +31,9 @@
                 <input class="form-control" placeholder="Search" name="keyword" id="srch-term" type="text">
                 <div class="input-group-append">
                     <button class="btn btn-info" type="submit"><i class="fa fa-search"></i></button>
-                    <a href="javascript:void(0)" class="src-drop" title="Advance Search">
+                    {{-- <a href="javascript:void(0)" class="src-drop" title="Advance Search">
                         <span class="fa fa-sliders"></span>
-                    </a>
+                    </a> --}}
                 </div>
               </div>
 
