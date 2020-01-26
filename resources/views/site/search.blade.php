@@ -61,7 +61,7 @@
                                                 </figure>
                                                 @endif
                                                 <div class="card-body">
-                                                    <div class="card-meta"><i class="fa fa-clock-o">&nbsp;</i> {{ $row->created_at }}&nbsp; <i class="fa fa-user"> </i>&nbsp;@if(isset($row->postCategory->name)) {{ $row->postCategory->name}} @endif &nbsp;<i class="fa fa-eye">&nbsp; </i>{{ $row->visit_no}} </div>
+                                                    <div class="card-meta"><i class="fa fa-clock-o">&nbsp;</i> {{ $row->created_at }}&nbsp; <i class="fa fa-user"> </i>&nbsp;&nbsp;<i class="fa fa-eye">&nbsp; </i>{{ $row->visit_no}} </div>
                                                     @if(isset($row->title))
                                                     @if(Route::has('site.post.show'))
                                                     <a href="{{ route('site.post.show', ['id' => $row->unique_id] )}}">
@@ -105,7 +105,7 @@
                                             <p>{!! $row->content !!}</p>
                                             <div class="row">
                                                 <div class="col-md-9">
-                                                    <i class="fa fa-clock-o">&nbsp;</i> {{ $row->created_at }}&nbsp; <i class="fa fa-user"> </i>&nbsp;@if(isset($row->postCategory->name)) {{ $row->postCategory->name}} @endif  &nbsp;<i class="fa fa-eye">&nbsp; </i>{{ $row->visit_no }}
+                                                    <i class="fa fa-clock-o">&nbsp;</i> {{ $row->created_at }}&nbsp; <i class="fa fa-user"> </i>&nbsp;&nbsp;<i class="fa fa-eye">&nbsp; </i>{{ $row->visit_no }}
                                                 </div>
                                                 <div class="col-md-3">
                                                     <a style="border:1px solid #e5e5e5;padding: 10px;" href="{{ route('site.post.show', ['id' => $row->unique_id] )}}">सबै हेर्नुहोस  &nbsp;</a>
@@ -122,14 +122,14 @@
                     </div>
                     <div class="clearfix"></div>
                 </div>
-                <div class="col-lg-3 col-md-3 page_sidebar">
-                    @include('site.includes.sidebar.widget-1')
+                {{-- <div class="col-lg-3 col-md-3 page_sidebar"> --}}
+                    {{-- @include('site.includes.sidebar.widget-1')
                     @include('site.includes.sidebar.widget-2')
                     @include('site.includes.sidebar.widget-3')
                     @include('site.includes.sidebar.widget-4')
-                    @include('site.includes.sidebar.widget-5')
+                    @include('site.includes.sidebar.widget-5') --}}
 
-                </div>
+                {{-- </div> --}}
             </div>
         </div>
     </section>

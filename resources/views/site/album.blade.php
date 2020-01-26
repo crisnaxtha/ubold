@@ -2,8 +2,7 @@
 
 @section('content')
 <div class="mid_part inner_page">
-    <div class="inner_banner" style="background: url(assets/site/assets/images/sheetal.jpg); background-size: cover; background-attachment: fixed; width: 100%;"></div>
-
+    @include('site.includes.banner-image')
     <div class="breadcrumb-col">
         <div class="container">
             <ol class="breadcrumb">

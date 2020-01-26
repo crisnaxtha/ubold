@@ -1,6 +1,7 @@
 @extends('site.layouts.app') @section('content')
 <div class="mid_part inner_page">
-   <div class="inner_banner" style="background: url({{asset('assets/site/assets/images/rara-iw-adventure.jpg')}}); background-size: cover; background-attachment: fixed; width: 100%;"></div>
+    @include('site.includes.banner-image')
+
    <div class="breadcrumb-col">
       <div class="container">
          <ol class="breadcrumb">

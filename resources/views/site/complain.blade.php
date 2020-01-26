@@ -3,7 +3,8 @@
 @section('content')
 <div class="mid_part inner_page contact_page">
 
-    <div class="inner_banner" style="background: url(images/sleeping-buddha.jpg); background-size: cover; background-attachment: fixed; width: 100%;"></div>
+    @include('site.includes.banner-image')
+
 
     <div class="breadcrumb-col">
         <div class="container">

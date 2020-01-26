@@ -46,7 +46,8 @@ class BannersController extends DM_BaseController
     public function create()
     {
         $this->tracker;
-        $data['type'] = ['post', 'page', 'category', 'album', 'member', 'contact'];
+        $data['type'] = ['post', 'page', 'category', 'album', 'member', 'contact', 'process', 'faq', 'search'];
+
         return view(parent::loadView($this->view_path.'.create'), compact('data'));
     }
 
@@ -60,10 +61,8 @@ class BannersController extends DM_BaseController
     {
         $this->tracker;
         $request->validate([
-
             'type'        => 'required',
             'image'        => 'required',
-
         ]);
 
         $row = $this->model;
@@ -97,7 +96,7 @@ class BannersController extends DM_BaseController
     {
         $this->tracker;
         $row = $this->model::findOrFail($id);
-        $data['type'] = ['post', 'page', 'category', 'album', 'member', 'contact'];
+        $data['type'] = ['post', 'page', 'category', 'album', 'member', 'contact', 'process', 'faq', 'search'];
         return view(parent::loadView($this->view_path.'.edit'), compact('row', 'data'));
     }
 
@@ -112,9 +111,7 @@ class BannersController extends DM_BaseController
     {
         $this->tracker;
         $request->validate([
-
             'type'        => 'required',
-
         ]);
 
         $row = $this->model::findOrFail($id);
