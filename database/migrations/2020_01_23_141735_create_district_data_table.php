@@ -18,6 +18,7 @@ class CreateDistrictDataTable extends Migration
             $table->string('title');
             $table->string('slug');
             $table->integer('data');
+            $table->unsignedInteger('state')->nullable();
             $table->timestamps();
         });
     }
