@@ -17,7 +17,7 @@
             <div class="row">
                 <div class="col-md-12 pull-right">
                     <select name="account" class="form-control" id="province_id" name="province_id">
-                        <option>-----------------------------------------Select Province-----------------------------------------</option>
+                        {{-- <option>-----------------------------------------Select Province-----------------------------------------</option> --}}
                         <option value="1">Province 1</option>
                         <option value="2">Province 2</option>
                         <option value="3">Province 3</option>

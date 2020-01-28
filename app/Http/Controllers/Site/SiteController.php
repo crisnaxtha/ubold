@@ -101,12 +101,12 @@ class SiteController extends DM_BaseController
 
     public function getProvinceWiseDistrictData(Request $request) {
         if($request->ajax()) {
-            $data['district_api'] = DB::table('district_data')->where('state', '=', $request->id)->get();
+            $district_api = DB::table('district_data')->where('state', '=', $request->id)->get();
 
             $data['districtLabel'] = [];
             $data['districtData'] = [];
 
-            foreach($data['district_api'] as $row) {
+            foreach($district_api as $row) {
                 array_push($data['districtLabel'], $row->title);
                 array_push($data['districtData'], $row->data);
             }

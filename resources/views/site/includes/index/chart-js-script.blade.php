@@ -1,36 +1,4 @@
 <script>
-    var color = Chart.helpers.color;
-    var barChartData = {
-            labels:  <?php echo json_encode($data['districtLabel'], JSON_NUMERIC_CHECK); ?>,
-            datasets: [{
-                label: 'No of Company Based on District',
-                data:  <?php echo json_encode($data['districtData'], JSON_NUMERIC_CHECK); ?>,
-                backgroundColor:color(window.chartColors.blue).alpha(0.5).rgbString(),
-                borderColor: window.chartColors.blue,
-                borderWidth: 1
-            }]
-        }
-    var ctx = document.getElementById('district-chart').getContext('2d');
-    var myChart = new Chart(ctx, {
-        type: 'bar',
-        data: barChartData,
-        options: {
-            scales: {
-                yAxes: [{
-                    ticks: {
-                        beginAtZero: false
-                    }
-                }]
-            },
-            title: {
-                display: true,
-                text: 'Company No. Based on District'
-            }
-        }
-    });
-</script>
-
-<script>
         var config = {
             type: 'doughnut',
             data: {
@@ -72,25 +40,61 @@
 </script>
 
 <script>
+    var color = Chart.helpers.color;
+    var barChartData = {
+            labels:  <?php echo json_encode($data['districtLabel'], JSON_NUMERIC_CHECK); ?>,
+            datasets: [{
+                label: 'No of Company Based on District',
+                data:  <?php echo json_encode($data['districtData'], JSON_NUMERIC_CHECK); ?>,
+                backgroundColor:color(window.chartColors.red).alpha(0.5).rgbString(),
+                borderColor: window.chartColors.red,
+                borderWidth: 1
+            }]
+        }
+    var ctx = document.getElementById('district-chart').getContext('2d');
+    var myChart = new Chart(ctx, {
+        type: 'bar',
+        data: barChartData,
+        options: {
+            scales: {
+                yAxes: [{
+                    ticks: {
+                        beginAtZero: false
+                    }
+                }]
+            },
+            title: {
+                display: true,
+                text: 'Company No. Based on District'
+            }
+        }
+    });
+</script>
+
+<script>
     $('#province_id').change(function() {
         var id = $('#province_id').val();
+        // alert(id);
         url = '{{ route('site.provinceDistrictData')}}';
         $.ajax({
             method: 'get',
             dataType: 'json',
             url : url,
             data :{ id: id},
-            success: function(response) {
-                console.log(response);
+            success: function(data) {
+                console.clear();
+                console.log(data);
+                // window.clear();
                 var config = {
                     type: 'bar',
                     data: {
                         datasets: [{
-                            data: response.districtData,
-                            backgroundColor: window.chartColors.red,
+                            data: data.districtData,
+                            backgroundColor: color(window.chartColors.red).alpha(0.5).rgbString(),
+                            borderColor: window.chartColors.red,
                             label: 'Company No. Based on Province'
                         }],
-                        labels:  response.districtLabel,
+                        labels:  data.districtLabel,
                     },
                     options: {
                         responsive: true,
@@ -101,13 +105,17 @@
                             display: true,
                             text: 'Company No. Based on Province'
                         },
-                        animation: {
-                            animateScale: true,
-                            animateRotate: true
-                        }
+                        scales: {
+                            yAxes: [{
+                                ticks: {
+                                    beginAtZero: false
+                                }
+                            }]
+                        },
                     }
                 };
                 var ctx = document.getElementById('district-chart').getContext('2d');
+                myDoughnut.clear();
                 window.myDoughnut = new Chart(ctx, config);
             },
             error: function(xHr){
