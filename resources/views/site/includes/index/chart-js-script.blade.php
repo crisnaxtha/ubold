@@ -28,13 +28,9 @@
             }
         }
     });
-    </script>
+</script>
 
-    <script>
-        var randomScalingFactor = function() {
-            return Math.round(Math.random() * 100);
-        };
-
+<script>
         var config = {
             type: 'doughnut',
             data: {
@@ -73,4 +69,50 @@
             var ctx = document.getElementById('province-chart').getContext('2d');
             window.myDoughnut = new Chart(ctx, config);
         };
+</script>
+
+<script>
+    $('#province_id').change(function() {
+        var id = $('#province_id').val();
+        url = '{{ route('site.provinceDistrictData')}}';
+        $.ajax({
+            method: 'get',
+            dataType: 'json',
+            url : url,
+            data :{ id: id},
+            success: function(response) {
+                console.log(response);
+                var config = {
+                    type: 'bar',
+                    data: {
+                        datasets: [{
+                            data: response.districtData,
+                            backgroundColor: window.chartColors.red,
+                            label: 'Company No. Based on Province'
+                        }],
+                        labels:  response.districtLabel,
+                    },
+                    options: {
+                        responsive: true,
+                        legend: {
+                            position: 'top',
+                        },
+                        title: {
+                            display: true,
+                            text: 'Company No. Based on Province'
+                        },
+                        animation: {
+                            animateScale: true,
+                            animateRotate: true
+                        }
+                    }
+                };
+                var ctx = document.getElementById('district-chart').getContext('2d');
+                window.myDoughnut = new Chart(ctx, config);
+            },
+            error: function(xHr){
+                console.log(xHr.responseText);
+            }
+        });
+    });
 </script>

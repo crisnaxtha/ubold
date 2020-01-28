@@ -570,6 +570,8 @@ Route::group([ 'as'=>'site.', 'namespace'=>'Site'], function(){
     Route::get('/faq',                              ['as'=>'faq',           'uses'=>'SiteController@showAllFaq']);
 
     Route::get('/complain',                              ['as'=>'complain',           'uses'=>'SiteController@showComplain']);
+
+    Route::get('/province_base_district_data',        ['as' => 'provinceDistrictData' , 'uses'=>'SiteController@getProvinceWiseDistrictData']);
 });
 
 use GuzzleHttp\Client;

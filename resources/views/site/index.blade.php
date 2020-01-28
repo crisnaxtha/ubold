@@ -39,6 +39,7 @@
 
 </script>
 
+
 @include('site.includes.index.chart-js-script')
 @endsection
 

@@ -76,7 +76,7 @@ class SiteController extends DM_BaseController
         $data['services'] = Service::where('status', '=', 1)->where('lang_id', '=', $this->lang_id)->take(8)->get();
 
 
-        $data['district_api'] = DistrictData::all();
+        $data['district_api'] = DistrictData::where('state', '=', 1)->get();
         $data['province_api'] = ProvinceData::all();
         $data['districtLabel'] = [];
         $data['districtData'] = [];
@@ -99,11 +99,27 @@ class SiteController extends DM_BaseController
         return view(parent::loadView($this->view_path.'.index'), compact('data'));
     }
 
+    public function getProvinceWiseDistrictData(Request $request) {
+        if($request->ajax()) {
+            $data['district_api'] = DB::table('district_data')->where('state', '=', $request->id)->get();
+
+            $data['districtLabel'] = [];
+            $data['districtData'] = [];
+
+            foreach($data['district_api'] as $row) {
+                array_push($data['districtLabel'], $row->title);
+                array_push($data['districtData'], $row->data);
+            }
+            // var_dump($data['districtLabel']);var_dump($data['districtData']);
+            return $data;
+        }
+    }
+
+
     /**
      * Show contact Form
      */
     public function showContact() {
-        $data['banner'] = Banner::where('type', '=', 'contact')->first();
         $this->panel = "Contact";
         $this->view_path = 'site.';
         $this->tracker;// to track user
@@ -216,8 +232,6 @@ class SiteController extends DM_BaseController
      */
     public function showAlbum() {
         $this->tracker;
-        $data['banner'] = Banner::where('type', '=', 'album')->first();
-
         $data['common'] = Common::where('lang_id', '=', $this->lang_id)->first();
         $data['menu'] = Menu::tree($this->lang_id);
         $data['recent_post'] = DB::table('posts')->where('type', '=', 'post')->where('status', '=', 1)->where('lang_id', '=', $this->lang_id)->take(5)->get();
@@ -229,8 +243,6 @@ class SiteController extends DM_BaseController
      */
     public function showPhotos($album_id) {
         $this->tracker;
-        $data['banner'] = Banner::where('type', '=', 'album')->first();
-
         $data['common'] = Common::where('lang_id', '=', $this->lang_id)->first();
         $data['menu'] = Menu::tree($this->lang_id);
         $data['recent_post'] = DB::table('posts')->where('type', '=', 'post')->where('status', '=', 1)->where('lang_id', '=', $this->lang_id)->take(5)->get();
@@ -239,8 +251,6 @@ class SiteController extends DM_BaseController
     }
 
     public function showStaff() {
-        $data['banner'] = Banner::where('type', '=', 'member')->first();
-
         $data['common'] = Common::where('lang_id', '=', $this->lang_id)->first();
         $data['menu'] = Menu::tree($this->lang_id);
         $data['recent_post'] = DB::table('posts')->where('type', '=', 'post')->where('status', '=', 1)->where('lang_id', '=', $this->lang_id)->take(5)->get();
@@ -255,8 +265,6 @@ class SiteController extends DM_BaseController
     }
 
     public function search(Request $request) {
-        $data['banner'] = Banner::where('type', '=', 'search')->first();
-
         $data['common'] = Common::where('lang_id', '=', $this->lang_id)->first();
         $data['menu'] = Menu::tree($this->lang_id);
         $data['recent_post'] = DB::table('posts')->where('type', '=', 'post')->where('status', '=', 1)->where('lang_id', '=', $this->lang_id)->take(5)->get();
@@ -273,8 +281,6 @@ class SiteController extends DM_BaseController
      * Showing of the process
      */
     public function showProcess(Request $request) {
-        $data['banner'] = Banner::where('type', '=', 'process')->first();
-
         $data['common'] = Common::where('lang_id', '=', $this->lang_id)->first();
         $data['menu'] = Menu::tree($this->lang_id);
         $data['processes'] = Process::tree($this->lang_id);
@@ -308,8 +314,6 @@ class SiteController extends DM_BaseController
     }
 
     public function showAllFaq(Request $request) {
-        $data['banner'] = Banner::where('type', '=', 'faq')->first();
-
         $data['common'] = Common::where('lang_id', '=', $this->lang_id)->first();
         $data['menu'] = Menu::tree($this->lang_id);
         $data['rows'] = FAQ::where('lang_id', '=', $this->lang_id)->where('status', '=', 1)->orderBy('order')->get();
@@ -333,6 +337,5 @@ class SiteController extends DM_BaseController
         session()->flash('alert-success', $this->panel. ' successfully send.');
         return redirect()->route('site.contact');
     }
-
 
 }

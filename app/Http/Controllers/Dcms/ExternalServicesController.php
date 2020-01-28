@@ -140,13 +140,24 @@ class ExternalServicesController extends DM_BaseController
         // return $body;
         if(isset($body)){
             $data = json_decode($body);
-            $this->model_1::truncate();
+            // $this->model_1::truncate();
             foreach($data as $row) {
-                $this->model_1::create([
-                    'title' => $row->districtEnglishName,
-                    'slug' => Str::slug($row->districtEnglishName),
-                    'data'  => $row->totalCompany
-                ]);
+                // $this->model_1::create([
+                //     'title' => $row->districtEnglishName,
+                //     'slug' => Str::slug($row->districtEnglishName),
+                //     'data'  => $row->totalCompany
+                // ]);
+                $district_single =  DB::table('district_data')->where('slug', '=', Str::slug($row->districtEnglishName))->first();
+                if(isset($district_single)) {
+                    DB::table('district_data')->where('id', $district_single->id)->update(['data'  => $row->totalCompany ]);
+                }
+                else {
+                    DB::table('district_data')->insert([
+                        'title' => $row->districtEnglishName,
+                        'slug' => Str::slug($row->districtEnglishName),
+                        'data'  => $row->totalCompany
+                    ]);
+                }
             }
         session()->flash('alert-success', $this->panel.' Updated Successfully!!');
 
