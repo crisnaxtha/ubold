@@ -10,8 +10,8 @@
 @if(Route::has('dcms.dashboard'))
                 <li><a class="{{ ($_panel == 'Home') ? 'active' : '' }}" href="{{ URL::route('dcms.dashboard') }}"><i class="fe-airplay"></i><span>{{__('Dashboard')}}</span></a></li>
 @endif
-                <li class="sub-menu {{ ($_panel == 'Posts' || $_panel == 'Category' || $_panel == 'Pages') ? 'active' : '' }}">
-                    <a href="javascript:;" class="{{ ($_panel == 'Posts' || $_panel == 'Category' || $_panel == 'Pages') ? 'active' : '' }}"><i class="far fa-gem"></i>
+                <li class="sub-menu {{ ($_panel == 'Posts' || $_panel == 'Category' || $_panel == 'Pages' || $_panel == 'Complain') ? 'active' : '' }}">
+                    <a href="javascript:;" class="{{ ($_panel == 'Posts' || $_panel == 'Category' || $_panel == 'Pages' || $_panel == 'Complain') ? 'active' : '' }}"><i class="far fa-gem"></i>
                         <span class="menu-arrow"></span>
                         <span>{{ __('Content') }}</span>
                     </a>
@@ -30,6 +30,9 @@
 @endif
 @if( Route::has('dcms.faq.index'))
                         <li class="{{ ($_panel == 'FAQ') ? 'active' : '' }}"><a  href="{{ URL::route('dcms.faq.index') }}" ><i class="dripicons-question"></i>&nbsp;&nbsp;<span>{{__('FAQ')}}</span></a></li>
+@endif
+@if( Route::has('dcms.complain.index'))
+                        <li class="{{ ($_panel == 'Complain') ? 'active' : '' }}"><a  href="{{ URL::route('dcms.complain.index') }}" ><i class="dripicons-question"></i>&nbsp;&nbsp;<span>{{__('Complain')}}</span></a></li>
 @endif
                     </ul>
                 </li>
@@ -52,8 +55,8 @@
                     </ul>
                 </li>
 
-                <li class="sub-menu {{ ($_panel == 'Sliders' || $_panel == 'Links' || $_panel == 'Services' || $_panel == 'Popup' || $_panel =="Process" || $_panel =="Banner") ? 'active' : '' }}">
-                    <a href="javascript:;" class="{{ ($_panel == 'Sliders' || $_panel == 'Links' || $_panel == 'Services' || $_panel == 'Popup') ? 'active' : '' }}"><i class="fas fa-cart-plus"></i>
+                <li class="sub-menu {{ ($_panel == 'Sliders' || $_panel == 'Links' || $_panel == 'Services' || $_panel == 'Popup' || $_panel =="Process" || $_panel =="Banner" || $_panel == 'API Data') ? 'active' : '' }}">
+                    <a href="javascript:;" class="{{ ($_panel == 'Sliders' || $_panel == 'Links' || $_panel == 'Services' || $_panel == 'Popup' || $_panel =="Process" || $_panel =="Banner" || $_panel == 'API Data') ? 'active' : '' }}"><i class="fas fa-cart-plus"></i>
                         <span class="menu-arrow"></span>
                         <span>{{ __('Accessories ') }}</span>
                     </a>
@@ -75,6 +78,9 @@
 @endif
 @if( Route::has('dcms.banner.index'))
                         <li class="{{ ($_panel == 'banner') ? 'active' : '' }}"><a href="{{ URL::route('dcms.banner.index') }}" ><i class="mdi mdi-link-box-outline"></i>&nbsp;&nbsp;<span>{{__('Banner') }}</span></a></li>
+@endif
+@if( Route::has('dcms.api.index'))
+                        <li class="{{ ($_panel == 'API Data') ? 'active' : '' }}" ><a href="{{ URL::route('dcms.api.index') }}" ><i class="fa fa-bars"></i>&nbsp;&nbsp;<span>{{__('Api Data')}}</span></a></li>
 @endif
                     </ul>
                 </li>
@@ -140,9 +146,6 @@
 
             </ul>
         </li>
-@if( Route::has('dcms.api.index'))
-                <li><a class="{{ ($_panel == 'API Data') ? 'active' : '' }}" href="{{ URL::route('dcms.api.index') }}" ><i class="fa fa-bars"></i><span>{{__('Api Data')}}</span></a></li>
-@endif
         </div>
         <!-- End Sidebar -->
 

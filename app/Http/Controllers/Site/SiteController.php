@@ -25,6 +25,7 @@ use App\Model\Dcms\Banner;
 use App\Model\Api\DistrictData;
 use App\Model\Api\ProvinceData;
 use App\Model\Api\DateData;
+use App\Model\Dcms\Complain;
 use DB;
 use Session;
 use Response;
@@ -322,20 +323,27 @@ class SiteController extends DM_BaseController
     }
 
     public function showComplain(Request $request) {
-        dd('hello');
-        $request->validate([
-            'name'     => 'required|max:255',
-            'email'    => 'required',
-            'message'  => 'required'
-        ]);
-        $row = new Contact;
-        $row->name = $request->name;
-        $row->email = $request->email;
-        $row->number = $request->number;
-        $row->message = $request->message;
-        $row->save();
-        session()->flash('alert-success', $this->panel. ' successfully send.');
-        return redirect()->route('site.contact');
+        if($request->isMethod('post')) {
+                $request->validate([
+                    'name'     => 'required|max:255',
+                    'email'    => 'required',
+                    'message'  => 'required'
+                ]);
+                $row = new Complain;
+                $row->name = $request->name;
+                $row->email = $request->email;
+                $row->phone = $request->phone;
+                $row->address = $request->address;
+                $row->comment = $request->message;
+                $row->save();
+                session()->flash('alert-success', $this->panel. ' successfully send.');
+                return redirect()->route('site.complain');
+        }
+        else {
+            $data['common'] = Common::where('lang_id', '=', $this->lang_id)->first();
+            $data['menu'] = Menu::tree($this->lang_id);
+            return view(parent::loadView($this->view_path.'.complain'), compact('data'));
+        }
     }
 
 }

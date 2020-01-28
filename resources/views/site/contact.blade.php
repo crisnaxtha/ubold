@@ -32,7 +32,7 @@
                 <div class="col-lg-8 col-md-8">
                   <h4>सुझाब तथा पर्तिक्रिय</h4>
                   <p>If you have a any quries please contact our office. we will respnd you within 48 hours. Thank you.</p>
-
+                    @include('site.includes.message-success')
                   <form  action="{{ route('site.message') }}" method="POST" enctype="multipart/form-data">
                     @csrf
                     <div class="row">

@@ -20,30 +20,28 @@
 
         <div class="container select-width">
             <h4>सुझाब तथा पर्तिक्रिय</h4>
+            @include('site.includes.message-success')
 
-            <form method="post" action="?">
+            <form method="post" action="{{ route('site.complain') }}">
+                @csrf
                 <div class="row">
-                    <div class="col-md-6 col-sm-6 form-group">
+                    <div class="col-md-12 col-sm-12 form-group">
                         <label>नाम:</label>
-                        <input type="text" name="text" class="form-control" required="required" />
-                    </div>
-                    <div class="col-md-6 col-sm-6 form-group">
-                        <label>थर:</label>
-                        <input type="text" name="text" class="form-control" required="required" />
+                        <input autofocus type="text" name="name" class="form-control" required="required" />
                     </div>
                     <div class="col-md-6 col-sm-6 form-group">
                         <label>इ_मेल:</label>
-                        <input type="email" name="text" class="form-control" required="required" />
+                        <input type="email" name="email" class="form-control" required="required" />
                     </div>
                     <div class="col-md-6 col-sm-6 form-group">
                         <label>फोन नम्बर:</label>
-                        <input type="number" name="text" class="form-control" required="required" />
+                        <input type="text" name="phone" class="form-control" required="required" />
                     </div>
                     <div class="col-md-12 col-sm-12 form-group">
                         <label>ठेगाना:</label>
-                        <input type="text" name="text" class="form-control" required="required" />
+                        <input type="text" name="address" class="form-control" required="required" />
                     </div>
-                    <div class="col-md-12 col-sm-12 form-group">
+                    {{-- <div class="col-md-12 col-sm-12 form-group">
                         <label>सेलेक्ट सुब्जेच्त </label>
                         <br>
                         <input type="checkbox" name="subject" id="maths">
@@ -52,8 +50,8 @@
                         <label for="sceince">लोक सेवा आयोग</label>
                         <input type="checkbox" name="subject" id="english">
                         <label for="english">राहदानी विभाग</label>
-                    </div>
-                    <div class="col-md-12 col-sm-12 form-group">
+                    </div> --}}
+                    {{-- <div class="col-md-12 col-sm-12 form-group">
                         सेलेक्ट गेंदर
                         <br>
                         <input type="radio" name="gender" id="male">
@@ -62,18 +60,18 @@
                         <input type="radio" name="gender" id="female">
                         <label for="female">पुरुष </label>
 
-                    </div>
+                    </div> --}}
 
                     <div class="col-md-12 col-sm-12 form-group">
                         <label>टिप्पणी गर्नुहोस्:</label>
-                        <textarea class="form-control" rows="5" placeholder="Write your comments here..."></textarea>
+                        <textarea class="form-control" rows="5" placeholder="Write your comments here..." name="message"></textarea>
                     </div>
 
-                    <div class="col-md-12 col-sm-12 form-group">
+                    {{-- <div class="col-md-12 col-sm-12 form-group">
                         <label for="fileselect">Upload:</label>
                         <input type="file" name="upload" id="fileselect">
 
-                    </div>
+                    </div> --}}
 
                     <div class="clearfix"></div>
                 </div>

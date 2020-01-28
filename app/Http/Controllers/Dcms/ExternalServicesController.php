@@ -64,6 +64,17 @@ class ExternalServicesController extends DM_BaseController
         $one_month_ago_data = $this->apiDate($one_month_ago, date('Y-m-d'));
         $one_year_ago_data = $this->apiDate($one_year_ago, date('Y-m-d'));
         $two_year_ago_data = $this->apiDate($two_year_ago, date('Y-m-d'));
+        // dump($one_day_ago);
+        // dump($one_week_ago);
+        // dump($one_month_ago);
+        // dump($one_year_ago);
+        // dump($two_year_ago);
+        // dump($one_day_ago_data);
+        // dump($one_week_ago_data);
+        // dump($one_month_ago_data);
+        // dump($one_year_ago_data);
+        // dump($two_year_ago_data);
+        die;
         if(isset($one_day_ago) && isset($one_week_ago_data) && isset($one_month_ago_data) && isset($one_year_ago_data) && isset($two_year_ago_data)) {
             $this->model_3::truncate();
 

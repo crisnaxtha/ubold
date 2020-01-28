@@ -478,6 +478,18 @@ Route::group(['prefix' => 'dashboard', 'as'=> 'dcms.', 'namespace'=>'Dcms', 'mid
             Route::delete('{faq}',                             ['as'=>'destroy',              'uses'=>'FAQController@destroy']);
         });
 
+
+        Route::group(['prefix' => 'complain', 'as'=>'complain.'], function () {
+            Route::get('',                                      ['as'=>'index',              'uses'=>'ComplainsController@index']);
+            Route::get('create',                                ['as'=>'create',              'uses'=>'ComplainsController@create']);
+            Route::post('',                                     ['as'=>'store',              'uses'=>'ComplainsController@store']);
+            Route::get('{complain}/show',                       ['as'=>'show',              'uses'=>'ComplainsController@show']);
+            Route::get('{complain}/edit',                           ['as'=>'edit',              'uses'=>'ComplainsController@edit']);
+            Route::put('{complain}',                                ['as'=>'update',              'uses'=>'ComplainsController@update']);
+            Route::delete('{complain}',                             ['as'=>'destroy',              'uses'=>'ComplainsController@destroy']);
+        });
+
+        /** To get API Data */
         Route::group(['prefix' => 'api', 'as'=>'api.'], function () {
             Route::get('',                                      ['as'=>'index',              'uses'=>'ExternalServicesController@index']);
             Route::get('district',                                      ['as'=>'district',              'uses'=>'ExternalServicesController@apiDistrictWise']);
@@ -569,7 +581,7 @@ Route::group([ 'as'=>'site.', 'namespace'=>'Site'], function(){
 
     Route::get('/faq',                              ['as'=>'faq',           'uses'=>'SiteController@showAllFaq']);
 
-    Route::get('/complain',                              ['as'=>'complain',           'uses'=>'SiteController@showComplain']);
+    Route::any('/complain',                         ['as'=>'complain',           'uses'=>'SiteController@showComplain']);
 
     Route::get('/province_base_district_data',        ['as' => 'provinceDistrictData' , 'uses'=>'SiteController@getProvinceWiseDistrictData']);
 });
@@ -580,5 +592,6 @@ Route::get('/json-api',                                 ['as'=>'api_authenticati
 Route::get('/json-api-1',                               ['as'=>'api_authentication', 'uses'=>'Dcms\ExternalServicesController@apiDistrictWise']);
 Route::get('/json-api-2',                               ['as'=>'api_authentication', 'uses'=>'Dcms\ExternalServicesController@apiProvinceWise']);
 Route::get('/json-api-3',         ['as'=>'api_authentication', 'uses'=>'Dcms\ExternalServicesController@apiDateWise']);
+Route::get('/json-api-4/{from}/{to}',         ['as'=>'api_authentication', 'uses'=>'Dcms\ExternalServicesController@apiDate']);
 
 
