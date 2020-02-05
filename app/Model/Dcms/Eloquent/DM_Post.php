@@ -13,6 +13,7 @@ use App\Model\Dcms\AlbumCategory;
 use App\Model\Dcms\Album;
 use Session;
 use App;
+use App\Model\Dcms\Staff;
 use Auth;
 use Monolog\Handler\NullHandler;
 
@@ -241,5 +242,11 @@ class DM_Post extends Model{
         }
         ksort($arr, SORT_NUMERIC);
         return $arr;
+    }
+
+    public function branchStaff($lang_id, $branch_id, $number) {
+        $data =  Staff::where('branch_id', '=', $branch_id)->where('lang_id', '=', $lang_id)->paginate($number);
+        $staff = $data->toArray();
+        return Self::arrayGroupBy(json_encode($staff['data']), 'level');
     }
 }

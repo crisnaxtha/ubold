@@ -38,29 +38,6 @@
                         </li>
                         @endforeach
                         @endif
-                        {{--
-                        <li class="nav-item">
-                           <a class="nav-link" id="planning-tab" data-toggle="tab" href="#planning" role="tab" aria-controls="planning" aria-selected="false">Planning Division</a>
-                        </li>
-                        <li class="nav-item">
-                           <a class="nav-link" id="mgmt-tab" data-toggle="tab" href="#mgmt" role="tab" aria-controls="mgmt" aria-selected="false">Management Division</a>
-                        </li>
-                        <li class="nav-item">
-                           <a class="nav-link" id="manpowerdiv-tab" data-toggle="tab" href="#manpowerdiv" role="tab" aria-controls="manpowerdiv" aria-selected="false">मानव संसाधन शाखा</a>
-                        </li>
-                        <li class="nav-item">
-                           <a class="nav-link" id="economydiv-tab" data-toggle="tab" href="#economydiv" role="tab" aria-controls="economydiv" aria-selected="false">आर्थिक प्रशासन शाखा</a>
-                        </li>
-                        <li class="nav-item">
-                           <a class="nav-link" id="progressdiv-tab" data-toggle="tab" href="#progressdiv" role="tab" aria-controls="progressdiv" aria-selected="false">भौतिक सुधार शाखा</a>
-                        </li>
-                        <li class="nav-item">
-                           <a class="nav-link" id="budgetdiv-tab" data-toggle="tab" href="#budgetdiv" role="tab" aria-controls="budgetdiv" aria-selected="false">कार्यक्रम तथा बजेट शाखा</a>
-                        </li>
-                        <li class="nav-item">
-                           <a class="nav-link" id="techdiv-tab" data-toggle="tab" href="#techdiv" role="tab" aria-controls="techdiv" aria-selected="false">प्राविधिक तथा व्यावसायिक शाखा</a>
-                        </li>
-                        --}}
                      </ul>
                   </div>
                </div>
@@ -81,31 +58,53 @@
                            <br/>
                            <div class="home_members">
                               <div class="members text-center">
-                                @if(!empty($row->staff))
-                                @foreach($row->staff as $staffs)
-                                @if($loop->iteration == 1)
+                                @if(!empty($data['staff'.$loop->iteration]))
+                                @foreach($data['staff'.$loop->iteration] as $staffs)
+
+                                @if(count($staffs) == 1)
+                                @foreach($staffs as $staff)
                                  <div class="member_single">
-                                    <img src="{{ asset($staffs->image)}}" alt="{{ $staffs->name }}'" class="img-fluid mx-auto">
+                                    @if(isset($staff['image']))
+                                    <img src="{{ asset($staff['image'])}}" alt="{{ $staff['name'] }}'" class="img-fluid mx-auto">
+                                    @else
+                                    <img src="{{ asset('assets/site/assets/images/no-image.jpg')}}" alt="{{ $staff['name'] }}'" class="img-fluid mx-auto">
+                                    @endif
                                     <h6 class="text-center mt-3">
                                         <a href="#" class="showToolTip" title="" data-original-title="Click to view detail">
-                                        {{ $staffs->name }}</a>
+                                        {{ $staff['name'] }}</a>
                                     </h6>
-                                    <p class="text-center">{{ $staffs->designation }}</p>
+                                    <p class="text-center">{{ $staff['designation'] }}</p>
+                                    {{-- <small><i class="fa fa-envelope-o">&nbsp;</i> premkumarrai@gmail.com</small> --}}
                                  </div>
-                                @else
-                                 {{-- <div class=""> --}}
-                                    {{-- <div class="row"> --}}
-                                       <div class="col-md-6">
-                                          <img src="{{ asset($staffs->image)}}" alt="{{ $staffs->name }}'" class="img-fluid mx-auto">
-                                          <h6 class="text-center mt-3">
-                                             <a href="#" class="showToolTip" title="" data-original-title="Click to view detail">
-                                            {{ $staffs->name }}</a>
-                                          </h6>
-                                          <p class="text-center">{{ $staffs->designation }}</p>
+                                 @endforeach
+                                @elseif(count($staffs) > 1)
+                                <div class="member_multiple">
+                                    <div class="row">
+                                        @if(count($staffs) == 2)
+                                            @php $x = 6 @endphp
+                                        @elseif(count($staffs) == 3)
+                                            @php $x = 4 @endphp
+                                        @else
+                                            @php $x = 3  @endphp
+                                        @endif
+                                        @foreach($staffs as $staff)
+                                        <div class="col-md-{{ $x }}  wow fadeInUp" data-wow-duration="2s" data-wow-delay=".2s">
+                                            @if(isset($staff['image']))
+                                            <img src="{{ asset($staff['image'])}}" alt="{{ $staff['name'] }}'" class="img-fluid mx-auto">
+                                            @else
+                                            <img src="{{ asset('assets/site/assets/images/no-image.jpg')}}" alt="{{ $staff['name'] }}'" class="img-fluid mx-auto">
+                                            @endif
+                                            <h6 class="text-center mt-3">
+                                                <a href="#" class="showToolTip" title="" data-original-title="Click to view detail">
+                                                {{ $staff['name'] }}</a>
+                                            </h6>
+                                            <p class="text-center">{{ $staff['designation'] }}</p>
+                                            {{-- <small><i class="fa fa-envelope-o">&nbsp;</i> premkumarrai@gmail.com</small> --}}
                                        </div>
+                                       @endforeach
                                        <div class="clearfix"></div>
-                                    {{-- </div> --}}
-                                 {{-- </div> --}}
+                                    </div>
+                                 </div>
                                 @endif
                                 @endforeach
                                 @endif

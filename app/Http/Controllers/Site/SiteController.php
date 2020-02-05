@@ -256,6 +256,17 @@ class SiteController extends DM_BaseController
         $data['menu'] = Menu::tree($this->lang_id);
         $data['recent_post'] = DB::table('posts')->where('type', '=', 'post')->where('status', '=', 1)->where('lang_id', '=', $this->lang_id)->take(5)->get();
         $data['branch'] = Branch::where('status', '=', 1)->orderBy('order')->get();
+
+        $i = 1;
+        foreach($data['branch'] as $row) {
+            $staffs = $this->dm_post->branchStaff($this->lang_id, $row->id, 10);
+            if(count($staffs) != 0 ){
+                $data['staff'.$i] = $this->dm_post->branchStaff($this->lang_id, $row->id, 10);
+            }else {
+                $data['staff'.$i] = NULL;
+            }
+            $i++;
+        }
         $lang_id = $this->lang_id;
         return view(parent::loadView($this->view_path.'.staff'), compact('data', 'lang_id'));
     }
