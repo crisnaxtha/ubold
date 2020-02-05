@@ -353,6 +353,7 @@ class SiteController extends DM_BaseController
         else {
             $data['common'] = Common::where('lang_id', '=', $this->lang_id)->first();
             $data['menu'] = Menu::tree($this->lang_id);
+            $data['complain'] = Complain::where('status', '=', 1)->paginate(5);
             return view(parent::loadView($this->view_path.'.complain'), compact('data'));
         }
     }

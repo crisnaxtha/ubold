@@ -53,7 +53,7 @@
                      <div class="tab-content" id="myTabContent">
                         @foreach($data['branch'] as $row)
                         <div class="tab-pane fade @if($loop->iteration == 1) show active @endif" id="v-tabpanel-{{ $loop->iteration }}" role="tabpanel" aria-labelledby="vtab-{{ $loop->iteration }}">
-                           <p>Member Secretary, Board Member, National Examination Board, Nepal,  Chair Person, Regional Security Coordination Committee, Regional Administration Office, Mid-west, Surkhet, Chair Person Regional Security Coordination Committee, Regional Administration Office, Western, Pokhara.</p>
+                           {{-- <p>Member Secretary, Board Member, National Examination Board, Nepal,  Chair Person, Regional Security Coordination Committee, Regional Administration Office, Mid-west, Surkhet, Chair Person Regional Security Coordination Committee, Regional Administration Office, Western, Pokhara.</p> --}}
                            <hr/>
                            <br/>
                            <div class="home_members">
