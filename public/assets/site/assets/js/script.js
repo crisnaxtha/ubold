@@ -467,3 +467,10 @@ $(window).scroll(function() {
   window.addEventListener("scroll", callbackFunc);
 
 })();
+
+
+$('.dropdown-item').on('click',function() {
+    var value=$(this).attr('href');
+            window.location.href = value;
+});
+
