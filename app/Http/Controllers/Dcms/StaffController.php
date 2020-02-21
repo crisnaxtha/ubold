@@ -183,7 +183,7 @@ class StaffController extends DM_BaseController
 
     public function getFeatureList() {
         $this->tracker;
-        $data['rows'] = $this->model::where('status', '=', 1)->where('featured', '=', 1)->where('lang_id', '=', $this->lang_id)->orderBy('feature_order')->get();
+        $data['rows'] = $this->model::where('status', '=', 1)->where('featured', '=', 1)->where('lang_id', '=', $this->lang_id)->orderBy('featured_order')->get();
         return view(parent::loadView($this->view_path.'.featured_list'), compact('data'));
     }
 
