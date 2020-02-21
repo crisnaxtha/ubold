@@ -1,8 +1,8 @@
-@extends('dcms.layouts.app') 
-@section('css') 
+@extends('dcms.layouts.app')
+@section('css')
 @include('dcms.includes.nestable-assets.css')
 
-@endsection 
+@endsection
 
 @section('content')
 @include('dcms.includes.breadcrumb')
@@ -10,8 +10,8 @@
     <div class="col-lg-12 col-md-12 col-xs-12">
         <section class="card">
             <div class="card-body">
-                    @include('dcms.includes.flash-message')  
-                @if(isset($data['branch']))                  
+                    @include('dcms.includes.flash-message')
+                @if(isset($data['branch']))
                     <form class="form-horizontal tasi-form" action="" method="get">
                         <div class="form-group">
                             <label class="col-sm-2 control-label col-lg-2" for="inputSuccess">Select Branch to Sort</label>
@@ -27,11 +27,11 @@
                     </form>
                     <div class="dd" id="nestable">
                         <ol class="dd-list">
-                           
+
                         </ol>
                         <div style="display:" id="nestable-output"></div>
                     </div>
-          
+
                 @endif
             </div>
         </section>
@@ -51,8 +51,8 @@ $(document).ready(function()
                output = list.data('output');
            if (window.JSON) {
                output.val(window.JSON.stringify(list.nestable('serialize')));//, null, 2));
-               // Ajax request data 
-               var dataString = { 
+               // Ajax request data
+               var dataString = {
                  data : $("#nestable-output").val(),
                };
             //    alert(dataString);
@@ -69,8 +69,8 @@ $(document).ready(function()
                            },
                         cache : false,
                         success: function(data){
-                            console.log(data); 
-                       
+                            console.log(data);
+
                         } ,error: function(xhr, status, error) {
                         // alert(error);
                         console.log(xhr.responseText); // this line will save you tons of hours while debugging
@@ -82,7 +82,7 @@ $(document).ready(function()
                   output.val('JSON browser support required for this demo.');
             }
        };
-   
+
        // activate Nestable for list 1
        $('#nestable').nestable({
           group: 1
@@ -90,9 +90,9 @@ $(document).ready(function()
        .on('change', updateOutput);
        // output initial serialised data
        updateOutput($('#nestable').data('output', $('#nestable-output')));
-   
+
    });
-   
+
 
 
     $(document).ready(function() {
@@ -106,20 +106,26 @@ $(document).ready(function()
                     type: "GET",
                     dataType: "json",
                     success:function(data) {
-                        console.log(data);
+                        // console.log(data);
                         // alert(data[0].name);
                         var res='';
                         var txt='';
-                        if(data) {   // DO SOMETHING     
+                        if(data) {   // DO SOMETHING
                             var last_no = data.length;
                             var last_no= last_no-1;
                             // alert(last_no);
                             $.each(data, function(key, value) {
-                               
+                                console.log(value);
                                 res+=
                                 '<li class="dd-item dd3-item" data-id="'+value.id+'" data-unique="'+value.staff_unique_id+'">'+
                                     '<div class="dd-handle dd3-handle"></div>'+
-                                    '<div class="dd3-content">'+value.name+'</div>'+
+                                    '<div class="dd3-content">'+
+                                        '<span id="label_show2">'+value.name+'<span class="span-right">'+
+                                        '<span id="link_show2">Featured:1</span>'+
+                                        '&nbsp;&nbsp;'+
+                                        '<a class="btn btn-warning" id="2" label="Act/Directive" href="'+value.unique_id+'/edit" ><i class="fas fa-pencil-alt"></i></a>'+
+                                        '<a class="btn btn-danger del-button" id="'+value.unique_id+'" ><i class="far fa-trash-alt"></i></a>'+
+                            '       </span></div>'+
                                 '</li>';
                                 if(last_no == key) {
                                     txt+=
@@ -128,7 +134,7 @@ $(document).ready(function()
                                     txt+=
                                     '{"id" :'+value.id+',"unique":"'+value.staff_unique_id+'"},';
                                 }
-                               
+
                             });
                             $('.dd-list').html(res);
                             // $('#nestable-output').html('['+txt+']');
@@ -141,10 +147,44 @@ $(document).ready(function()
                     },
                 });
             }else{
-                
+
             }
         });
     });
+
+    $(document).on("click",".del-button",function() {
+              var x = confirm('Delete this Staff?');
+              var id = $(this).attr('id');
+            //   debugger;
+              var url = id;
+            //   alert(url);
+            $object=$(this);
+              if(x){
+                   $.ajax({
+                  url: url,
+                  type: 'DELETE',
+                  beforeSend: function (xhr) {
+                      var token = $('meta[name="csrf-token"]').attr('content');
+                          if (token) {
+                              return xhr.setRequestHeader('X-CSRF-TOKEN', token);
+                          }
+                      },
+                  data: {
+                      "id": id,
+                  },
+                  success: function(response){
+                    //   debugger;
+                    $($object).parents('li').remove();
+                      console.log(response);
+                    //   alert(response);
+                      alert('Successfully Deleted!!');
+                  },
+                  error: function(xhr, status, error) {
+                        alert(error);
+                      },
+                  });
+              }
+      });
 </script>
 
-@endsection 
+@endsection

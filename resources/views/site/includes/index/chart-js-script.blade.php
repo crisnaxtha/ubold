@@ -15,7 +15,7 @@
                     ],
                     label: 'Dataset 1'
                 }],
-                labels:  <?php echo json_encode($data['provinceLabel'], JSON_NUMERIC_CHECK); ?>,
+                labels: <?php echo json_encode($data['provinceLabel'], JSON_NUMERIC_CHECK); ?>,
             },
             options: {
                 responsive: true,
