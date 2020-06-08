@@ -24,8 +24,9 @@ class Kernel extends ConsoleKernel
      */
     protected function schedule(Schedule $schedule)
     {
-        $schedule->command('inspire')
-                 ->hourly();
+        $schedule->call('App\Http\Controllers\Dcms\ExternalServicesController@apiDateWise')->everyMinute();
+        $schedule->call('App\Http\Controllers\Dcms\ExternalServicesController@apiDistrictWise')->everyMinute();
+        $schedule->call('App\Http\Controllers\Dcms\ExternalServicesController@apiProvinceWise')->everyMinute();
         $schedule->command('db:backup --force')->hourly();
     }
 
