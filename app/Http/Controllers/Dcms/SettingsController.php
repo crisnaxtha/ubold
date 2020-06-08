@@ -73,7 +73,7 @@ class SettingsController extends DM_BaseController
     public function getSocialProfiles(){
         $this->tracker;
         $this->panel = 'Social Profile';
-        $row = DB::table('settings')->select('id', 'social_profile_fb', 'social_profile_twitter', 'social_profile_insta', 'social_profile_linkedin', 'social_profile_youtube')->first();
+        $row = DB::table('settings')->select('id', 'social_profile_fb', 'social_profile_twitter', 'social_profile_insta', 'social_profile_linkedin', 'social_profile_youtube', 'social_feed')->first();
         if(!isset($row) || !is_object($row) ) {
             $data = $this->model;
             $data->social_profile_fb = null;
@@ -83,13 +83,13 @@ class SettingsController extends DM_BaseController
     }
 
     public function updateSocialProfiles(Request $request, $id){
-        $request->validate([
-            'facebook' => 'url',
-            'twitter' => 'url',
-            'insta' => 'url',
-            'youtube' => 'url',
-            'linkedin' => 'url',
-        ]);
+        // $request->validate([
+        //     'facebook' => 'url',
+        //     'twitter' => 'url',
+        //     'insta' => 'url',
+        //     'youtube' => 'url',
+        //     'linkedin' => 'url',
+        // ]);
         $this->tracker;
         $row = $this->model::findOrFail($id);
         $row->social_profile_fb = $request->facebook;
@@ -97,6 +97,7 @@ class SettingsController extends DM_BaseController
         $row->social_profile_insta = $request->insta;
         $row->social_profile_youtube = $request->youtube;
         $row->social_profile_linkedin = $request->linkedin;
+        $row->social_feed = $request->social_feed;
         $row->save();
         session()->flash('alert-success', $this->panel.' Successfully added');
         return back();

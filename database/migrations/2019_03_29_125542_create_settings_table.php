@@ -29,6 +29,7 @@ class CreateSettingsTable extends Migration
             $table->string('social_profile_insta')->nullable();
             $table->string('social_profile_youtube')->nullable();
             $table->string('social_profile_linkedin')->nullable();
+            $table->text('social_feed')->nullable();
             $table->string('contact_title')->nullable();
             $table->string('contact_sub_title')->nullable();
             $table->string('contact_address_1')->nullable();

@@ -6,7 +6,7 @@
         <div class="col-lg-12 col-md-12 col-xs-12">
             <section class="card">
                 <div class="card-body">
-                        @include('dcms.includes.flash-message')                    
+                        @include('dcms.includes.flash-message')
                     <div class=" form">
                         <?php
                             if($row->id)
@@ -16,6 +16,7 @@
                         dm_hinputUpdate('url','insta', "Instagram", $row->social_profile_insta);
                         dm_hinputUpdate('url','youtube', "Youtube", $row->social_profile_youtube);
                         dm_hinputUpdate('url','linkedin', "Linkedin", $row->social_profile_linkedin);
+                        dm_htextareaUpdate('social_feed', "Social Feed", $row->social_feed);
                         dm_hsubmit('Submit', URL::route($_base_route.'.index'), 'Cancel');
                         dm_closeform();
                         ?>
