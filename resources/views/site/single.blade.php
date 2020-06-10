@@ -27,9 +27,9 @@
                             <div class="share-box">
                             <ul>
                                     @php $current_url = url()->current(); @endphp
-                                <li><a href="https://twitter.com/share?url={{$current_url}}" class="social-color-1"><i class="fa fa-twitter" aria-hidden="true"></i></a></li>
-                                <li><a href="http://www.facebook.com/sharer.php?u={{$current_url}}" class="social-color-2"><i class="fa fa-facebook" aria-hidden="true"></i></a></li>
-                                <li><a href="https://plus.google.com/share?url={{$current_url}}" class="social-color-3"><i class="fa fa-google-plus" aria-hidden="true"></i></a></li>
+                                <li><a href="https://twitter.com/share?url={{$current_url}}" class="social-color-1" target="_blank"><i class="fa fa-twitter" aria-hidden="true"></i></a></li>
+                                <li><a href="http://www.facebook.com/sharer.php?u={{$current_url}}" class="social-color-2" target="_blank"><i class="fa fa-facebook" aria-hidden="true"></i></a></li>
+                                <li><a href="https://plus.google.com/share?url={{$current_url}}" class="social-color-3" target="_blank"><i class="fa fa-google-plus" aria-hidden="true"></i></a></li>
                                 {{-- <li><a href="javascript:void(0)" class="social-color-3"><i class="fa fa-linkedin" aria-hidden="true"></i></a></li>
                                 <li><a href="javascript:void(0)" class="social-color-4"><i class="fa fa-instagram" aria-hidden="true"></i></a></li> --}}
                             </ul>
@@ -71,8 +71,8 @@
 
       <form>
         <div class="row">
-            <div class="col-lg-3 col-md-4">
-                <b>Rate This:</b>
+            <div class="col-md-4">
+                <b>{{__('Please Rate')}}:</b>
                 <div id="smileys">
                 <input type="radio" name="reaction" data-value="sad" data-url="{{ URL::route('site.reaction') }}" data-id="{{ $data['row']->unique_id }}" class="sad" id="reaction">
                 <input type="radio" name="reaction" data-value="neutral" data-url="{{ URL::route('site.reaction') }}" data-id="{{ $data['row']->unique_id }}" class="neutral" id="reaction">
@@ -82,12 +82,12 @@
             </div>
             <form action="{{ URL::route('site.comment') }}" method="POST" enctype="multipart/form-data">
                 @csrf
-                <div class="col-lg-7 col-md-5">
-                    <input type="text" class="form-control" name="comment" placeholder="Your Comment" id="u_comment"  />
+                <div class="col-md-4">
+            <input type="text" class="form-control" name="comment" placeholder="{{__('Your Comment')}}" id="u_comment"  />
                     <input type="hidden" name="unique_id" value="{{ $data['row']->unique_id }}" id="u_unique_id">
                 </div>
                 <div class="col-lg-2 col-md-3">
-                    <button type="submit" id="submit" class="btn btn-success" data-url="{{ URL::route('site.comment') }}">Submit</button>
+                    <button type="submit" id="submit" class="btn btn-success" data-url="{{ URL::route('site.comment') }}">{{__('Submit')}}</button>
                 </div>
             </form>
             <div class="clearfix"></div>
@@ -97,14 +97,14 @@
         <div class="clearfix"></div>
       </form>
 
-                </div>
+    </div>
 
                 <div class="col-lg-3 col-md-3 page_sidebar">
-                    @include('site.includes.sidebar.widget-1')
+                    @include('site.includes.sidebar.widget-5')
                     @include('site.includes.sidebar.widget-2')
                     @include('site.includes.sidebar.widget-3')
                     @include('site.includes.sidebar.widget-4')
-                    @include('site.includes.sidebar.widget-5')
+                    @include('site.includes.sidebar.widget-1')
 
                 </div>
               </div>

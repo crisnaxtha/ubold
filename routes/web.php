@@ -144,6 +144,9 @@ Route::group(['prefix' => 'dashboard', 'as'=> 'dcms.', 'namespace'=>'Dcms', 'mid
         Route::get('delete_item',                            ['as'=>'deleted_item',              'uses'=>'PostsController@deletedPage']);
         Route::put('restore/{post}',                         ['as'=>'restore',              'uses'=>'PostsController@restore']);
         Route::delete('permanent_delete/{post}',             ['as'=>'delete',              'uses'=>'PostsController@permanentDelete']);
+           /**Feature Page */
+           Route::get('featured',                                ['as'=>'featured',            'uses'=>'PostsController@featuredPage']);
+           Route::post('order',                                ['as'=>'order',            'uses'=>'PostsController@storeOrder']);
 
     });
     /**

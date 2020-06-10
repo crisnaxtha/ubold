@@ -1,6 +1,6 @@
 @if(isset($data['category_first']))
 <div class="widget-box">
-    <h3> <i class="fa fa-newspaper-o">&nbsp;</i>{{ $data['category_first']->name }}</h3>
+    <h3> <i class="fa fa-newspaper-o">&nbsp;</i>{{ $data['category_first']->cat_name }}</h3>
     <div class="side-widget">
         <div class="owl-carousel info-carousel3">
             @if(count($data['category_first_post']))

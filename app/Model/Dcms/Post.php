@@ -44,7 +44,7 @@ class Post extends DM_BaseModel
         $this->folder_path_file = getcwd() . DIRECTORY_SEPARATOR . 'upload_file' . DIRECTORY_SEPARATOR . 'files' . DIRECTORY_SEPARATOR . $this->folder . DIRECTORY_SEPARATOR;
     }
 
-    public function storeData(Request $request, $category, $type, $rows, $image, $tag, $status, $file_title, $files){
+    public function storeData(Request $request, $category, $type, $rows, $image, $tag, $status, $file_title, $files, $featured){
         $unique_id = uniqid(Auth::user()->id.'_');
         // for thumbnail
         if($request->hasFile('image')){
@@ -82,6 +82,7 @@ class Post extends DM_BaseModel
                 'content' => $row['description'],
                 'excerpt' => $row['excerpt'],
                 'status' => $status,
+                'featured' => $featured,
                 'tag' => $tag,
                 'type' => $type,
                 'created_at' => new DateTime(),
@@ -104,7 +105,7 @@ class Post extends DM_BaseModel
         }
     }
 
-    public function updateData(Request $request, $category, $type, $rows, $image, $tag, $status, $file_title, $files, $unique_id){
+    public function updateData(Request $request, $category, $type, $rows, $image, $tag, $status, $file_title, $files, $unique_id, $featured){
         // for thumbnail
         if($request->hasFile('image')){
             $post_thumbnail = parent::uploadImage($request, $this->folder_path_image ,$this->prefix_path_image,'image','','');
@@ -145,6 +146,7 @@ class Post extends DM_BaseModel
             $post->content = $row['description'];
             $post->excerpt = $row['excerpt'];
             $post->status = $status;
+            $post->featured = $featured;
             $post->tag = $tag;
             $post->type = $type;
             $post->updated_at = date('Y-m-d');
@@ -177,4 +179,49 @@ class Post extends DM_BaseModel
     public function postCategory() {
         return $this->belongsTo(Category::class, 'category_id');
     }
+
+      /** Page Tree */
+      public function pageTree($lang_id) {
+        $data['rows'] =  Post::where('deleted_at', '=', null)->where('featured', '=', 1)->where('status', '=', 1)->where('type', '=', 'page')->where('lang_id', '=', $lang_id)->orderBy('order')->get();
+        $ref = [];
+        $items = [];
+        foreach($data['rows'] as $row){
+            $thisRef = &$ref[$row->id];
+            $thisRef['title'] = $row->title;
+            $thisRef['unique_id'] = $row->unique_id;
+            $thisRef['id'] = $row->id;
+            $items[$row->id] = &$thisRef;
+        }
+        return $items;
+    }
+
+     /**
+     * Build Category | Admin Panel
+     */
+    public static function buildPage($items, $class = 'dd-list') {
+        $html = "<ol class=\"".$class."\" id=\"menu-id\">";
+        foreach($items as $key=>$value) {
+            $html.= '<li class="dd-item dd3-item" data-id="'.$value['id'].'">
+                        <div class="dd-handle dd3-handle"></div>
+                        <div class="dd3-content"><span id="label_show'.$value['id'].'">'.$value['title'].'</span>
+                            <span class="span-right">
+                                &nbsp;&nbsp;
+                                <a class="btn btn-warning" id="'.$value['id'].'" label="'.$value['title'].'" href="\dashboard/page/'. $value['unique_id'].'/edit" ><i class="fa fa-pencil"></i></a>
+                                <a class="btn btn-danger del-button" id="'.$value['unique_id'].'" ><i class="fa fa-trash-o"></i></a>
+                            </span>
+                        </div>';
+            if(array_key_exists('child',$value)) {
+                $html .= self::buildPage($value['child'],'child');
+            }
+                $html .= "</li>";
+        }
+        $html .= "</ol>";
+        return $html;
+    }
+
+    // Getter for the HTML menu builder | Admin Panel
+	public function getHTML($items)
+	{
+		return $this->buildPage($items);
+	}
 }

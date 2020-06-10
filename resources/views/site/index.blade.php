@@ -9,8 +9,8 @@
                 @include('site.includes.index.index-stat')
                 @include('site.includes.index.index-chart')
                 @include('site.includes.index.index-imp-link')
-                @include('site.includes.index.index-tab')
                 @include('site.includes.index.index-video')
+                @include('site.includes.index.index-tab')
             </div>
             <div class="col-lg-3 col-md-4">
                 @include('site.includes.index.index-member')

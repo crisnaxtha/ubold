@@ -70,7 +70,7 @@ class SiteController extends DM_BaseController
             $data['cat_album_'.$row->slug] = $row->id;
         }
 
-        $data['about_us'] = $this->dm_post::getSinglePage('1_5d70d58478f88', $this->lang_id);
+        $data['about_us'] = Post::where('type', '=', 'page')->where('status', '=', 1)->where('featured', '=', 1)->where('lang_id', '=', $this->lang_id)->first();
         $data['video'] = Blog::where('status', '=', 1)->get();
         $data['popup'] = Popup::where('status', '=', 1)->where('lang_id', '=', $this->lang_id)->get();
 
@@ -159,7 +159,13 @@ class SiteController extends DM_BaseController
         $data['menu'] = Menu::tree($this->lang_id);
         $data['row'] = $this->dm_post::getSinglePost($post_unique_id, $this->lang_id);
         $data['file'] = $this->dm_post::getFile($post_unique_id);
+
         $data['recent_post'] = DB::table('posts')->where('type', '=', 'post')->where('status', '=', 1)->where('lang_id', '=', $this->lang_id)->take(5)->get();
+        //Api Data
+        $data['date_api'] = DB::table('date_data')->get();
+        $data['date_data'] = $this->dm_post::arrayGroupBy($data['date_api'], 'flag');
+        //Album
+        $data['album'] = $this->dm_post::joinAlbum($this->lang_id);
         return view(parent::loadView($this->view_path.'.single'), compact('data'));
     }
     /** Show Single Page */
@@ -175,6 +181,11 @@ class SiteController extends DM_BaseController
         $data['row'] = $this->dm_post::getSinglePage($unique_id, $this->lang_id);
         $data['file'] = $this->dm_post::getFile($unique_id);
         $data['recent_post'] = DB::table('posts')->where('type', '=', 'post')->where('status', '=', 1)->where('lang_id', '=', $this->lang_id)->take(5)->get();
+        //Api Data
+        $data['date_api'] = DB::table('date_data')->get();
+        $data['date_data'] = $this->dm_post::arrayGroupBy($data['date_api'], 'flag');
+        //Album
+        $data['album'] = $this->dm_post::joinAlbum($this->lang_id);
         return view(parent::loadView($this->view_path.'.single'), compact('data'));
     }
 
@@ -226,6 +237,9 @@ class SiteController extends DM_BaseController
         $data['menu'] = Menu::tree($this->lang_id);
         $data['rows'] = $this->dm_post::getCategories();
         $data['recent_post'] = DB::table('posts')->where('type', '=', 'post')->where('status', '=', 1)->where('lang_id', '=', $this->lang_id)->take(5)->get();
+        //Api Data
+        $data['date_api'] = DB::table('date_data')->get();
+        $data['date_data'] = $this->dm_post::arrayGroupBy($data['date_api'], 'flag');
         return view(parent::loadView($this->view_path.'.category'), compact('data'));
     }
     /**
@@ -285,7 +299,7 @@ class SiteController extends DM_BaseController
         $data['rows'] = Post::where('title', 'LIKE', '%'. $data['query'].'%')
                         ->orWhere('content', 'LIKE', '%'. $data['query'].'%')
                         ->orWhere('tag', 'LIKE', '%'. $data['query'].'%')
-                        ->orWhere('author', 'LIKE', '%'. $data['query'].'%')->get();
+                        ->orWhere('author', 'LIKE', '%'. $data['query'].'%')->paginate(9);
         return view(parent::loadView($this->view_path.'.search'), compact('data'));
     }
 

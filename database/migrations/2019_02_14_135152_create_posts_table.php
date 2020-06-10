@@ -30,6 +30,7 @@ class CreatePostsTable extends Migration
             $table->string('tag')->nullable();
             $table->string('author')->nullable();
             $table->string('url')->nullable();
+            $table->integer('order')->nullable();
             $table->unsignedInteger('visit_no')->default(0);
             $table->timestamps();
             $table->softDeletes();

@@ -50,8 +50,8 @@
     <div class="footer-bottom">
       <div class="container">
         <div class="row">
-          <div class="col-md-7"> <span>Copyrights © <a href="index.html">NGOsite.com</a> - The NGO Evolution. All rights reserved.</span> </div>
-          <div class="col-md-5 text-right"> <span>Powered by <a href=" http://tejobindu.com/" target="_blank">TBS</a></span> </div>
+          <div class="col-md-7"> <span>Copyright © {{date('Y')}} Office of the Company Registrar. All Rights Reserved.</span> </div>
+          {{-- <div class="col-md-5 text-right"> <span>Powered by <a href=" http://tejobindu.com/" target="_blank">TBS</a></span> </div> --}}
           <div class="clearfix"></div>
         </div>
       </div>

@@ -1,6 +1,6 @@
 @if(isset($data['album']))
 <div class="widget-box">
-    <h3> <i class="fa fa-camera" aria-hidden="true">&nbsp;</i>Album</h3>
+    <h3> <i class="fa fa-camera" aria-hidden="true">&nbsp;</i>{{__('Album')}}</h3>
     <div class="side-widget">
         <div class="row">
             @foreach($data['album'] as $row)
@@ -14,7 +14,7 @@
            @endforeach
         </div>
         <br>
-        <a style="border:1px solid #e5e5e5;padding: 10px;" href="{{ route('site.album' )}}">सबै हेर्नुहोस  &nbsp;</a>
+        <a style="border:1px solid #e5e5e5;padding: 10px;" href="{{ route('site.album' )}}">{{__('View All') }}&nbsp;</a>
         </br>
     </div>
 </div>

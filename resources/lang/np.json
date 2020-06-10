@@ -1,9 +1,15 @@
 {
+    "All":"सबै",
+    "Company":"कम्पनी",
+    "Related":"समबन्धी",
+    "View All":"सबै हेर्नुहोस",
+    "Submit":"बुझाउनुहोस्",
+    "Your Comment":"तपाईंको टिप्पणी",
 
     "Dashboard":"ड्याशबोर्ड",
     "Posts": "पोस्टहरू",
     "Categories":"पोस्ट वर्ग",
-    "Pages": "पोस्ट",
+    "Pages": "पृष्ठहरु",
     "Sliders": "स्लाइडर",
     "Links" : "लिङ्क",
     "Photo Album": "फोटो एल्बम",
@@ -42,9 +48,40 @@
 
     "Lorem ipsum dolor sit amet": "नेपाली डमी लेखाई",
 
-    "Gallery Album":"ग्यालरी  एल्बम",
+    "One day ago":"एक दिन अघि",
+    "One week ago":"एक हप्ता अघि",
+    "One month ago":"एक महिना अघि",
+    "One year ago":"एक वर्ष अगाडी",
+    "Two year ago":"दुई वर्ष अघि",
 
-    "All Videos":"सबै भिडियोहरू"
+    "Private":"प्रा.ली",
+    "Public":"प.ली",
+    "Non-Profit Distributing":"मु.वि.न",
+    "Foreign":"बि.का",
+
+    "Company Related Data in Graphical Format":"कम्पन्नी सम्बन्धी डाटा ग्राफमा हेर्नुहोस ।",
+    "Province":"प्रदेशहरू",
+    "District":"जिल्ला",
+
+    "Province 1":"प्रदेश नं १",
+    "Province 2":"प्रदेश नं २",
+    "Bagmati Province":"बागमती प्रदेश",
+    "Gandaki Province":"गण्डकी प्रदेश",
+    "Province 5":"प्रदेश नं ५",
+    "Karnali Province":"कर्णाली प्रदेश",
+    "Sudurpaschim Province":"सुदूरपश्चिम प्रदेश",
+    "":"",
+
+    "Important Links":"महत्वपूर्ण लिंकहरू",
+    "eServices":"अनलाईन सेवा",
+
+    "Gallery":"ग्यालरी",
+    "Album":"एल्बम",
+    "Videos":"भिडियोहरू",
+
+    "Please Rate":"रेटीङ गरनुहोस",
+    "Category List": "वर्ग सूची"
+
 
 
 }

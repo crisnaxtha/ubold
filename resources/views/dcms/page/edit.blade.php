@@ -123,6 +123,7 @@
                 <?php
                 dm_textareaUpdate('tag', 'Tags(*)', $data['single']->tag, '');
                 dm_checkbox('checkbox', 'status', 'Publish', $data['single']->status);
+                dm_checkbox('checkbox', 'featured', 'Featured', $data['single']->featured);
                 ?>
             </div>
         </div>

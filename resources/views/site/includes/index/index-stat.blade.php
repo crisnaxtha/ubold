@@ -4,13 +4,13 @@
         @foreach($data['date_data'] as $key => $rows)
         <div class="item">
             <div class="card">
-                <div class="card-header"><i class="fa fa-clock-o">&nbsp;</i>{{ ucfirst(str_replace("_"," ",$key)) }} Ago</div>
+                <div class="card-header"><i class="fa fa-clock-o">&nbsp;</i>{{ __(ucfirst(str_replace("_"," ",$key)).' '.'ago') }}</div>
                 <div class="card-body">
                 <div class="row">
                     @foreach($rows as $row)
                     @if(isset($row['data']))
                     <div class="col-md-6">
-                    <span>{{ $row['title'] }}:</span> <span class="counter">{{ $row['data'] }}</span>
+                    <span>{{ __($row['title']) }}:</span> <span class="counter">{{ $row['data'] }}</span>
                     </div>
                     @endif
                     @endforeach

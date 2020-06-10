@@ -12,6 +12,7 @@ use Illuminate\Support\Str;
 use Auth;
 use DateTime;
 use App\Model\Dcms\Tracker;
+use Response;
 
 class PostsController extends DM_BaseController
 {
@@ -79,7 +80,7 @@ class PostsController extends DM_BaseController
         $this->panel = 'Pages';
         $this->base_route = 'dcms.page';
         $this->view_path = 'dcms.page';
-        if($this->model->storeData($request, $request->category, $request->type, $request->rows, $request->image, $request->tag, $request->status, $request->file_title, $request->file)){
+        if($this->model->storeData($request, $request->category, $request->type, $request->rows, $request->image, $request->tag, $request->status, $request->file_title, $request->file, $request->featured)){
             session()->flash('alert-success', $this->panel.' Successfully Added');
         }
         else {
@@ -115,7 +116,7 @@ class PostsController extends DM_BaseController
         $this->panel = 'Pages';
         $this->base_route = 'dcms.page';
         $this->view_path = 'dcms.page';
-        if($this->model->updateData($request, $request->category, $request->type, $request->rows, $request->image, $request->tag, $request->status, $request->file_title, $request->file, $unique_id)){
+        if($this->model->updateData($request, $request->category, $request->type, $request->rows, $request->image, $request->tag, $request->status, $request->file_title, $request->file, $unique_id, $request->featured)){
             session()->flash('alert-success', $this->panel.' Successfully updated');
         }
         else {
@@ -148,7 +149,38 @@ class PostsController extends DM_BaseController
         $this->view_path = 'dcms.page';
         $data['rows'] = Post::where('deleted_at', '!=', null)->where('type', '=', 'page')->where('lang_id', '=', $this->lang_id)->get();
         return view(parent::loadView($this->view_path.'.deleted'), compact('data'));
+    }
 
+    public function featuredPage() {
+        $this->tracker;
+        $this->panel = 'Pages';
+        $this->base_route = 'dcms.page';
+        $this->view_path = 'dcms.page';
+        // $data['rows'] = Post::where('deleted_at', '=', null)->where('featured', '=', 1)->where('type', '=', 'page')->where('lang_id', '=', $this->lang_id)->get();
+        $items = $this->model->pageTree($this->lang_id);
+        $page = $this->model->getHtml($items);
+        return view(parent::loadView($this->view_path.'.featured'), compact('page'));
+    }
+
+    /** Store the order from ajax */
+    public function storeOrder(Request $request){
+        if($request->ajax()) {
+            $data = json_decode($_POST['data']);
+            $readbleArray = parent::ParseJsonArray($data);
+            $i = 0;
+            foreach( $readbleArray as $row) {
+                $i++;
+                // $menu = $this->model::where('unique_id', '=', $row['unique'])->get();
+                $page = $this->model::findOrFail($row['id']);
+                $page_unique = $this->model::where('unique_id', '=', $page->unique_id)->get();
+                foreach($page_unique as $stf) {
+                    $staff = $this->model::findOrFail($stf->id);
+                    $staff->order = $i;
+                    $staff->save();
+                }
+            }
+            return var_dump(Response::json($readbleArray));
+        }
     }
 
     /** ================================POST==================================================== */
@@ -189,7 +221,7 @@ class PostsController extends DM_BaseController
         $this->panel = 'Posts';
         $this->base_route = 'dcms.post';
         $this->view_path = 'dcms.post';
-        if($this->model->storeData($request, $request->category, $request->type, $request->rows, $request->image, $request->tag, $request->status, $request->file_title, $request->file)){
+        if($this->model->storeData($request, $request->category, $request->type, $request->rows, $request->image, $request->tag, $request->status, $request->file_title, $request->file, $request->featured)){
             session()->flash('alert-success', $this->panel.' Successfully Added');
         }
         else {
@@ -227,7 +259,7 @@ class PostsController extends DM_BaseController
         $this->panel = 'Posts';
         $this->base_route = 'dcms.post';
         $this->view_path = 'dcms.post';
-        if($this->model->updateData($request, $request->category, $request->type, $request->rows, $request->image, $request->tag, $request->status, $request->file_title, $request->file, $unique_id)){
+        if($this->model->updateData($request, $request->category, $request->type, $request->rows, $request->image, $request->tag, $request->status, $request->file_title, $request->file, $unique_id, $request->featured)){
             session()->flash('alert-success', $this->panel.' Successfully updated');
         }
         else {

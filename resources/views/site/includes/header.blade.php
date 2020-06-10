@@ -15,11 +15,15 @@
                 <span>{{ $data['common']->header_first_title }}</span>
                 @endif
                 @if(isset($data['common']->header_second_title))
-                 <b>{{ $data['common']->header_second_title }}</b>
+                 <span>{{ $data['common']->header_second_title }}</span>
                 @endif
                 @if(isset($data['common']->header_third_title))
-                 <span>{{ $data['common']->header_third_title}}</span> </div>
+                 <b>{{ $data['common']->header_third_title}}</b>
                 @endif
+                @if(isset($data['common']->header_fourth_title))
+                <span>{{ $data['common']->header_fourth_title }}</span>
+               @endif
+            </div>
             <div class="clearfix"></div>
           </div>
           </a> </div>
@@ -28,7 +32,7 @@
             <form class="navbar-form" role="search" action="{{ Route('site.search')}}" method="POST">
                     {{ csrf_field() }}
               <div class="input-group">
-                <input class="form-control" placeholder="Search" name="keyword" id="srch-term" type="text" value="@if(isset($data['query'])) {{ $data['query'] }} @endif">
+                <input class="form-control" placeholder="Search" name="keyword" id="srch-term" type="text" value="@if(isset($data['query'])) {{ $data['query'] }} @endif" required>
                 <div class="input-group-append">
                     <button class="btn btn-info" type="submit"><i class="fa fa-search"></i></button>
                     {{-- <a href="javascript:void(0)" class="src-drop" title="Advance Search">

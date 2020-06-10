@@ -1,7 +1,7 @@
 @if(isset($data['imp_link']))
 <div class="main-link card">
     <div class="card-header">
-        <h4>{{ __('Important Links') }}</h4>
+        <h4>{{ __('eServices') }}</h4>
     </div>
     <div class="card-body">
         <ul class="useful-link">

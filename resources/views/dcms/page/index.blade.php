@@ -17,6 +17,7 @@
             </p> --}}
 
             @include('dcms.includes.buttons.button-create')
+            @include('dcms.page.includes.buttons.featured')
             <div class="btn-group float-right">
                     @include('dcms.includes.buttons.button-recycle')
             </div>

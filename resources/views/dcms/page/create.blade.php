@@ -73,6 +73,7 @@
                 <?php
                 dm_textarea('tag', 'Tags(*)', 'tag', '');
                 dm_checkbox('checkbox', 'status', 'Publish');
+                dm_checkbox('checkbox', 'featured', 'Featured');
                 ?>
             </div>
         </div>

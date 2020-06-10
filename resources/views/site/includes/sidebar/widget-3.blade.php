@@ -1,8 +1,11 @@
 @if(isset($data['category']))
 @if(count($data['category']))
 <div class="widget-box">
-    <h3><i class="fa fa-external-link-square">&nbsp;</i> Category List
-                    <a href="#">View All</a> </h3>
+    <h3><i class="fa fa-external-link-square">&nbsp;</i> {{__('Category List')}}
+        @if(Route::has('site.category'))
+        <a href="{{ route('site.category') }}">{{__('View All')}}</a>
+        @endif
+    </h3>
     <div class="archive-widget">
         <ul>
             @foreach($data['category'] as $row)
@@ -11,7 +14,7 @@
                 <a href="{{ route('site.category.show', ['id' => $row->id]) }}">
                     <span>
                         <i class="fa fa-bookmark" aria-hidden="true"></i>
-                    </span>{{ $row->name }}
+                    </span>{{ $row->cat_name }}
                 </a>
                 @endif
             </li>

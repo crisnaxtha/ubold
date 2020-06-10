@@ -1,10 +1,10 @@
 @if(count($data['album_category']) != 0)
 <div class="gallery">
     <div class="container">
-       <h4>{{ __('Gallery Album') }}
+       <h4>{{ __('Album') }}
             <span class="pull-right">
             @if(Route::has('site.album'))
-            <a href="{{ Route('site.album') }}" target="_blank" class="btn btn-info btn-sm more_btn">View All &nbsp;<i class="fa fa-angle-double-right"></i></a>
+            <a href="{{ Route('site.album') }}" target="_blank" class="btn btn-info btn-sm more_btn">{{__('View All')}} &nbsp;<i class="fa fa-angle-double-right"></i></a>
             @endif
             </span>
        </h4>
