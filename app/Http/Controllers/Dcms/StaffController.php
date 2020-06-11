@@ -197,7 +197,7 @@ class StaffController extends DM_BaseController
                 $menu = Staff::where('unique_id', '=', $row['unique'])->get();
                 foreach($menu as $stf) {
                     $staff = Staff::findOrFail($stf->id);
-                    $staff->feature_order = $i;
+                    $staff->featured_order = $i;
                     $staff->save();
                 }
             }

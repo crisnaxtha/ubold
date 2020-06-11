@@ -30,7 +30,7 @@
                     </div>
                  </div>
                  <div class="col-md-1 pad-left-0">
-                    <button type="submit" class="btn btn-primary"><i class="fa fa-search"></i></button>
+                    <button type="button" class="btn btn-primary"><i class="fa fa-search"></i></button>
                  </div>
                  <div class="clearfix"></div>
               </div>

@@ -1,6 +1,10 @@
 @if(isset($data['album']))
 <div class="widget-box">
-    <h3> <i class="fa fa-camera" aria-hidden="true">&nbsp;</i>{{__('Album')}}</h3>
+    <h3> <i class="fa fa-camera" aria-hidden="true">&nbsp;</i>{{__('Album')}}
+        @if(Route::has('site.album'))
+        <a href="{{ route('site.album' )}}">{{__('View All')}}</a>
+        @endif
+    </h3>
     <div class="side-widget">
         <div class="row">
             @foreach($data['album'] as $row)
@@ -13,9 +17,6 @@
             </div>
            @endforeach
         </div>
-        <br>
-        <a style="border:1px solid #e5e5e5;padding: 10px;" href="{{ route('site.album' )}}">{{__('View All') }}&nbsp;</a>
-        </br>
     </div>
 </div>
 @endif

@@ -1359,7 +1359,7 @@ header {
 	background: -webkit-linear-gradient(45deg, #ffffff 0%, #ffffff 50%, #fafafa 100%);
 	background: linear-gradient(45deg, #ffffff 0%, #ffffff 50%, #fafafa 100%);
 	filter: progid:DXImageTransform.Microsoft.gradient( startColorstr='#ffffff', endColorstr='#fafafa', GradientType=1);
-	background: url(../images/topbg.png) no-repeat bottom right, url(../images/visitnepal2020.jpg) #fff no-repeat bottom right !important;
+	background: url(../images/topbg.png) no-repeat bottom right,  #fff no-repeat bottom right !important;
 	min-height: 114px !important;
 }
 
@@ -1464,7 +1464,7 @@ img {
 }
 
 .right-box ul li img {
-	max-height: 20px;
+	max-height: 10px;
 	max-width: 100%;
 	vertical-align: middle;
 }
@@ -1808,7 +1808,8 @@ img {
 }
 
 .item-inner .card-body {
-	padding: 1rem;
+    padding: 1rem;
+    /* background-color: #888; */
 }
 
 .item-inner .card-body p {
@@ -2176,7 +2177,7 @@ input[type=time] {
 }
 
 .inner_banner {
-	height: 50vh;
+	height: 30vh;
 	margin-top: 5.6ems;
 	background-attachment: fixed;
 	position: relative;
@@ -2789,7 +2790,7 @@ input[type=time] {
 }
 
 .top_sec.sticky .logo_sec img {
-	max-height: 60px;
+	max-height: 80px;
 }
 
 .top_sec.sticky .logo_text span {

@@ -13,6 +13,7 @@ use App\Model\Dcms\AlbumCategory;
 use App\Model\Dcms\Album;
 use Session;
 use App;
+use App\Model\Dcms\Banner;
 use App\Model\Dcms\Staff;
 use Auth;
 use Monolog\Handler\NullHandler;
@@ -47,6 +48,19 @@ class DM_Post extends Model{
                 ->where('sliders_name.lang_id', '=', $lang_id)
                 ->select('sliders.*', 'sliders_name.lang_id', 'sliders_name.name as slider_name')
                 ->get();
+    }
+
+    /**
+    *to get all the album file using joint post with file
+     *
+     */
+    public static function joinAlbumCategoryName($lang_id, $id) {
+        return DB::table('album_categories')
+                ->join('album_categories_name', 'album_categories.id', '=', 'album_categories_name.album_category_id')
+                ->where('album_categories_name.lang_id', '=', $lang_id)
+                ->where('album_categories.id', '=', $id)
+                ->select('album_categories.*', 'album_categories_name.lang_id', 'album_categories_name.name as album_cat_name')
+                ->first();
     }
 
     /**
@@ -248,5 +262,10 @@ class DM_Post extends Model{
         $data =  Staff::where('branch_id', '=', $branch_id)->where('lang_id', '=', $lang_id)->paginate($number);
         $staff = $data->toArray();
         return Self::arrayGroupBy(json_encode($staff['data']), 'level');
+    }
+
+    public static function getBannerImageBaseOnType($type) {
+        $data = Banner::where('type', '=', $type)->first();
+        return $data;
     }
 }

@@ -21,7 +21,7 @@
                         <div class="card-header">
                             <div class="row">
                                 <div class="col-lg-12 col-md-12">
-                                    <h4>&nbsp; <i class="fa fa-photo">&nbsp;</i>Album</h4>
+                                    <h4>&nbsp; <i class="fa fa-photo">&nbsp;</i>{{__('Album')}}</h4>
                                 </div>
                                 <div class="clearfix"></div>
                             </div>
@@ -31,7 +31,7 @@
                             <div class="row">
                                 @foreach($data['album'] as $row)
                                 @if(Route::has('site.album.show'))
-                                <div class="col-md-4 col-sm-6">
+                                <div class="col-md-3 col-sm-6">
                                     <div class="item-inner card">
                                         <figure>
                                             <a href="{{ route('site.album.show', ['id'=> $row->id ]) }}">
@@ -41,7 +41,7 @@
                                                 <img src="{{ asset('assets/site/assets/images/gallery.png')}}" class="img-fluid" alt="{{ $row->title }}">
                                                 @endif
                                             </a>
-                                            <a href="{{ route('site.album.show', ['id'=> $row->id ]) }}" class="btn btn-sm btn-danger catagory_link">Business</a>
+                                            <a href="{{ route('site.album.show', ['id'=> $row->id ]) }}" class="btn btn-sm btn-danger catagory_link">{{ dm_albumCategoryName($data['lang_id'], $row->album_category_id)->album_cat_name }}</a>
                                         </figure>
                                         <div class="card-body">
                                             <a href="{{ route('site.album.show', ['id'=> $row->id ]) }}">

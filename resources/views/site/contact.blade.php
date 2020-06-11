@@ -22,7 +22,8 @@
 
               <div class="mapouter wow fadeInUp" data-wow-duration="1s" data-wow-delay=".2s">
                 <div class="gmap_canvas location_map">
-                  <iframe width="100%" height="380" id="gmap_canvas" src="https://maps.google.com/maps?q=Babar%20Mahal&t=&z=13&ie=UTF8&iwloc=&output=embed" frameborder="0" scrolling="no" marginheight="0" marginwidth="0"></iframe>
+                    {!! $all_view['setting']->contact_map !!}
+                  {{-- <iframe width="100%" height="380" id="gmap_canvas" src="https://maps.google.com/maps?q=Babar%20Mahal&t=&z=13&ie=UTF8&iwloc=&output=embed" frameborder="0" scrolling="no" marginheight="0" marginwidth="0"></iframe> --}}
                 </div>
               </div>
 

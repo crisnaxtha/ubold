@@ -4,13 +4,13 @@
        <h4>{{ __('Album') }}
             <span class="pull-right">
             @if(Route::has('site.album'))
-            <a href="{{ Route('site.album') }}" target="_blank" class="btn btn-info btn-sm more_btn">{{__('View All')}} &nbsp;<i class="fa fa-angle-double-right"></i></a>
+            <a href="{{ Route('site.album') }}" class="btn btn-info btn-sm more_btn">{{__('View All')}} &nbsp;<i class="fa fa-angle-double-right"></i></a>
             @endif
             </span>
        </h4>
        <div class="row">
             @foreach($data['album_category'] as $row)
-            <div class="col-md-4">
+            <div class="col-md-3">
                 <div class="owl-carousel gallery-carousel">
                     @foreach($data['cat_album_photo_'.$row->slug] as $album)
                     <div class="item">

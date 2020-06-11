@@ -7,7 +7,7 @@
           <div class="row">
             <div class="col-lg-2 col-md-3 pad-right-0">
             @if(isset($data['common']->logo))
-                <img src="{{ asset($data['common']->logo) }}" alt="Main Logo" height="90" width="100"/>
+                <img src="{{ asset($data['common']->logo) }}" alt="Main Logo" height="90" width="90"/>
             @endif
              </div>
             <div class="col-lg-10 col-md-9 text-left logo_text">

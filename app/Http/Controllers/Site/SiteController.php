@@ -127,6 +127,7 @@ class SiteController extends DM_BaseController
         $data['common'] = Common::where('lang_id', '=', $this->lang_id)->first();
 
         $data['menu'] = Menu::tree($this->lang_id);
+        $data['banner'] = DM_Post::getBannerImageBaseOnType('contact');
         return view(parent::loadView($this->view_path.'.contact'), compact('data'));
     }
     /** Store Message From Contact Us */
@@ -150,7 +151,8 @@ class SiteController extends DM_BaseController
     //to show post
     public function showPost($post_unique_id) {
         $this->tracker;
-        $data['banner'] = Banner::where('type', '=', 'post')->first();
+        $data['banner'] = DM_Post::getBannerImageBaseOnType('post');
+
         $data['common'] = Common::where('lang_id', '=', $this->lang_id)->first();
         $data['imp_link'] = Link::where('status', '=', 1)->where('lang_id', '=', $this->lang_id)->get();
         $data['category'] = $this->dm_post::getCategoryList($this->lang_id);
@@ -171,7 +173,8 @@ class SiteController extends DM_BaseController
     /** Show Single Page */
     public function showPage($unique_id){
         $this->tracker;
-        $data['banner'] = Banner::where('type', '=', 'page')->first();
+        $data['banner'] = DM_Post::getBannerImageBaseOnType('page');
+
         $data['common'] = Common::where('lang_id', '=', $this->lang_id)->first();
         $data['menu'] = Menu::tree($this->lang_id);
         $data['imp_link'] = Link::where('status', '=', 1)->where('lang_id', '=', $this->lang_id)->get();
@@ -192,7 +195,7 @@ class SiteController extends DM_BaseController
     //to show post category with post archive
     public function showCategoryPost($category_id) {
         $this->tracker;
-        $data['banner'] = Banner::where('type', '=', 'category')->first();
+        $data['banner'] = DM_Post::getBannerImageBaseOnType('category');
 
         $data['common'] = Common::where('lang_id', '=', $this->lang_id)->first();
         $data['menu'] = Menu::tree($this->lang_id);
@@ -202,6 +205,10 @@ class SiteController extends DM_BaseController
         $data['category_first_post'] = $this->dm_post::categoryPost($data['category_first']->id, $this->lang_id, 20);
         $data['recent_post'] = DB::table('posts')->where('type', '=', 'post')->where('status', '=', 1)->where('lang_id', '=', $this->lang_id)->take(5)->get();
         $data['album'] = Album::where('status', '=', 1)->orderBy('order')->take(6)->get();
+
+        //Api Data
+        $data['date_api'] = DB::table('date_data')->get();
+        $data['date_data'] = $this->dm_post::arrayGroupBy($data['date_api'], 'flag');
         return view(parent::loadView($this->view_path.'.category'), compact('data'));
     }
 
@@ -213,6 +220,8 @@ class SiteController extends DM_BaseController
     /** Show All Post Collection */
     public function showAllPost() {
         $this->tracker;
+        $data['banner'] = DM_Post::getBannerImageBaseOnType('post');
+
         $data['common'] = Common::where('lang_id', '=', $this->lang_id)->first();
         $data['menu'] = Menu::tree($this->lang_id);
         $data['rows'] = $this->dm_post::getAllPosts($this->lang_id);
@@ -223,6 +232,8 @@ class SiteController extends DM_BaseController
 
     public function showAllPage() {
         $this->tracker;
+        $data['banner'] = DM_Post::getBannerImageBaseOnType('page');
+
         $data['common'] = Common::where('lang_id', '=', $this->lang_id)->first();
         $data['menu'] = Menu::tree($this->lang_id);
         $data['rows'] = $this->dm_post::getAllPages($this->lang_id);
@@ -233,6 +244,8 @@ class SiteController extends DM_BaseController
 
     public function showAllCategory() {
         $this->tracker;
+        $data['banner'] = DM_Post::getBannerImageBaseOnType('category');
+
         $data['common'] = Common::where('lang_id', '=', $this->lang_id)->first();
         $data['menu'] = Menu::tree($this->lang_id);
         $data['rows'] = $this->dm_post::getCategories();
@@ -247,10 +260,13 @@ class SiteController extends DM_BaseController
      */
     public function showAlbum() {
         $this->tracker;
+        $data['banner'] = DM_Post::getBannerImageBaseOnType('album');
+
         $data['common'] = Common::where('lang_id', '=', $this->lang_id)->first();
         $data['menu'] = Menu::tree($this->lang_id);
         $data['recent_post'] = DB::table('posts')->where('type', '=', 'post')->where('status', '=', 1)->where('lang_id', '=', $this->lang_id)->take(5)->get();
         $data['album'] = $this->dm_post::joinAlbum($this->lang_id);
+        $data['lang_id'] = $this->lang_id;
         return  view(parent::loadView($this->view_path.'.album'), compact('data'));
     }
     /**
@@ -258,6 +274,8 @@ class SiteController extends DM_BaseController
      */
     public function showPhotos($album_id) {
         $this->tracker;
+        $data['banner'] = DM_Post::getBannerImageBaseOnType('album');
+
         $data['common'] = Common::where('lang_id', '=', $this->lang_id)->first();
         $data['menu'] = Menu::tree($this->lang_id);
         $data['recent_post'] = DB::table('posts')->where('type', '=', 'post')->where('status', '=', 1)->where('lang_id', '=', $this->lang_id)->take(5)->get();
@@ -266,6 +284,8 @@ class SiteController extends DM_BaseController
     }
 
     public function showStaff() {
+        $data['banner'] = DM_Post::getBannerImageBaseOnType('member');
+
         $data['common'] = Common::where('lang_id', '=', $this->lang_id)->first();
         $data['menu'] = Menu::tree($this->lang_id);
         $data['recent_post'] = DB::table('posts')->where('type', '=', 'post')->where('status', '=', 1)->where('lang_id', '=', $this->lang_id)->take(5)->get();
@@ -291,6 +311,8 @@ class SiteController extends DM_BaseController
     }
 
     public function search(Request $request) {
+        $data['banner'] = DM_Post::getBannerImageBaseOnType('search');
+
         $data['common'] = Common::where('lang_id', '=', $this->lang_id)->first();
         $data['menu'] = Menu::tree($this->lang_id);
         $data['recent_post'] = DB::table('posts')->where('type', '=', 'post')->where('status', '=', 1)->where('lang_id', '=', $this->lang_id)->take(5)->get();
@@ -307,6 +329,8 @@ class SiteController extends DM_BaseController
      * Showing of the process
      */
     public function showProcess(Request $request) {
+        $data['banner'] = DM_Post::getBannerImageBaseOnType('process');
+
         $data['common'] = Common::where('lang_id', '=', $this->lang_id)->first();
         $data['menu'] = Menu::tree($this->lang_id);
         $data['processes'] = Process::tree($this->lang_id);
@@ -340,6 +364,8 @@ class SiteController extends DM_BaseController
     }
 
     public function showAllFaq(Request $request) {
+        $data['banner'] = DM_Post::getBannerImageBaseOnType('faq');
+
         $data['common'] = Common::where('lang_id', '=', $this->lang_id)->first();
         $data['menu'] = Menu::tree($this->lang_id);
         $data['rows'] = FAQ::where('lang_id', '=', $this->lang_id)->where('status', '=', 1)->orderBy('order')->get();
