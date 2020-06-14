@@ -258,12 +258,19 @@ class DM_Post extends Model{
         return $arr;
     }
 
+    //Send the staff based on
     public function branchStaff($lang_id, $branch_id, $number) {
-        $data =  Staff::where('branch_id', '=', $branch_id)->where('lang_id', '=', $lang_id)->paginate($number);
+        $data =  Staff::where('branch_id', '=', $branch_id)->where('lang_id', '=', $lang_id)->where('status', '=', 1)->paginate($number);
         $staff = $data->toArray();
         return Self::arrayGroupBy(json_encode($staff['data']), 'level');
     }
 
+    // Send the featured staff based on level
+    public static function featuredStaff($lang_id) {
+        $data =  Staff::where('lang_id', '=', $lang_id)->where('status', '=', 1)->where('featured', '=', 1)->orderBy('featured_order')->get();
+        $staff = $data->toArray();
+        return Self::arrayGroupBy(json_encode($staff), 'level');
+    }
     public static function getBannerImageBaseOnType($type) {
         $data = Banner::where('type', '=', $type)->first();
         return $data;

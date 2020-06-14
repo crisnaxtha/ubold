@@ -5,11 +5,11 @@
     </div>
     <div class="card-body">
         <ul class="useful-link">
-@foreach($data['imp_link'] as $row)
+            @foreach($data['imp_link'] as $row)
             <li>
                 <a href="{{ $row->url }}" class="" target="_blank"><i class="fa {{ $row->icon }}"></i>&nbsp;{{ $row->name }}</a>
             </li>
-@endforeach
+            @endforeach
         </ul>
         <div class="clearfix"></div>
     </div>

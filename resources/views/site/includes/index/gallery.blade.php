@@ -1,14 +1,14 @@
 @if(count($data['album_category']) != 0)
 <div class="gallery">
     <div class="container">
-       <h4>{{ __('Album') }}
-            <span class="pull-right">
-            @if(Route::has('site.album'))
-            <a href="{{ Route('site.album') }}" class="btn btn-info btn-sm more_btn">{{__('View All')}} &nbsp;<i class="fa fa-angle-double-right"></i></a>
-            @endif
-            </span>
-       </h4>
-       <div class="row">
+        <h4>{{ __('Album') }}
+                <span class="pull-right">
+                @if(Route::has('site.album'))
+                <a href="{{ Route('site.album') }}" class="btn btn-info btn-sm more_btn">{{__('View All')}} &nbsp;<i class="fa fa-angle-double-right"></i></a>
+                @endif
+                </span>
+        </h4>
+        <div class="row">
             @foreach($data['album_category'] as $row)
             <div class="col-md-3">
                 <div class="owl-carousel gallery-carousel">
@@ -32,10 +32,9 @@
                 </div>
             </div>
             @endforeach
-          <div class="clearfix"></div>
-       </div>
+            <div class="clearfix"></div>
+        </div>
     </div>
 </div>
 <div class="clearfix"></div>
-{{-- </div> --}}
 @endif
