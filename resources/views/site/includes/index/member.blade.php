@@ -16,7 +16,9 @@
                 <a href="#" class="showToolTip" title="" data-original-title="Click to view detail">{{ $staff['name'] }}</a>
             </h6>
             <p class="text-center">{{ $staff['designation'] }}</p>
-            {{-- <small><i class="fa fa-envelope-o">&nbsp;</i> premkumarrai@gmail.com</small> --}}
+            @if(isset($staff['phone']))
+            <small><i class="fa fa-phone">&nbsp;</i>{{ $staff['phone'] }}</small>
+            @endif
         </div>
         @endforeach
         
@@ -34,7 +36,9 @@
                         <a href="#" class="showToolTip" title="" data-original-title="Click to view detail">{{ $staff['name'] }}</a>
                     </h6>
                     <p class="text-center">{{ $staff['designation'] }}</p>
-                    {{-- <small><i class="fa fa-envelope-o">&nbsp;</i> premkumarrai@gmail.com</small> --}}
+                    @if(isset($staff['phone']))
+                    <small><i class="fa fa-phone">&nbsp;</i>{{ $staff['phone'] }}</small>
+                    @endif
                </div>
                @endforeach
                <div class="clearfix"></div>

@@ -3,6 +3,9 @@
     <div class="dash_info">
         <div class="owl-carousel info-carousel2">
             @foreach($data['date_data'] as $key => $rows)
+            @if($loop->iteration === 1)
+
+            @else
             <div class="item">
                 <div class="card">
                     <div class="card-header"><i class="fa fa-clock-o">&nbsp;</i>{{ __(ucfirst(str_replace("_"," ",$key)).' '.'ago') }}</div>
@@ -20,6 +23,7 @@
                     </div>
                 </div>
             </div>
+            @endif
             @endforeach
         </div>
     </div>

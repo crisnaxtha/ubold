@@ -57,7 +57,7 @@ class SiteController extends DM_BaseController
 
         $data['album'] = $this->dm_post::joinAlbum($this->lang_id);
         $data['category'] = $this->dm_post::getCategoryList($this->lang_id);
-        $data['album_category'] = $this->dm_post::getAlbumCategoryList($this->lang_id);
+        $data['album_category'] = $this->dm_post::getAlbumCategoryList($this->lang_id, 4);
         $data['count_cat'] = count($data['category']);
 
         foreach($data['category'] as $row) {
@@ -66,7 +66,7 @@ class SiteController extends DM_BaseController
         }
 
         foreach($data['album_category'] as $row) {
-            $data['cat_album_photo_'.$row->slug] = $this->dm_post::categoryAlbum($row->id, $this->lang_id, 3);
+            $data['cat_album_photo_'.$row->slug] = $this->dm_post::categoryAlbum($row->id, $this->lang_id, 4);
             $data['cat_album_'.$row->slug] = $row->id;
         }
 
@@ -167,7 +167,7 @@ class SiteController extends DM_BaseController
         $data['date_api'] = DB::table('date_data')->get();
         $data['date_data'] = $this->dm_post::arrayGroupBy($data['date_api'], 'flag');
         //Album
-        $data['album'] = $this->dm_post::joinAlbum($this->lang_id);
+        $data['album'] = $this->dm_post::joinAlbumLimit($this->lang_id, 3);
         return view(parent::loadView($this->view_path.'.single'), compact('data'));
     }
     /** Show Single Page */
@@ -188,7 +188,7 @@ class SiteController extends DM_BaseController
         $data['date_api'] = DB::table('date_data')->get();
         $data['date_data'] = $this->dm_post::arrayGroupBy($data['date_api'], 'flag');
         //Album
-        $data['album'] = $this->dm_post::joinAlbum($this->lang_id);
+        $data['album'] = $this->dm_post::joinAlbumLimit($this->lang_id, 3);
         return view(parent::loadView($this->view_path.'.single'), compact('data'));
     }
 
@@ -204,7 +204,7 @@ class SiteController extends DM_BaseController
         $data['category_first'] = $this->dm_post::getCategoryFirst($this->lang_id);
         $data['category_first_post'] = $this->dm_post::categoryPost($data['category_first']->id, $this->lang_id, 20);
         $data['recent_post'] = DB::table('posts')->where('type', '=', 'post')->where('status', '=', 1)->where('lang_id', '=', $this->lang_id)->take(5)->get();
-        $data['album'] = Album::where('status', '=', 1)->orderBy('order')->take(6)->get();
+        $data['album'] = $this->dm_post::joinAlbumLimit($this->lang_id, 3);
 
         //Api Data
         $data['date_api'] = DB::table('date_data')->get();

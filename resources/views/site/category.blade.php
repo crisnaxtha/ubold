@@ -46,7 +46,7 @@
                                 @if(isset($data['rows']))
                                     @foreach($data['rows'] as $row)
                                 <div class="col-md-4">
-                                    <div id="divgrid">
+                                    <div class="divgrid">
                                         <div class="item">
                                             <div class="item-inner card">
                                                 @if(Route::has('site.post.show'))
@@ -80,7 +80,7 @@
                             <div class="pagination">
                                {{-- {{ $data['rows']->links() }} --}}
                             </div>
-                            <div id="divlist" style="display:none">
+                            <div class="divlist" style="display:none">
                                 @if(isset($data['rows']))
                                     @foreach($data['rows'] as $row)
                                 <div class="row">
@@ -102,7 +102,7 @@
                                             </a>
                                             @endif
                                             @endif
-                                            <p>{!! $row->content !!}</p>
+                                            {{-- <p>{!! $row->content !!}</p> --}}
                                             <div class="row">
                                                 <div class="col-md-9">
                                                     <i class="fa fa-clock-o">&nbsp;</i> {{ $row->created_at }}&nbsp; <i class="fa fa-user"> </i>&nbsp;@if(isset($row->postCategory->name)) {{ $row->postCategory->name}} @endif  &nbsp;<i class="fa fa-eye">&nbsp; </i>{{ $row->visit_no }}
@@ -115,6 +115,7 @@
                                         </div>
                                     </div>
                                 </div>
+                                <br />
                                     @endforeach
                                     @endif
                             </div>
@@ -142,28 +143,12 @@
 <script>
     $(document).ready(function(){
         $("#gridlink").click(function() {
-            $("#divlist").hide();
-            $("#divgrid").show();
-            $("#divgrid1").show();
-            $("#divgrid2").show();
-            $("#divgrid3").show();
-            $("#divgrid4").show();
-            $("#divgrid5").show();
-            $("#divgrid6").show();
-            $("#divgrid7").show();
-            $("#divgrid8").show();
+            $(".divlist").hide();
+            $(".divgrid").show();
         });
         $("#listlink").click(function() {
-            $("#divlist").show();
-            $("#divgrid").hide();
-            $("#divgrid1").hide();
-            $("#divgrid2").hide();
-            $("#divgrid3").hide();
-            $("#divgrid4").hide();
-            $("#divgrid5").hide();
-            $("#divgrid6").hide();
-            $("#divgrid7").hide();
-            $("#divgrid8").hide();
+            $(".divlist").show();
+            $(".divgrid").hide();
         });
     })
 </script>

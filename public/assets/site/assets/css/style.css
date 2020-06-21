@@ -1390,7 +1390,7 @@ img {
 }
 
 .logo_text {
-	padding-top: 15px;
+	/* padding-top: 15px; */
 }
 
 .logo_text small {
@@ -2485,7 +2485,7 @@ input[type=time] {
 
 .side-widget .thumb img {
 	max-height: 70px;
-	max-width: 80px;
+	width: 80px;
 }
 
 .side-widget .text-area {

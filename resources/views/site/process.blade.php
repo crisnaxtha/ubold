@@ -23,10 +23,10 @@
     <div class="col-lg-3 col-md-4 dept_list">
     <div id="sidebar">
       <div class="card">
-        <div class="card-header"><h4> <i class="fa fa-list-ol">&nbsp;</i> Services सूचीहरू</h4></div>
+        <div class="card-header"><h4> <i class="fa fa-list-ol">&nbsp;</i>{{ __('Services List') }}</h4></div>
         <div class="card-body">
 
-          <form method="Post">
+          {{-- <form method="Post">
             <div class="input-group">
               <input type="text" class="form-control" placeholder="Search this Departnment">
               <div class="input-group-append">
@@ -35,7 +35,7 @@
                 </button>
               </div>
               </div>
-          </form>
+          </form> --}}
 
            <ul class="nav nav-pills flex-column" id="myTab" role="tablist">
                @foreach($data['processes'] as $row)
@@ -62,17 +62,20 @@
               <hr/>
             @if(array_key_exists('child', $row))
                 <div class="timeline">
-                    <h4 class="text-center"><span>Official Service</span></h4>
+                    <h4 class="text-center"><span>{{__('Official Service')}}</span></h4>
                     <ul>
                     @foreach($row['child'] as $child)
                     <li>
-                        <h6>Service {{ $loop->iteration}}</h6>
+                        <h6>{{__('Step')}} {{ $loop->iteration}}</h6>
                         <div>
                         <h5>
                             {{ $child['process_name'] }}
                         </h5>
                         {!! $child['description'] !!}
+
+                        @if(isset($child['url']))
                         <a  class="btn btn-sm btn-danger" href="{{ $child['url'] }}" target="_blank">View</a>
+                        @endif
                         </div>
                     </li>
                    @endforeach

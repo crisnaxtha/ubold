@@ -163,6 +163,17 @@ class DM_Post extends Model{
         return $album;
     }
 
+    /** Join Album with limited number  */
+    public static function joinAlbumLimit($lang_id, $number = 3) {
+        $album = DB::table('albums')
+                    ->join('albums_name', 'albums.id', '=', 'albums_name.album_id')
+                    ->select('albums.*', 'albums_name.title', 'albums_name.lang_id', 'albums_name.description')
+                    ->where('albums_name.lang_id', '=', $lang_id)
+                    ->where('albums.status', '=', 1)
+                    ->take($number)->get();
+        return $album;
+    }
+
     /** used for the session language id | used all over */
     public static function setLanguage() {
         if(!Session::has('lang_id')) {
@@ -198,7 +209,7 @@ class DM_Post extends Model{
         ->join('categories_name', 'categories.id', '=', 'categories_name.category_id')
         ->select('categories.*', 'categories_name.name as cat_name', 'categories_name.lang_id')
         ->where('categories_name.lang_id', '=', $lang_id)
-        ->where('categories.featured', '=', 1)
+        ->where('categories.featured', '=', 1)->orderBy('order')
         ->first();
         return $album;
     }
@@ -213,13 +224,13 @@ class DM_Post extends Model{
             return $album;
     }
 
-    public static function getAlbumCategoryList($lang_id) {
+    public static function getAlbumCategoryList($lang_id, $number = 4) {
         $album =  DB::table('album_categories')
             ->join('album_categories_name', 'album_categories.id', '=', 'album_categories_name.album_category_id')
             ->select('album_categories.*', 'album_categories_name.name as cat_name', 'album_categories_name.lang_id')
             ->where('album_categories_name.lang_id', '=', $lang_id)
             ->where('album_categories.featured', '=', 1)->orderBy('order')
-            ->take(3)->get();
+            ->take($number)->get();
             return $album;
     }
 

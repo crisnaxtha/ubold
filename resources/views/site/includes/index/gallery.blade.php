@@ -16,15 +16,19 @@
                     <div class="item">
                         <div class="item-inner card">
                             <figure>
-                                <a href="#">
+                                @if(Route::has('site.album.show'))
+                                <a href="{{ route('site.album.show', ['id' => $album->id]) }}">
                                 <img src="{{ $album->cover_image }}" class="img-fluid" alt="image" height="100" width="50">
                                 </a>
-                                <a href="#" class="btn btn-sm btn-danger catagory_link">{{ $row->cat_name }}</a>
+                                <a href="{{ route('site.album.show', ['id' => $album->id]) }}" class="btn btn-sm btn-danger catagory_link">{{ $row->cat_name }}</a>
+                                @endif
                             </figure>
                             <div class="card-body">
-                                <a href="#">
+                                @if(Route::has('site.album.show'))
+                                <a href="{{ route('site.album.show', ['id' => $album->id]) }}">
                                     <h6 class="card-title">{{ $album->album_name }}</h6>
                                 </a>
+                                @endif
                             </div>
                         </div>
                     </div>

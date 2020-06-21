@@ -116,7 +116,7 @@
                     <div class="clearfix"></div>
                   </div>
 
-                  <div class="row">
+                  {{-- <div class="row">
                     <div class="col-lg-2 col-md-3 col-sm-4">
                       <i class="fa fa-globe"></i>
                     </div>
@@ -125,7 +125,7 @@
                       <p>हाम्रो आधिकारिक साइट </p>
                     </div>
                     <div class="clearfix"></div>
-                  </div>
+                  </div> --}}
 
                 </div>
                 <div class="clearfix"></div>

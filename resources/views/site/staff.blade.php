@@ -15,30 +15,32 @@
       <div class="container">
          <div class="row">
             <div class="col-lg-3 col-md-4 dept_list">
-               <div class="card">
-                  <div class="card-header">
-                     <h4> <i class="fa fa-list-ol">&nbsp;</i> विभागको सदस्य सूचीहरू</h4>
-                  </div>
-                  <div class="card-body">
-                     <form method="Post">
-                        <div class="input-group">
-                           <input type="text" class="form-control" placeholder="Search this Departnment">
-                           <div class="input-group-append">
-                              <button class="btn btn-primary" type="button">
-                              <i class="fa fa-search"></i>
-                              </button>
+               <div id="sidebar">
+                  <div class="card">
+                     <div class="card-header">
+                        <h4> <i class="fa fa-list-ol">&nbsp;</i> विभागको सदस्य सूचीहरू</h4>
+                     </div>
+                     <div class="card-body">
+                        {{-- <form method="Post">
+                           <div class="input-group">
+                              <input type="text" class="form-control" placeholder="Search this Departnment">
+                              <div class="input-group-append">
+                                 <button class="btn btn-primary" type="button">
+                                 <i class="fa fa-search"></i>
+                                 </button>
+                              </div>
                            </div>
-                        </div>
-                     </form>
-                     <ul class="nav nav-pills flex-column" id="myTab" role="tablist">
-                        @if($data['branch'])
-                        @foreach($data['branch'] as $row)
-                        <li class="nav-item">
-                           <a class="nav-link @if($loop->iteration == 1) active @endif" id="vtab-{{ $loop->iteration }}" data-toggle="tab" href="#v-tabpanel-{{ $loop->iteration }}" role="tab" aria-controls="home" aria-selected="@if($loop->iteration == 1) true @else false @endif">{{ $row->name }}</a>
-                        </li>
-                        @endforeach
-                        @endif
-                     </ul>
+                        </form> --}}
+                        <ul class="nav nav-pills flex-column" id="myTab" role="tablist">
+                           @if($data['branch'])
+                           @foreach($data['branch'] as $row)
+                           <li class="nav-item">
+                              <a class="nav-link @if($loop->iteration == 1) active @endif" id="vtab-{{ $loop->iteration }}" data-toggle="tab" href="#v-tabpanel-{{ $loop->iteration }}" role="tab" aria-controls="home" aria-selected="@if($loop->iteration == 1) true @else false @endif">{{ $row->name }}</a>
+                           </li>
+                           @endforeach
+                           @endif
+                        </ul>
+                     </div>
                   </div>
                </div>
             </div>
@@ -74,7 +76,9 @@
                                         {{ $staff['name'] }}</a>
                                     </h6>
                                     <p class="text-center">{{ $staff['designation'] }}</p>
-                                    {{-- <small><i class="fa fa-envelope-o">&nbsp;</i> premkumarrai@gmail.com</small> --}}
+                                    @if(isset($staff['phone']))
+                                    <small><i class="fa fa-phone">&nbsp;</i>{{ $staff['phone'] }}</small>
+                                    @endif
                                  </div>
                                  @endforeach
                                 @elseif(count($staffs) > 1)
@@ -99,7 +103,9 @@
                                                 {{ $staff['name'] }}</a>
                                             </h6>
                                             <p class="text-center">{{ $staff['designation'] }}</p>
-                                            {{-- <small><i class="fa fa-envelope-o">&nbsp;</i> premkumarrai@gmail.com</small> --}}
+                                            @if(isset($staff['phone']))
+                                            <small><i class="fa fa-phone">&nbsp;</i>{{ $staff['phone'] }}</small>
+                                            @endif
                                        </div>
                                        @endforeach
                                        <div class="clearfix"></div>

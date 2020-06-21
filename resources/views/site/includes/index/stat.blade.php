@@ -2,6 +2,10 @@
 <div class="dash_info">
     <div class="owl-carousel info-carousel">
         @foreach($data['date_data'] as $key => $rows)
+
+        @if($loop->iteration === 1)
+
+        @else
         <div class="item">
             <div class="card">
                 <div class="card-header">
@@ -21,6 +25,7 @@
                 </div>
             </div>
         </div>
+        @endif
         @endforeach
     </div>
 </div>
