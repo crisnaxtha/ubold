@@ -586,15 +586,19 @@ Route::group([ 'as'=>'site.', 'namespace'=>'Site'], function(){
 
     Route::any('/complain',                         ['as'=>'complain',           'uses'=>'SiteController@showComplain']);
 
-    Route::get('/province_base_district_data',        ['as' => 'provinceDistrictData' , 'uses'=>'SiteController@getProvinceWiseDistrictData']);
+    Route::get('/time_based_data',                  ['as' => 'timeBasedData' , 'uses'=>'SiteController@getTimeBasedData']);
 });
 
 use GuzzleHttp\Client;
+Route::group([ 'as'=>'api.', 'namespace'=>'Dcms'], function(){
 
-Route::get('/json-api',                                 ['as'=>'api_authentication', 'uses'=>'Dsms\ExternalServicesController@apiAuthentication']);
-Route::get('/json-api-1',                               ['as'=>'api_authentication', 'uses'=>'Dcms\ExternalServicesController@apiDistrictWise']);
-Route::get('/json-api-2',                               ['as'=>'api_authentication', 'uses'=>'Dcms\ExternalServicesController@apiProvinceWise']);
-Route::get('/json-api-3',         ['as'=>'api_authentication', 'uses'=>'Dcms\ExternalServicesController@apiDateWise']);
-Route::get('/json-api-4/{from}/{to}',         ['as'=>'api_authentication', 'uses'=>'Dcms\ExternalServicesController@apiDate']);
+    Route::get('/json-api',                                 ['as'=>'authentication', 'uses'=>'ExternalServicesController@apiAuthentication']);
+    Route::get('/json-api-1',                               ['as'=>'districtWise', 'uses'=>'ExternalServicesController@apiDistrictWise']);
+    Route::get('/json-api-2',                               ['as'=>'provinceWise', 'uses'=>'ExternalServicesController@apiProvinceWise']);
+    Route::get('/json-api-3',                               ['as'=>'dateWise', 'uses'=>'ExternalServicesController@apiDateWise']);
+    Route::get('/json-api-4/{from}/{to}',                   ['as'=>'date', 'uses'=>'ExternalServicesController@apiDate']);
+    Route::get('/json-api-5',                               ['as'=>'provinceDataBasedOnTime', 'uses'=>'ExternalServicesController@getProvinceDataBasedOnTime']);
+
+});
 
 

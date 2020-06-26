@@ -9,17 +9,18 @@ use App\Model\Api\DistrictData;
 use App\Model\Api\ProvinceData;
 use App\Model\Api\DateData;
 use Illuminate\Support\Str;
-
+use DB;
 
 class ExternalServicesController extends DM_BaseController
 {
-    protected $url = 'http://172.27.1.76:8080';
+    protected $url = 'http://110.34.25.91:8080';
     protected $panel = 'API Data';
     protected $base_route = 'dcms.api';
     protected $view_path ='dcms.api';
 
     public function __construct(Client $model, DistrictData $model_1, ProvinceData $model_2, DateData $model_3)
     {
+        $this->middleware('auth');
         $this->model = $model;
         $this->model_1 = $model_1;
         $this->model_2 = $model_2;
@@ -74,16 +75,17 @@ class ExternalServicesController extends DM_BaseController
         // dump($one_month_ago_data);
         // dump($one_year_ago_data);
         // dump($two_year_ago_data);
-        die;
+        // die;
         if(isset($one_day_ago) && isset($one_week_ago_data) && isset($one_month_ago_data) && isset($one_year_ago_data) && isset($two_year_ago_data)) {
             $this->model_3::truncate();
 
             $data['one_day_ago'] = json_decode($one_day_ago_data);
+            // dd($data['one_day_ago']);
             foreach($data['one_day_ago'] as $row) {
                 $this->model_3::create([
-                    'title' => $row->companyType,
-                    'slug' => Str::slug($row->companyType),
-                    'data'  => $row->totalCompany,
+                    'title' => $row[0],
+                    'slug' => Str::slug($row[0]),
+                    'data'  => $row[1],
                     'flag' => "one_day",
                 ]);
             }
@@ -91,9 +93,9 @@ class ExternalServicesController extends DM_BaseController
             $data['one_week_ago_data'] = json_decode($one_week_ago_data);
             foreach($data['one_week_ago_data'] as $row) {
                 $this->model_3::create([
-                    'title' => $row->companyType,
-                    'slug' => Str::slug($row->companyType),
-                    'data'  => $row->totalCompany,
+                    'title' => $row[0],
+                    'slug' => Str::slug($row[0]),
+                    'data'  => $row[1],
                     'flag' => "one_week",
                 ]);
             }
@@ -101,9 +103,9 @@ class ExternalServicesController extends DM_BaseController
             $data['one_month_ago_data'] = json_decode($one_month_ago_data);
             foreach($data['one_month_ago_data'] as $row) {
                 $this->model_3::create([
-                    'title' => $row->companyType,
-                    'slug' => Str::slug($row->companyType),
-                    'data'  => $row->totalCompany,
+                    'title' => $row[0],
+                    'slug' => Str::slug($row[0]),
+                    'data'  => $row[1],
                     'flag' => "one_month",
                 ]);
             }
@@ -111,9 +113,9 @@ class ExternalServicesController extends DM_BaseController
             $data['one_year_ago_data'] = json_decode($one_year_ago_data);
             foreach($data['one_year_ago_data'] as $row) {
                 $this->model_3::create([
-                    'title' => $row->companyType,
-                    'slug' => Str::slug($row->companyType),
-                    'data'  => $row->totalCompany,
+                    'title' => $row[0],
+                    'slug' => Str::slug($row[0]),
+                    'data'  => $row[1],
                     'flag' => "one_year",
                 ]);
             }
@@ -121,9 +123,9 @@ class ExternalServicesController extends DM_BaseController
             $data['two_year_ago_data'] = json_decode($two_year_ago_data);
             foreach($data['two_year_ago_data'] as $row) {
                 $this->model_3::create([
-                    'title' => $row->companyType,
-                    'slug' => Str::slug($row->companyType),
-                    'data'  => $row->totalCompany,
+                    'title' => $row[0],
+                    'slug' => Str::slug($row[0]),
+                    'data'  => $row[1],
                     'flag' => "two_year",
                 ]);
             }
@@ -206,5 +208,41 @@ class ExternalServicesController extends DM_BaseController
             session()->flash('alert-danger', $this->panel.' can not be done');
         }
         return view(parent::loadView($this->view_path.'.index'));
+    }
+
+    public function getProvinceDataBasedOnTime(Request $request) {
+        if($request->ajax()) {
+            $from = $request->from;
+            $to = $request->to;
+
+            $token_response = $this->apiAuthentication();
+            $response = json_decode($token_response);
+            $client = $this->model;
+            $district_response = $client->request('GET', $this->url.'/cro-search-engine/ocr/v1/companies/total-province-till-date?fromDate='.$from.'&toDate='.$to, [
+                'headers' => [
+                    'Authorization' => "Bearer $response->token"
+                ]
+            ]);
+            $statusCode = $district_response->getStatusCode();
+            $body = $district_response->getBody()->getContents();
+            if(isset($body)){
+                $data['province'] = json_decode($body);
+                $data['provinceLabel'] = [];
+                $data['provinceData'] = [];
+
+                foreach($data['province'] as $row) {
+                    if($row[0] != "Not Available"){
+                        array_push($data['provinceLabel'], $row[0]);
+                        array_push($data['provinceData'], $row[1]);
+                    }
+                }
+                return $data;
+
+            }
+
+            return false;
+            
+           
+        }
     }
 }

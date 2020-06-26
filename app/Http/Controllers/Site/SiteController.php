@@ -77,7 +77,8 @@ class SiteController extends DM_BaseController
         $data['services'] = Service::where('status', '=', 1)->where('lang_id', '=', $this->lang_id)->take(8)->get();
 
 
-        $data['district_api'] = DistrictData::where('state', '=', 1)->get();
+        $data['district_api'] = DB::table('date_data')->where('flag', '=', 'one_year')->get();
+        // dd($data['district_api']);
         $data['province_api'] = ProvinceData::all();
         $data['districtLabel'] = [];
         $data['districtData'] = [];
@@ -100,9 +101,9 @@ class SiteController extends DM_BaseController
         return view(parent::loadView($this->view_path.'.index'), compact('data'));
     }
 
-    public function getProvinceWiseDistrictData(Request $request) {
+    public function getTimeBasedData(Request $request) {
         if($request->ajax()) {
-            $district_api = DB::table('district_data')->where('state', '=', $request->id)->get();
+            $district_api = DB::table('date_data')->where('flag', '=', $request->flag)->get();
 
             $data['districtLabel'] = [];
             $data['districtData'] = [];
@@ -115,7 +116,6 @@ class SiteController extends DM_BaseController
             return $data;
         }
     }
-
 
     /**
      * Show contact Form
