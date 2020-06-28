@@ -40,7 +40,7 @@
             <div class="card-header d-flex align-items-center">
                 <div class="row" style="width:100%">
                     <div class="col-md-6">
-                        <h5>{{__('Based on time')}}</h5>
+                        <h5>{{__("Company's type based on type")}}</h5>
                     </div>
                 </div>
             </div>
@@ -52,7 +52,7 @@
     <div class="col-lg-6 pad-left-0">
         <div class="card bar-chart-example">
             <div class="card-header d-flex align-items-center">
-                <h5>{{__("Province")}}</h5>
+                <h5>{{__("Company's number based on province")}}</h5>
             </div>
             <div class="card-body">
                 <canvas id="province-chart"></canvas>

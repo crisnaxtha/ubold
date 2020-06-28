@@ -592,11 +592,11 @@ Route::group([ 'as'=>'site.', 'namespace'=>'Site'], function(){
 use GuzzleHttp\Client;
 Route::group([ 'as'=>'api.', 'namespace'=>'Dcms'], function(){
 
-    Route::get('/json-api',                                 ['as'=>'authentication', 'uses'=>'ExternalServicesController@apiAuthentication']);
-    Route::get('/json-api-1',                               ['as'=>'districtWise', 'uses'=>'ExternalServicesController@apiDistrictWise']);
-    Route::get('/json-api-2',                               ['as'=>'provinceWise', 'uses'=>'ExternalServicesController@apiProvinceWise']);
-    Route::get('/json-api-3',                               ['as'=>'dateWise', 'uses'=>'ExternalServicesController@apiDateWise']);
-    Route::get('/json-api-4/{from}/{to}',                   ['as'=>'date', 'uses'=>'ExternalServicesController@apiDate']);
+    Route::get('/json-api',                                 ['as'=>'authentication', 'uses'=>'ExternalServicesController@apiAuthentication'])->middleware('auth');
+    Route::get('/json-api-1',                               ['as'=>'districtWise', 'uses'=>'ExternalServicesController@apiDistrictWise'])->middleware('auth');
+    Route::get('/json-api-2',                               ['as'=>'provinceWise', 'uses'=>'ExternalServicesController@apiProvinceWise'])->middleware('auth');
+    Route::get('/json-api-3',                               ['as'=>'dateWise', 'uses'=>'ExternalServicesController@apiDateWise'])->middleware('auth');
+    Route::get('/json-api-4/{from}/{to}',                   ['as'=>'date', 'uses'=>'ExternalServicesController@apiDate'])->middleware('auth');
     Route::get('/json-api-5',                               ['as'=>'provinceDataBasedOnTime', 'uses'=>'ExternalServicesController@getProvinceDataBasedOnTime']);
 
 });

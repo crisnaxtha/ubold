@@ -63,6 +63,8 @@
     "Province":"प्रदेशहरू",
     "District":"जिल्ला",
     "Based on time" : "समयको आधारमा",
+    "Company's type based on type":"कम्पनीको प्रकार अनुसार",
+    "Company's number based on province": "प्रदेश अनुसार कुल कम्पनी संख्या",
 
     "Province 1":"प्रदेश नं १",
     "Province 2":"प्रदेश नं २",

@@ -8,7 +8,7 @@
     <div class="breadcrumb-col">
         <div class="container">
             <ol class="breadcrumb">
-                <li><a href="{{ route('/') }}"><i class="fa fa-home"></i></a></li>
+                <li><a href="{{ route('site.index') }}"><i class="fa fa-home"></i></a></li>
                 @if(isset($data['cat']->name))
                 <li class="">{{$data['cat']->name}}</li>
                 @endif

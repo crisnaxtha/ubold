@@ -20,7 +20,7 @@ class ExternalServicesController extends DM_BaseController
 
     public function __construct(Client $model, DistrictData $model_1, ProvinceData $model_2, DateData $model_3)
     {
-        $this->middleware('auth');
+        // $this->middleware('auth');
         $this->model = $model;
         $this->model_1 = $model_1;
         $this->model_2 = $model_2;
