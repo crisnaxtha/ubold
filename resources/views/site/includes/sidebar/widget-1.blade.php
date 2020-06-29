@@ -1,6 +1,10 @@
 @if(isset($data['category_first']))
 <div class="widget-box">
-    <h3> <i class="fa fa-newspaper-o">&nbsp;</i>{{ $data['category_first']->cat_name }}</h3>
+    <h3> <i class="fa {{ $data['category_first']->icon }}">&nbsp;</i>{{ $data['category_first']->cat_name }}   
+        @if(Route::has('site.album'))
+        <a href="{{ route('site.category.show', ['id'=> $data['category_first']->id ]) }}">{{__('View All')}}</a>
+        @endif
+    </h3>
     <div class="side-widget">
         <div class="owl-carousel info-carousel3">
             @if(count($data['category_first_post']))

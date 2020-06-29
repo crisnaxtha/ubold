@@ -601,4 +601,11 @@ Route::group([ 'as'=>'api.', 'namespace'=>'Dcms'], function(){
 
 });
 
+Route::get('/api_test', function() {
+    
+    $client = new Client(['base_uri' => 'https://reqres.in/']);
+    $response = $client->request('GET', '/api/users?page=1');
+    dd($response);
+    
+});
 
