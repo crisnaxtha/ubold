@@ -3,7 +3,7 @@
     <div class="owl-carousel info-carousel">
         @foreach($data['date_data'] as $key => $rows)
 
-        @if($loop->iteration === 1)
+        @if($loop->iteration == 1 || $loop->iteration == 2)
 
         @else
         <div class="item">

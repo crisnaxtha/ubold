@@ -13,7 +13,8 @@
                 @include('site.includes.index.tab')
             </div>
             <div class="col-lg-3 col-md-4">
-                @include('site.includes.index.member')
+                {{-- @include('site.includes.index.member') --}}
+                @include('site.includes.sidebar.widget-1')
                 @include('site.includes.index.tweet')
             </div>
         </div>

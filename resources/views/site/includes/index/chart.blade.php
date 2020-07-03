@@ -3,7 +3,7 @@
         <div class="card-header d-flex align-items-center">
            <h5><i class="fa fa-search">&nbsp;</i>{{__('Company Related Data in Graphical Format')}}</h5>
         </div>
-        <div class="card-body">
+        {{-- <div class="card-body">
             <form method="post" action="">
                 @csrf
                 <div class="row">
@@ -33,7 +33,7 @@
                     <div class="clearfix"></div>
                 </div>
             </form>
-        </div>
+        </div> --}}
     </div>
     <div class="col-lg-6 pad-right-0">
         <div class="card line-chart-example">

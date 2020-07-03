@@ -2,18 +2,25 @@
     <ul class="nav nav-tabs" id="myTab" role="tablist">
         @if(isset($data['category']))
         @foreach($data['category'] as $row)
+        @if($loop->iteration == 1)
+           
+        @else
         <li class="nav-item">
-            <a class="nav-link @if($loop->iteration == 1) active @endif" id="{{ $row->slug }}-tab" data-toggle="tab" href="#{{ $row->slug }}" role="tab" aria-controls="{{ $row->slug }}" aria-selected="@if($loop->iteration ==1 )true @else false @endif">
+            <a class="nav-link @if($loop->iteration == 2) active @endif" id="{{ $row->slug }}-tab" data-toggle="tab" href="#{{ $row->slug }}" role="tab" aria-controls="{{ $row->slug }}" aria-selected="@if($loop->iteration ==1 )true @else false @endif">
                 <i class="fa {{ $row->icon }}">&nbsp;</i> {{ $row->cat_name }}
             </a>
         </li>
+        @endif
         @endforeach
         @endif
     </ul>
     <div class="tab-content card white-box" id="myTabContent">
         @if(isset($data['category']))
         @foreach($data['category'] as $row)
-        <div class="tab-pane fade @if($loop->iteration == 1) show active @endif" id="{{ $row->slug }}" role="tabpanel" aria-labelledby="{{ $row->slug }}-tab">
+        @if($loop->iteration == 1)
+           
+        @else
+        <div class="tab-pane fade @if($loop->iteration == 2) show active @endif" id="{{ $row->slug }}" role="tabpanel" aria-labelledby="{{ $row->slug }}-tab">
             <div class="owl-carousel info-carousel">
                 @if(isset($data['cat_post_'.$row->slug]))
                 @foreach($data['cat_post_'.$row->slug] as $p_row)
@@ -50,6 +57,7 @@
                 <a  href="{{ route('site.category.show', ['id'=> $row->id]) }}">{{__('View All')}} &nbsp;</a>
             </div>
         </div>
+        @endif
         @endforeach
         @endif
     </div>
