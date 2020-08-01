@@ -1,0 +1,358 @@
+@media (max-width: 1199px) {
+	.nav_sec .navbar-nav .nav-link {
+		padding: .5rem 1.3rem;
+	}
+	.chart_sec .page-link {
+		padding: .5rem .30rem;
+	}
+	.chart_sec .input-group-text,
+	.chart_sec .form-control {
+		font-size: 12px;
+	}
+	.useful-link li {
+		width: 32%;
+	}
+	.wrapper {
+		padding-bottom: 28rem;
+	}
+	.v_all {
+		margin-top: 15px;
+		display: block;
+		float: none;
+		text-align: center;
+	}
+	.share-box {
+		margin-top: 0px;
+	}
+	.dtl_sec .card-header h4 {
+		margin-bottom: 6px;
+	}
+	#sidebar,
+	#sidebar.fixed {
+		position: relative;
+		top: 0px;
+	}
+}
+
+@media (max-width: 991px) {
+	header,
+	.top_sec.sticky header {
+		background-size: cover !important;
+		min-height: 100px !important;
+	}
+	.logo_text b {
+		font-size: 24px;
+		line-height: 24px;
+	}
+	.logo_text span {
+		font-size: 16px;
+	}
+	.right-box ul {
+		margin-top: 5px;
+	}
+	.right-box {
+		padding-top: 0px;
+	}
+	.contact_person {
+		margin-bottom: 20px;
+	}
+	.contact_person hr {
+		margin-top: 5px;
+		margin-bottom: 5px;
+	}
+	.top_sec.sticky,
+	#footer {
+		position: relative;
+	}
+	.wrapper {
+		padding-bottom: 0em;
+	}
+	.tab-content.card.white-box {
+		padding-left: 20px;
+		padding-right: 20px;
+	}
+	.chart_sec,
+	.twitter-feeds,
+	.menu-large {
+		display: none;
+	}
+	.footer-bottom {
+		font-size: 12px;
+		padding: 5px 0px;
+	}
+	.right-box {
+		padding-right: 3%;
+	}
+	.top_sec.sticky .logo_text span {
+		display: block;
+	}
+	.top_sec.sticky .col-lg-3 {
+		max-width: inherit !important;
+	}
+	.logo_sec,
+	.top_sec.sticky .logo_sec {
+		padding: 5px 0px !important;
+	}
+	.dtl_sec {
+		padding-bottom: 0px;
+	}
+	.inner_banner {
+		clip-path: ellipse(90% 100% at 50% 0);
+		-webkit-clip-path: ellipse(90% 100% at 50% 0);
+		background-position: center center !important;
+	}
+	.dtl_sec h4,
+	.staff_inner .card-header h4 {
+		font-size: 20px;
+	}
+	.widget-box .useful-link li a {
+		padding-bottom: .2rem;
+	}
+	.table-responsive-lg table {
+		min-width: 768px;
+	}
+	#sidebar,
+	#sidebar.fixed {
+		position: relative !important;
+		top: 0px !important;
+	}
+	.navbar-collapse {
+		padding-top: 15px;
+	}
+}
+
+@media (max-width: 768px) {
+	.breadcrumb-col {
+		margin-top: -55px;
+	}
+	.inner_banner {
+		height: 40vh;
+	}
+	.timeline ul {
+		padding: 0px;
+	}
+}
+
+@media (max-width: 767px) {
+	.logo_sec img,
+	.top_sec.sticky .logo_sec img {
+		max-height: 100px;
+		float: right;
+	}
+	.right-box {
+		width: auto;
+		float: right;
+		position: absolute;
+		z-index: 999;
+		right: 0;
+		bottom: -32px;
+	}
+	.right-box form {
+		display: none;
+	}
+	.right-box ul li a {
+		background: #fff;
+		padding: 5px 10px;
+		border-radius: 4px;
+	}
+	.right-box ul li {
+		border-left: 0px;
+		margin-left: 0px;
+	}
+	.useful-link li {
+		width: 49%;
+	}
+	.useful-link li a,
+	.sewa .card-body h5 {
+		font-size: 16px;
+	}
+	.gallery-carousel,
+	.gallery-carousel2,
+	.ratings_sec {
+		margin-bottom: 30px;
+	}
+	.footer-top h4 {
+		margin-top: 20px;
+		padding-bottom: 10px;
+	}
+	.mapouter {
+		margin-top: 15px;
+	}
+	.contact_person {
+		margin-bottom: 0px;
+	}
+	.footer-bottom .text-right {
+		text-align: left !important;
+	}
+	.my-ttl,
+	.sewa .card-header h4,
+	.gallery h4,
+	.footer-top h4,
+	.useful-link li a i,
+	.dtl_sec h4,
+	.staff_inner .card-header h4,
+	.contact_us_inner h4 {
+		font-size: 18px;
+	}
+	p,
+	.sewa .card-body h5,
+	.sewa .card-body a,
+	.footer-top a,
+	.para,
+	.contact_us_inner form label,
+	.question p b,
+	.dtl_sec p {
+		font-size: 14px;
+	}
+	.sewa .card-body .col-lg-3 {
+		padding-top: 20px;
+		padding-bottom: 20px;
+	}
+	.main-modal {
+		padding-top: 30px;
+	}
+	.gallery_list {
+		padding: 20px;
+	}
+	#sidebar,
+	#sidebar.fixed {
+		position: relative !important;
+		top: 0px !important;
+	}
+	.timeline ul li div {
+		width: 210px;
+	}
+	.timeline ul li:nth-child(even) div {
+		left: -248px;
+	}
+}
+
+@media (max-width: 600px) {
+	.timeline ul li:nth-child(even) div {
+		left: 45px;
+	}
+	.timeline h4.text-center {
+		text-align: left !important;
+	}
+	.timeline h4 span {
+		margin: 0px;
+	}
+	.timeline ul li div {
+		width: 400px;
+	}
+}
+
+@media (max-width: 575px) {
+	.side-section .icon1 {
+		margin-bottom: 15px;
+	}
+}
+
+@media (max-width: 481px) {
+	.useful-link li {
+		width: 100%;
+	}
+	.tab_sec .nav-tabs li a,
+	.item-inner .card-title,
+	.useful-link li a,
+	.useful-link li a i,
+	.faq_sec .collapsible {
+		font-size: 14px;
+	}
+	.item-inner .card-body p,
+	.para {
+		font-size: 12px;
+	}
+	.banner_sec h2 {
+		font-size: 30px;
+	}
+	.banner_sec h3 {
+		font-size: 24px;
+	}
+	.useful-link li a {
+		padding: 1.5rem 0rem .2rem 0rem;
+	}
+	.useful-link li a i {
+		min-width: 20px;
+	}
+	.sewa .card-body h5:before,
+	.useful-link li:before,
+	.c_top .card-header h5:before {
+		left: 7.5%;
+	}
+	.sewa .card-body h5:after,
+	.useful-link li:after,
+	.c_top .card-header h5:after {
+		left: 25%;
+	}
+	.sewa .card-body .col-lg-3 {
+		padding-top: 15px;
+		padding-bottom: 15px;
+	}
+	.logo_sec img,
+	.top_sec.sticky .logo_sec img {
+		max-height: 80px !important;
+	}
+	.right-box {
+		/* bottom: -42px; */
+	}
+	.breadcrumb-col .breadcrumb>li a i {
+		font-size: 20px;
+	}
+	.widget-box h3 {
+		font-size: 18px;
+	}
+	.breadcrumb-col .breadcrumb,
+	.dtl_sec h4,
+	.staff_inner .card-header h4 {
+		font-size: 16px;
+	}
+	.inner_banner {
+		clip-path: ellipse(99% 100% at 50% 0);
+		-webkit-clip-path: ellipse(99% 100% at 50% 0);
+		background-position: center center !important;
+	}
+	.inner_banner {
+		border-bottom: 25px solid #2460b9;
+	}
+	.share-box ul li {
+		padding: 0 5px 0 0;
+	}
+	.timeline ul li div {
+		width: 335px;
+	}
+}
+
+@media (max-width: 420px) {
+	.tab_sec .nav-tabs li a {
+		padding: .5rem .5rem;
+	}
+	.sewa .card-body .col-lg-3 {
+		padding-top: 10px;
+		padding-bottom: 10px;
+	}
+	.timeline ul li div {
+		width: 270px;
+	}
+}
+
+@media (max-width: 386px) {
+	.tab_sec .nav-tabs li a {
+		padding: .5rem 0.4rem;
+	}
+	.logo_text b {
+		font-size: 18px;
+		line-height: 20px;
+	}
+	.right-box ul li a {
+		font-size: 12px;
+	}
+	.share-box ul li a {
+		width: 25px;
+		height: 25px;
+		line-height: 25px;
+	}
+	.timeline ul li div {
+		width: 230px;
+	}
+}

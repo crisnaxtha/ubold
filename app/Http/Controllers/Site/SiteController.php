@@ -101,7 +101,7 @@ class SiteController extends DM_BaseController
 
         $data['category_first'] = $this->dm_post::getCategoryFirst($this->lang_id);
         $data['category_first_post'] = $this->dm_post::categoryPost($data['category_first']->id, $this->lang_id, 20);
-        
+
         return view(parent::loadView($this->view_path.'.index'), compact('data'));
     }
 
@@ -203,7 +203,7 @@ class SiteController extends DM_BaseController
 
         $data['common'] = Common::where('lang_id', '=', $this->lang_id)->first();
         $data['menu'] = Menu::tree($this->lang_id);
-        $data['rows'] = $this->dm_post::categoryPost($category_id, $this->lang_id);
+        $data['rows'] = Post::where('deleted_at', '=', null)->where('type', '=', 'post')->where('category_id', '=', $category_id)->where('lang_id', '=', $this->lang_id)->paginate(9);
         $data['cat'] = $this->dm_post::getCategory($category_id);
         $data['category_first'] = $this->dm_post::getCategoryFirst($this->lang_id);
         $data['category_first_post'] = $this->dm_post::categoryPost($data['category_first']->id, $this->lang_id, 20);

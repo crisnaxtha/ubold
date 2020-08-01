@@ -77,9 +77,6 @@
                                     @endforeach
                                 @endif
                             </div>
-                            <div class="pagination">
-                               {{-- {{ $data['rows']->links() }} --}}
-                            </div>
                             <div class="divlist" style="display:none">
                                 @if(isset($data['rows']))
                                     @foreach($data['rows'] as $row)
@@ -119,6 +116,9 @@
                                     @endforeach
                                     @endif
                             </div>
+                            <div class="pagination">
+                                {{ $data['rows']->links() }}
+                             </div>
                         </div>
                     </div>
                     <div class="clearfix"></div>

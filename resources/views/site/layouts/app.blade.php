@@ -41,6 +41,7 @@
     <!--Custom CSS -->
 
     <link href="{{ asset('assets/site/assets/css/style.css') }}" rel="stylesheet">
+    <link href="{{ asset('assets/site/assets/css/resize.css') }}" rel="stylesheet">
     {{-- <link href="{{ asset('assets/site/assets/css/custom.css') }}" rel="stylesheet"> --}}
 
     @yield('css')
